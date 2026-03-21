@@ -13,19 +13,33 @@
     </NuxtLink>
     
     <div class="flex items-center gap-3">
-      <!-- Theme Toggle Component -->
       <AppThemeToggle />
-
       <AppNotificationBell />
       
-      <NuxtLink to="/profil" class="w-9 h-9 rounded-full bg-[var(--state-active)] border border-brand/20 flex items-center justify-center overflow-hidden">
-        <Icon name="lucide:user" class="w-5 h-5 text-brand" />
-      </NuxtLink>
+      <ClientOnly>
+        <NuxtLink v-if="!authStore.isLoggedIn" 
+                  to="/login" 
+                  class="flex items-center gap-2 px-4 py-2 bg-surface shadow-sm border border-default rounded-full hover:bg-default/5 transition-all active:scale-95">
+          <div class="w-6 h-6 rounded-full bg-brand/10 flex items-center justify-center">
+            <Icon name="lucide:user" class="w-4 h-4 text-brand" />
+          </div>
+          <span class="text-sm font-bold text-default">Login</span>
+        </NuxtLink>
+
+        <NuxtLink v-else to="/profil" class="w-9 h-9 rounded-full bg-[var(--state-active)] border border-brand/20 flex items-center justify-center overflow-hidden active:scale-95 transition-all">
+          <Icon name="lucide:user" class="w-5 h-5 text-brand" />
+        </NuxtLink>
+
+        <template #fallback>
+          <div class="w-9 h-9 rounded-full bg-default/5 animate-pulse" />
+        </template>
+      </ClientOnly>
     </div>
   </header>
 </template>
 
 <script setup>
+const authStore = useAuthStore()
 const colorMode = useColorMode()
 
 const toggleTheme = () => {

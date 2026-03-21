@@ -2,11 +2,12 @@
   <div class="animate-fade-up min-h-screen bg-base">
     <!-- Header -->
     <div class="sticky top-0 z-30 bg-base/80 backdrop-blur-md px-4 py-4 flex items-center justify-between border-b border-default">
-      <div class="flex items-center gap-3">
-        <button @click="$router.back()" class="p-2 -ml-2 rounded-full hover:bg-surface transition-colors">
-          <Icon name="lucide:arrow-left" class="w-6 h-6 text-default" />
+      <div class="flex items-center gap-1">
+        <button @click="$router.back()" class="flex items-center gap-1 p-2 -ml-2 rounded-full hover:bg-surface transition-colors text-default font-bold">
+          <Icon name="lucide:chevron-left" class="w-6 h-6" />
+          <span class="text-sm">Kembali</span>
         </button>
-        <h2 class="font-serif font-bold text-default">Bhagavad Gita</h2>
+        <h2 class="font-serif font-bold text-default ml-2">Bhagavad Gita</h2>
       </div>
     </div>
 

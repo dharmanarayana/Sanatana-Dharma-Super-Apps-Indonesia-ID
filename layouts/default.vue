@@ -24,8 +24,8 @@ const sidebarCollapsed = ref(false)
         <AppHeaderDesktop @toggle-sidebar="sidebarCollapsed = !sidebarCollapsed" />
 
         <!-- Konten halaman -->
-        <main class="pt-[64px] min-h-screen">
-          <div class="px-4 lg:px-8 py-8 w-full max-w-[1600px] mx-auto transition-all duration-300">
+        <main class="min-h-screen">
+          <div class="px-4 lg:px-8 pt-4 pb-8 w-full max-w-[1600px] mx-auto transition-all duration-300">
             <slot />
           </div>
         </main>

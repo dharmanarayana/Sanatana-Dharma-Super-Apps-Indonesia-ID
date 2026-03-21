@@ -2,8 +2,9 @@
   <div class="min-h-screen bg-base flex flex-col animate-fade-up">
     <!-- Sticky Header -->
     <div class="sticky top-0 z-30 bg-base/80 backdrop-blur-md px-4 py-4 flex items-center justify-between border-b border-default">
-      <button @click="$router.back()" class="p-2 -ml-2 rounded-full hover:bg-surface transition-colors">
-        <Icon name="lucide:arrow-left" class="w-6 h-6 text-default" />
+      <button @click="$router.back()" class="flex items-center gap-1 p-2 -ml-2 rounded-full hover:bg-surface transition-colors text-default font-bold">
+        <Icon name="lucide:chevron-left" class="w-6 h-6" />
+        <span class="text-sm">Kembali</span>
       </button>
       <div class="flex items-center gap-2">
         <button @click="toggleBookmark" class="p-2 rounded-full hover:bg-surface transition-colors">

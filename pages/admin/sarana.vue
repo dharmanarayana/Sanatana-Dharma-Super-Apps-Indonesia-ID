@@ -2,9 +2,9 @@
   <div class="space-y-6">
     <div class="flex items-center justify-between">
       <h1 class="text-2xl font-bold text-default">Manajemen Sarana Upacara</h1>
-      <nuxt-link to="/admin" class="text-brand-primary font-medium hover:underline flex items-center gap-1">
-        <Icon name="lucide:arrow-left" size="18" />
-        Kembali ke Dashboard
+      <nuxt-link to="/admin" class="text-brand font-bold hover:underline flex items-center gap-1 text-sm transition-all active:scale-95">
+        <Icon name="lucide:chevron-left" size="18" />
+        Kembali
       </nuxt-link>
     </div>
 

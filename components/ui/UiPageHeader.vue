@@ -14,11 +14,6 @@ const { isDesktop } = useDevice()
   <div v-if="!isDesktop"
        class="flex items-center gap-3 px-4 py-3 bg-surface
               border-b border-default sticky top-[60px] z-30 overflow-hidden">
-    <NuxtLink v-if="backPath" :to="backPath"
-              class="touch-target rounded-full text-secondary"
-              aria-label="Kembali">
-      <span class="text-2xl leading-none">‹</span>
-    </NuxtLink>
     <span v-if="icon" class="text-2xl shrink-0">{{ icon }}</span>
     <div class="min-w-0">
       <h1 class="font-bold text-default text-lg leading-tight truncate">{{ title }}</h1>

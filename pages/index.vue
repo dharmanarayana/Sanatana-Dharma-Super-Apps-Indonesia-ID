@@ -1,31 +1,28 @@
 <template>
   <div class="px-4 lg:px-0 py-4 lg:py-0">
 
-    <!-- Welcome Message -->
-    <div v-if="authStore.user" class="mb-6">
+    <!-- Desktop Welcome (keep as is) -->
+    <div class="hidden lg:block mb-6">
       <h1 class="text-2xl font-bold text-default font-serif">
         Om Swastyastu, <span class="text-brand">{{ firstName }}</span> 🙏
       </h1>
-      <p class="text-secondary text-sm mt-1">Selamat datang kembali di aktivitas spiritualmu.</p>
+      <p class="text-secondary text-sm mt-1">Digital — Harmoni dalam Kehidupan Spiritual.</p>
     </div>
 
     <!-- Banner wuku hari ini -->
     <HomeBanner class="mb-6" />
 
-    <!-- ═══ MOBILE LAYOUT ═══ -->
-    <div class="lg:hidden">
-      <!-- Menu Grid 3-col dengan judul baris -->
-      <section class="mb-6">
-        <HomeMenuGrid />
-      </section>
+    <!-- Quick Menu Grid 4-col (MOBILE) -->
+    <section class="lg:hidden mb-8">
+      <HomeMenuGrid />
+    </section>
 
-      <!-- Info Cards — stacked -->
-      <section class="space-y-4 mb-6">
-        <HomeWukuToday />
-        <HomeHariRayaTerdekat />
-        <HomeStreakCard />
-      </section>
-    </div>
+    <!-- Info Cards — stacked -->
+    <section class="lg:hidden space-y-4 mb-6">
+      <HomeWukuToday />
+      <HomeHariRayaTerdekat />
+      <HomeStreakCard />
+    </section>
 
     <!-- ═══ DESKTOP LAYOUT ═══ -->
     <section class="hidden lg:grid lg:grid-cols-3 gap-6 mb-8">

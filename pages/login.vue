@@ -2,9 +2,9 @@
   <div class="min-h-screen bg-base flex flex-col px-6 py-6 animate-fade-up relative text-default">
     <!-- Back Button -->
     <div class="absolute top-6 left-6 z-10">
-      <NuxtLink to="/" class="group flex items-center gap-2 px-4 py-2 bg-surface/50 backdrop-blur-md rounded-full border border-default shadow-sm hover:bg-surface transition-all active:scale-95">
-        <Icon name="lucide:arrow-left" class="w-4 h-4 text-secondary group-hover:text-brand transition-colors" />
-        <span class="text-xs font-bold text-secondary group-hover:text-brand transition-colors">Beranda</span>
+      <NuxtLink to="/" class="group flex items-center gap-1.5 px-4 py-2 bg-surface/50 backdrop-blur-md rounded-full border border-default shadow-sm hover:bg-surface transition-all active:scale-95">
+        <Icon name="lucide:chevron-left" class="w-4 h-4 text-brand transition-colors" />
+        <span class="text-xs font-bold text-brand transition-colors">Kembali</span>
       </NuxtLink>
     </div>
 

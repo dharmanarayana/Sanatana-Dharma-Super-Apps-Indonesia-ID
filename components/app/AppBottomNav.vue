@@ -5,62 +5,61 @@ const route = useRoute()
 const isActive = (path: string) =>
   path === '/' ? route.path === '/' : route.path.startsWith(path)
 
-const tabs = computed(() => [
-  { path: '/',           icon: 'lucide:house',             label: 'Beranda'  },
-  { path: '/kalender',   icon: 'lucide:calendar-days',     label: 'Kalender' },
-  { path: '/kitab-suci', icon: 'lucide:book-open-text',    label: 'Kitab'    },
-  { path: '/forum',      icon: 'lucide:message-square',    label: 'Sosial'   },
+const showMenu = ref(false)
+const toggleMenu = () => {
+  showMenu.value = !showMenu.value
+}
+
+const navItems = computed(() => [
+  { path: '/',           icon: 'lucide:house',           label: 'Beranda'  },
+  { path: '/kalender',   icon: 'lucide:calendar-days',   label: 'Kalender' },
+  { type: 'menu',        label: 'Menu' },
+  { path: '/kitab-suci', icon: 'lucide:book-open-text',  label: 'Kitab'    },
   { 
-    path: authStore.isLoggedIn ? '/profil' : '/login', 
-    icon: 'lucide:user', 
-    label: authStore.isLoggedIn ? 'Profil' : 'Masuk' 
+    path: authStore.isLoggedIn ? '/profil' : '/forum', 
+    icon: authStore.isLoggedIn ? 'lucide:user' : 'lucide:message-square', 
+    label: authStore.isLoggedIn ? 'Profil' : 'Sosial' 
   },
 ])
 </script>
 
 <template>
-  <nav class="app-bottom-nav lg:hidden fixed bottom-0 left-0 right-0 z-40
-              flex items-center justify-around safe-bottom bg-surface border-t border-default"
-       style="height: var(--bottom-nav-h)">
-    <NuxtLink
-      v-for="tab in tabs.slice(0, 4)" :key="tab.path" :to="tab.path"
-      class="flex flex-col items-center justify-center gap-0.5
-             flex-1 h-full rounded-none transition-colors duration-150"
-      :class="isActive(tab.path)
-        ? 'text-brand font-semibold'
-        : 'text-muted'"
-      :aria-label="tab.label"
+  <div>
+    <AppMenuOverlay :show="showMenu" @close="showMenu = false" />
+    
+    <nav class="app-bottom-nav lg:hidden fixed bottom-5 left-4 right-4 z-40
+                flex items-center safe-bottom bg-surface/90 backdrop-blur-lg 
+                border border-white/20 rounded-[32px] shadow-[0_8px_32px_rgba(0,0,0,0.12)] h-[76px] px-2"
     >
-      <Icon :name="tab.icon" class="w-6 h-6 transition-transform duration-200"
-            :class="isActive(tab.path) ? 'scale-110' : ''" />
-      <span class="text-[11px] font-medium leading-tight mt-0.5">{{ tab.label }}</span>
-      <div class="h-0.5 w-5 rounded-full transition-all duration-150 mt-1"
-           :class="isActive(tab.path) ? 'bg-brand' : 'bg-transparent'" />
-    </NuxtLink>
+      <template v-for="item in navItems" :key="item.label">
+        <!-- Regular Tab -->
+        <NuxtLink
+          v-if="item.path"
+          :to="item.path"
+          class="flex-1 flex flex-col items-center justify-center gap-1 transition-all duration-300"
+          :class="isActive(item.path) ? 'text-brand' : 'text-muted/60'"
+        >
+          <Icon :name="item.icon!" class="w-6 h-6" :class="isActive(item.path) ? 'scale-110' : ''" />
+          <span class="text-[10px] font-bold">{{ item.label }}</span>
+        </NuxtLink>
 
-    <!-- ClientOnly for Profile/Login to avoid hydration mismatch -->
-    <ClientOnly>
-      <NuxtLink
-        :to="tabs[4].path"
-        class="flex flex-col items-center justify-center gap-0.5
-               flex-1 h-full rounded-none transition-colors duration-150"
-        :class="isActive(tabs[4].path)
-          ? 'text-brand font-semibold'
-          : 'text-muted'"
-        :aria-label="tabs[4].label"
-      >
-        <Icon :name="tabs[4].icon" class="w-6 h-6 transition-transform duration-200"
-              :class="isActive(tabs[4].path) ? 'scale-110' : ''" />
-        <span class="text-[11px] font-medium leading-tight mt-0.5">{{ tabs[4].label }}</span>
-        <div class="h-0.5 w-5 rounded-full transition-all duration-150 mt-1"
-             :class="isActive(tabs[4].path) ? 'bg-brand' : 'bg-transparent'" />
-      </NuxtLink>
-      <template #fallback>
-        <div class="flex flex-col items-center justify-center gap-0.5 flex-1 h-full text-muted opacity-50">
-          <Icon name="lucide:user" class="w-6 h-6" />
-          <span class="text-[11px] font-medium leading-tight mt-0.5">...</span>
+        <!-- Center MENU FAB -->
+        <div v-else class="flex-1 flex flex-col items-center justify-center pt-2">
+          <div class="relative w-12 h-6 flex justify-center">
+            <button @click="toggleMenu"
+                    class="absolute -top-7 w-14 h-14 rounded-full bg-white shadow-lg shadow-brand/20 border-4 border-surface 
+                           flex items-center justify-center active:scale-95 transition-all group duration-300 flex-shrink-0 aspect-square"
+                    :class="showMenu ? 'rotate-45' : ''">
+              <Icon :name="showMenu ? 'lucide:plus' : 'lucide:layout-grid'" 
+                    class="w-8 h-8 text-brand transition-all duration-300" />
+            </button>
+          </div>
+          <span class="text-[11px] font-extrabold text-default mt-2 transition-opacity" 
+                :class="showMenu ? 'opacity-0' : 'opacity-100'">
+            Menu
+          </span>
         </div>
       </template>
-    </ClientOnly>
-  </nav>
+    </nav>
+  </div>
 </template>

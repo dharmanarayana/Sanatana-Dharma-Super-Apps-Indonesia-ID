@@ -151,6 +151,8 @@
 
 @theme {
   /* Colors */
+  --color-brand: var(--brand-primary);
+  --color-brand-secondary: var(--brand-secondary);
   --color-saffron: var(--brand-primary);
   --color-gold: var(--brand-secondary);
   --color-maroon: var(--brand-maroon);
@@ -161,7 +163,7 @@
   --color-bg-surface: var(--bg-surface);
   --color-bg-elevated: var(--bg-elevated);
 
-  --color-text-primary: var(--text-primary);
+  --color-text-default: var(--text-primary);
   --color-text-secondary: var(--text-secondary);
   --color-text-muted: var(--text-muted);
   --color-text-brand: var(--text-brand);
