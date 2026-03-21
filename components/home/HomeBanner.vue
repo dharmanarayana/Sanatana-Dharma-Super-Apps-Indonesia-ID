@@ -82,7 +82,7 @@ const detectLocation = () => {
     },
     (error) => {
       isLocating.value = false
-      currentLocation.value = 'Kalender Bali' // Fallback
+      currentLocation.value = 'Lokasi Tidak Terdeteksi' // Fallback
       if (error.code === error.PERMISSION_DENIED) {
         alert('Mohon izinkan akses lokasi (GPS) pada browser Anda agar kami bisa menyesuaikan kalender dengan wilayah Anda.')
       }
