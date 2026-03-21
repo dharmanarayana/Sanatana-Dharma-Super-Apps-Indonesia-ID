@@ -36,15 +36,16 @@ const menuGroups = [
   {
     title: 'Favorit',
     shortTitle: 'Favorit',
-    items: [
-      { id: 1, label: 'Kalender', icon: 'lucide:calendar', color: 'bg-[#5C7CFA]', path: '/kalender' },
-      { id: 2, label: 'Doa', icon: 'lucide:scroll-text', color: 'bg-[#40C057]', path: '/doa-mantra' },
-      { id: 3, label: 'Kitab Suci', icon: 'lucide:book-open', color: 'bg-[#7048E8]', path: '/kitab-suci' },
-      { id: 14, label: 'Toko', icon: 'lucide:shopping-bag', color: 'bg-[#FF922B]', path: '/marketplace' },
-      { id: 4, label: 'Video', icon: 'lucide:clapperboard', color: 'bg-[#FCC419]', path: '/video' },
-      { id: 8, label: 'Pura', icon: 'lucide:map-pin', color: 'bg-[#37B24D]', path: '/pura' },
-      { id: 9, label: 'Donasi', icon: 'lucide:heart', color: 'bg-[#FA5252]', path: '/donasi' },
-    ]
+      items: [
+        { id: 1, label: 'Kalender', icon: 'lucide:calendar', color: 'bg-[#5C7CFA]', path: '/kalender' },
+        { id: 2, label: 'Doa', icon: 'lucide:scroll-text', color: 'bg-[#40C057]', path: '/doa-mantra' },
+        { id: 3, label: 'Kitab Suci', icon: 'lucide:book-open', color: 'bg-[#7048E8]', path: '/kitab-suci' },
+        { id: 14, label: 'Toko', icon: 'lucide:shopping-bag', color: 'bg-[#FF922B]', path: '/marketplace' },
+        { id: 15, label: 'Sarana', icon: 'lucide:sparkles', color: 'bg-brand', path: '/sarana-upacara' },
+        { id: 4, label: 'Video', icon: 'lucide:clapperboard', color: 'bg-[#FCC419]', path: '/video' },
+        { id: 8, label: 'Pura', icon: 'lucide:map-pin', color: 'bg-[#37B24D]', path: '/pura' },
+        { id: 9, label: 'Donasi', icon: 'lucide:heart', color: 'bg-[#FA5252]', path: '/donasi' },
+      ]
   },
   {
     title: 'Keagamaan',
