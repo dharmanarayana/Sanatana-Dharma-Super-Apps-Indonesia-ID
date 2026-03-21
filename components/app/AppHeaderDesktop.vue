@@ -13,6 +13,14 @@ defineEmits(['toggle-sidebar'])
       <Icon name="lucide:menu" class="w-5 h-5" />
     </button>
 
+    <!-- Logo link to home -->
+    <NuxtLink to="/" class="flex items-center gap-2 active:opacity-70 transition-opacity mr-2">
+      <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-brand to-gold/80 flex items-center justify-center">
+        <Icon name="ic:round-om" class="w-5 h-5 text-white" />
+      </div>
+      <span class="font-serif font-bold text-brand text-sm hidden xl:inline">Sanatana Dharma</span>
+    </NuxtLink>
+
     <!-- Breadcrumb -->
     <AppBreadcrumb class="flex-1" />
 
