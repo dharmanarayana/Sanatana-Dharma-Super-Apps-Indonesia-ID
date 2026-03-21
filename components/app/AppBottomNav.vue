@@ -6,13 +6,13 @@ const isActive = (path: string) =>
   path === '/' ? route.path === '/' : route.path.startsWith(path)
 
 const tabs = computed(() => [
-  { path: '/',           icon: '🏠', label: 'Beranda'  },
-  { path: '/kalender',   icon: '🗓️', label: 'Kalender' },
-  { path: '/kitab-suci', icon: '📖', label: 'Kitab'    },
-  { path: '/forum',      icon: '💬', label: 'Sosial'   },
+  { path: '/',           icon: 'lucide:house',             label: 'Beranda'  },
+  { path: '/kalender',   icon: 'lucide:calendar-days',     label: 'Kalender' },
+  { path: '/kitab-suci', icon: 'lucide:book-open-text',    label: 'Kitab'    },
+  { path: '/forum',      icon: 'lucide:message-square',    label: 'Sosial'   },
   { 
     path: authStore.isLoggedIn ? '/profil' : '/login', 
-    icon: '👤', 
+    icon: 'lucide:user', 
     label: authStore.isLoggedIn ? 'Profil' : 'Masuk' 
   },
 ])
@@ -31,8 +31,9 @@ const tabs = computed(() => [
         : 'text-muted'"
       :aria-label="tab.label"
     >
-      <span class="text-2xl leading-none">{{ tab.icon }}</span>
-      <span class="text-[10px] font-medium leading-tight">{{ tab.label }}</span>
+      <Icon :name="tab.icon" class="w-6 h-6 transition-transform duration-200"
+            :class="isActive(tab.path) ? 'scale-110' : ''" />
+      <span class="text-[11px] font-medium leading-tight mt-0.5">{{ tab.label }}</span>
       <div class="h-0.5 w-5 rounded-full transition-all duration-150 mt-1"
            :class="isActive(tab.path) ? 'bg-brand' : 'bg-transparent'" />
     </NuxtLink>
@@ -48,15 +49,16 @@ const tabs = computed(() => [
           : 'text-muted'"
         :aria-label="tabs[4].label"
       >
-        <span class="text-2xl leading-none">{{ tabs[4].icon }}</span>
-        <span class="text-[10px] font-medium leading-tight">{{ tabs[4].label }}</span>
+        <Icon :name="tabs[4].icon" class="w-6 h-6 transition-transform duration-200"
+              :class="isActive(tabs[4].path) ? 'scale-110' : ''" />
+        <span class="text-[11px] font-medium leading-tight mt-0.5">{{ tabs[4].label }}</span>
         <div class="h-0.5 w-5 rounded-full transition-all duration-150 mt-1"
              :class="isActive(tabs[4].path) ? 'bg-brand' : 'bg-transparent'" />
       </NuxtLink>
       <template #fallback>
-        <div class="flex flex-col items-center justify-center gap-0.5 flex-1 h-full text-muted">
-          <span class="text-2xl leading-none">👤</span>
-          <span class="text-[10px] font-medium leading-tight">...</span>
+        <div class="flex flex-col items-center justify-center gap-0.5 flex-1 h-full text-muted opacity-50">
+          <Icon name="lucide:user" class="w-6 h-6" />
+          <span class="text-[11px] font-medium leading-tight mt-0.5">...</span>
         </div>
       </template>
     </ClientOnly>

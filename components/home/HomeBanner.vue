@@ -1,8 +1,8 @@
 <template>
   <div class="relative overflow-hidden bg-gradient-to-r from-[var(--brand-primary)] to-[var(--brand-secondary)] rounded-2xl p-5 text-inverse shadow-lg">
     <!-- Background Pattern -->
-    <div class="absolute -top-10 -right-10 text-9xl opacity-10 rotate-12 select-none pointer-events-none">
-      🕉️
+    <div class="absolute -top-10 -right-10 opacity-10 rotate-12 select-none pointer-events-none">
+      <Icon name="ic:round-om" class="text-[180px]" />
     </div>
 
     <div class="relative z-10 flex flex-col gap-1">

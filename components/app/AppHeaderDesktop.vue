@@ -10,7 +10,7 @@ defineEmits(['toggle-sidebar'])
     <!-- Tombol toggle sidebar -->
     <button @click="$emit('toggle-sidebar')"
             class="btn-ghost p-2 rounded-lg" aria-label="Toggle navigasi">
-      <span class="text-lg">☰</span>
+      <Icon name="lucide:menu" class="w-5 h-5" />
     </button>
 
     <!-- Breadcrumb -->
@@ -21,7 +21,7 @@ defineEmits(['toggle-sidebar'])
       <input type="search"
              placeholder="Cari doa, kitab, berita..."
              class="input-field pl-10 pr-4 py-2 text-sm" />
-      <span class="absolute left-3 top-1/2 -translate-y-1/2 text-muted text-base">🔍</span>
+      <Icon name="lucide:search" class="absolute left-3 top-1/2 -translate-y-1/2 text-muted w-4 h-4" />
     </div>
 
     <!-- Actions -->
