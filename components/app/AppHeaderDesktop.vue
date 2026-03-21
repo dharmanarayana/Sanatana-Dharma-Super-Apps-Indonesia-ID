@@ -27,10 +27,7 @@ defineEmits(['toggle-sidebar'])
     <!-- Actions -->
     <div class="flex items-center gap-2">
       <AppThemeToggle />
-      <button class="btn-ghost p-2 rounded-lg relative" aria-label="Notifikasi">
-        <span class="text-xl">🔔</span>
-        <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-saffron rounded-full" />
-      </button>
+      <AppNotificationBell />
     </div>
   </header>
 </template>

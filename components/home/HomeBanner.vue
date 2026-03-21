@@ -1,5 +1,5 @@
 <template>
-  <div class="relative overflow-visible bg-gradient-to-r from-[var(--brand-primary)] to-[var(--brand-secondary)] rounded-2xl p-5 text-inverse shadow-lg">
+  <div class="relative overflow-hidden bg-gradient-to-r from-[var(--brand-primary)] to-[var(--brand-secondary)] rounded-2xl p-5 text-inverse shadow-lg">
     <!-- Background Pattern -->
     <div class="absolute -top-10 -right-10 text-9xl opacity-10 rotate-12 select-none pointer-events-none">
       🕉️
@@ -186,9 +186,4 @@ const bulanSaka = computed(() => {
 })
 </script>
 
-<style scoped>
-/* Let UI spill properly from parent if it has hidden overflow */
-.overflow-visible {
-  overflow: visible !important;
-}
-</style>
+

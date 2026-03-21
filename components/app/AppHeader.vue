@@ -13,9 +13,7 @@
       <!-- Theme Toggle Component -->
       <AppThemeToggle />
 
-      <button class="p-2 rounded-full hover:bg-elevated active:scale-95 transition-all">
-        <Icon name="lucide:bell" class="w-6 h-6 text-muted" />
-      </button>
+      <AppNotificationBell />
       
       <NuxtLink to="/profil" class="w-9 h-9 rounded-full bg-[var(--state-active)] border border-brand/20 flex items-center justify-center overflow-hidden">
         <Icon name="lucide:user" class="w-5 h-5 text-brand" />

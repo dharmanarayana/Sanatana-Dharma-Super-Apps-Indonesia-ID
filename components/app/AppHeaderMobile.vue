@@ -15,9 +15,7 @@
     <!-- Aksi kanan -->
     <div class="flex items-center gap-1">
       <AppThemeToggle />
-      <button class="touch-target rounded-full" aria-label="Notifikasi">
-        <span class="text-xl">🔔</span>
-      </button>
+      <AppNotificationBell />
     </div>
   </header>
 </template>

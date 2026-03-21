@@ -3,9 +3,12 @@
     <!-- Mobile Header -->
     <header class="lg:hidden flex items-center justify-between p-4 bg-surface border-b border-border sticky top-0 z-50">
       <h1 class="font-bold text-lg text-brand-primary">Admin Panel</h1>
-      <button @click="isSidebarOpen = !isSidebarOpen" class="p-2 text-default hover:bg-surface-variant rounded-lg transition-colors">
-        <Icon :name="isSidebarOpen ? 'lucide:x' : 'lucide:menu'" size="24" />
-      </button>
+      <div class="flex items-center gap-2">
+        <AppNotificationBell />
+        <button @click="isSidebarOpen = !isSidebarOpen" class="p-2 text-default hover:bg-surface-variant rounded-lg transition-colors">
+          <Icon :name="isSidebarOpen ? 'lucide:x' : 'lucide:menu'" size="24" />
+        </button>
+      </div>
     </header>
 
     <div class="flex flex-col lg:flex-row min-h-screen">

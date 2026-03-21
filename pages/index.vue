@@ -6,18 +6,28 @@
       <h1 class="text-2xl font-bold text-default font-serif">
         Om Swastyastu, <span class="text-brand">{{ firstName }}</span> 🙏
       </h1>
-      <p class="text-secondary text-sm mt-1">Selamat datang kembali di aktivitas spiritalmu.</p>
+      <p class="text-secondary text-sm mt-1">Selamat datang kembali di aktivitas spiritualmu.</p>
     </div>
 
     <!-- Banner wuku hari ini -->
     <HomeBanner class="mb-6" />
 
-    <!-- MOBILE: Grid 4x4 menu utama -->
-    <section class="lg:hidden mb-6">
-      <HomeMenuGrid />
-    </section>
+    <!-- ═══ MOBILE LAYOUT ═══ -->
+    <div class="lg:hidden">
+      <!-- Menu Grid 3-col dengan judul baris -->
+      <section class="mb-6">
+        <HomeMenuGrid />
+      </section>
 
-    <!-- DESKTOP: Banner besar + statistik di kanan -->
+      <!-- Info Cards — stacked -->
+      <section class="space-y-4 mb-6">
+        <HomeWukuToday />
+        <HomeHariRayaTerdekat />
+        <HomeStreakCard />
+      </section>
+    </div>
+
+    <!-- ═══ DESKTOP LAYOUT ═══ -->
     <section class="hidden lg:grid lg:grid-cols-3 gap-6 mb-8">
       <div class="lg:col-span-2">
         <HomeMenuGrid />
