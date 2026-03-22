@@ -34,7 +34,7 @@
       <div
         v-if="notifStore.latestToast && !notifStore.showPanel"
         class="absolute right-0 top-full mt-2 w-72 bg-surface border border-brand/30
-               rounded-xl shadow-lg overflow-hidden z-50 cursor-pointer"
+               rounded-xl shadow-lg overflow-hidden z-[100] cursor-pointer"
         style="box-shadow: 0 4px 24px rgba(255,107,0,0.18);"
         @click="handleToastClick(notifStore.latestToast)"
       >
@@ -69,8 +69,8 @@
   </div>
 </template>
 
-<script setup>
-import { useNotificationStore } from '~/stores/notification.store'
+<script setup lang="ts">
+import { useNotificationStore, type NotificationItem } from '~/stores/notification.store'
 import { useAuthStore } from '~/stores/auth.store'
 
 const notifStore = useNotificationStore()
@@ -103,7 +103,7 @@ const showWelcomeToast = () => {
   })
 }
 
-const handleToastClick = (notif) => {
+const handleToastClick = (notif: NotificationItem | null) => {
   if (notif) {
     notifStore.markRead(notif.id)
     notifStore.dismissToast()
@@ -111,8 +111,8 @@ const handleToastClick = (notif) => {
   }
 }
 
-const getIconBg = (type) => {
-  const map = {
+const getIconBg = (type: string) => {
+  const map: Record<string, string> = {
     news: 'bg-saffron',
     video: 'bg-gold',
     post: 'bg-maroon',
@@ -123,21 +123,25 @@ const getIconBg = (type) => {
 }
 
 // Close panel when clicking outside
-const handleClickOutside = (e) => {
-  if (notifStore.showPanel && !e.target.closest('.notification-wrapper')) {
+const handleClickOutside = (e: MouseEvent) => {
+  const target = e.target as HTMLElement
+  if (notifStore.showPanel && !target.closest('.notification-wrapper')) {
     notifStore.closePanel()
   }
 }
+
+let welcomeTimer: ReturnType<typeof setTimeout> | null = null
 
 onMounted(() => {
   document.addEventListener('click', handleClickOutside, true)
   
   // Trigger welcome toast after a short delay
-  setTimeout(showWelcomeToast, 1000)
+  welcomeTimer = setTimeout(showWelcomeToast, 1500)
 })
 
 onUnmounted(() => {
   document.removeEventListener('click', handleClickOutside, true)
+  if (welcomeTimer) clearTimeout(welcomeTimer)
 })
 </script>
 

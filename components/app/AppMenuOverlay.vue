@@ -25,44 +25,46 @@ const close = () => emit('close')
 </script>
 
 <template>
-  <Teleport to="body">
-    <Transition name="fade">
-      <div v-if="show" class="fixed inset-0 z-50 flex flex-col items-center justify-end">
-        <!-- Backdrop -->
-        <div class="absolute inset-0 bg-black/40 backdrop-blur-md" @click="close"></div>
+  <ClientOnly>
+    <Teleport to="body">
+      <Transition name="fade">
+        <div v-if="show" class="fixed inset-0 z-50 flex flex-col items-center justify-end">
+          <!-- Backdrop -->
+          <div class="absolute inset-0 bg-black/40 backdrop-blur-md" @click="close"></div>
 
-        <!-- Menu Card -->
-        <div class="relative w-full max-w-lg bg-surface rounded-t-[40px] p-8 shadow-2xl animate-slide-up">
-          <div class="flex items-center justify-between mb-8">
-            <h3 class="text-xl font-bold text-default font-serif">Pilih Layanan</h3>
-            <button @click="close" class="p-2 rounded-full bg-default/5 hover:bg-default/10 transition-colors">
-              <Icon name="lucide:x" class="w-6 h-6 text-muted" />
-            </button>
-          </div>
+          <!-- Menu Card -->
+          <div class="relative w-full max-w-lg bg-surface rounded-t-[40px] p-8 shadow-2xl animate-slide-up">
+            <div class="flex items-center justify-between mb-8">
+              <h3 class="text-xl font-bold text-default font-serif">Pilih Layanan</h3>
+              <button @click="close" class="p-2 rounded-full bg-default/5 hover:bg-default/10 transition-colors">
+                <Icon name="lucide:x" class="w-6 h-6 text-muted" />
+              </button>
+            </div>
 
-          <div class="grid grid-cols-4 gap-y-8 gap-x-4">
-            <NuxtLink v-for="item in menuItems" 
-                      :key="item.path" 
-                      :to="item.path"
-                      @click="close"
-                      class="flex flex-col items-center group active:scale-95 transition-all">
-              <div class="w-16 h-16 rounded-[20px] bg-surface border border-default shadow-sm 
-                          flex items-center justify-center mb-2 group-hover:border-brand transition-colors">
-                <Icon :name="item.icon" class="w-9 h-9" :class="item.color" />
-              </div>
-              <span class="text-[11px] font-bold text-default text-center leading-tight">
-                {{ item.label }}
-              </span>
-            </NuxtLink>
-          </div>
+            <div class="grid grid-cols-4 gap-y-8 gap-x-4">
+              <NuxtLink v-for="item in menuItems" 
+                        :key="item.path" 
+                        :to="item.path"
+                        @click="close"
+                        class="flex flex-col items-center group active:scale-95 transition-all">
+                <div class="w-16 h-16 rounded-[20px] bg-surface border border-default shadow-sm 
+                            flex items-center justify-center mb-2 group-hover:border-brand transition-colors">
+                  <Icon :name="item.icon" class="w-9 h-9" :class="item.color" />
+                </div>
+                <span class="text-[11px] font-bold text-default text-center leading-tight">
+                  {{ item.label }}
+                </span>
+              </NuxtLink>
+            </div>
 
-          <div class="mt-10 flex justify-center">
-            <div class="w-12 h-1.5 bg-default/10 rounded-full"></div>
+            <div class="mt-10 flex justify-center">
+              <div class="w-12 h-1.5 bg-default/10 rounded-full"></div>
+            </div>
           </div>
         </div>
-      </div>
-    </Transition>
-  </Teleport>
+      </Transition>
+    </Teleport>
+  </ClientOnly>
 </template>
 
 <style scoped>

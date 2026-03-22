@@ -25,7 +25,9 @@ const navItems = computed(() => [
 
 <template>
   <div>
-    <AppMenuOverlay :show="showMenu" @close="showMenu = false" />
+    <ClientOnly>
+      <AppMenuOverlay :show="showMenu" @close="showMenu = false" />
+    </ClientOnly>
     
     <nav class="app-bottom-nav lg:hidden fixed bottom-5 left-4 right-4 z-40
                 flex items-center safe-bottom bg-surface/90 backdrop-blur-lg 
