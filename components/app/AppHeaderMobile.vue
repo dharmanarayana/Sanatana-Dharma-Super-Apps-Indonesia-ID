@@ -29,6 +29,9 @@
 
     <!-- Aksi kanan -->
     <div class="flex items-center gap-2">
+      <AppThemeToggle />
+      <AppNotificationBell />
+
       <ClientOnly>
         <NuxtLink v-if="!authStore.isLoggedIn" 
                   to="/login" 
@@ -38,9 +41,13 @@
           </div>
           <span class="text-xs font-bold text-default">Login</span>
         </NuxtLink>
+
+        <NuxtLink v-else 
+                  to="/profil" 
+                  class="w-9 h-9 rounded-full bg-[var(--state-active)] border border-brand/20 flex items-center justify-center overflow-hidden active:scale-95 transition-all">
+          <Icon name="lucide:user" class="w-5 h-5 text-brand" />
+        </NuxtLink>
       </ClientOnly>
-      <AppThemeToggle />
-      <AppNotificationBell />
     </div>
   </header>
 </template>

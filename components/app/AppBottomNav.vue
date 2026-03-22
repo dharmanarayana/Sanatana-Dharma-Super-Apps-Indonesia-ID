@@ -15,11 +15,7 @@ const navItems = computed(() => [
   { path: '/kalender',   icon: 'lucide:calendar-days',   label: 'Kalender' },
   { type: 'menu',        label: 'Menu' },
   { path: '/kitab-suci', icon: 'lucide:book-open-text',  label: 'Kitab'    },
-  { 
-    path: authStore.isLoggedIn ? '/profil' : '/forum', 
-    icon: authStore.isLoggedIn ? 'lucide:user' : 'lucide:message-square', 
-    label: authStore.isLoggedIn ? 'Profil' : 'Sosial' 
-  },
+  { path: '/forum',     icon: 'lucide:message-square',  label: 'Sosial'   },
 ])
 </script>
 
