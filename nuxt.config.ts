@@ -71,11 +71,11 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      // These will be overridden by NUXT_PUBLIC_APPWRITE_ENDPOINT, etc. at runtime
-      appwriteEndpoint: 'https://cloud.appwrite.io/v1',
-      appwriteProjectId: '',
-      appwriteProjectName: 'Sanatana Dharma Digital',
-      appwriteDatabaseId: 'sanatana-dharma-db',
+      // Improved fallbacks for different variable naming conventions on Vercel
+      appwriteEndpoint: process.env.NUXT_PUBLIC_APPWRITE_ENDPOINT || process.env.APPWRITE_ENDPOINT || 'https://fra.cloud.appwrite.io/v1',
+      appwriteProjectId: process.env.NUXT_PUBLIC_APPWRITE_PROJECT_ID || process.env.APPWRITE_PROJECT_ID || '',
+      appwriteProjectName: process.env.NUXT_PUBLIC_APPWRITE_PROJECT_NAME || 'Sanatana Dharma Digital',
+      appwriteDatabaseId: process.env.NUXT_PUBLIC_APPWRITE_DATABASE_ID || 'sanatana-dharma-db',
     }
   },
 
