@@ -135,11 +135,14 @@ const dateParams = computed(() => {
   return `?tanggal=${currentDate.value.getDate()}&bulan=${currentDate.value.getMonth() + 1}&tahun=${currentDate.value.getFullYear()}`
 })
 
-const { data: dewasaData, pending, error, refresh } = useFetch<DewasaResponse>(() => `/api/dewasa${dateParams.value}`, { 
-  key: `dewasa-${dateParams.value}`,
-  lazy: true, 
-  server: false 
-})
+const { data: dewasaData, pending, error, refresh } = useFetch<DewasaResponse>(
+  () => `/api/dewasa${dateParams.value}`, 
+  { 
+    key: `dewasa-lookup-${currentDate.value.getFullYear()}-${currentDate.value.getMonth() + 1}-${currentDate.value.getDate()}`,
+    lazy: true, 
+    server: false 
+  }
+)
 
 useHead({
   title: 'Ala Ayuning Dewasa | Sanatana Dharma Digital',

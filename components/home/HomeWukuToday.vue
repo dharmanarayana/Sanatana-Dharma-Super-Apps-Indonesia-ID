@@ -45,7 +45,15 @@ const kalender = useKalender()
 const dateStr = computed(() => {
   return `?tanggal=${kalender.selectedDate.value}&bulan=${kalender.selectedMonth.value}&tahun=${kalender.selectedYear.value}`
 })
-const { data: dewasaData, pending: pendingDewasa } = useFetch(() => `/api/dewasa${dateStr.value}`, { lazy: true, server: false })
+
+const { data: dewasaData, pending: pendingDewasa } = useFetch(
+  () => `/api/dewasa${dateStr.value}`, 
+  { 
+    key: `dewasa-today-${dateStr.value}`,
+    lazy: true, 
+    server: false 
+  }
+)
 
 const sakaInfoShort = computed(() => {
   const info = kalender.selectedDayInfo.value?.sakaInfo
