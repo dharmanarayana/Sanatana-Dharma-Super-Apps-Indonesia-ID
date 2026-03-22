@@ -71,10 +71,11 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      appwriteEndpoint: process.env.NUXT_PUBLIC_APPWRITE_ENDPOINT || 'https://cloud.appwrite.io/v1',
-      appwriteProjectId: process.env.NUXT_PUBLIC_APPWRITE_PROJECT_ID || '',
-      appwriteProjectName: process.env.NUXT_PUBLIC_APPWRITE_PROJECT_NAME || 'Sanatana Dharma Digital',
-      appwriteDatabaseId: process.env.NUXT_PUBLIC_APPWRITE_DATABASE_ID || 'sanatana-dharma-db',
+      // These will be overridden by NUXT_PUBLIC_APPWRITE_ENDPOINT, etc. at runtime
+      appwriteEndpoint: 'https://cloud.appwrite.io/v1',
+      appwriteProjectId: '',
+      appwriteProjectName: 'Sanatana Dharma Digital',
+      appwriteDatabaseId: 'sanatana-dharma-db',
     }
   },
 

@@ -25,7 +25,7 @@ export const useAuth = () => {
 
   const loginWithGoogle = async () => {
     $appwrite.account.createOAuth2Session(
-      'google',
+      'google' as any,
       `${window.location.origin}/`,
       `${window.location.origin}/login`
     )
