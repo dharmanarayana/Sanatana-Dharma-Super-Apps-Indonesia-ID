@@ -3,9 +3,16 @@
 
     <!-- Desktop Welcome (keep as is) -->
     <div class="hidden lg:block mb-6">
-      <h1 class="text-2xl font-bold text-default font-serif">
-        Om Swastyastu, <span class="text-brand">{{ firstName }}</span> 🙏
-      </h1>
+      <ClientOnly>
+        <h1 class="text-2xl font-bold text-default font-serif">
+          Om Swastyastu, <span class="text-brand">{{ firstName }}</span> 🙏
+        </h1>
+        <template #fallback>
+          <h1 class="text-2xl font-bold text-default font-serif">
+            Om Swastyastu, <span class="text-brand">Umat Sedharma</span> 🙏
+          </h1>
+        </template>
+      </ClientOnly>
       <p class="text-secondary text-sm mt-1">Digital — Harmoni dalam Kehidupan Spiritual.</p>
     </div>
 

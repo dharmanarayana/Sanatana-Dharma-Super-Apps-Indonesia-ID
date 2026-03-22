@@ -36,5 +36,9 @@ const fetchActiveUsers = async () => {
   }
 }
 
-onMounted(fetchActiveUsers)
+onMounted(() => {
+  if (authStore.isLoggedIn) {
+    fetchActiveUsers()
+  }
+})
 </script>

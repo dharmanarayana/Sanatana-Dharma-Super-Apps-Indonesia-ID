@@ -13,11 +13,11 @@ const DATABASE_ID = process.env.NUXT_PUBLIC_APPWRITE_DATABASE_ID || 'sanatana-dh
 const publicCollections = [
     'videos', 'news', 'prayers', 'holy_books', 
     'donations', 'elibrary', 'temples', 
-    'trisandhya', 'sarana_upacara'
+    'trisandhya', 'sarana_upacara', 'rituals', 'posts'
 ];
 
 const privateCollections = [
-    'rituals', 'users_profile', 'posts'
+    'users_profile'
 ];
 
 async function fixPermissions() {

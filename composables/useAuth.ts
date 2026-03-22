@@ -93,17 +93,30 @@ export const useAuth = () => {
 
   const checkDailyLogin = async () => {
     if (!authStore.user) return
-    const today = new Date().toISOString().split('T')[0]
-    const prefs = await $appwrite.account.getPrefs()
-    
-    if (prefs.lastLoginDate !== today) {
-      await addPoints(1)
-      await $appwrite.account.updatePrefs({ ...prefs, lastLoginDate: today, points: (prefs.points || 0) + 1 })
+    try {
+      const today = new Date().toISOString().split('T')[0]
+      const prefs = await $appwrite.account.getPrefs()
+      
+      if (prefs.lastLoginDate !== today) {
+        await addPoints(1)
+        await $appwrite.account.updatePrefs({ ...prefs, lastLoginDate: today, points: (prefs.points || 0) + 1 })
+      }
+    } catch (e) {
+      // Silent error for guest or invalid session
     }
   }
 
   const refreshUserSession = async () => {
     try {
+      // Basic check: if we're on client and have no session cookie, don't even try to avoid 401 console noise
+      if (import.meta.client) {
+        const hasSession = document.cookie.includes('a_session_')
+        if (!hasSession && !authStore.isLoggedIn) {
+          authStore.clearUser()
+          return null
+        }
+      }
+
       const user = await $appwrite.account.get()
       authStore.setUser(user)
       return user
