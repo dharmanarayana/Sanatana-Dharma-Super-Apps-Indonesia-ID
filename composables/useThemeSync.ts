@@ -1,3 +1,5 @@
+import { Query } from 'appwrite'
+
 export const useThemeSync = () => {
   const { $appwrite } = useNuxtApp()
   const colorMode    = useColorMode()
@@ -41,17 +43,17 @@ export const useThemeSync = () => {
   const loadTheme = async () => {
     if (!authStore.user) return
     try {
-      const doc = await $appwrite.databases.getDocument(
-        DB_ID, COLL_ID, authStore.user.$id
+      // Use listDocuments with filter to avoid 404 network noise if doc missing
+      const { documents } = await $appwrite.databases.listDocuments(
+        DB_ID, COLL_ID, 
+        [Query.equal('$id', authStore.user.$id)]
       )
-      if (doc.preferred_theme) {
-        colorMode.preference = doc.preferred_theme
+      
+      if (documents.length > 0 && documents[0].preferred_theme) {
+        colorMode.preference = documents[0].preferred_theme
       }
     } catch (e: any) {
-      // Sliently handle 404 - means user just hasn't saved a theme yet or doc missing
-      if (e.code !== 404) {
-        console.warn('Gagal muat preferensi tema:', e)
-      }
+      console.warn('Gagal muat preferensi tema:', e)
     }
   }
 

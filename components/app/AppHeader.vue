@@ -13,10 +13,10 @@
     </NuxtLink>
     
     <div class="flex items-center gap-3">
-      <AppThemeToggle />
-      <AppNotificationBell />
-      
       <ClientOnly>
+        <AppThemeToggle />
+        <AppNotificationBell />
+        
         <NuxtLink v-if="!authStore.isLoggedIn" 
                   to="/login" 
                   class="flex items-center gap-2 px-4 py-2 bg-surface shadow-sm border border-default rounded-full hover:bg-default/5 transition-all active:scale-95">
@@ -31,7 +31,11 @@
         </NuxtLink>
 
         <template #fallback>
-          <div class="w-9 h-9 rounded-full bg-default/5 animate-pulse" />
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-default/5 animate-pulse" />
+            <div class="w-10 h-10 rounded-full bg-default/5 animate-pulse" />
+            <div class="w-9 h-9 rounded-full bg-default/5 animate-pulse" />
+          </div>
         </template>
       </ClientOnly>
     </div>
