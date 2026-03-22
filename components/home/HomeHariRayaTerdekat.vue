@@ -10,15 +10,21 @@
       <div class="h-4 bg-default rounded w-3/4 animate-pulse"></div>
     </div>
     
-    <div v-else-if="upcomingEvents.length > 0" class="space-y-2 mt-3 text-sm">
-      <div v-for="(event, i) in upcomingEvents.slice(0, 3)" :key="i">
-        <div class="flex items-center justify-between">
-          <span class="font-bold pr-2 truncate">{{ event.name }}</span>
-          <span class="text-xs text-muted whitespace-nowrap bg-default px-2 py-0.5 rounded-full">
-            {{ event.daysLeft === 0 ? 'Hari Ini' : event.daysLeft === 1 ? 'Besok' : `${event.daysLeft} hari lagi` }}
+    <div v-else-if="upcomingEvents.length > 0" class="space-y-4 mt-4">
+      <div v-for="(event, i) in upcomingEvents.slice(0, 3)" :key="i" class="group/item">
+        <div class="flex items-start justify-between gap-3">
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-1.5 mb-1">
+               <span :class="['text-[8px] font-black uppercase px-1.5 py-0.5 rounded-md tracking-tighter shadow-sm', event.cat.color]">
+                {{ event.cat.label }}
+              </span>
+            </div>
+            <p class="font-bold text-sm text-default truncate">{{ event.name }}</p>
+          </div>
+          <span class="text-[10px] font-bold text-muted whitespace-nowrap bg-default/50 px-2 py-1 rounded-lg border border-default">
+            {{ event.daysLeft === 0 ? 'Hari Ini' : event.daysLeft === 1 ? 'Besok' : `${event.daysLeft} hari` }}
           </span>
         </div>
-        <div v-if="i < Math.min(upcomingEvents.length, 3) - 1" class="divider my-2 opacity-50"></div>
       </div>
     </div>
     
@@ -28,32 +34,46 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue'
 import { useKalender } from '~/composables/useKalender'
 
 const kalender = useKalender()
 
 const upcomingEvents = computed(() => {
-  const today = kalender.selectedDate.value // This defaults to current day of month on load
+  const today = kalender.selectedDate.value
   const rerainan = kalender.currentReligiousDays.value || []
-  
-  // Combine religious and holidays if you want, or just religious. Let's do both
   const holidays = kalender.currentHolidays.value || []
-  const all = [...rerainan, ...holidays].filter(e => e.date >= today)
   
-  // Sort by date ascending
+  // Helper to categorize inside the computed
+  const getCat = (name: string, isRerainan: boolean) => {
+    if (isRerainan) return { label: 'Rerainan', color: 'bg-red-100 text-red-600 dark:bg-red-900/40 dark:text-red-300' }
+    const n = name.toLowerCase()
+    if (n.includes('cuti bersama')) return { label: 'Cuti', color: 'bg-teal-100 text-teal-600 dark:bg-teal-900/40 dark:text-teal-300' }
+    
+    const liburKeywords = ['tahun baru', 'nyepi', 'idul fitri', 'idul adha', 'wafat isa', 'kenaikan isa', 'imlek', 'isra mikraj', 'waisak', 'pancasila', 'kemerdekaan', 'maulid', 'natal']
+    if (liburKeywords.some(k => n.includes(k))) return { label: 'Libur', color: 'bg-amber-100 text-amber-600 dark:bg-amber-900/40 dark:text-amber-300' }
+    
+    return { label: 'Peringatan', color: 'bg-blue-100 text-blue-600 dark:bg-blue-900/40 dark:text-blue-300' }
+  }
+
+  const all = [
+    ...rerainan.map((r: any) => ({ ...r, isRerainan: true })),
+    ...holidays.map((h: any) => ({ ...h, isRerainan: false }))
+  ].filter(e => e.date >= today)
+  
   all.sort((a, b) => a.date - b.date)
   
-  // Remove precise duplicate names arriving on same date
-  const unique = []
+  const unique: any[] = []
   const seen = new Set()
   all.forEach(item => {
     const key = `${item.date}-${item.name}`
     if (!seen.has(key)) {
+      const catInfo = getCat(item.name, item.isRerainan)
       unique.push({
         ...item,
-        daysLeft: item.date - today
+        daysLeft: item.date - today,
+        cat: catInfo
       })
       seen.add(key)
     }

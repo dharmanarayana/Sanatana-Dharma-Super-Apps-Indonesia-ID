@@ -108,6 +108,41 @@ export const useKalender = () => {
     }
   }
 
+  const categorizeHoliday = (name: string) => {
+    const n = name.toLowerCase()
+    if (n.includes('cuti bersama')) return 'cuti'
+    
+    // List keywords for national public holidays (red dates)
+    const publicHolidayKeywords = [
+      'tahun baru', 'nyepi', 'idul fitri', 'idul adha', 'wafat isa', 'kenaikan isa',
+      'imlek', 'isra mikraj', 'waisak', 'hari lahir pancasila', 'hari kemerdekaan', 
+      'maulid nabi', 'natal', 'proklamasi'
+    ]
+    
+    if (publicHolidayKeywords.some(k => n.includes(k))) return 'libur'
+    
+    // Everything else in the holidays array is a commemoration
+    return 'peringatan'
+  }
+
+  const categorizedHolidays = computed(() => {
+    const holidays = currentHolidays.value
+    const groups = {
+      libur: [] as any[],
+      cuti: [] as any[],
+      peringatan: [] as any[]
+    }
+    
+    holidays.forEach((h: any) => {
+      const cat = categorizeHoliday(h.name)
+      if (cat === 'libur') groups.libur.push(h)
+      else if (cat === 'cuti') groups.cuti.push(h)
+      else groups.peringatan.push(h)
+    })
+    
+    return groups
+  })
+
   const monthName = computed(() => {
     return dayjs(`${selectedYear.value}-${String(selectedMonth.value).padStart(2, '0')}-01`).format('MMMM')
   })
@@ -122,6 +157,7 @@ export const useKalender = () => {
     selectedDayInfo,
     currentReligiousDays,
     currentHolidays,
+    categorizedHolidays,
     monthName,
     nextMonth,
     prevMonth,
