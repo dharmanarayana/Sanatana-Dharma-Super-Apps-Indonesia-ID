@@ -1,7 +1,7 @@
 <template>
   <div class="card p-4 flex gap-4 hover:border-brand/30 transition-all cursor-pointer group">
     <div class="w-24 h-24 bg-surface-variant rounded-xl shrink-0 overflow-hidden relative">
-      <img v-if="item.coverImage" :src="item.coverImage" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+      <NuxtImg v-if="item.coverImage" :src="item.coverImage" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
       <div v-else class="w-full h-full flex items-center justify-center opacity-20">
         <Icon name="lucide:book-open" size="32" />
       </div>

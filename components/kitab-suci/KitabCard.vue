@@ -1,7 +1,7 @@
 <template>
   <div class="card overflow-hidden group cursor-pointer hover:border-brand/40 transition-all flex flex-col h-full">
     <div class="aspect-[3/4] bg-surface-variant relative overflow-hidden shrink-0">
-      <img v-if="kitab.coverImage" :src="kitab.coverImage" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+      <NuxtImg v-if="kitab.coverImage" :src="kitab.coverImage" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
       <div v-else class="w-full h-full flex items-center justify-center text-maroon text-4xl opacity-10">📖</div>
       <div class="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
         <span class="text-[10px] font-bold text-brand bg-brand/20 px-2 py-0.5 rounded uppercase mb-2 inline-block backdrop-blur-sm">

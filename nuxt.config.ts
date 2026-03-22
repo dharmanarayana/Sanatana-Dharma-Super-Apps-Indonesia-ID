@@ -87,7 +87,7 @@ export default defineNuxtConfig({
         {
           src: '/theme-init.js',
           tagPosition: 'head',
-          defer: false,
+          defer: true,
           async: false,
         }
       ]

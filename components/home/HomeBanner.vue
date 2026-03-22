@@ -25,7 +25,7 @@
     </div>
     
       <div class="flex items-center justify-between text-xs pt-3 border-t border-white/5">
-        <button @click="detectLocation" class="flex items-center gap-1.5 font-bold text-white/90 hover:text-white transition-colors text-left outline-none" title="Deteksi Lokasi GPS Anda">
+        <button @click="detectLocation(true)" class="flex items-center gap-1.5 font-bold text-white/90 hover:text-white transition-colors text-left outline-none" title="Deteksi Lokasi GPS Anda">
           <Icon v-if="isLocating" name="lucide:loader-2" class="w-4 h-4 animate-spin" />
           <Icon v-else name="lucide:map-pin" class="w-4 h-4" />
           <span class="truncate max-w-[150px] sm:max-w-[200px]">{{ currentLocation }}</span>
@@ -47,7 +47,16 @@ const kalender = useKalender()
 const isLocating = ref(false)
 const currentLocation = ref('Deteksi Lokasi...')
 
-const detectLocation = () => {
+const detectLocation = (force = false) => {
+  // Check cache first if not forced
+  if (!force) {
+    const cached = localStorage.getItem('sdd_last_location')
+    if (cached) {
+      currentLocation.value = cached
+      return
+    }
+  }
+
   if (!navigator.geolocation) {
     currentLocation.value = 'GPS Tidak Didukung'
     return
@@ -68,7 +77,9 @@ const detectLocation = () => {
           const state = data.address.state || ''
           
           if (city) {
-            currentLocation.value = `${city}${state ? ', ' + state : ''}`
+            const result = `${city}${state ? ', ' + state : ''}`
+            currentLocation.value = result
+            localStorage.setItem('sdd_last_location', result)
           } else {
             currentLocation.value = 'Lokasi Ditemukan'
           }
@@ -84,16 +95,21 @@ const detectLocation = () => {
       isLocating.value = false
       currentLocation.value = 'Lokasi Tidak Terdeteksi' // Fallback
       if (error.code === error.PERMISSION_DENIED) {
-        alert('Mohon izinkan akses lokasi (GPS) pada browser Anda agar kami bisa menyesuaikan kalender dengan wilayah Anda.')
+        // Only alert if forced by user action
+        if (force) {
+          alert('Mohon izinkan akses lokasi (GPS) pada browser Anda agar kami bisa menyesuaikan kalender dengan wilayah Anda.')
+        }
       }
     },
-    { enableHighAccuracy: false, timeout: 10000, maximumAge: 60000 }
+    { enableHighAccuracy: false, timeout: 10000, maximumAge: 3600000 } // Cache for 1 hour at browser level
   )
 }
 
 onMounted(() => {
-  // Auto-detect location immediately on mount
-  detectLocation()
+  // Try to detect location, but favor cache
+  setTimeout(() => {
+    detectLocation(false)
+  }, 1000)
 })
 
 const { getMasehiToSaka } = useKalenderSaka()

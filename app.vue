@@ -21,22 +21,10 @@ onMounted(async () => {
 </script>
 
 <style>
-/* Transisi warna halus saat tema berganti — terapkan ke semua elemen */
-*, *::before, *::after {
-  transition-property: background-color, border-color, color, fill, stroke;
-  transition-duration: 200ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Kecualikan elemen animasi agar tidak terganggu transisi tema */
-.no-theme-transition,
-.no-theme-transition * {
-  transition: none !important;
-}
-
+/* Page transitions only - avoid universal transitions for better performance */
 .page-enter-active,
 .page-leave-active {
-  transition: all 0.2s;
+  transition: opacity 0.2s, filter 0.2s;
 }
 .page-enter-from,
 .page-leave-to {

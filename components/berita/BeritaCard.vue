@@ -1,7 +1,7 @@
 <template>
   <div class="card p-3 flex gap-4 hover:border-brand/30 transition-all cursor-pointer group">
     <div class="w-24 h-24 bg-surface-variant overflow-hidden rounded-xl shrink-0">
-      <img v-if="news.image" :src="news.image" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+      <NuxtImg v-if="news.image" :src="news.image" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
       <div v-else class="w-full h-full flex items-center justify-center opacity-20">
         <Icon name="lucide:newspaper" size="32" />
       </div>
