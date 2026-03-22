@@ -49,9 +49,19 @@ export default defineNuxtConfig({
       globPatterns: ['**/*.{js,css,html,png,svg,ico,woff2}'],
       runtimeCaching: [
         {
-          urlPattern: /^https:\/\/cloud\.appwrite\.io\/.*/i,
+          // Support regional Appwrite endpoints (e.g., fra.cloud.appwrite.io)
+          urlPattern: /^https:\/\/.*\.appwrite\.io\/v1\/databases\/.*/i,
           handler: 'NetworkFirst',
-          options: { cacheName: 'appwrite-api-cache', expiration: { maxEntries: 100, maxAgeSeconds: 86400 } }
+          options: { 
+            cacheName: 'appwrite-api-cache', 
+            expiration: { maxEntries: 100, maxAgeSeconds: 86400 },
+            cacheableResponse: { statuses: [0, 200] }
+          }
+        },
+        {
+          // EXCLUDE account/sessions from caching to prevent SW interference with auth
+          urlPattern: /^https:\/\/.*\.appwrite\.io\/v1\/account\/.*/i,
+          handler: 'NetworkOnly',
         }
       ]
     },

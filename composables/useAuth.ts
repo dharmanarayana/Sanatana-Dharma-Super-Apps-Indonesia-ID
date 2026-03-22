@@ -4,12 +4,22 @@ export const useAuth = () => {
 
   const login = async (email: string, password: string) => {
     try {
+      console.log('--- 🔐 Attempting Login:', email)
       await $appwrite.account.createEmailPasswordSession(email, password)
       const user = await $appwrite.account.get()
       authStore.setUser(user)
       navigateTo('/')
     } catch (e: any) {
-      throw new Error(e.message)
+      console.error('--- ❌ Login Error Details:', e)
+      
+      // Provide more helpful error messages for common Appwrite/Fetch issues
+      if (e.message.includes('Failed to fetch')) {
+        throw new Error('Gagal menghubungkan ke server (Failed to fetch). Pastikan koneksi internet stabil dan endpoint Appwrite sudah benar di .env.')
+      } else if (e.message.includes('Network Error')) {
+        throw new Error('Kesalahan Jaringan. Periksa koneksi internet Anda.')
+      }
+      
+      throw new Error(e.message || 'Terjadi kesalahan saat masuk. Silakan coba lagi.')
     }
   }
 

@@ -3,6 +3,10 @@ import { Client, Account, Databases, Storage, Functions, Messaging } from 'appwr
 export default defineNuxtPlugin(() => {
   const config = useRuntimeConfig()
 
+  if (import.meta.client) {
+    console.log('--- 🔧 Appwrite Init:', config.public.appwriteEndpoint, config.public.appwriteProjectId)
+  }
+
   const client = new Client()
     .setEndpoint(config.public.appwriteEndpoint)
     .setProject(config.public.appwriteProjectId)
