@@ -30,13 +30,15 @@
           </a>
         </div>
 
-        <div class="absolute bottom-0 left-0 h-1 bg-brand/30 w-full opacity-50"></div>
+        <div class="absolute bottom-0 left-0 h-1 bg-brand w-full origin-left animate-progress"></div>
       </div>
     </div>
   </Transition>
 </template>
 
 <script setup lang="ts">
+import { useSocialDetection } from '~/composables/useSocialDetection'
+
 const { platform, isSocialReferrer } = useSocialDetection()
 const visible = ref(false)
 
@@ -70,8 +72,14 @@ onMounted(() => {
   const isClosed = localStorage.getItem('sdd_social_popup_closed')
   if (isClosed) return
 
+  // Show after 5 seconds
   setTimeout(() => {
     visible.value = true
+    
+    // Auto close after another 10 seconds
+    setTimeout(() => {
+      if (visible.value) close()
+    }, 10000)
   }, 5000)
 })
 </script>
@@ -87,5 +95,13 @@ onMounted(() => {
 .fade-up-leave-to {
   opacity: 0;
   transform: translateY(10px) scale(0.98);
+}
+
+@keyframes progress {
+  from { transform: scaleX(1); }
+  to { transform: scaleX(0); }
+}
+.animate-progress {
+  animation: progress 10s linear forwards;
 }
 </style>

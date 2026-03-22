@@ -4,7 +4,7 @@
     <NuxtLink to="/" class="flex items-center gap-2.5 active:opacity-70 transition-opacity">
       <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand to-gold/80 
                   flex items-center justify-center shadow-lg shadow-brand/20">
-        <Icon name="material-symbols:om" class="w-7 h-7 text-white" />
+        <Icon name="fa6-solid:om" class="w-7 h-7 text-white" />
       </div>
       <h1 class="font-serif font-bold text-brand text-[17px] leading-[1.1]">
         Sanatana Dharma<br/>

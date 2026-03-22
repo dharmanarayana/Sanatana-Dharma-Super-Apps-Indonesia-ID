@@ -1,4 +1,4 @@
-import { Client, Databases, ID } from 'node-appwrite';
+import { Client, Databases, ID, Permission, Role } from 'node-appwrite';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -30,6 +30,10 @@ async function setup() {
             { key: 'type', type: 'string', size: 50, required: true },
             { key: 'completedAt', type: 'datetime', required: true },
             { key: 'streak', type: 'integer', required: false, min: 0 }
+        ], [
+            Permission.read(Role.users()),
+            Permission.create(Role.users()),
+            Permission.update(Role.users()),
         ]);
 
         // 3. Prayers Collection
@@ -39,7 +43,7 @@ async function setup() {
             { key: 'content', type: 'string', size: 5000, required: true },
             { key: 'transliteration', type: 'string', size: 5000, required: false },
             { key: 'audioUrl', type: 'string', size: 255, required: false }
-        ]);
+        ], [Permission.read(Role.any())]);
 
         // 4. Holy Books Collection
         await createCollection('holy_books', 'Holy Books', [
@@ -47,7 +51,7 @@ async function setup() {
             { key: 'category', type: 'string', size: 50, required: true },
             { key: 'description', type: 'string', size: 1000, required: false },
             { key: 'coverImage', type: 'string', size: 255, required: false }
-        ]);
+        ], [Permission.read(Role.any())]);
 
         // 5. Donations Collection
         await createCollection('donations', 'Donation Programs', [
@@ -74,6 +78,10 @@ async function setup() {
             { key: 'preferred_theme', type: 'string', size: 20, required: false, default: 'system' },
             { key: 'points', type: 'integer', required: false, default: 0 },
             { key: 'avatarId', type: 'string', size: 255, required: false }
+        ], [
+            Permission.read(Role.users()),
+            Permission.create(Role.users()),
+            Permission.update(Role.users()),
         ]);
 
         // 7. Forum Posts Collection
@@ -92,7 +100,7 @@ async function setup() {
             { key: 'thumbnail', type: 'string', size: 255, required: false },
             { key: 'category', type: 'string', size: 50, required: true },
             { key: 'description', type: 'string', size: 1000, required: false }
-        ]);
+        ], [Permission.read(Role.any())]);
 
         // 9. E-Library Collection
         await createCollection('elibrary', 'E-Library', [
@@ -112,7 +120,7 @@ async function setup() {
             { key: 'image', type: 'string', size: 255, required: false },
             { key: 'category', type: 'string', size: 50, required: true },
             { key: 'publishedAt', type: 'datetime', required: true }
-        ]);
+        ], [Permission.read(Role.any())]);
 
         // 11. Temples Collection
         await createCollection('temples', 'Direktori Pura', [
@@ -121,7 +129,7 @@ async function setup() {
             { key: 'description', type: 'string', size: 2000, required: false },
             { key: 'image', type: 'string', size: 255, required: false },
             { key: 'history', type: 'string', size: 5000, required: false }
-        ]);
+        ], [Permission.read(Role.any())]);
 
         // 12. Tri Sandhya Collection
         await createCollection('trisandhya', 'Tri Sandhya Content', [
@@ -129,7 +137,7 @@ async function setup() {
             { key: 'content', type: 'string', size: 1000, required: true },
             { key: 'translation', type: 'string', size: 1000, required: true },
             { key: 'audioUrl', type: 'string', size: 255, required: false }
-        ]);
+        ], [Permission.read(Role.any())]);
 
         // 13. Sarana Upacara Collection
         await createCollection('sarana_upacara', 'Sarana Upacara', [
@@ -140,7 +148,7 @@ async function setup() {
             { key: 'description', type: 'string', size: 5000, required: true },
             { key: 'image', type: 'string', size: 255, required: false },
             { key: 'icon', type: 'string', size: 50, required: false }
-        ]);
+        ], [Permission.read(Role.any())]);
 
         console.log('🏁 Migration Completed Successfully!');
     } catch (error) {
@@ -148,10 +156,10 @@ async function setup() {
     }
 }
 
-async function createCollection(id, name, attributes) {
+async function createCollection(id, name, attributes, permissions = []) {
     try {
-        await databases.createCollection(DATABASE_ID, id, name);
-        console.log(`✅ Collection "${name}" created`);
+        await databases.createCollection(DATABASE_ID, id, name, permissions);
+        console.log(`✅ Collection "${name}" created with permissions`);
 
         for (const attr of attributes) {
             try {
