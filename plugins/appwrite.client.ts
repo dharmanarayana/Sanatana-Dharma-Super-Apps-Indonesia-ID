@@ -4,13 +4,7 @@ export default defineNuxtPlugin(() => {
   const config = useRuntimeConfig()
 
   if (import.meta.client) {
-    console.log('--- 🔧 Appwrite Client Configuration Check ---')
-    console.log('Endpoint:', config.public.appwriteEndpoint)
-    console.log('Project ID:', config.public.appwriteProjectId || 'MISSING ❌')
-    
-    if (!config.public.appwriteProjectId) {
-      console.error('CRITICAL: Appwrite Project ID is not set in environment variables! Login will fail.')
-    }
+  // Client configuration
   }
 
   const client = new Client()

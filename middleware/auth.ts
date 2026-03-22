@@ -1,12 +1,11 @@
 export default defineNuxtRouteMiddleware(async (to, from) => {
   if (import.meta.server) return
-  console.log('--- 📍 Middleware Auth:', to.path)
+  
   const authStore = useAuthStore()
   const { refreshUserSession } = useAuth()
 
   // Verify session if not already in store
   if (!authStore.isLoggedIn) {
-    console.log('--- 🔑 Middleware: Verifying session...')
     await refreshUserSession()
   }
 

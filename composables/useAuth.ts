@@ -4,7 +4,6 @@ export const useAuth = () => {
 
   const login = async (email: string, password: string) => {
     try {
-      console.log('--- 🔐 Attempting Login:', email)
       await $appwrite.account.createEmailPasswordSession(email, password)
       const user = await $appwrite.account.get()
       authStore.setUser(user)
@@ -33,8 +32,37 @@ export const useAuth = () => {
 
   const register = async (email: string, password: string, name: string) => {
     try {
-      await $appwrite.account.create('unique()', email, password, name)
-      await login(email, password)
+      const config = useRuntimeConfig()
+      const DB_ID = config.public.appwriteDatabaseId
+      const userId = 'unique()'
+      
+      const response = await $appwrite.account.create(userId, email, password, name)
+      const createdUserId = response.$id
+      
+      // Auto login
+      await $appwrite.account.createEmailPasswordSession(email, password)
+      const user = await $appwrite.account.get()
+      authStore.setUser(user)
+
+      // Create Profile Document
+      try {
+        await $appwrite.databases.createDocument(
+          DB_ID,
+          'users_profile',
+          createdUserId,
+          {
+            userId: createdUserId,
+            preferred_theme: 'system',
+            points: 0
+          }
+        )
+        console.log('✅ Profile created for user:', createdUserId)
+      } catch (profileError) {
+        console.error('⚠️ Could not create profile document:', profileError)
+        // We don't throw here to allow user to still use the app
+      }
+
+      navigateTo('/')
     } catch (e: any) {
       throw new Error(e.message)
     }
@@ -71,7 +99,6 @@ export const useAuth = () => {
     if (prefs.lastLoginDate !== today) {
       await addPoints(1)
       await $appwrite.account.updatePrefs({ ...prefs, lastLoginDate: today, points: (prefs.points || 0) + 1 })
-      console.log('Daily login point rewarded! ☀️')
     }
   }
 

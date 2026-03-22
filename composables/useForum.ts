@@ -19,7 +19,6 @@ export const useForum = () => {
       const response = await $appwrite.databases.listDocuments(DATABASE_ID, COLLECTION_ID)
       posts.value = response.documents
     } catch (e) {
-      console.warn('Forum: Collection not found or empty.')
       posts.value = []
     } finally {
       loading.value = false
@@ -50,9 +49,17 @@ export const useForum = () => {
     // In real implementation:
     // await $appwrite.databases.createDocument(DATABASE_ID, COLLECTION_ID, 'unique()', { content, category, ... })
     // Realtime will automatically add it to the 'posts' ref
-    console.log('Forum: Simulating post creation', { content, category })
+    
     // For now, manually add to mock state to show it works
-    const newPost = { $id: Date.now().toString(), author: 'Saya (Simulasi)', content, category, likes: 0, comments: 0, createdAt: new Date().toISOString() }
+    const newPost = { 
+      $id: Date.now().toString(), 
+      author: 'Saya (Simulasi)', 
+      content, 
+      category, 
+      likes: 0, 
+      comments: 0, 
+      createdAt: new Date().toISOString() 
+    }
     posts.value = [newPost, ...posts.value]
   }
 

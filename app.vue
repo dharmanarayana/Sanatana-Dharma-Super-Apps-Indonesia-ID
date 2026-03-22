@@ -11,7 +11,6 @@
 const { refreshUserSession, checkDailyLogin } = useAuth()
 
 onMounted(async () => {
-  console.log('--- 🚀 App: onMounted start ---')
   document.documentElement.style.visibility = 'visible'
   
   // Check session and daily login points

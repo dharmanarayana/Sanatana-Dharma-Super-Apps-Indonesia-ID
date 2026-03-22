@@ -15,8 +15,25 @@ export const useThemeSync = () => {
         DB_ID, COLL_ID, authStore.user.$id,
         { preferred_theme: theme }
       )
-    } catch (e) {
-      console.warn('Gagal simpan preferensi tema:', e)
+    } catch (e: any) {
+      // If document doesn't exist, create it
+      if (e.code === 404) {
+        try {
+          await $appwrite.databases.createDocument(
+            DB_ID, COLL_ID, authStore.user.$id,
+            { 
+              userId: authStore.user.$id,
+              preferred_theme: theme,
+              points: 0
+            }
+          )
+          console.log('✅ Profile document created on-the-fly')
+        } catch (createError) {
+          console.warn('Gagal buat dokumen profil baru:', createError)
+        }
+      } else {
+        console.warn('Gagal simpan preferensi tema:', e)
+      }
     }
   }
 
@@ -30,8 +47,11 @@ export const useThemeSync = () => {
       if (doc.preferred_theme) {
         colorMode.preference = doc.preferred_theme
       }
-    } catch (e) {
-      console.warn('Gagal muat preferensi tema:', e)
+    } catch (e: any) {
+      // Sliently handle 404 - means user just hasn't saved a theme yet or doc missing
+      if (e.code !== 404) {
+        console.warn('Gagal muat preferensi tema:', e)
+      }
     }
   }
 

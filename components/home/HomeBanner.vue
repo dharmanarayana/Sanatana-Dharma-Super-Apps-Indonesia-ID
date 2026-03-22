@@ -2,7 +2,7 @@
   <div class="relative overflow-hidden bg-gradient-to-br from-brand via-brand-secondary to-maroon/40 rounded-3xl p-6 text-white shadow-xl shadow-brand/10 border border-white/5 group active:scale-[0.98] transition-all">
     <!-- Background Pattern -->
     <div class="absolute -top-10 -right-10 opacity-10 rotate-12 select-none pointer-events-none">
-      <Icon name="ic:round-om" class="text-[180px]" />
+      <Icon name="material-symbols:om" class="text-[180px]" />
     </div>
 
     <div class="relative z-10 flex flex-col gap-1">

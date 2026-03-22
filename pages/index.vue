@@ -85,7 +85,7 @@ const fetchData = async () => {
     videos.value = vRes.documents
     news.value = nRes.documents
   } catch (e: any) {
-    console.error('Error fetching home content:', e.message)
+    // Sliently handle errors for production
   }
 }
 
