@@ -1,6 +1,9 @@
 <template>
-  <div class="card p-4">
-    <h4 class="card-label mb-2">Hari Raya Terdekat</h4>
+  <div class="card p-4 border-l-4 border-brand-secondary">
+    <div class="flex items-center gap-2 mb-3">
+      <Icon name="lucide:calendar-check" class="w-5 h-5 text-brand" />
+      <h4 class="font-bold text-default text-sm font-serif">Jadwal Hari Raya Mendatang</h4>
+    </div>
     
     <div v-if="kalender.isLoading.value" class="space-y-3 mt-3">
       <div class="h-4 bg-default rounded w-full animate-pulse"></div>

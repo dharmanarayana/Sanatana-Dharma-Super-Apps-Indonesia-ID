@@ -1,5 +1,5 @@
 <template>
-  <div class="card p-4 bg-orange-50 dark:bg-orange-900/10 border-orange-200/50 hover:border-orange-300 transition-all group">
+  <div v-if="authStore.isLoggedIn" class="card p-4 bg-orange-50 dark:bg-orange-900/10 border-orange-200/50 hover:border-orange-300 transition-all group">
     <div class="flex items-center gap-3">
       <div class="text-3xl group-hover:scale-110 transition-transform duration-300">🔥</div>
       <div>
@@ -13,6 +13,7 @@
 
 <script setup lang="ts">
 const { $appwrite } = useNuxtApp()
+const authStore = useAuthStore()
 const DB_ID = 'sanatana-dharma-db'
 const activeUsers = ref(0)
 
