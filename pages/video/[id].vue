@@ -42,6 +42,24 @@
             <div class="prose prose-invert max-w-none text-muted leading-relaxed text-base">
               {{ video.description || 'Tidak ada deskripsi untuk video ini.' }}
             </div>
+
+            <div class="mt-8 p-6 rounded-2xl bg-gradient-to-r from-red-600/20 to-brand/10 border border-red-600/30 flex flex-col md:flex-row items-center gap-6 shadow-xl shadow-red-600/10">
+              <div class="flex-1 text-center md:text-left">
+                <div class="flex items-center justify-center md:justify-start gap-2 mb-2">
+                  <Icon name="lucide:sparkles" class="text-red-500 w-4 h-4 anima-pulse" />
+                  <p class="text-[11px] font-black text-red-500 uppercase tracking-[0.2em]">Dukung Syiar Dharma</p>
+                </div>
+                <p class="text-default text-base font-medium leading-relaxed">
+                  Bantu kami menjangkau lebih banyak umat! Subscribe ke channel YouTube <span class="text-brand font-bold underline">@idabagussubagia</span> untuk mendapatkan pencerahan rutin dan konten spiritual yang menginspirasi setiap minggunya.
+                </p>
+              </div>
+              <a href="https://www.youtube.com/@idabagussubagia?sub_confirmation=1" 
+                 target="_blank" 
+                 class="btn-youtube group flex items-center gap-3 px-8 py-4 shrink-0 shadow-2xl shadow-red-600/40 active:scale-95 transition-all">
+                <Icon name="lucide:youtube" size="24" class="group-hover:scale-125 transition-transform" />
+                <span class="text-sm">SUBSCRIBE SEKARANG</span>
+              </a>
+            </div>
           </div>
 
           <!-- Share / Action Buttons -->
@@ -174,6 +192,20 @@ onUnmounted(() => {
 }
 .btn-primary:active {
   transform: scale(0.95);
+}
+
+.btn-youtube {
+  background-color: #FF0000;
+  color: white;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.75rem;
+  border-radius: var(--radius-xl);
+}
+.btn-youtube:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
 }
 
 .btn-ghost {
