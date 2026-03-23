@@ -29,3 +29,6 @@ logs
 # VSCode
 .vscode
 
+# Script
+scripts
+tmp

@@ -14,6 +14,51 @@ if (!fs.existsSync(outputDir)) {
   fs.mkdirSync(outputDir, { recursive: true });
 }
 
+async function fetchRerainan(month, year) {
+  const url = `https://kalenderbali.com/rerainan/?bl=${month}&th=${year}`;
+  try {
+    const { data } = await axios.get(url, { headers: { 'User-Agent': USER_AGENT } });
+    const $ = cheerio.load(data);
+    const events = [];
+    
+    $('.foresmall').each((_, container) => {
+      const $container = $(container);
+      if ($container.find('li').length > 0) {
+        $container.find('li').each((i, el) => {
+          const text = $(el).text().trim();
+          const match = text.match(/[^\d]*(\d{2})-(\d{2})-(\d{4})\.\s*(.*)/);
+          if (match) {
+            const [_, d, m, y, name] = match;
+            if (parseInt(m) === parseInt(month)) {
+              let eventName = name.trim().split('.')[0].trim();
+              events.push({ date: parseInt(d), name: eventName });
+            }
+          }
+        });
+      } else {
+        const html = $container.html() || '';
+        const lines = html.split(/<br\s*\/?>/i);
+        lines.forEach(line => {
+          const text = line.replace(/<[^>]*>?/gm, '').trim();
+          const match = text.match(/[^\d]*(\d{2})-(\d{2})-(\d{4})\.\s*(.*)/);
+          if (match) {
+            const [_, d, m, y, name] = match;
+            if (parseInt(m) === parseInt(month)) {
+              let eventName = name.trim().split('.')[0].trim();
+              events.push({ date: parseInt(d), name: eventName });
+            }
+          }
+        });
+      }
+    });
+
+    return events.filter((v,i,a) => a.findIndex(t=>(t.date===v.date && t.name===v.name))===i);
+  } catch (e) {
+    console.error(`Error fetching rerainan for ${month}/${year}:`, e.message);
+    return [];
+  }
+}
+
 async function scrapeMonth(month, year) {
   const url = `https://kalenderbali.org/?tanggal=1&bulan=${month}&tahun=${year}&pilih=OK`;
   console.log(`Scraping: ${url}`);
@@ -84,13 +129,15 @@ async function scrapeMonth(month, year) {
         const n = e.name.toLowerCase();
         return n.includes('hari') || n.includes('hut') || n.includes('tahun baru') || n.includes('isra') || n.includes('imlek') || n.includes('lh') || n.includes('waisak') || n.includes('nyepi') || n.includes('nasional');
     });
-    const religiousDays = events.filter(e => !holidays.some(h => h.name === e.name));
+
+    // Scrape specific Hari Suci Hindu (Rerainan) from new source
+    const rerainanNewSource = await fetchRerainan(month, year);
 
     return {
       month: parseInt(month),
       year: parseInt(year),
       days: uniqueDays,
-      religiousDays: [ ...new Map(religiousDays.map(item => [item.name, item])).values() ],
+      religiousDays: rerainanNewSource.length > 0 ? rerainanNewSource : [ ...new Map(events.filter(e => !holidays.some(h => h.name === e.name)).map(item => [item.name, item])).values() ],
       holidays: [ ...new Map(holidays.map(item => [item.name, item])).values() ]
     };
   } catch (error) {

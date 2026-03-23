@@ -13,8 +13,8 @@ export const useKalender = () => {
   const selectedMonth = useState<number>('kalender_month', () => currentDate.month() + 1)
   const selectedDate = useState<number>('kalender_date', () => currentDate.date())
   const calendarData = useState<any[]>('kalender_data', () => [])
-  const isLoading = useState<boolean>('kalender_loading', () => false)
-  const isFetching = useState<boolean>('kalender_fetching', () => false)
+  const isLoading = ref<boolean>(false)
+  const isFetching = ref<boolean>(false)
 
   const fetchCalendarData = async (year: number) => {
     // Basic lock to prevent duplicate concurrent fetches

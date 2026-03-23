@@ -2,10 +2,10 @@
   <div class="card p-4 border-l-4 border-brand-secondary">
     <div class="flex items-center gap-2 mb-4">
       <Icon name="lucide:calendar-check" class="w-6 h-6 text-brand" />
-      <h4 class="font-bold text-default text-base font-serif">Jadwal Hari Raya Mendatang</h4>
+      <h4 class="font-bold text-default text-base font-serif">Jadwal Hari Suci Hindu</h4>
     </div>
     
-    <div v-if="kalender.isLoading" class="space-y-3 mt-3">
+    <div v-if="!currentMonthData?.days?.length" class="space-y-3 mt-3">
       <div class="h-4 bg-default rounded w-full animate-pulse"></div>
       <div class="h-4 bg-default rounded w-3/4 animate-pulse"></div>
     </div>
@@ -39,6 +39,7 @@ import { computed } from 'vue'
 import { useKalender } from '~/composables/useKalender'
 
 const kalender = useKalender()
+const currentMonthData = kalender.currentMonthData
 
 const upcomingEvents = computed(() => {
   const today = kalender.selectedDate.value
@@ -58,8 +59,7 @@ const upcomingEvents = computed(() => {
   }
 
   const all = [
-    ...rerainan.map((r: any) => ({ ...r, isRerainan: true })),
-    ...holidays.map((h: any) => ({ ...h, isRerainan: false }))
+    ...rerainan.map((r: any) => ({ ...r, isRerainan: true }))
   ].filter(e => e && typeof e.date === 'number' && e.date >= (today || 0))
   
   all.sort((a, b) => a.date - b.date)

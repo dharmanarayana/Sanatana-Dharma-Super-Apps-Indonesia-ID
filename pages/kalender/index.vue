@@ -12,8 +12,8 @@
         </button>
         <div class="flex items-center gap-3">
           <h3 class="text-xl font-bold flex items-center gap-2">
-            {{ kalender.monthName }} {{ kalender.selectedYear }}
-            <Icon v-if="kalender.isLoading.value" name="lucide:loader-2" class="w-4 h-4 animate-spin text-primary" />
+            {{ kalender.monthName?.value }} {{ kalender.selectedYear?.value }}
+            <Icon v-if="kalender.isLoading?.value" name="lucide:loader-2" class="w-4 h-4 animate-spin text-primary" />
           </h3>
         </div>
         <button @click="kalender.nextMonth" class="p-2 hover:bg-default rounded-lg transition-colors">

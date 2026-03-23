@@ -1,15 +1,15 @@
 <template>
   <div class="card p-4 bg-yellow-50 dark:bg-yellow-900/10 border-yellow-200 dark:border-yellow-800/30">
-    <div v-if="kalender.selectedDayInfo" class="space-y-2">
+    <div v-if="kalender.selectedDayInfo?.value" class="space-y-2">
       <h4 class="card-label text-yellow-800 dark:text-yellow-500 flex items-center gap-2">
         <Icon name="lucide:info" class="w-4 h-4" />
         Detail Saka
       </h4>
       <div class="text-xl font-bold">
-        {{ kalender.selectedDate }} {{ kalender.monthName }} {{ kalender.selectedYear }}
+        {{ kalender.selectedDate?.value }} {{ kalender.monthName?.value }} {{ kalender.selectedYear?.value }}
       </div>
       <p class="body-text text-sm font-medium leading-relaxed">
-        {{ kalender.selectedDayInfo.sakaInfo || 'Tidak ada info Saka' }}
+        {{ kalender.selectedDayInfo?.value?.sakaInfo || 'Tidak ada info Saka' }}
       </p>
       
       <!-- Event for selected day -->

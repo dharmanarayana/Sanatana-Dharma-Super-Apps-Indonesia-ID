@@ -138,12 +138,20 @@
         "name": "Buda Wage Merakih"
       },
       {
+        "date": 9,
+        "name": "Hari Bhatara Sri"
+      },
+      {
         "date": 13,
         "name": "Anggar Kasih Tambir"
       },
       {
         "date": 13,
         "name": "Kajeng Keliwon Uwudan"
+      },
+      {
+        "date": 17,
+        "name": "Hari Siwa Ratri"
       },
       {
         "date": 18,
@@ -344,6 +352,10 @@
         "name": "Kajeng Keliwon Uwudan"
       },
       {
+        "date": 13,
+        "name": "Hari Bhatara Sri"
+      },
+      {
         "date": 16,
         "name": "Tilem"
       },
@@ -530,6 +542,14 @@
         "name": "Tilem"
       },
       {
+        "date": 19,
+        "name": "Hari Raya Nyepi"
+      },
+      {
+        "date": 20,
+        "name": "Hari Bhatara Sri"
+      },
+      {
         "date": 20,
         "name": "Ngembak Geni"
       },
@@ -548,10 +568,6 @@
       {
         "date": 31,
         "name": "Paid-Paidan"
-      },
-      {
-        "date": 24,
-        "name": "Idul Fitri 1447 Hijriah"
       }
     ],
     "holidays": [
@@ -720,8 +736,24 @@
     ],
     "religiousDays": [
       {
+        "date": 1,
+        "name": "Hari Urip"
+      },
+      {
+        "date": 2,
+        "name": "Hari Patetegan"
+      },
+      {
         "date": 2,
         "name": "Purnama"
+      },
+      {
+        "date": 3,
+        "name": "Hari Pangredanaan"
+      },
+      {
+        "date": 4,
+        "name": "Hari Raya Saraswati"
       },
       {
         "date": 5,
@@ -760,20 +792,16 @@
         "name": "Buda Wage Ukir"
       },
       {
+        "date": 24,
+        "name": "Hari Bhatara Sri"
+      },
+      {
         "date": 28,
         "name": "Kajeng Keliwon Enyitan"
       },
       {
         "date": 28,
         "name": "Anggar Kasih Kulantir"
-      },
-      {
-        "date": 3,
-        "name": "Wafat Yesus Kristus"
-      },
-      {
-        "date": 5,
-        "name": "Kebangkitan Yesus Kristus (Paskah)"
       }
     ],
     "holidays": [
@@ -982,7 +1010,7 @@
     ],
     "religiousDays": [
       {
-        "date": 31,
+        "date": 1,
         "name": "Purnama"
       },
       {
@@ -1018,12 +1046,12 @@
         "name": "Kajeng Keliwon Enyitan"
       },
       {
-        "date": 15,
-        "name": "Kenaikan Yesus Kristus"
+        "date": 29,
+        "name": "Hari Bhatara Sri"
       },
       {
-        "date": 28,
-        "name": "Idul Adha 1447 Hijriah"
+        "date": 31,
+        "name": "Purnama"
       }
     ],
     "holidays": [
@@ -1217,6 +1245,10 @@
       },
       {
         "date": 14,
+        "name": "Hari Penyekeban"
+      },
+      {
+        "date": 14,
         "name": "Tilem"
       },
       {
@@ -1226,6 +1258,10 @@
       {
         "date": 16,
         "name": "Penampahan Galungan"
+      },
+      {
+        "date": 17,
+        "name": "Hari Raya Galungan"
       },
       {
         "date": 18,
@@ -1256,12 +1292,12 @@
         "name": "Kajeng Keliwon Enyitan"
       },
       {
-        "date": 29,
-        "name": "Purnama"
+        "date": 27,
+        "name": "Hari Raya Kuningan"
       },
       {
-        "date": 18,
-        "name": "Umanis Galungan"
+        "date": 29,
+        "name": "Purnama"
       }
     ],
     "holidays": [
@@ -1448,6 +1484,10 @@
       {
         "date": 1,
         "name": "Buda Wage Langkir"
+      },
+      {
+        "date": 3,
+        "name": "Hari Bhatara Sri"
       },
       {
         "date": 7,
@@ -1648,6 +1688,10 @@
         "name": "Buda Wage Merakih"
       },
       {
+        "date": 7,
+        "name": "Hari Bhatara Sri"
+      },
+      {
         "date": 11,
         "name": "Anggar Kasih Tambir"
       },
@@ -1674,10 +1718,6 @@
       {
         "date": 27,
         "name": "Purnama"
-      },
-      {
-        "date": 25,
-        "name": "Maulid Nabi Muhammad SAW"
       }
     ],
     "holidays": [
@@ -1856,6 +1896,10 @@
       {
         "date": 10,
         "name": "Kajeng Keliwon Uwudan"
+      },
+      {
+        "date": 11,
+        "name": "Hari Bhatara Sri"
       },
       {
         "date": 11,
@@ -2080,6 +2124,10 @@
         "name": "Buda Wage Kulawu"
       },
       {
+        "date": 16,
+        "name": "Hari Bhatara Sri"
+      },
+      {
         "date": 20,
         "name": "Anggar Kasih Dukut"
       },
@@ -2094,6 +2142,22 @@
       {
         "date": 27,
         "name": "Paid-Paidan"
+      },
+      {
+        "date": 28,
+        "name": "Hari Urip"
+      },
+      {
+        "date": 29,
+        "name": "Hari Patetegan"
+      },
+      {
+        "date": 30,
+        "name": "Hari Pangredanaan"
+      },
+      {
+        "date": 31,
+        "name": "Hari Raya Saraswati"
       }
     ],
     "holidays": [
@@ -2314,6 +2378,10 @@
         "name": "Buda Wage Ukir"
       },
       {
+        "date": 20,
+        "name": "Hari Bhatara Sri"
+      },
+      {
         "date": 24,
         "name": "Anggar Kasih Kulantir"
       },
@@ -2520,12 +2588,12 @@
         "name": "Kajeng Keliwon Uwudan"
       },
       {
-        "date": 29,
-        "name": "Anggar Kasih Julungwangi"
+        "date": 25,
+        "name": "Hari Bhatara Sri"
       },
       {
-        "date": 24,
-        "name": "Kelahiran Yesus Kristus"
+        "date": 29,
+        "name": "Anggar Kasih Julungwangi"
       }
     ],
     "holidays": [

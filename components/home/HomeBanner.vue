@@ -10,8 +10,8 @@
       <span class="text-xs font-sans tracking-[0.2em] uppercase text-white font-bold opacity-90">
         Info Saka Hari {{ currentDayName }}
       </span>
-      <h3 class="text-2xl font-serif font-bold text-white leading-tight drop-shadow-sm">
-        <span v-if="kalender.isLoading" class="animate-pulse bg-white/20 h-8 rounded w-3/4 block"></span>
+      <h3 class="text-2xl font-serif font-bold text-white leading-tight drop-shadow-sm text-left">
+        <span v-if="!gridDays?.length" class="animate-pulse bg-white/20 h-8 rounded w-3/4 block"></span>
         <span v-else>{{ sakaInfo }}</span>
       </h3>
       <div class="flex flex-wrap items-center gap-2 mt-4">
@@ -42,6 +42,7 @@ import { useKalender } from '~/composables/useKalender'
 import dayjs from 'dayjs'
 
 const kalender = useKalender()
+const gridDays = kalender.gridDays
 const currentDayName = computed(() => dayjs().format('dddd'))
 
 // -----------------------------------------------------------------
@@ -134,22 +135,34 @@ const sakaInfo = computed(() => kalender.selectedDayInfo.value?.sakaInfo || 'Mem
 
 const wukuToday = computed(() => {
   const info = sakaInfo.value
-  if (!info || info === 'Tidak Ada Info' || info === 'Memuat Data...') return '-'
-  // Search for known wuku name in the string
-  const found = WUKU_LIST.find(w => info.includes(w))
-  return found || '-'
+  // Attempt 1: Search for known wuku name in the scraped string
+  if (info && info !== 'Tidak Ada Info' && info !== 'Memuat Data...') {
+    const found = WUKU_LIST.find(w => info.includes(w))
+    if (found) return found
+  }
+  
+  // Attempt 2: Programmatically calculate based on selected date
+  const year = kalender.selectedYear.value
+  const month = kalender.selectedMonth.value
+  const date = kalender.selectedDate.value
+  if (year && month && date) {
+    const { getWuku } = useKalenderSaka()
+    const targetDate = new Date(year, month - 1, date)
+    return getWuku(targetDate)
+  }
+  
+  return '-'
 })
 
 const bulanSaka = computed(() => {
   const info = sakaInfo.value
-  if (!info || info === 'Tidak Ada Info' || info === 'Memuat Data...') return 'Sasih'
-  
   // 1. Try to find explicit Sasih name in the string
-  const found = SASIH_LIST.find(s => info.toLowerCase().includes(s.toLowerCase()))
-  if (found) return found
+  if (info && info !== 'Tidak Ada Info' && info !== 'Memuat Data...') {
+    const found = SASIH_LIST.find(s => info.toLowerCase().includes(s.toLowerCase()))
+    if (found) return found
+  }
   
-  // 2. Fallback to current month approximations if not explicitly in today's info
-  // (In a real app, we'd look at the month's Tilem/Purnama, but this is a reasonable approximation)
+  // 2. Fallback to current month approximations
   const month = kalender.selectedMonth.value
   const monthMap: Record<number, string> = {
     1: 'Kapitu', 2: 'Kawalu', 3: 'Kasanga', 4: 'Kedasa', 5: 'Jyestha', 6: 'Sadha',
