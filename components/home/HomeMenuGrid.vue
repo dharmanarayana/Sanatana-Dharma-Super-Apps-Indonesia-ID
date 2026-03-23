@@ -2,7 +2,7 @@
   <div class="space-y-6">
     <!-- ═══ HEADER (Pusaka Style) ═══ -->
     <div class="text-center relative py-2">
-      <h2 class="text-lg font-bold text-default tracking-tight">Layanan Sanatana</h2>
+      <h2 class="text-xl font-bold text-default tracking-tight">Layanan Sanatana</h2>
       <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-12 h-1.5 bg-brand rounded-full"></div>
     </div>
 
@@ -11,7 +11,7 @@
       <button v-for="group in menuGroups" 
               :key="group.title"
               @click="activeTab = group.title"
-              class="px-4 py-2 rounded-full text-xs font-bold transition-all whitespace-nowrap whitespace-pre"
+              class="px-5 py-2.5 rounded-full text-sm font-bold transition-all whitespace-nowrap whitespace-pre"
               :class="activeTab === group.title 
                 ? 'bg-white shadow-sm text-brand border border-default ring-1 ring-black/5' 
                 : 'text-muted/70 hover:text-muted'"

@@ -1,4 +1,5 @@
 import { ref, computed, watch } from 'vue'
+import { useState } from '#app'
 import dayjs from 'dayjs'
 import 'dayjs/locale/id'
 
@@ -6,13 +7,20 @@ dayjs.locale('id')
 
 export const useKalender = () => {
   const currentDate = dayjs()
-  const selectedYear = ref(currentDate.year())
-  const selectedMonth = ref(currentDate.month() + 1) // 1-12
-  const selectedDate = ref(currentDate.date())
-  const calendarData = ref<any[]>([])
-  const isLoading = ref(false)
+  
+  // Use Nuxt useState to share state across components
+  const selectedYear = useState<number>('kalender_year', () => currentDate.year())
+  const selectedMonth = useState<number>('kalender_month', () => currentDate.month() + 1)
+  const selectedDate = useState<number>('kalender_date', () => currentDate.date())
+  const calendarData = useState<any[]>('kalender_data', () => [])
+  const isLoading = useState<boolean>('kalender_loading', () => false)
+  const isFetching = useState<boolean>('kalender_fetching', () => false)
 
   const fetchCalendarData = async (year: number) => {
+    // Basic lock to prevent duplicate concurrent fetches
+    if (isFetching.value || (calendarData.value.length > 0 && calendarData.value[0]?.year === year)) return
+    
+    isFetching.value = true
     isLoading.value = true
     try {
       const data = await $fetch(`/data/calendar-${year}.json`)
@@ -26,6 +34,7 @@ export const useKalender = () => {
       calendarData.value = []
     } finally {
       isLoading.value = false
+      isFetching.value = false
     }
   }
 
@@ -76,7 +85,7 @@ export const useKalender = () => {
   })
 
   // Watch for year changes to fetch new data
-  watch(selectedYear, (newYear) => {
+  watch(selectedYear, (newYear: number) => {
     if (newYear >= 2025 && newYear <= 2026) {
        fetchCalendarData(newYear)
     }

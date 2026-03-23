@@ -1,11 +1,11 @@
 <template>
   <div class="card p-4 border-l-4 border-brand-secondary">
-    <div class="flex items-center gap-2 mb-3">
-      <Icon name="lucide:calendar-check" class="w-5 h-5 text-brand" />
-      <h4 class="font-bold text-default text-sm font-serif">Jadwal Hari Raya Mendatang</h4>
+    <div class="flex items-center gap-2 mb-4">
+      <Icon name="lucide:calendar-check" class="w-6 h-6 text-brand" />
+      <h4 class="font-bold text-default text-base font-serif">Jadwal Hari Raya Mendatang</h4>
     </div>
     
-    <div v-if="kalender.isLoading.value" class="space-y-3 mt-3">
+    <div v-if="kalender.isLoading" class="space-y-3 mt-3">
       <div class="h-4 bg-default rounded w-full animate-pulse"></div>
       <div class="h-4 bg-default rounded w-3/4 animate-pulse"></div>
     </div>
@@ -15,13 +15,13 @@
         <div class="flex items-start justify-between gap-3">
           <div class="flex-1 min-w-0">
             <div class="flex items-center gap-1.5 mb-1">
-               <span :class="['text-[8px] font-black uppercase px-1.5 py-0.5 rounded-md tracking-tighter shadow-sm', event.cat.color]">
+               <span :class="['text-xs font-black uppercase px-2 py-0.5 rounded-md tracking-tighter shadow-sm', event.cat.color]">
                 {{ event.cat.label }}
               </span>
             </div>
-            <p class="font-bold text-sm text-default truncate">{{ event.name }}</p>
+            <p class="font-bold text-base text-default truncate">{{ event.name }}</p>
           </div>
-          <span class="text-[10px] font-bold text-muted whitespace-nowrap bg-default/50 px-2 py-1 rounded-lg border border-default">
+          <span class="text-sm font-bold text-muted whitespace-nowrap bg-default/50 px-2 py-1.5 rounded-lg border border-default">
             {{ event.daysLeft === 0 ? 'Hari Ini' : event.daysLeft === 1 ? 'Besok' : `${event.daysLeft} hari` }}
           </span>
         </div>
@@ -60,7 +60,7 @@ const upcomingEvents = computed(() => {
   const all = [
     ...rerainan.map((r: any) => ({ ...r, isRerainan: true })),
     ...holidays.map((h: any) => ({ ...h, isRerainan: false }))
-  ].filter(e => e.date >= today)
+  ].filter(e => e && typeof e.date === 'number' && e.date >= (today || 0))
   
   all.sort((a, b) => a.date - b.date)
   

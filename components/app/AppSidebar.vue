@@ -52,10 +52,10 @@ const navGroups = [
       <span class="text-2xl shrink-0">🕉️</span>
       <Transition name="fade-label">
         <div v-if="!collapsed" class="overflow-hidden">
-          <p class="font-serif font-bold text-brand text-sm leading-tight">
+          <p class="font-serif font-bold text-brand text-base leading-tight">
             Sanatana Dharma
           </p>
-          <p class="text-muted text-[11px]">Digital</p>
+          <p class="text-muted text-xs">Digital</p>
         </div>
       </Transition>
     </div>
@@ -67,7 +67,7 @@ const navGroups = [
         <!-- Label grup (sembunyikan saat collapsed) -->
         <template v-if="!collapsed">
           <Transition name="fade-label">
-            <p class="text-[10px] font-bold text-muted uppercase tracking-widest px-4 mb-2">
+            <p class="text-xs font-bold text-muted uppercase tracking-widest px-4 mb-2">
               {{ group.label }}
             </p>
           </Transition>
@@ -88,7 +88,7 @@ const navGroups = [
           <span class="text-xl shrink-0 w-7 text-center">{{ item.icon }}</span>
 
           <Transition name="fade-label">
-            <span v-if="!collapsed" class="text-sm truncate">
+            <span v-if="!collapsed" class="text-base truncate">
               {{ item.label }}
             </span>
           </Transition>
@@ -96,7 +96,7 @@ const navGroups = [
           <!-- Tooltip saat collapsed -->
           <div v-if="collapsed"
                class="absolute left-full ml-3 px-3 py-1.5 bg-charcoal text-white
-                      text-sm rounded-lg whitespace-nowrap opacity-0 pointer-events-none
+                      text-base rounded-lg whitespace-nowrap opacity-0 pointer-events-none
                       group-hover:opacity-100 transition-opacity duration-150 z-50
                       shadow-lg">
             {{ item.label }}
@@ -121,7 +121,7 @@ const navGroups = [
             <span class="text-sm">👤</span>
           </div>
           <Transition name="fade-label">
-            <span v-if="!collapsed" class="text-sm text-secondary">Profil Saya</span>
+            <span v-if="!collapsed" class="text-base text-secondary">Profil Saya</span>
           </Transition>
           <!-- Tooltip saat collapsed -->
           <div v-if="collapsed"
@@ -142,7 +142,7 @@ const navGroups = [
             <span class="text-sm">🔑</span>
           </div>
           <Transition name="fade-label">
-            <span v-if="!collapsed" class="text-sm font-bold">Masuk / Daftar</span>
+            <span v-if="!collapsed" class="text-base font-bold">Masuk / Daftar</span>
           </Transition>
           <!-- Tooltip saat collapsed -->
           <div v-if="collapsed"
@@ -166,7 +166,7 @@ const navGroups = [
           {{ collapsed ? '▶' : '◀' }}
         </span>
         <Transition name="fade-label">
-          <span v-if="!collapsed" class="text-sm">Ciutkan</span>
+          <span v-if="!collapsed" class="text-base">Ciutkan</span>
         </Transition>
       </button>
     </div>

@@ -6,7 +6,7 @@
       
       <Icon :name="menu.iconComp || menu.icon" class="w-8 h-8 relative z-10" />
     </div>
-    <span class="text-[11px] font-bold text-default text-center leading-tight opacity-80 group-hover:opacity-100 transition-opacity">
+    <span class="text-sm font-bold text-default text-center leading-tight opacity-90 group-hover:opacity-100 transition-opacity">
       {{ menu.label }}
     </span>
   </NuxtLink>

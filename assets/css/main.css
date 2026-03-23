@@ -70,12 +70,12 @@
   --gap-layout:      1.5rem;
 
   /* ── Font sizes — mobile default ── */
-  --font-body:       1rem;         /* 16px */
-  --font-label:      0.875rem;     /* 14px */
-  --font-caption:    0.75rem;      /* 12px */
-  --font-heading-1:  1.5rem;
-  --font-heading-2:  1.25rem;
-  --font-heading-3:  1.0625rem;
+  --font-body:       1.125rem;     /* 18px — lebih besar untuk semua umur */
+  --font-label:      1rem;         /* 16px */
+  --font-caption:    0.875rem;     /* 14px — minimum terbaca nyaman */
+  --font-heading-1:  1.75rem;
+  --font-heading-2:  1.5rem;
+  --font-heading-3:  1.25rem;
 
   /* ── Touch target ── */
   --touch-min:       48px;
@@ -86,12 +86,12 @@
 @media (min-width: 1024px) {
   :root {
     --header-h:      64px;         /* sedikit lebih tinggi */
-    --font-body:     1.0625rem;    /* 17px — sedikit lebih besar untuk baca */
-    --font-label:    0.9375rem;    /* 15px */
-    --font-caption:  0.8125rem;    /* 13px */
-    --font-heading-1: 1.875rem;
-    --font-heading-2: 1.5rem;
-    --font-heading-3: 1.25rem;
+    --font-body:     1.1875rem;    /* 19px — lebih premium & readable */
+    --font-label:    1.0625rem;    /* 17px */
+    --font-caption:  0.9375rem;    /* 15px */
+    --font-heading-1: 2rem;
+    --font-heading-2: 1.75rem;
+    --font-heading-3: 1.375rem;
     --gap-layout:    2rem;
   }
 }
@@ -264,9 +264,9 @@
 
   .mantra-text {
     font-family: var(--font-serif);
-    font-size: 1.125rem;
+    font-size: 1.5rem;
     font-style: italic;
-    line-height: 2;
+    line-height: 1.8;
     color: var(--brand-maroon);
     letter-spacing: 0.01em;
   }
@@ -309,7 +309,7 @@
     border-radius: var(--radius-full);
     padding: 0.625rem 1.5rem;
     font-weight: 600;
-    font-size: 0.9375rem;
+    font-size: 1rem;
     transition: filter var(--transition), transform var(--transition);
     display: inline-flex;
     align-items: center;
@@ -328,7 +328,7 @@
     border-radius: var(--radius-full);
     padding: 0.625rem 1.5rem;
     font-weight: 600;
-    font-size: 0.9375rem;
+    font-size: 1rem;
     transition: background-color var(--transition), transform var(--transition);
     display: inline-flex;
     align-items: center;
@@ -357,7 +357,7 @@
     color: var(--text-primary);
     padding: 0.625rem 0.875rem;
     width: 100%;
-    font-size: 0.9375rem;
+    font-size: 1rem;
     transition: border-color var(--transition), box-shadow var(--transition);
     outline: none;
   }
@@ -372,16 +372,16 @@
     background-color: var(--state-active);
     color: var(--brand-primary);
     border-radius: var(--radius-full);
-    padding: 0.2rem 0.625rem;
-    font-size: 0.75rem;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.875rem;
     font-weight: 600;
   }
   .badge-muted {
     background-color: var(--state-disabled);
     color: var(--text-muted);
     border-radius: var(--radius-full);
-    padding: 0.2rem 0.625rem;
-    font-size: 0.75rem;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.875rem;
     font-weight: 500;
   }
 

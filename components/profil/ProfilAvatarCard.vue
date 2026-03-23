@@ -6,16 +6,16 @@
     </div>
     <div class="flex items-center justify-center gap-2">
       <h3 class="font-black italic text-xl text-default">{{ authStore.user?.name || 'Umat Sanatana' }}</h3>
-      <span v-if="authStore.isAdmin" class="bg-blue-500 text-white text-[8px] px-1.5 py-0.5 rounded-full flex items-center gap-0.5 shadow-sm" title="Verified Admin">
-        <span class="text-[10px]">✓</span> 
+      <span v-if="authStore.isAdmin" class="bg-blue-500 text-white text-xs px-2 py-0.5 rounded-full flex items-center gap-0.5 shadow-sm" title="Verified Admin">
+        <span class="text-xs">✓</span> 
         <span class="font-black italic uppercase">ADMIN</span>
       </span>
     </div>
-    <p class="text-[10px] font-bold text-muted uppercase tracking-widest mt-1">
+    <p class="text-sm font-bold text-muted uppercase tracking-widest mt-1.5">
       Lvl {{ level }} • {{ rank }}
     </p>
     <div class="mt-4 flex justify-center gap-2">
-      <button class="btn-primary py-2 px-6 text-[10px] font-black italic">Sunting Profil ⚙️</button>
+      <button class="btn-primary py-2.5 px-8 text-sm font-black italic">Sunting Profil ⚙️</button>
     </div>
   </div>
 </template>

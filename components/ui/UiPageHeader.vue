@@ -16,8 +16,8 @@ const { isDesktop } = useDevice()
               border-b border-default sticky top-[60px] z-30 overflow-hidden">
     <span v-if="icon" class="text-2xl shrink-0">{{ icon }}</span>
     <div class="min-w-0">
-      <h1 class="font-bold text-default text-lg leading-tight truncate">{{ title }}</h1>
-      <p v-if="subtitle" class="text-muted text-xs truncate">{{ subtitle }}</p>
+      <h1 class="font-bold text-default text-xl leading-tight truncate">{{ title }}</h1>
+      <p v-if="subtitle" class="text-muted text-sm truncate">{{ subtitle }}</p>
     </div>
   </div>
 

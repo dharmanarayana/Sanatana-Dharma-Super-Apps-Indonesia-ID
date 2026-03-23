@@ -1,0 +1,522 @@
+﻿[
+    {
+        "category_id":  17,
+        "title":  "Doa Memohon Kesehatan",
+        "category_name":  "Doa Harian",
+        "content":  [
+                        {
+                            "translation":  "Ya Hyang Widhi semoga Hyang Vayu menghembuskan angin kesejukan dan memberikan kesehatan, kesejahteraan dan umur panjang kepada kami.",
+                            "transliteration":  "Om Vāta ā vātu bhesajam śambhu \nmajobhu no hrde, Pra na āyumsi tārisat",
+                            "sanskrit":  null
+                        }
+                    ],
+        "id":  274
+    },
+    {
+        "category_id":  17,
+        "title":  "Doa Bangun Pagi",
+        "category_name":  "Doa Harian",
+        "content":  [
+                        {
+                            "translation":  "Ya Hyang Widhi, hamba memuja-Mu, bahwa hamba telah bangun pagi dalam keadaan selamat.",
+                            "transliteration":  "Om Jagrasca Prabhata Kalasca Ya Namah Svaha",
+                            "sanskrit":  ""
+                        }
+                    ],
+        "id":  10
+    },
+    {
+        "category_id":  17,
+        "title":  "Doa saat Cuci Muka",
+        "category_name":  "Doa Harian",
+        "content":  [
+                        {
+                            "translation":  "Ya Tuhan, hamba memuja-Mu, semoga wajah hamba menjadi bersih dan suci.",
+                            "transliteration":  "Om Cam Camani Ya Namah Svaha Om Waktra Parisudaha Ya Namah Svaha",
+                            "sanskrit":  ""
+                        }
+                    ],
+        "id":  11
+    },
+    {
+        "category_id":  17,
+        "title":  "Doa Berkumur dan Menggosok Gigi",
+        "category_name":  "Doa Harian",
+        "content":  [
+                        {
+                            "translation":  "Ya Tuhan, sujud hamba kepada Dewi Sri, Bhatari Yogini. Semoga bersihlah gigi hamba dan semoga bersihlah mulut hamba",
+                            "transliteration":  "Om Sri Devi Yogini Bhatrimsa Ya Namah, Om Ang Vaktra Parisudhamam Svaha.",
+                            "sanskrit":  ""
+                        }
+                    ],
+        "id":  12
+    },
+    {
+        "category_id":  17,
+        "title":  "Doa Membersihkan Kaki",
+        "category_name":  "Doa Harian",
+        "content":  [
+                        {
+                            "translation":  "Ya Tuhan, semoga bersihlah kaki hamba.",
+                            "transliteration":  "Om Am Kham Khasolkhaya Isvaraya Namah Svaha.",
+                            "sanskrit":  ""
+                        }
+                    ],
+        "id":  13
+    },
+    {
+        "category_id":  17,
+        "title":  "Doa Mandi",
+        "category_name":  "Doa Harian",
+        "content":  [
+                        {
+                            "translation":  "Ya Tuhan, Engkau adalah sumber kehidupan abadi nan suci, semoga badan hamba menjadi bersih dan suci.",
+                            "transliteration":  "Om Gangga Amrta Sarira Sudhamam Svaha. Om Sarira Parisudhamam Svaha.",
+                            "sanskrit":  ""
+                        }
+                    ],
+        "id":  14
+    },
+    {
+        "category_id":  17,
+        "title":  "Doa saat Keramas",
+        "category_name":  "Doa Harian",
+        "content":  [
+                        {
+                            "translation":  "Ya Tuhan, semoga air gangga ini menjadi amerta dan \nmembersihkan segala kekotoran kepala hamba",
+                            "transliteration":  "Om gangga namurteya namah, \nOm gring Çiwagriwa yanamah",
+                            "sanskrit":  null
+                        }
+                    ],
+        "id":  271
+    },
+    {
+        "category_id":  17,
+        "title":  "Doa saat Berpakaian",
+        "category_name":  "Doa Harian",
+        "content":  [
+                        {
+                            "translation":  "Ya Tuhan dalam wujud Mahadewa Yang Maha Agung, hamba bersujud kepada-Mu. \nSemoga pakaian yang hamba kenakan menjadi bersih dan suci.",
+                            "transliteration":  "Om Tam Mahadewaya Namah Swaha, \nOm Bhusanam Sarirabhyo Parisudhamam Swaha",
+                            "sanskrit":  ""
+                        }
+                    ],
+        "id":  270
+    },
+    {
+        "category_id":  17,
+        "title":  "Doa Sebelum Makan",
+        "category_name":  "Doa Harian",
+        "content":  [
+                        {
+                            "translation":  "Ya Tuhan, semoga makanan ini menjadi penghidup hamba lahir dan batin yang suci.",
+                            "transliteration":  "Om Anugraha Amrtadi Sanjivani Ya Namah Svaha.",
+                            "sanskrit":  ""
+                        }
+                    ],
+        "id":  15
+    },
+    {
+        "category_id":  17,
+        "title":  "Doa Selesai Makan",
+        "category_name":  "Doa Harian",
+        "content":  [
+                        {
+                            "translation":  "Ya Tuhan, semoga makanan yang telah masuk ke tubuh hamba memberikan kekuatan dan keselamatan, panjang umur dan tidak mendapat sesuatu apa pun. Ya Tuhan, semoga damai, damai di hati, damai di dunia, damai selama-lamanya.",
+                            "transliteration":  "Om Dhirgayur Astu, Avighnam Astu, Subham Astu, Om Sriyam Bhavantu,Sukham Bhavantu,Purnam Bhavantu,Ksama Sampurnaya Namah Svaha. Om Santih, Santih,Santih Om.",
+                            "sanskrit":  ""
+                        }
+                    ],
+        "id":  16
+    },
+    {
+        "category_id":  17,
+        "title":  "Doa saat Bepergian",
+        "category_name":  "Doa Harian",
+        "content":  [
+                        {
+                            "translation":  "Ia yang bersinar, membuat sinar yang tidak bersinar. Dengan hukum ia yang menerangi fajar. Ia bergerak dengan kuda di pasang dengan tatanan abadi; yang membuat manusia bahagia dengan kereta yang menemukan sinar.",
+                            "transliteration":  "Om ayam rocayad aruco rucāno yam\nvāsayad vy rtena purvīh\nayam īyata rtayugbhir asvaih\nsvarvida nābhinā carsaniprāh\n",
+                            "sanskrit":  null
+                        }
+                    ],
+        "id":  275
+    },
+    {
+        "category_id":  17,
+        "title":  "Doa Keselamatan",
+        "category_name":  "Doa Harian",
+        "content":  [
+                        {
+                            "translation":  "Ya Tuhan, semoga kami senantiasa dalam keadaan selamat.",
+                            "transliteration":  "Om Svastyastu.",
+                            "sanskrit":  ""
+                        }
+                    ],
+        "id":  17
+    },
+    {
+        "category_id":  17,
+        "title":  "Doa Sebelum Memulai Pekerjaan",
+        "category_name":  "Doa Harian",
+        "content":  [
+                        {
+                            "translation":  "Ya Tuhan, semoga atas perkenan-Mu, tiada suatu halangan bagi hamba memulai pekerjaan ini dan semoga berhasil baik.",
+                            "transliteration":  "Om Avighnam Astu Namo Sidham. Om Sidhirastu Tad Astu Svaha.",
+                            "sanskrit":  ""
+                        }
+                    ],
+        "id":  18
+    },
+    {
+        "category_id":  17,
+        "title":  "Doa Selesai Bekerja/Bersyukur",
+        "category_name":  "Doa Harian",
+        "content":  [
+                        {
+                            "translation":  "Ya Tuhan dalam wujud Parama Acintya yang mahagaib dan mahakarya, hanya atas anugerah-Mu lah makan pekerjaan ini berhasil dengan baik. Semoga damai, damai di hati, damai di dunia, damai selamanya.",
+                            "transliteration":  "Om Deva Suksma Parama Acintya Ya Namah Svaha, Sarva Karya Prasidhantam, Om Santih, Santih, Santih, Om.",
+                            "sanskrit":  ""
+                        }
+                    ],
+        "id":  19
+    },
+    {
+        "category_id":  17,
+        "title":  "Doa Mohon Bimbingan Tuhan",
+        "category_name":  "Doa Harian",
+        "content":  [
+                        {
+                            "translation":  "Ya Tuhan Yang Mahasuci, bimbinglah hamba dari yang tidak benar menuju yang benar. Bimbinglah hamba dari kegelapan pikiran menuju cahaya pengetahuan yang terang. Lepaskanlah hamba dari kematian menuju kehidupan yang abadi. Tuhan Yang Mahasuci, terimalah pujian yang hamba persembahkan melalui Weda mantra dan kembangkanlah pengetahuan rohani hamba agar hamba dapat menghancurkan musuh yang ada pada hamba (nafsu). Hamba menyadari bahwa Engkaulah yang berada dalam setiap insani (jiwatman), menolong orang terpelajar, pemimpin negara dan para pejabat. Hamba memuja Engkau semoga melimpahkan anugerah kekuatan kepada hamba.",
+                            "transliteration":  "Om Asato Ma Sadyamaya, Tamaso Ma Jyotir Gamaya, Mrtyor Ma Amrtam Gamaya. Om Agne Brahma Grbhnisva Dharunama Syanta Riksam Drdvamha, Brahmavanitwa Ksatravani Sajata, Vanyu Dadhami Bhratrvyasya Vadhayaya.",
+                            "sanskrit":  ""
+                        }
+                    ],
+        "id":  20
+    },
+    {
+        "category_id":  17,
+        "title":  "Doa Mohon Inspirasi",
+        "category_name":  "Doa Harian",
+        "content":  [
+                        {
+                            "translation":  "Ya Tuhan dalam manifestasi Dewi Saraswati, Hyang Mahaagung dan Mahakuasa, semoga Engkau memancarkan kekuatan rohani, kecerdasan pikiran dan lindungilah hamba selama-lamanya.",
+                            "transliteration":  "Om Prano Devi Sarasvati, Vajebir Vajiniwati, Dhinam Avinyavantu.",
+                            "sanskrit":  ""
+                        }
+                    ],
+        "id":  21
+    },
+    {
+        "category_id":  17,
+        "title":  "Doa Mohon Kecerdasan",
+        "category_name":  "Doa Harian",
+        "content":  [
+                        {
+                            "translation":  "Ya Tuhan, dalam manifestasi Saraswati Yang Mahasuci anugerahkanlah hamba kecerdasan, dan terimalah persembahan hamba ini.",
+                            "transliteration":  "Om Pavakanah Sarasvati, Vajebir Vajiniwati, Yajnam Vastu Dhiyavasuh.",
+                            "sanskrit":  ""
+                        }
+                    ],
+        "id":  22
+    },
+    {
+        "category_id":  17,
+        "title":  "Doa Sebelum Belajar",
+        "category_name":  "Doa Harian",
+        "content":  [
+                        {
+                            "translation":  "Dewi Saraswati, sembah rendah hatiku kepada-Mu yang merupakan pemenuhan semua keinginanku. Saya mulai belajar dengan permintaan agar Engkau melimpahkan karunia-Mu kepadaku.",
+                            "transliteration":  "Sarasvati Namastubhyam Varade Kamarupini Vidyarambham Karis Yami Siddhir Bhavatume Sada.",
+                            "sanskrit":  ""
+                        }
+                    ],
+        "id":  23
+    },
+    {
+        "category_id":  17,
+        "title":  "Doa Mohon Ampunan",
+        "category_name":  "Doa Harian",
+        "content":  [
+                        {
+                            "translation":  "Ya Tuhan, ampunilah dosa hamba terhadap-Mu, ampunilah dosa hamba terhadap sesama manusia, terhadap orang tua hamba, terhadap teman hamba. Tuhan ampunilah dosa hamba terhadap segala macam dosa. Terhadap dosa yang hamba lakukan dengan sadar atau tidak sadar. Tuhan, semoga berkenan mengampuni semuanya itu.",
+                            "transliteration":  "Om Dewakrtasyainaso Awaya Janam, Asi Manusyakrtasi Nama Awaya Janam, Asi Pitrakrtasi Namo Awaya Janam, Asyatmakrtasyaenaso Awaya Janam, Asyena Sa’ Enase Waya Janam, Asi Yacchadam Eno Vidvamscakara Yacchavidvams Tasya Va Ya Janam Asi.",
+                            "sanskrit":  ""
+                        }
+                    ],
+        "id":  24
+    },
+    {
+        "category_id":  17,
+        "title":  "Doa Ucapan Kelahiran",
+        "category_name":  "Doa Harian",
+        "content":  [
+                        {
+                            "translation":  "Ya Tuhan, semoga bahagia dan panjang umur atas karunia-Mu.",
+                            "transliteration":  "Om Dirgayurastu Tad Astu Astu Svaha.",
+                            "sanskrit":  ""
+                        }
+                    ],
+        "id":  25
+    },
+    {
+        "category_id":  17,
+        "title":  "Doa Mengunjungi Orang Sakit",
+        "category_name":  "Doa Harian",
+        "content":  [
+                        {
+                            "translation":  "Ya Tuhan, semoga segala halangan, penyakit dan penderitaan, serta gangguan Engkau lenyapkan.",
+                            "transliteration":  "Om Sarva Vigha Sarva Klesa Sarva Lara Roga Vinasaya Namah.",
+                            "sanskrit":  ""
+                        }
+                    ],
+        "id":  26
+    },
+    {
+        "category_id":  17,
+        "title":  "Doa Melayat/Mendengar Kematian",
+        "category_name":  "Doa Harian",
+        "content":  [
+                        {
+                            "translation":  "Ya Tuhan, semoga arwah yang meninggal mendapat surga, menunggal dengan-Mu, mencapai keheningan tanpa derita. Ya Tuhan, ampunilah segala dosanya, semoga ia mencapai kesempurnaan atas kekuasaan dan pengetahuan serta pengampunan-Mu.",
+                            "transliteration":  "Om Atma Tattvatma Naryatma\n\nSvadah Ang Ah\n\nOm Svargantu, Moksantu, Sunyantu, Murcantu.\n\nOm Ksama Sampurnaya Namah Swaha.",
+                            "sanskrit":  ""
+                        }
+                    ],
+        "id":  28
+    },
+    {
+        "category_id":  17,
+        "title":  "Doa Menjelang Tidur",
+        "category_name":  "Doa Harian",
+        "content":  [
+                        {
+                            "translation":  "Ya Tuhan, tuntunlah kami dari jalan sesat ke jalan yang benar, dari jalan gelap ke jalan yang terang, hindarkan kami dari kematian menuju kehidupan sejati.",
+                            "transliteration":  "Om Asato Ma Sat Gamaya, Tamaso Ma Jyotir Gamaya Mrityor Mamritan Gamaya.",
+                            "sanskrit":  ""
+                        }
+                    ],
+        "id":  29
+    },
+    {
+        "category_id":  17,
+        "title":  "Doa Menghilangkan Rasa Takut",
+        "category_name":  "Doa Harian",
+        "content":  [
+                        {
+                            "translation":  "Ya Hyang Widhi Yang Maha Jaya, yang mengatasi segala kematian, kami memuja-Mu. \nLindungilah kami dari mara bahaya.",
+                            "transliteration":  "Om Om Jaya jivad sarira raksan dadasi me, \nOm Mjum sah vaosat mrityun jaya namah svaha.",
+                            "sanskrit":  null
+                        }
+                    ],
+        "id":  272
+    },
+    {
+        "category_id":  17,
+        "title":  "Doa Mohon Petunjuk",
+        "category_name":  "Doa Harian",
+        "content":  [
+                        {
+                            "translation":  "Ya Hyang Widhi, Hyang Saraswati Yang Maha Agung dan Kuasa, \nEngkau sebagai sumber ilmu pengetahuan, semoga Engkau memelihara kecerdasan hamba.\n",
+                            "transliteration":  "Om pra ņo devī Sarasvatī vājebir\nVājinīvatī dhīnām avitry avatu",
+                            "sanskrit":  null
+                        }
+                    ],
+        "id":  273
+    },
+    {
+        "category_id":  17,
+        "title":  "Doa Mohon Perlindungan",
+        "category_name":  "Doa Harian",
+        "content":  [
+                        {
+                            "translation":  "Wahai Hyang Widhi Wasa, Sawitar, usirlah jauh-jauh segala kekuatan jahat. \n\nBerikanlah hamba yang terbaik.",
+                            "transliteration":  "Om visvani deva savitar\nduri tāni parā suwa\nyad bhadram tanna ā suva",
+                            "sanskrit":  null
+                        }
+                    ],
+        "id":  276
+    },
+    {
+        "category_id":  45,
+        "title":  "Doa Membuka Rapat/Pertemuan",
+        "category_name":  "Doa Waktu Tertentu",
+        "content":  [
+                        {
+                            "translation":  "Ya Hyang Widhi, hamba berkumpul di tempat ini hendak bicara satu dengan yang lain untuk menyatukan pikiran seperti halnya para dewa selalu bersatu. \n\nYa Tuhan, tuntunlah kami agar sama dalam tujuan, sama dalam hati, bersatu dalam pikiran hingga dapat hidup bersama dalam sejahtera dan bahagia. Ya tuhan, semoga pikiran yang baik datang dari segala penjuru.",
+                            "transliteration":  "Om sam gacchadhvam sam vadadhvam \nsam vo manamsi jānatām, \ndeva bhagam yatha purve \nsamjānāna upasate.\n\nOm samāni va akutih\nsamanā hrdayāni vah\nsamānam astu vo\nmano yatha vah susāhasati\nOm ano badrah kretavo yantu visvatah",
+                            "sanskrit":  null
+                        }
+                    ],
+        "id":  277
+    },
+    {
+        "category_id":  45,
+        "title":  "Doa Menutup Rapat/Pertemuan",
+        "category_name":  "Doa Waktu Tertentu",
+        "content":  [
+                        {
+                            "translation":  null,
+                            "transliteration":  null,
+                            "sanskrit":  null
+                        }
+                    ],
+        "id":  278
+    },
+    {
+        "category_id":  45,
+        "title":  "Doa Mengheningkan Cipta",
+        "category_name":  "Doa Waktu Tertentu",
+        "content":  [
+                        {
+                            "translation":  "Om Hyang Widhi, semoga hamba semakin mencintai tanah air ini sebagai ibu, dan hambalah putra-putranya siap membela seperti para pahlawan",
+                            "transliteration":  "Om māta bhumih putro aham prtivyah",
+                            "sanskrit":  null
+                        }
+                    ],
+        "id":  279
+    },
+    {
+        "category_id":  20,
+        "title":  "Pertama",
+        "category_name":  "Kramaning Sembah / Panca Sembah",
+        "content":  [
+                        {
+                            "translation":  "Ya Tuhan, atma atau jiwa dan kebenaran, bersihkanlah hamba.",
+                            "transliteration":  "Om Àtmà Tattwàtmà Suddha Màm Swàha.",
+                            "sanskrit":  ""
+                        }
+                    ],
+        "id":  36
+    },
+    {
+        "category_id":  20,
+        "title":  "Kedua",
+        "category_name":  "Kramaning Sembah / Panca Sembah",
+        "content":  [
+                        {
+                            "translation":  "Ya Tuhan, Sinar Hyang Widhi Surya yang Mahahebat. Engkau bersinar merah, hamba memuja Engkau. Hyang Surya yang beristana di tengah-tengah teratai putih. Hamba memuja Engkau yang menciptakan sinar matahari berkilauan.",
+                            "transliteration":  "Om Adityasyà Param Jyoti\nRakta Tejo Namo `Stute\nSweta Pankaja Madhyastha\nBhàskaràya Namo `Stute.",
+                            "sanskrit":  ""
+                        }
+                    ],
+        "id":  37
+    },
+    {
+        "category_id":  20,
+        "title":  "Ketiga",
+        "category_name":  "Kramaning Sembah / Panca Sembah",
+        "content":  [
+                        {
+                            "translation":  "Ya Tuhan, kepada dewata yang bersemayam pada tempat yang luhur, kepada Hyang Siwa yang berada di mana-mana, kepada dewata yang bersemayam pada tempat duduk bunga teratai di suatu tempat, kepada Ardhanaresvari hamba memuja.",
+                            "transliteration":  "Om Nama Dewa Adhisthanàya\nSarwa Wyapi Wai Siwàya\nPadmàsana Eka Pratisthàya\nArdhanareswaryai Namo Namah.",
+                            "sanskrit":  ""
+                        }
+                    ],
+        "id":  38
+    },
+    {
+        "category_id":  20,
+        "title":  "Keempat",
+        "category_name":  "Kramaning Sembah / Panca Sembah",
+        "content":  [
+                        {
+                            "translation":  "Ya Tuhan, Engkau yang menarik hati pemberi anugerah, anugerah pemberian Dewata, pujaan segala pujaan, hamba memuja-Mu sebagai pemberi segala anugerah. Kemahasiddhian para Dewa dan Dewi berwujud yadnya suci. Kebahagiaan, kesempurnaan, panjang umur, bebas dari rintangan, kegembiraan dan kemajuan rohani dan jasmani.",
+                            "transliteration":  "Om Anugraha Manoharam \nDewa Dattà Nugrahaka\nArcanam Sarwà Pùjanam\nNamah Sarwà Nugrahaka Dewa-Dewi Mahàsiddhi\nYajñanya Nirmalàtmaka\nLaksmi Siddhisca Dirghàyuh\nNirwighna Sukra Wrddisca.",
+                            "sanskrit":  ""
+                        }
+                    ],
+        "id":  39
+    },
+    {
+        "category_id":  20,
+        "title":  "Kelima",
+        "category_name":  "Kramaning Sembah / Panca Sembah",
+        "content":  [
+                        {
+                            "translation":  "Ya Tuhan, hamba memuja Engkau Dewata yang tidak terpikirkan, Mahatinggi dan Mahagaib. Ya Tuhan, anugerahkan kepada hamba kedamaian, damai, damai, ya Tuhan.",
+                            "transliteration":  "Om Dewa Suksma Paramà Cintyàya Nama Swàha\nOm Sàntih, Sàntih, Sàntih, Om.",
+                            "sanskrit":  ""
+                        }
+                    ],
+        "id":  40
+    },
+    {
+        "category_id":  19,
+        "title":  "Pertama",
+        "category_name":  "Sebelum Persembahyangan",
+        "content":  [
+                        {
+                            "translation":  "Ya Tuhan, dalam wujud Hyang Siwa hamba-Mu duduk tenang, suci, dan tiada noda.",
+                            "transliteration":  "Om Prasada Sthiti Sarira Siwa Suci Nirmalàya Namah Swàha.",
+                            "sanskrit":  ""
+                        }
+                    ],
+        "id":  30
+    },
+    {
+        "category_id":  19,
+        "title":  "Kedua",
+        "category_name":  "Sebelum Persembahyangan",
+        "content":  [
+                        {
+                            "translation":  "Ya Tuhan, bersihkanlah tangan hamba (bisa juga pengertiannya untuk membersihkan tangan kanan).",
+                            "transliteration":  "Om Suddha Màm Swàha.",
+                            "sanskrit":  ""
+                        }
+                    ],
+        "id":  31
+    },
+    {
+        "category_id":  19,
+        "title":  "Ketiga",
+        "category_name":  "Sebelum Persembahyangan",
+        "content":  [
+                        {
+                            "translation":  "Ya Tuhan, lebih dibersihkan lagi tangan hamba (bisa juga pengertiannya untuk membersihkan tangan kiri).",
+                            "transliteration":  "Om Ati Suddha Màm Swàha.",
+                            "sanskrit":  ""
+                        }
+                    ],
+        "id":  32
+    },
+    {
+        "category_id":  19,
+        "title":  "Keempat",
+        "category_name":  "Sebelum Persembahyangan",
+        "content":  [
+                        {
+                            "translation":  "Ya Tuhan, sucikanlah mulut hamba",
+                            "transliteration":  "Om Ang Waktra Parisuddmàm Swàha.",
+                            "sanskrit":  ""
+                        }
+                    ],
+        "id":  33
+    },
+    {
+        "category_id":  19,
+        "title":  "Kelima",
+        "category_name":  "Sebelum Persembahyangan",
+        "content":  [
+                        {
+                            "translation":  "Ya Tuhan/Brahma, tajamkanlah nyala dupa hamba sehingga sucilah sudah hamba seperti sinar-Mu.",
+                            "transliteration":  "Om Ang Dupa Dipàstraya Nama Swàha.",
+                            "sanskrit":  ""
+                        }
+                    ],
+        "id":  34
+    },
+    {
+        "category_id":  19,
+        "title":  "Keenam",
+        "category_name":  "Sebelum Persembahyangan",
+        "content":  [
+                        {
+                            "translation":  "Tuhan adalah bhùr svah. Kita memusatkan pikiran pada kecemerlangan dan kemuliaan Hyang Widhi, semoga Ia berikan semangat pikiran kita.\n\nYa Tuhan, Naràyàna adalah semua ini apa yang telah ada dan apa yang akan ada, bebas dari noda, bebas dari kotoran, bebas dari perubahan yang tak dapat digambarkan, sucilah dewa Nàràyana, Ia hanya satu tidak ada yang kedua.\nYa Tuhan, Engkau dipanggil Siwa, Mahàdewa, Iswara, Parameswara, Brahmà, Wisnu, Rudha dan Purusa.\n\nYa Tuhan, hamba ini papa, perbuatan hamba papa, diri hamba ini papa, kelahiran hamba papa, lindungilah hamba Hyang Widhi, sucikanlah jiwa dan raga hamba.\n\nYa Tuhan, ampunilah hamba Hyang Widhi, yang memberikan keselamatan kepada semua makhluk, bebaskanlah hamba dari segala dosa, lindungilah hamba oh Hyang Widhi. Ya Tuhan, ampunilah dosa anggota badan, ampunilah dosa hamba, ampunilah dosa pikiran hamba, ampunilah hamba dari kelahiran hamba.\nYa Tuhan, semoga damai, damai, damai selamanya.",
+                            "transliteration":  "Mantram trisandhyà\nOm bhùr bhvah svah\ntat savitur varenyam\nbhargo devasya dhimahi\ndhiyo yo nah pracodayàt \nOm Nàràyana evedam sarvam\nyad bhùtam yac ca bhavyam\nniskalanko nirañjano nirvikalpo\nniràkhyàtah suddha deva eko\nNàràyano na dvitìyo `sti kascit\nOm tvam sivah tvam mahàdevah\nisvarah paramesvarah\nbrahmà visnusca rudrasca\npurusah parikìrtitah\nOm pàpo ham pàpakarmàham\nPàpàtmà pàpasambhavah\nTràhi màm pundarìkàksa\nSabàhyàbhyàntarah sucih\nOm ksamasva màm mahàdeva\nSarvapràni hitankara\nmàm moca sarva pàpebyah\npàlayasva sadà siva\nOm ksàntavyah kàyiko dosah\nksàntavyo vàciko mama ksàntavyo mànaso dosah\ntat pramàdàt ksamasva màm\nOm sàntìh, sàntìh, sàntìh, Om.",
+                            "sanskrit":  ""
+                        }
+                    ],
+        "id":  35
+    }
+]

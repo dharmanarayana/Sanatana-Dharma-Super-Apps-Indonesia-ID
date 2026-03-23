@@ -8,18 +8,18 @@
     </div>
     <div class="flex-1 min-w-0">
       <div class="flex justify-between items-start mb-2">
-        <h4 class="font-bold text-default text-sm line-clamp-1">{{ temple.name }}</h4>
-        <span class="text-[10px] font-bold text-brand bg-brand/10 px-2 py-0.5 rounded">PURA</span>
+        <h4 class="font-bold text-default text-base line-clamp-1">{{ temple.name }}</h4>
+        <span class="text-xs font-bold text-brand bg-brand/10 px-2 py-0.5 rounded">PURA</span>
       </div>
-      <p class="text-[10px] text-muted flex items-center gap-1 mb-4 line-clamp-1">
-        <Icon name="lucide:navigation" size="10" />
+      <p class="text-sm text-muted flex items-center gap-1 mb-4 line-clamp-1">
+        <Icon name="lucide:navigation" size="12" />
         {{ temple.location }}
       </p>
     </div>
     <div class="flex gap-2 mt-auto">
-      <button class="flex-1 btn-primary py-2 text-[10px] uppercase font-bold justify-center">Detail Pura</button>
-      <button class="w-10 h-10 rounded-lg bg-surface-variant flex items-center justify-center hover:bg-brand/10 transition-colors text-xl">
-        <Icon name="lucide:map" size="18" class="text-secondary" />
+      <button class="flex-1 btn-primary py-2.5 text-sm uppercase font-bold justify-center">Detail Pura</button>
+      <button class="w-12 h-12 rounded-lg bg-surface-variant flex items-center justify-center hover:bg-brand/10 transition-colors text-xl">
+        <Icon name="lucide:map" size="20" class="text-secondary" />
       </button>
     </div>
   </div>

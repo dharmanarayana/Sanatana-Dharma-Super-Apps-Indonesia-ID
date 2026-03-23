@@ -1,5 +1,6 @@
 <!-- components/app/AppBottomNav.vue -->
 <script setup lang="ts">
+import { ref, computed } from 'vue'
 const authStore = useAuthStore()
 const route = useRoute()
 const isActive = (path: string) =>
@@ -38,7 +39,7 @@ const navItems = computed(() => [
           :class="isActive(item.path) ? 'text-brand' : 'text-muted/60'"
         >
           <Icon :name="item.icon!" class="w-6 h-6" :class="isActive(item.path) ? 'scale-110' : ''" />
-          <span class="text-[10px] font-bold">{{ item.label }}</span>
+          <span class="text-sm font-bold">{{ item.label }}</span>
         </NuxtLink>
 
         <!-- Center MENU FAB -->
@@ -52,7 +53,7 @@ const navItems = computed(() => [
                     class="w-8 h-8 text-brand transition-all duration-300" />
             </button>
           </div>
-          <span class="text-[11px] font-extrabold text-default mt-2 transition-opacity" 
+          <span class="text-sm font-extrabold text-default mt-2 transition-opacity" 
                 :class="showMenu ? 'opacity-0' : 'opacity-100'">
             Menu
           </span>
@@ -61,3 +62,4 @@ const navItems = computed(() => [
     </nav>
   </div>
 </template>
+<!-- Force rebuild to fix hydration mismatch -->

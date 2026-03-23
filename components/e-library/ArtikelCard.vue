@@ -11,17 +11,17 @@
     </div>
     <div class="flex-1 min-w-0">
       <div class="flex items-center gap-2 mb-1">
-        <span class="text-[10px] font-bold text-brand bg-brand/10 px-2 py-0.5 rounded uppercase">{{ item.category }}</span>
+        <span class="text-xs font-bold text-brand bg-brand/10 px-2 py-0.5 rounded uppercase">{{ item.category }}</span>
       </div>
-      <h4 class="font-bold text-default line-clamp-2 text-sm leading-tight group-hover:text-brand transition-colors">
+      <h4 class="font-bold text-default line-clamp-2 text-base leading-tight group-hover:text-brand transition-colors">
         {{ item.title }}
       </h4>
-      <p class="text-[10px] text-muted mt-2 line-clamp-2">
+      <p class="text-sm text-muted mt-2 line-clamp-2">
         {{ item.description || 'Tidak ada deskripsi.' }}
       </p>
       <div class="flex items-center gap-2 mt-2">
-        <Icon name="lucide:user" size="10" class="text-muted" />
-        <span class="text-[10px] text-muted">{{ item.author }}</span>
+        <Icon name="lucide:user" size="12" class="text-muted" />
+        <span class="text-xs text-muted">{{ item.author }}</span>
       </div>
     </div>
   </div>

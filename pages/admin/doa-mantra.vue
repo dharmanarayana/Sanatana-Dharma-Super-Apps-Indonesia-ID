@@ -15,7 +15,17 @@
       @add="handleAdd"
       @edit="handleEdit"
       @delete="handleDelete"
-    />
+    >
+      <template #col-audioUrl="{ item }">
+        <div v-if="item.audioUrl" class="flex items-center gap-2">
+          <button @click.stop="playAudio(item.audioUrl)" class="p-2 bg-brand/10 text-brand rounded-full hover:bg-brand hover:text-white transition-all">
+            <Icon name="lucide:play" size="14" />
+          </button>
+          <span class="text-[10px] text-muted truncate max-w-[100px]">Tersedia</span>
+        </div>
+        <span v-else class="text-[10px] text-muted opacity-40">Tidak ada</span>
+      </template>
+    </AdminCrudTable>
 
     <AdminCrudForm 
       :show="showForm"
@@ -38,6 +48,11 @@ const { $appwrite } = useNuxtApp()
 const DB_ID = 'sanatana-dharma-db'
 const COLL_ID = 'prayers'
 
+const playAudio = (url: string) => {
+  const audio = new Audio(url)
+  audio.play()
+}
+
 const items = ref<any[]>([])
 const showForm = ref(false)
 const editingItem = ref<any>(null)
@@ -45,6 +60,7 @@ const editingItem = ref<any>(null)
 const columns = [
   { key: 'title', label: 'Judul Doa' },
   { key: 'category', label: 'Kategori' },
+  { key: 'audioUrl', label: 'Audio' },
 ]
 
 const fields = [

@@ -1,45 +1,48 @@
 <template>
   <div class="relative overflow-hidden bg-gradient-to-br from-brand via-brand-secondary to-maroon/40 rounded-3xl p-6 text-white shadow-xl shadow-brand/10 border border-white/5 group active:scale-[0.98] transition-all">
-    <!-- Background Pattern -->
-    <div class="absolute -top-10 -right-10 opacity-10 rotate-12 select-none pointer-events-none">
-      <Icon name="fa6-solid:om" class="text-[180px]" />
-    </div>
+    <ClientOnly>
+      <div class="absolute -top-10 -right-10 opacity-10 rotate-12 select-none pointer-events-none">
+        <Icon name="fa6-solid:om" class="text-[180px]" />
+      </div>
+    </ClientOnly>
 
     <div class="relative z-10 flex flex-col gap-1">
-      <span class="text-[10px] font-sans tracking-[0.2em] uppercase text-white/80 font-bold">Warta Kalender</span>
+      <span class="text-xs font-sans tracking-[0.2em] uppercase text-white font-bold opacity-90">
+        Info Saka Hari {{ currentDayName }}
+      </span>
       <h3 class="text-2xl font-serif font-bold text-white leading-tight drop-shadow-sm">
-        <span v-if="kalender.isLoading.value" class="animate-pulse bg-white/20 h-8 rounded w-3/4 block"></span>
-        <span v-else>{{ kalender.selectedDate.value }} {{ kalender.monthName.value }} {{ kalender.selectedYear.value }}</span>
+        <span v-if="kalender.isLoading" class="animate-pulse bg-white/20 h-8 rounded w-3/4 block"></span>
+        <span v-else>{{ sakaInfo }}</span>
       </h3>
       <div class="flex flex-wrap items-center gap-2 mt-4">
-        <div class="bg-white px-3 py-1.5 rounded-lg shadow-sm text-[11px] font-bold text-brand uppercase tracking-wider">
+        <div class="bg-white px-3 py-1.5 rounded-lg shadow-sm text-sm font-bold text-brand uppercase tracking-wider">
           Saka {{ tahunSaka }}
         </div>
-        <div class="bg-brand-secondary px-3 py-1.5 rounded-lg shadow-sm text-[11px] font-bold text-maroon uppercase tracking-wider">
+        <div class="bg-brand-secondary px-3 py-1.5 rounded-lg shadow-sm text-sm font-bold text-maroon uppercase tracking-wider">
           {{ bulanSaka }}
         </div>
-        <div class="bg-black/20 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-white/10 text-[11px] font-bold text-white uppercase tracking-wider">
+        <div class="bg-black/20 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-white/10 text-sm font-bold text-white uppercase tracking-wider">
           Wuku {{ wukuToday }}
         </div>
       </div>
-    </div>
-    
-      <div class="flex items-center justify-between text-xs pt-3 border-t border-white/5">
+
+      <div class="flex items-center justify-between text-sm pt-3 border-t border-white/5 mt-4">
         <button @click="detectLocation(true)" class="flex items-center gap-1.5 font-bold text-white/90 hover:text-white transition-colors text-left outline-none" title="Deteksi Lokasi GPS Anda">
           <Icon v-if="isLocating" name="lucide:loader-2" class="w-4 h-4 animate-spin" />
           <Icon v-else name="lucide:map-pin" class="w-4 h-4" />
           <span class="truncate max-w-[150px] sm:max-w-[200px]">{{ currentLocation }}</span>
         </button>
       </div>
-
+    </div>
   </div>
 </template>
-
-<script setup>
+<script setup lang="ts">
 import { computed, ref, onMounted } from 'vue'
 import { useKalender } from '~/composables/useKalender'
+import dayjs from 'dayjs'
 
 const kalender = useKalender()
+const currentDayName = computed(() => dayjs().format('dddd'))
 
 // -----------------------------------------------------------------
 // GPS LOCATION LOGIC
@@ -117,21 +120,42 @@ const { getMasehiToSaka } = useKalenderSaka()
 const today = new Date()
 const { tahunSaka } = getMasehiToSaka(today)
 
-const sakaInfo = computed(() => kalender.selectedDayInfo.value?.sakaInfo || 'Tidak Ada Info')
+const WUKU_LIST = [
+  'Sinta', 'Landep', 'Ukir', 'Kulantir', 'Tolu', 'Gumbreg', 'Wariga', 'Warigadean', 'Julungwangi', 'Sungsang', 
+  'Dunggulan', 'Kuningan', 'Langkir', 'Medangsia', 'Pujut', 'Pahang', 'Krulut', 'Merakih', 'Tambir', 
+  'Medangkungan', 'Matal', 'Uye', 'Menail', 'Prangbakat', 'Bala', 'Ugu', 'Wayang', 'Kelawu', 'Dukut', 'Watugunung'
+]
+
+const SASIH_LIST = [
+  'Kasa', 'Karo', 'Katiga', 'Kapat', 'Kalima', 'Kanam', 'Kapitu', 'Kawalu', 'Kasanga', 'Kedasa', 'Jyestha', 'Sadha'
+]
+
+const sakaInfo = computed(() => kalender.selectedDayInfo.value?.sakaInfo || 'Memuat Data...')
 
 const wukuToday = computed(() => {
-  const parts = sakaInfo.value.split(',')[0].trim().split(' ')
-  return parts.length > 2 ? parts[parts.length - 1] : parts.pop() || '-'
+  const info = sakaInfo.value
+  if (!info || info === 'Tidak Ada Info' || info === 'Memuat Data...') return '-'
+  // Search for known wuku name in the string
+  const found = WUKU_LIST.find(w => info.includes(w))
+  return found || '-'
 })
 
 const bulanSaka = computed(() => {
-  const info = sakaInfo.value.toLowerCase()
-  if (info.includes('kepitu')) return 'Kepitu'
-  if (info.includes('kawalu')) return 'Kawalu'
-  if (info.includes('kasanga')) return 'Kasanga'
-  if (info.includes('kedasa')) return 'Kedasa'
-  if (info.includes('jyestha')) return 'Jyestha'
-  return 'Sasih Berjalan'
+  const info = sakaInfo.value
+  if (!info || info === 'Tidak Ada Info' || info === 'Memuat Data...') return 'Sasih'
+  
+  // 1. Try to find explicit Sasih name in the string
+  const found = SASIH_LIST.find(s => info.toLowerCase().includes(s.toLowerCase()))
+  if (found) return found
+  
+  // 2. Fallback to current month approximations if not explicitly in today's info
+  // (In a real app, we'd look at the month's Tilem/Purnama, but this is a reasonable approximation)
+  const month = kalender.selectedMonth.value
+  const monthMap: Record<number, string> = {
+    1: 'Kapitu', 2: 'Kawalu', 3: 'Kasanga', 4: 'Kedasa', 5: 'Jyestha', 6: 'Sadha',
+    7: 'Kasa', 8: 'Karo', 9: 'Katiga', 10: 'Kapat', 11: 'Kalima', 12: 'Kanam'
+  }
+  return monthMap[month] || 'Sasih'
 })
 </script>
 

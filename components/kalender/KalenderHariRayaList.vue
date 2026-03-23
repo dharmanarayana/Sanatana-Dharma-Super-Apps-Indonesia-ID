@@ -9,17 +9,17 @@
     <div class="space-y-6">
       <!-- 1. Rerainan -->
       <div v-if="kalender.currentReligiousDays.value?.length > 0">
-        <h5 class="flex items-center gap-2 text-[10px] font-bold text-red-600 dark:text-red-400 mb-3 uppercase tracking-widest">
+        <h5 class="flex items-center gap-2 text-sm font-bold text-red-600 dark:text-red-400 mb-4 uppercase tracking-widest">
           <Icon name="lucide:flame" class="w-3.5 h-3.5" />
           Rerainan (Hari Suci)
         </h5>
         <div class="space-y-2">
           <div v-for="(hari, i) in kalender.currentReligiousDays.value" :key="'r-'+i" class="flex items-start gap-3">
-            <div class="w-8 h-8 rounded-xl bg-red-100 dark:bg-red-900/30 text-red-600 flex-shrink-0 flex items-center justify-center font-bold text-sm shadow-sm">
-              {{ hari.date }}
+            <div class="w-10 h-10 rounded-xl bg-opacity-10 flex-shrink-0 flex items-center justify-center font-bold text-base shadow-sm">
+              {{ hari.date || libur.date || cuti.date || hib.date }}
             </div>
             <div class="pt-0.5">
-              <p class="font-bold text-sm text-default leading-tight">{{ hari.name }}</p>
+              <p class="font-bold text-base text-default leading-tight">{{ hari.name || libur.name || cuti.name || hib.name }}</p>
             </div>
           </div>
         </div>
@@ -27,8 +27,8 @@
 
       <!-- 2. Libur Nasional -->
       <div v-if="kalender.categorizedHolidays.value.libur.length > 0">
-        <h5 class="flex items-center gap-2 text-[10px] font-bold text-amber-600 dark:text-amber-400 mb-3 uppercase tracking-widest">
-          <Icon name="lucide:calendar-days" class="w-3.5 h-3.5" />
+        <h5 class="flex items-center gap-2 text-sm font-bold text-amber-600 dark:text-amber-400 mb-4 uppercase tracking-widest">
+          <Icon name="lucide:calendar-days" class="w-4 h-4" />
           Hari Libur Nasional
         </h5>
         <div class="space-y-2">
@@ -45,8 +45,8 @@
 
       <!-- 3. Cuti Bersama -->
       <div v-if="kalender.categorizedHolidays.value.cuti.length > 0">
-        <h5 class="flex items-center gap-2 text-[10px] font-bold text-teal-600 dark:text-teal-400 mb-3 uppercase tracking-widest">
-          <Icon name="lucide:briefcase" class="w-3.5 h-3.5" />
+        <h5 class="flex items-center gap-2 text-sm font-bold text-teal-600 dark:text-teal-400 mb-4 uppercase tracking-widest">
+          <Icon name="lucide:briefcase" class="w-4 h-4" />
           Cuti Bersama
         </h5>
         <div class="space-y-2">
@@ -63,8 +63,8 @@
 
       <!-- 4. Hari Peringatan -->
       <div v-if="kalender.categorizedHolidays.value.peringatan.length > 0">
-        <h5 class="flex items-center gap-2 text-[10px] font-bold text-blue-600 dark:text-blue-400 mb-3 uppercase tracking-widest">
-          <Icon name="lucide:award" class="w-3.5 h-3.5" />
+        <h5 class="flex items-center gap-2 text-sm font-bold text-blue-600 dark:text-blue-400 mb-4 uppercase tracking-widest">
+          <Icon name="lucide:award" class="w-4 h-4" />
           Hari Peringatan
         </h5>
         <div class="space-y-2">

@@ -8,14 +8,14 @@
     </div>
     <div class="flex-1 min-w-0 flex flex-col justify-center">
       <div class="flex items-center gap-2 mb-1">
-        <span class="text-[10px] font-bold text-brand bg-brand/10 px-2 py-0.5 rounded uppercase">{{ news.category }}</span>
-        <span class="text-[10px] text-muted">{{ formatDate(news.publishedAt) }}</span>
+        <span class="text-xs font-bold text-brand bg-brand/10 px-2 py-0.5 rounded uppercase">{{ news.category }}</span>
+        <span class="text-xs text-muted">{{ formatDate(news.publishedAt) }}</span>
       </div>
-      <h4 class="font-bold text-default line-clamp-2 text-sm leading-tight group-hover:text-brand transition-colors">
+      <h4 class="font-bold text-default line-clamp-2 text-base leading-tight group-hover:text-brand transition-colors">
         {{ news.title }}
       </h4>
-      <p class="text-[10px] text-muted mt-2 flex items-center gap-1">
-        <Icon name="lucide:user" size="10" />
+      <p class="text-xs text-muted mt-2 flex items-center gap-1">
+        <Icon name="lucide:user" size="12" />
         {{ news.author }}
       </p>
     </div>
