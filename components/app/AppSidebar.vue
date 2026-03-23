@@ -38,6 +38,9 @@ const navGroups = [
     ]
   },
 ]
+const firstName = computed(() => {
+  return authStore.user?.name?.split(' ')[0] || 'User'
+})
 </script>
 
 <template>
@@ -116,12 +119,12 @@ const navGroups = [
         <NuxtLink to="/profil"
           class="flex items-center gap-3 px-3 py-2.5 rounded-xl
                  hover:bg-[var(--state-hover)] transition-colors group relative">
-          <div class="w-7 h-7 rounded-full bg-[var(--state-active)]
+          <div class="w-7 h-7 rounded-full bg-brand
                       flex items-center justify-center shrink-0">
-            <span class="text-sm">👤</span>
+            <span class="text-xs">👤</span>
           </div>
           <Transition name="fade-label">
-            <span v-if="!collapsed" class="text-base text-secondary">Profil Saya</span>
+            <span v-if="!collapsed" class="text-base text-brand font-bold">Hai, {{ firstName }}!</span>
           </Transition>
           <!-- Tooltip saat collapsed -->
           <div v-if="collapsed"

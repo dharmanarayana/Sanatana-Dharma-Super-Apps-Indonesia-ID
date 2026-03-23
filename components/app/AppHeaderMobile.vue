@@ -44,8 +44,11 @@
 
         <NuxtLink v-else 
                   to="/profil" 
-                  class="w-9 h-9 rounded-full bg-[var(--state-active)] border border-brand/20 flex items-center justify-center overflow-hidden active:scale-95 transition-all">
-          <Icon name="lucide:user" class="w-5 h-5 text-brand" />
+                  class="flex items-center gap-2 pl-3 pr-1 py-1 bg-surface border border-brand/20 rounded-full active:scale-95 transition-all shadow-sm">
+          <span class="text-[11px] font-bold text-brand">Hai, {{ firstName }}!</span>
+          <div class="w-7 h-7 rounded-full bg-brand flex items-center justify-center overflow-hidden">
+            <Icon name="lucide:user" class="w-4 h-4 text-white" />
+          </div>
         </NuxtLink>
       </ClientOnly>
     </div>
@@ -57,6 +60,10 @@ import { useRoute, useRouter } from 'vue-router'
 const route = useRoute()
 const router = useRouter()
 const authStore = useAuthStore()
+
+const firstName = computed(() => {
+  return authStore.user?.name?.split(' ')[0] || 'User'
+})
 </script>
 
 <style scoped>
