@@ -14,7 +14,7 @@
 
     <template v-else>
       <!-- Back Button (Desktop) -->
-      <div class="hidden lg:block fixed top-6 left-6 z-40">
+      <div class="hidden lg:block fixed top-[76px] left-6 z-50">
         <button @click="$router.back()" 
                 class="w-12 h-12 bg-white/20 backdrop-blur-md border border-white/30 rounded-full flex items-center justify-center text-white hover:bg-white/40 transition-all shadow-xl">
           <Icon name="lucide:arrow-left" size="24" />

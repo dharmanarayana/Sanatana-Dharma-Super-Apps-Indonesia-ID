@@ -1,7 +1,7 @@
 <template>
   <div v-if="video" class="min-h-screen bg-base animate-fade-up">
     <!-- Header -->
-    <div class="sticky top-0 z-30 bg-base/80 backdrop-blur-md px-4 py-4 flex items-center border-b border-default mb-6">
+    <div class="sticky top-[60px] z-30 bg-base/80 backdrop-blur-md px-4 py-4 flex items-center border-b border-default mb-6">
       <button @click="$router.back()" class="hidden lg:flex p-2 -ml-2 rounded-full hover:bg-surface transition-colors text-default mr-2">
         <Icon name="lucide:arrow-left" class="w-6 h-6" />
       </button>

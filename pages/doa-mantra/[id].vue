@@ -1,7 +1,7 @@
 <template>
   <div v-if="doa" class="min-h-screen bg-base flex flex-col animate-fade-up">
     <!-- Sticky Header -->
-    <div class="sticky top-0 z-30 bg-base/80 backdrop-blur-md px-4 py-4 flex items-center justify-between border-b border-default">
+    <div class="sticky top-[60px] z-30 bg-base/80 backdrop-blur-md px-4 py-4 flex items-center justify-between border-b border-default">
       <button @click="$router.back()" 
               class="hidden lg:flex p-2 -ml-2 rounded-full hover:bg-surface transition-colors items-center gap-2 text-muted hover:text-brand">
         <Icon name="lucide:arrow-left" class="w-6 h-6" />
