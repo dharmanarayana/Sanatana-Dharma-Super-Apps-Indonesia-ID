@@ -1,8 +1,13 @@
 <template>
   <div v-if="doa" class="min-h-screen bg-base flex flex-col animate-fade-up">
     <!-- Sticky Header -->
-    <div class="sticky top-0 z-30 bg-base/80 backdrop-blur-md px-4 py-4 flex items-center justify-end border-b border-default">
-      <div class="flex items-center gap-2">
+    <div class="sticky top-0 z-30 bg-base/80 backdrop-blur-md px-4 py-4 flex items-center justify-between border-b border-default">
+      <button @click="$router.back()" 
+              class="hidden lg:flex p-2 -ml-2 rounded-full hover:bg-surface transition-colors items-center gap-2 text-muted hover:text-brand">
+        <Icon name="lucide:arrow-left" class="w-6 h-6" />
+        <span class="text-sm font-bold">Kembali</span>
+      </button>
+      <div class="flex items-center gap-2 ml-auto">
         <button @click="toggleBookmark" class="p-2 rounded-full hover:bg-surface transition-colors">
           <Icon :name="isBookmarked ? 'lucide:bookmark-check' : 'lucide:bookmark'" 
                 :class="isBookmarked ? 'text-brand' : 'text-muted'" class="w-6 h-6" />
@@ -116,7 +121,7 @@ const parseContent = (doc: any) => {
 const fetchDetail = async () => {
   try {
     const prayersData = (await import('~/data/prayers.json')).default
-    let localData = prayersData.find(d => d.id.toString() === route.params.id)
+    let localData = prayersData.find((d: any) => d.slug === route.params.id)
     
     // Convert to proper format if matched local
     if (localData) {
@@ -126,15 +131,14 @@ const fetchDetail = async () => {
 
     try {
       const { $appwrite } = useNuxtApp()
-      // If it's a new Appwrite ID, it might fail here but we try
       let appDoc = null;
       try {
-        const res = await $appwrite.databases.listDocuments('sanatana-dharma-db', 'prayers')
-        // Find matching appwrite doc by title (if local exists) or by ID
-        appDoc = res.documents.find((d: any) => {
-          if (localData && d.title.toLowerCase().trim() === localData.title.toLowerCase().trim()) return true;
-          return d.$id === route.params.id;
-        })
+        const res = await $appwrite.databases.listDocuments('sanatana-dharma-db', 'prayers', [
+            useAppwriteQuery().equal('slug', route.params.id as string)
+        ])
+        if (res.documents.length > 0) {
+            appDoc = res.documents[0]
+        }
       } catch(err) {}
 
       if (appDoc) {
@@ -152,6 +156,11 @@ const fetchDetail = async () => {
       }
     } catch(err) {
       console.error('Appwrite merge failed:', err)
+    }
+
+    // Set breadcrumb override
+    if (doa.value) {
+      useBreadcrumbs().setBreadcrumbLabel(route.params.id as string, doa.value.title)
     }
   } catch (e) {
     console.error('Error loading prayer detail:', e)

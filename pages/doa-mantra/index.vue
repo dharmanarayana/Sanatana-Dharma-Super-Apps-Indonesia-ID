@@ -19,7 +19,7 @@
       </div>
 
       <UiGrid v-if="filteredDoa.length > 0" cols="2" gap="md">
-        <NuxtLink v-for="doa in filteredDoa" :key="doa.$id" :to="`/doa-mantra/${doa.$id}`" class="block no-underline">
+        <NuxtLink v-for="doa in filteredDoa" :key="doa.$id" :to="`/doa-mantra/${doa.slug}`" class="block no-underline">
           <DoaMantraDoaCard :doa="doa" />
         </NuxtLink>
       </UiGrid>

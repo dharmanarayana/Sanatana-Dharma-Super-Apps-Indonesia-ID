@@ -1,5 +1,6 @@
 <template>
-  <div class="card overflow-hidden group cursor-pointer hover:border-brand/30 transition-all">
+  <NuxtLink :to="`/video/${video.slug}`" 
+            class="card overflow-hidden group cursor-pointer hover:border-brand/30 transition-all block">
     <div class="aspect-video bg-charcoal relative overflow-hidden">
       <img v-if="video.thumbnail" :src="video.thumbnail" class="w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-500" />
       <div class="absolute inset-0 flex items-center justify-center">
@@ -22,7 +23,7 @@
         {{ video.description }}
       </p>
     </div>
-  </div>
+  </NuxtLink>
 </template>
 
 <script setup lang="ts">

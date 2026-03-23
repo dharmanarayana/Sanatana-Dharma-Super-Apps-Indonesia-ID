@@ -44,5 +44,12 @@
 </template>
 
 <script setup>
+const route = useRoute()
+const kitabTitle = ref('Bhagavad Gita') // In real app, this would come from data
+
+onMounted(() => {
+  useBreadcrumbs().setBreadcrumbLabel(route.params.kitabId, kitabTitle.value)
+})
+
 definePageMeta({ layout: 'default' })
 </script>

@@ -28,7 +28,7 @@
       </p>
     </div>
     <div class="flex gap-2 mt-auto">
-      <NuxtLink :to="`/pura/${temple.$id}`" class="flex-1 btn-primary py-2.5 text-sm uppercase font-bold justify-center">
+      <NuxtLink :to="`/pura/${temple.slug}`" class="flex-1 btn-primary py-2.5 text-sm uppercase font-bold justify-center">
         Detail Pura
       </NuxtLink>
       <button 

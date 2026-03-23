@@ -39,6 +39,7 @@ async function setup() {
         // 3. Prayers Collection
         await createCollection('prayers', 'Prayers & Mantras', [
             { key: 'title', type: 'string', size: 255, required: true },
+            { key: 'slug', type: 'string', size: 255, required: false },
             { key: 'category', type: 'string', size: 50, required: true },
             { key: 'content', type: 'string', size: 5000, required: true },
             { key: 'transliteration', type: 'string', size: 5000, required: false },
@@ -97,6 +98,7 @@ async function setup() {
         await createCollection('videos', 'Videos', [
             { key: 'title', type: 'string', size: 255, required: true },
             { key: 'url', type: 'string', size: 255, required: true },
+            { key: 'slug', type: 'string', size: 255, required: true },
             { key: 'thumbnail', type: 'string', size: 255, required: false },
             { key: 'category', type: 'string', size: 50, required: true },
             { key: 'description', type: 'string', size: 1000, required: false }

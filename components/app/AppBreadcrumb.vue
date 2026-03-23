@@ -23,12 +23,18 @@ const crumbMap: Record<string, string> = {
   'profil':      'Profil',
 }
 
+const { overrides } = useBreadcrumbs()
+
+const prettify = (str: string) => {
+  return str.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
+}
+
 const crumbs = computed(() => {
   const parts = route.path.split('/').filter(Boolean)
   return [
     { label: 'Beranda', path: '/' },
     ...parts.map((part, i) => ({
-      label: crumbMap[part] || part,
+      label: overrides.value[part] || crumbMap[part] || prettify(part),
       path: '/' + parts.slice(0, i + 1).join('/')
     }))
   ]

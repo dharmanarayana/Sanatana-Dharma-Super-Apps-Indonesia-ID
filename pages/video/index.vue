@@ -4,10 +4,11 @@
                   subtitle="Pembelajaran visual Sanatana Dharma"
                   back-path="/" />
     <div class="px-4 lg:px-0 py-4 space-y-6">
-      <VideoFeaturedBanner />
-      <VideoKategoriScroll />
-      <UiGrid v-if="videos.length > 0" cols="3" gap="md">
-        <VideoCard v-for="video in videos" :key="video.$id" :video="video" />
+      <VideoFeaturedBanner :videos="featuredVideos" />
+      <VideoKategoriScroll :categories="uniqueCategories" :active="selectedCategory" @select="selectedCategory = $event" />
+      
+      <UiGrid v-if="filteredVideos.length > 0" cols="3" gap="md">
+        <VideoCard v-for="video in filteredVideos" :key="video.$id" :video="video" />
       </UiGrid>
       <div v-else class="text-center py-20 opacity-40 italic">
         Belum ada video dharma.
@@ -17,20 +18,31 @@
 </template>
 
 <script setup lang="ts">
-const { $appwrite } = useNuxtApp()
-const DB_ID = 'sanatana-dharma-db'
-const videos = ref<any[]>([])
+const { videos, loading, fetchVideos, subscribe, stop } = useRealtimeVideos()
+const selectedCategory = ref('Semua')
 
-const fetchVideos = async () => {
-  try {
-    const res = await $appwrite.databases.listDocuments(DB_ID, 'videos', [
-      useAppwriteQuery().orderDesc('$createdAt')
-    ])
-    videos.value = res.documents
-  } catch (e: any) {
-    console.error('Error fetching videos:', e.message)
-  }
-}
+const featuredVideos = computed(() => {
+  return [...videos.value].sort((a, b) => 
+    new Date(b.$createdAt).getTime() - new Date(a.$createdAt).getTime()
+  ).slice(0, 3)
+})
 
-onMounted(fetchVideos)
+const uniqueCategories = computed(() => {
+  const cats = new Set(videos.value.map(v => v.category).filter(Boolean))
+  return ['Semua', ...Array.from(cats)]
+})
+
+const filteredVideos = computed(() => {
+  if (selectedCategory.value === 'Semua') return videos.value
+  return videos.value.filter(v => v.category === selectedCategory.value)
+})
+
+onMounted(async () => {
+  await fetchVideos()
+  subscribe()
+})
+
+onUnmounted(() => {
+  stop()
+})
 </script>

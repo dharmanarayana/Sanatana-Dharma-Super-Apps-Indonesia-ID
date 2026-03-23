@@ -13,6 +13,14 @@
     </div>
 
     <template v-else>
+      <!-- Back Button (Desktop) -->
+      <div class="hidden lg:block fixed top-6 left-6 z-40">
+        <button @click="$router.back()" 
+                class="w-12 h-12 bg-white/20 backdrop-blur-md border border-white/30 rounded-full flex items-center justify-center text-white hover:bg-white/40 transition-all shadow-xl">
+          <Icon name="lucide:arrow-left" size="24" />
+        </button>
+      </div>
+
       <!-- Hero / Header Section -->
       <div class="relative h-[40vh] md:h-[50vh] overflow-hidden group bg-brand/5 flex items-center justify-center">
         <img 
@@ -175,7 +183,15 @@ const loading = ref(true)
 const fetchTempleDetail = async () => {
     loading.value = true
     try {
-        temple.value = await $appwrite.databases.getDocument(DB_ID, COLL_ID, route.params.id as string)
+        const response = await $appwrite.databases.listDocuments(DB_ID, COLL_ID, [
+            useAppwriteQuery().equal('slug', route.params.id as string)
+        ])
+        if (response.documents.length > 0) {
+            temple.value = response.documents[0]
+            useBreadcrumbs().setBreadcrumbLabel(route.params.id as string, temple.value.name)
+        } else {
+            temple.value = null
+        }
     } catch (e: any) {
         console.error('Error fetching temple:', e.message)
         temple.value = null
@@ -187,11 +203,11 @@ const fetchTempleDetail = async () => {
 const mapUrl = computed(() => {
     if (!temple.value) return null
     
-    let query = ''
-    if (temple.value.latitude && temple.value.longitude && temple.value.latitude !== 0) {
-        query = `${temple.value.latitude},${temple.value.longitude}`
-    } else {
-        query = `${temple.value.name} ${temple.value.province || ''}`.trim().replace(/\s+/g, '+')
+    const { name, province, latitude, longitude } = temple.value
+    let query = (name + ' ' + (province || '')).trim().replace(/\s+/g, '+')
+    
+    if (latitude && longitude && Number(latitude) !== 0) {
+        query += `+${latitude},${longitude}`
     }
     
     // Using standard embed URL format

@@ -127,7 +127,6 @@ const toggleGeo = () => {
             }
             sortOrder.value = 'nearest'
             geoError.value = ''
-            autoSelectProvince()
         }, (err) => {
             if (err.code === 1) {
                 geoError.value = 'Izin lokasi ditolak. Silakan aktifkan GPS di pengaturan browser Anda untuk fitur ini.'
@@ -138,28 +137,7 @@ const toggleGeo = () => {
     }
 }
 
-const autoSelectProvince = () => {
-    const coords = userCoords.value
-    if (!coords || temples.value.length === 0) return
-    
-    let closest: any = null
-    let minDist = Infinity
-    
-    temples.value.forEach((t: any) => {
-        if (t.latitude != null && t.longitude != null && Number(t.longitude) !== 0) {
-            const d = calculateDistance(coords.lat, coords.lng, Number(t.latitude), Number(t.longitude))
-            if (d < minDist) {
-                minDist = d
-                closest = t
-            }
-        }
-    })
-    
-    if (closest && closest.province) {
-        selectedProvinces.value = [closest.province]
-        mobileProvince.value = closest.province
-    }
-}
+
 
 // Haversine formula for distance calculation
 const calculateDistance = (lat1: number, lon1: number, lat2: number, lon2: number) => {
@@ -247,7 +225,6 @@ const initGeo = () => {
             }
             sortOrder.value = 'nearest'
             geoError.value = ''
-            autoSelectProvince()
         }, (err) => {
             // Silently fail on init to avoid blocking the main view with errors
             if (err.code === 1) {
