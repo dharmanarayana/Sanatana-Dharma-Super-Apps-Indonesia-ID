@@ -32,8 +32,8 @@
           <div class="absolute -left-4 top-0 h-full w-1 bg-brand/10 rounded-full"></div>
           
           <h3 class="font-bold text-brand text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
-            <span class="w-6 h-6 rounded-full bg-brand text-inverse flex items-center justify-center text-xs">{{ idx + 1 }}</span>
-            {{ doa.content.length > 1 ? 'Bait ' + (idx + 1) : 'Isi Mantra' }}
+            <span class="w-6 h-6 rounded-full bg-brand text-inverse flex items-center justify-center text-xs">{{ (idx as number) + 1 }}</span>
+            {{ doa.content.length > 1 ? 'Bait ' + ((idx as number) + 1) : 'Isi Mantra' }}
           </h3>
 
           <div class="space-y-6">
@@ -81,11 +81,11 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const route = useRoute()
 const isPlaying = ref(false)
 const isBookmarked = ref(false)
-const doa = ref(null)
+const doa = ref<any>(null)
 
 const prayerExplanation = computed(() => {
   if (!doa.value) return ''
@@ -105,10 +105,54 @@ const prayerExplanation = computed(() => {
   return 'Mantra suci ini berisi pemujaan dan permohonan tulus kepada Ida Sang Hyang Widhi Wasa untuk mendatangkan kedamaian, tuntunan, dan keberkahan dalam setiap langkah kehidupan.'
 })
 
+const parseContent = (doc: any) => {
+  if (Array.isArray(doc.content)) return doc.content;
+  if (typeof doc.content === 'string' && doc.content.trim().startsWith('[')) {
+    try { return JSON.parse(doc.content) } catch (e) {}
+  }
+  return [{ sanskrit: '', transliteration: doc.transliteration || '', translation: doc.content || '' }]
+}
+
 const fetchDetail = async () => {
   try {
     const prayersData = (await import('~/data/prayers.json')).default
-    doa.value = prayersData.find(d => d.id.toString() === route.params.id)
+    let localData = prayersData.find(d => d.id.toString() === route.params.id)
+    
+    // Convert to proper format if matched local
+    if (localData) {
+      localData = { ...localData, category: localData.category_name } as any
+      doa.value = localData
+    }
+
+    try {
+      const { $appwrite } = useNuxtApp()
+      // If it's a new Appwrite ID, it might fail here but we try
+      let appDoc = null;
+      try {
+        const res = await $appwrite.databases.listDocuments('sanatana-dharma-db', 'prayers')
+        // Find matching appwrite doc by title (if local exists) or by ID
+        appDoc = res.documents.find((d: any) => {
+          if (localData && d.title.toLowerCase().trim() === localData.title.toLowerCase().trim()) return true;
+          return d.$id === route.params.id;
+        })
+      } catch(err) {}
+
+      if (appDoc) {
+        const parsedDoc = {
+          ...appDoc,
+          category: appDoc.category_name || (appDoc.category_id ? 'Kategori ' + appDoc.category_id : 'Lainnya'),
+          content: parseContent(appDoc)
+        }
+        
+        if (doa.value) {
+          doa.value = { ...doa.value, ...parsedDoc, content: doa.value.content } as any
+        } else {
+          doa.value = parsedDoc as any
+        }
+      }
+    } catch(err) {
+      console.error('Appwrite merge failed:', err)
+    }
   } catch (e) {
     console.error('Error loading prayer detail:', e)
   }

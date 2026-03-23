@@ -28,8 +28,9 @@
             v-model="formData[field.key]"
             :placeholder="field.placeholder"
             rows="5"
-            class="w-full px-4 py-3 bg-surface-variant/5 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary transition-all resize-none"
+            :class="['w-full px-4 py-3 bg-surface-variant/5 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary transition-all resize-none', field.disabled ? 'opacity-50 cursor-not-allowed' : '']"
             :required="field.required"
+            :disabled="field.disabled"
           ></textarea>
 
           <!-- Select -->
@@ -37,8 +38,9 @@
             v-else-if="field.type === 'select'"
             :id="field.key"
             v-model="formData[field.key]"
-            class="w-full px-4 py-3 bg-surface-variant/5 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary transition-all appearance-none cursor-pointer"
+            :class="['w-full px-4 py-3 bg-surface-variant/5 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary transition-all appearance-none cursor-pointer', field.disabled ? 'opacity-50 cursor-not-allowed' : '']"
             :required="field.required"
+            :disabled="field.disabled"
           >
             <option value="" disabled>{{ field.placeholder || 'Pilih...' }}</option>
             <option v-for="opt in field.options" :key="opt.value" :value="opt.value">
@@ -53,8 +55,21 @@
             v-model.number="formData[field.key]"
             type="number"
             :placeholder="field.placeholder"
-            class="w-full px-4 py-3 bg-surface-variant/5 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary transition-all"
+            :class="['w-full px-4 py-3 bg-surface-variant/5 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary transition-all', field.disabled ? 'opacity-50 cursor-not-allowed' : '']"
             :required="field.required"
+            :disabled="field.disabled"
+          />
+
+          <!-- File -->
+          <input 
+            v-else-if="field.type === 'file'"
+            :id="field.key"
+            type="file"
+            :accept="field.accept"
+            @change="(e) => field.onChange && field.onChange(e, formData)"
+            :class="['w-full px-4 py-2 bg-surface-variant/5 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary transition-all file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-brand-primary/10 file:text-brand-primary hover:file:bg-brand-primary/20', field.disabled ? 'opacity-50 cursor-not-allowed' : '']"
+            :required="field.required"
+            :disabled="field.disabled"
           />
 
           <!-- Default Text/Input -->
@@ -64,8 +79,9 @@
             v-model="formData[field.key]"
             :type="field.type || 'text'"
             :placeholder="field.placeholder"
-            class="w-full px-4 py-3 bg-surface-variant/5 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary transition-all"
+            :class="['w-full px-4 py-3 bg-surface-variant/5 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary transition-all', field.disabled ? 'opacity-50 cursor-not-allowed' : '']"
             :required="field.required"
+            :disabled="field.disabled"
           />
         </div>
       </form>

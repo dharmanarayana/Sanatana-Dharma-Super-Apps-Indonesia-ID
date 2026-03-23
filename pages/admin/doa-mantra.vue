@@ -12,6 +12,8 @@
       title="Doa"
       :items="items"
       :columns="columns"
+      :disableAdd="true"
+      :disableDelete="true"
       @add="handleAdd"
       @edit="handleEdit"
       @delete="handleDelete"
@@ -59,27 +61,47 @@ const editingItem = ref<any>(null)
 
 const columns = [
   { key: 'title', label: 'Judul Doa' },
-  { key: 'category', label: 'Kategori' },
+  { key: 'category_name', label: 'Kategori' },
   { key: 'audioUrl', label: 'Audio' },
 ]
 
 const fields = [
-  { key: 'title', label: 'Judul Doa/Mantra', required: true, placeholder: 'Contoh: Mantram Gayatri' },
-  { key: 'category', label: 'Kategori', required: true, type: 'select', options: [
-    { label: 'Harian', value: 'Harian' },
-    { label: 'Pemujaan', value: 'Pemujaan' },
-    { label: 'Upacara', value: 'Upacara' },
-    { label: 'Lainnya', value: 'Lainnya' },
+  { key: 'title', label: 'Judul Doa/Mantra', required: true, disabled: true },
+  { key: 'category_id', label: 'Kategori', required: true, type: 'select', disabled: true, options: [
+    { label: 'Doa Harian', value: 17 },
+    { label: 'Sebelum Persembahyangan', value: 19 },
+    { label: 'Kramaning Sembah / Panca Sembah', value: 20 },
+    { label: 'Doa Waktu Tertentu', value: 45 },
   ]},
-  { key: 'content', label: 'Teks Mantram', type: 'textarea', required: true, placeholder: 'Masukkan teks doa...' },
-  { key: 'transliteration', label: 'Transliterasi / Cara Baca', type: 'textarea', placeholder: 'Teks cara baca...' },
-  { key: 'audioUrl', label: 'URL Audio (Opsional)', placeholder: 'https://...' },
+  { key: 'audioFile', label: 'Upload Audio (Opsional)', type: 'file', accept: 'audio/*', onChange: (e: Event, formData: any) => {
+      const target = e.target as HTMLInputElement;
+      if (target.files?.length) formData.audioFile = target.files[0];
+      else delete formData.audioFile;
+  }},
+  { key: 'audioUrl', label: 'URL Audio (Eksternal, opsional)', placeholder: 'https://...' },
 ]
 
 const fetchData = async () => {
   try {
-    const res = await $appwrite.databases.listDocuments(DB_ID, COLL_ID)
-    items.value = res.documents
+    const prayersData = (await import('~/data/prayers.json')).default
+    
+    let appwriteData: any[] = []
+    try {
+      const res = await $appwrite.databases.listDocuments(DB_ID, COLL_ID)
+      appwriteData = res.documents
+    } catch (e: any) {
+      console.error('Appwrite fetch error:', e.message)
+    }
+
+    items.value = prayersData.map((d: any) => {
+      // Find matching appwrite doc by prayer_id, or string match id if previously saved that way
+      const appDoc = appwriteData.find(a => Number(a.prayer_id) === Number(d.id) || a.$id === d.id.toString())
+      return {
+        ...d,
+        appwrite_id: appDoc ? appDoc.$id : null,
+        audioUrl: appDoc ? appDoc.audioUrl : null,
+      }
+    })
   } catch (e: any) {
     console.error('Error fetching prayers:', e.message)
   }
@@ -106,13 +128,44 @@ const handleDelete = async (item: any) => {
   }
 }
 
+const catMap: Record<number, string> = {
+  17: 'Doa Harian',
+  19: 'Sebelum Persembahyangan',
+  20: 'Kramaning Sembah / Panca Sembah',
+  45: 'Doa Waktu Tertentu'
+}
+
 const handleSave = async (data: any) => {
   try {
-    if (editingItem.value) {
-      const { $id, $collectionId, $databaseId, $createdAt, $updatedAt, $permissions, ...cleanData } = data
-      await $appwrite.databases.updateDocument(DB_ID, COLL_ID, editingItem.value.$id, cleanData)
+    let finalAudioUrl = data.audioUrl
+
+    if (data.audioFile) {
+      const bucketId = 'audio'
+      try {
+        const uploadedFile = await $appwrite.storage.createFile(bucketId, 'unique()', data.audioFile)
+        finalAudioUrl = `${useRuntimeConfig().public.appwriteEndpoint}/storage/buckets/${bucketId}/files/${uploadedFile.$id}/view?project=${useRuntimeConfig().public.appwriteProjectId}`
+      } catch (err: any) {
+        if (err.message.includes('Bucket not found')) {
+          alert('Gagal: Bucket storage bernama "audio" belum dibuat di Appwrite. Buat bucket dengan ID "audio" dan beri permission Any untuk read.')
+          return
+        }
+        throw err
+      }
+    }
+
+    const docData: any = {
+      prayer_id: Number(editingItem.value.id),
+      category_id: Number(editingItem.value.category_id),
+      category_name: editingItem.value.category_name || catMap[Number(editingItem.value.category_id)],
+    }
+    
+    if (finalAudioUrl) docData.audioUrl = finalAudioUrl
+
+    if (editingItem.value.appwrite_id) {
+      await $appwrite.databases.updateDocument(DB_ID, COLL_ID, editingItem.value.appwrite_id, docData)
     } else {
-      await $appwrite.databases.createDocument(DB_ID, COLL_ID, 'unique()', data)
+      // Create new link document
+      await $appwrite.databases.createDocument(DB_ID, COLL_ID, 'unique()', docData)
     }
     showForm.value = false
     await fetchData()

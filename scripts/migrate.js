@@ -125,11 +125,18 @@ async function setup() {
         // 11. Temples Collection
         await createCollection('temples', 'Direktori Pura', [
             { key: 'name', type: 'string', size: 255, required: true },
-            { key: 'location', type: 'string', size: 500, required: true },
+            { key: 'address', type: 'string', size: 500, required: false },
+            { key: 'city', type: 'string', size: 255, required: false },
+            { key: 'province', type: 'string', size: 255, required: false },
             { key: 'description', type: 'string', size: 2000, required: false },
             { key: 'image', type: 'string', size: 255, required: false },
             { key: 'history', type: 'string', size: 5000, required: false }
-        ], [Permission.read(Role.any())]);
+        ], [
+            Permission.read(Role.any()),
+            Permission.create(Role.users()),
+            Permission.update(Role.users()),
+            Permission.delete(Role.users()),
+        ]);
 
         // 12. Tri Sandhya Collection
         await createCollection('trisandhya', 'Tri Sandhya Content', [
@@ -178,7 +185,13 @@ async function createCollection(id, name, attributes, permissions = []) {
             }
         }
     } catch (e) {
-        console.log(`ℹ️ Collection "${name}" already exists or error: ${e.message}`);
+        console.log(`ℹ️ Collection "${name}" already exists, updating permissions...`);
+        try {
+            await databases.updateCollection(DATABASE_ID, id, name, permissions);
+            console.log(`   ✅ Permissions updated for "${name}"`);
+        } catch (updateErr) {
+            console.warn(`   ⚠️ Could not update permissions for "${name}": ${updateErr.message}`);
+        }
     }
 }
 

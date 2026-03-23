@@ -10,7 +10,7 @@
           class="w-full pl-10 pr-4 py-2 bg-surface border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary"
         />
       </div>
-      <button @click="$emit('add')" class="flex items-center gap-2 px-6 py-2 bg-brand-primary text-white rounded-xl font-bold hover:bg-brand-secondary transition-all shadow-md shadow-brand-primary/20">
+      <button v-if="!disableAdd" @click="$emit('add')" class="flex items-center gap-2 px-6 py-2 bg-brand-primary text-white rounded-xl font-bold hover:bg-brand-secondary transition-all shadow-md shadow-brand-primary/20">
         <Icon name="lucide:plus" size="20" />
         Tambah {{ title }}
       </button>
@@ -40,7 +40,7 @@
                 <button @click="$emit('edit', item)" class="p-2 text-blue-500 hover:bg-blue-500/10 rounded-lg transition-colors" title="Edit">
                   <Icon name="lucide:pencil" size="18" />
                 </button>
-                <button @click="$emit('delete', item)" class="p-2 text-red-500 hover:bg-red-500/10 rounded-lg transition-colors" title="Hapus">
+                <button v-if="!disableDelete" @click="$emit('delete', item)" class="p-2 text-red-500 hover:bg-red-500/10 rounded-lg transition-colors" title="Hapus">
                   <Icon name="lucide:trash-2" size="18" />
                 </button>
               </div>
@@ -69,6 +69,8 @@ const props = defineProps<{
   title: string
   items: any[]
   columns: { key: string; label: string }[]
+  disableAdd?: boolean
+  disableDelete?: boolean
 }>()
 
 defineEmits(['add', 'edit', 'delete'])

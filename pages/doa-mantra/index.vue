@@ -45,30 +45,58 @@ const categories = computed(() => {
   return ['Semua', ...Array.from(cats)]
 })
 
+const parseContent = (doc: any) => {
+  // If content is already an array (from JSON), return it
+  if (Array.isArray(doc.content)) return doc.content;
+  
+  // If it's a JSON string from Appwrite
+  if (typeof doc.content === 'string' && doc.content.trim().startsWith('[')) {
+    try { return JSON.parse(doc.content) } catch (e) {}
+  }
+  
+  // Otherwise wrap it in the expected format
+  return [{
+    sanskrit: '',
+    transliteration: doc.transliteration || '',
+    translation: doc.content || ''
+  }]
+}
+
 const fetchDoa = async () => {
-  // Use local data as primary source
+  let localData: any[] = []
   try {
     const prayersData = (await import('~/data/prayers.json')).default
-    doaList.value = prayersData.map((d: any) => ({
+    localData = prayersData.map((d: any) => ({
       ...d,
-      $id: d.id.toString(), // Map id to $id for compatibility with existing components
+      $id: d.id.toString(),
       category: d.category_name
     }))
   } catch (e: any) {
     console.error('Error loading local prayers data:', e.message)
   }
 
-  /* 
-  // Optional: Fallback to Appwrite if needed
   try {
-    const res = await $appwrite.databases.listDocuments(DB_ID, 'prayers', [
-      useAppwriteQuery().orderAsc('title')
-    ])
-    // Merge or prioritize Appwrite data if desired
+    const res = await $appwrite.databases.listDocuments(DB_ID, 'prayers')
+    const appwriteData = res.documents.map((d: any) => ({
+      ...d,
+      category: d.category_name || (d.category_id ? 'Kategori ' + d.category_id : 'Lainnya'),
+      content: parseContent(d)
+    }))
+
+    // Merge Appwrite data over localData by title
+    appwriteData.forEach(appDoc => {
+      const existingIdx = localData.findIndex(ld => ld.title.toLowerCase().trim() === appDoc.title.toLowerCase().trim())
+      if (existingIdx >= 0) {
+        localData[existingIdx] = { ...localData[existingIdx], ...appDoc, content: localData[existingIdx].content }
+      } else {
+        localData.push(appDoc)
+      }
+    })
   } catch (e: any) {
     console.error('Error fetching prayers from Appwrite:', e.message)
   }
-  */
+  
+  doaList.value = localData
 }
 
 const filteredDoa = computed(() => {
