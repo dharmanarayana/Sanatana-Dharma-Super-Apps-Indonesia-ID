@@ -1,13 +1,13 @@
 <template>
   <div class="min-h-screen bg-base pb-20 animate-fade-up">
     <!-- Skeleton / Loading State -->
-    <div v-if="loading" class="max-w-4xl mx-auto px-6 mt-10 space-y-8">
-      <div class="h-8 bg-surface-variant rounded-xl w-3/4 animate-pulse"></div>
-      <div class="h-[400px] bg-surface-variant rounded-3xl animate-pulse"></div>
+    <div v-if="loading && !news" class="max-w-4xl mx-auto px-6 mt-10 space-y-8">
+      <UiSkeleton height="2rem" width="75%" />
+      <UiSkeleton height="400px" width="100%" class="rounded-3xl" />
       <div class="space-y-4">
-        <div class="h-4 bg-surface-variant rounded w-full animate-pulse"></div>
-        <div class="h-4 bg-surface-variant rounded w-full animate-pulse"></div>
-        <div class="h-4 bg-surface-variant rounded w-2/3 animate-pulse"></div>
+        <UiSkeleton height="1rem" width="100%" />
+        <UiSkeleton height="1rem" width="100%" />
+        <UiSkeleton height="1rem" width="60%" />
       </div>
     </div>
 
@@ -87,18 +87,25 @@
 </template>
 
 <script setup lang="ts">
+import { useNewsStore } from '~/stores/news.store'
+
 const route = useRoute()
+const newsStore = useNewsStore()
 const { $appwrite } = useNuxtApp()
 const DB_ID = 'sanatana-dharma-db'
 const COLL_ID = 'news'
 
 const { data: news, pending: loading } = await useAsyncData(`news-${route.params.id}`, async () => {
+  // Check cache
+  const cached = newsStore.getNewsById(route.params.id as string)
+  if (cached && !navigator.onLine) return cached
+
   try {
-    const { $appwrite } = useNuxtApp()
-    return await $appwrite.databases.getDocument(DB_ID, COLL_ID, route.params.id as string)
+    const res = await $appwrite.databases.getDocument(DB_ID, COLL_ID, route.params.id as string)
+    if (res) newsStore.setNewsDetail(route.params.id as string, res)
+    return res
   } catch (e: any) {
-    console.error('Error fetching news:', e.message)
-    return null
+    return cached || null
   }
 })
 

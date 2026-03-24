@@ -20,8 +20,10 @@ export const useRealtimeAnnouncements = () => {
 
       const res = await $appwrite.databases.listDocuments(DB_ID, COLL_ID, queries)
       announcements.value = res.documents
+      // Optional: cache in store too if we had a specific field, 
+      // but for now newsItems often contains these too.
     } catch (e: any) {
-      console.error('Error fetching announcements:', e.message)
+      console.warn('Announcements fetch failed:', e.message)
     } finally {
       loading.value = false
     }

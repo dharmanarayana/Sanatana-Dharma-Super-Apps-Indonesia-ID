@@ -12,7 +12,8 @@ export const useKalender = () => {
   const selectedYear = useState<number>('kalender_year', () => currentDate.year())
   const selectedMonth = useState<number>('kalender_month', () => currentDate.month() + 1)
   const selectedDate = useState<number>('kalender_date', () => currentDate.date())
-  const calendarData = useState<any[]>('kalender_data', () => [])
+  const calendarStore = useCalendarStore()
+  const calendarData = useState<any[]>('kalender_data', () => calendarStore.events)
   const isLoading = ref<boolean>(false)
   const isFetching = ref<boolean>(false)
 
@@ -27,12 +28,10 @@ export const useKalender = () => {
       const { data } = await useAsyncData(`calendar-${year}`, () => $fetch(`/api/calendar`, { query: { year } }))
       if (data.value) {
         calendarData.value = data.value as any[]
-      } else {
-        calendarData.value = []
+        calendarStore.setEvents(calendarData.value)
       }
     } catch (e) {
-      console.error('Error fetching calendar data:', e)
-      calendarData.value = []
+      console.warn('Calendar fetch failed, using cache:', e)
     } finally {
       isLoading.value = false
       isFetching.value = false

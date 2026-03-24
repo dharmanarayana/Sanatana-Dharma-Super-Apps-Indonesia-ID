@@ -1,9 +1,9 @@
 <template>
-  <div v-if="doa" class="min-h-screen bg-base flex flex-col animate-fade-up">
+  <div v-if="doa || loading" class="min-h-screen bg-base flex flex-col animate-fade-up">
     <!-- Sticky Header -->
     <div class="sticky top-[60px] z-30 bg-base/80 backdrop-blur-md px-4 py-4 flex items-center justify-between border-b border-default">
       <button @click="$router.back()" 
-              class="hidden lg:flex p-2 -ml-2 rounded-full hover:bg-surface transition-colors items-center gap-2 text-muted hover:text-brand">
+              class="hidden lg:flex p-2 -ml-2 rounded-full hover:bg-surface transition-colors items-center gap-2 text-muted hover:text-brand hover:border-brand transition-all active:scale-95">
         <Icon name="lucide:arrow-left" class="w-6 h-6" />
         <span class="text-sm font-bold">Kembali</span>
       </button>
@@ -15,10 +15,30 @@
       </div>
     </div>
 
+    <!-- Content Skeleton -->
+    <div v-if="loading && !doa" class="px-6 py-8 space-y-8">
+      <div class="text-center space-y-4 mb-10">
+        <UiSkeleton height="1rem" width="30%" class="mx-auto" />
+        <UiSkeleton height="3rem" width="70%" class="mx-auto" />
+        <UiSkeleton height="4rem" width="100%" class="mx-auto rounded-2xl" />
+      </div>
+      <div v-for="i in 3" :key="i" class="space-y-4">
+        <UiSkeleton height="1.5rem" width="40%" />
+        <UiSkeleton height="6rem" width="100%" />
+        <UiSkeleton height="4rem" width="100%" />
+      </div>
+    </div>
+
     <!-- Content -->
-    <div class="px-6 py-8 flex-grow pb-32 lg:pb-12">
+    <div v-else-if="doa" class="px-6 py-8 flex-grow pb-32 lg:pb-12">
       <div class="text-center mb-10">
-        <span class="text-sm font-bold uppercase tracking-[0.3em] text-brand mb-2 block">{{ doa.category_name || 'Doa & Mantra' }}</span>
+        <div class="flex items-center justify-center gap-3 mb-2">
+          <span class="text-sm font-bold uppercase tracking-[0.3em] text-brand">{{ doa.category_name || doa.category || 'Doa & Mantra' }}</span>
+          <div v-if="isCached" class="flex items-center gap-1 px-2 py-0.5 bg-brand/10 rounded-full text-[10px] font-bold text-brand uppercase tracking-tighter">
+            <Icon name="lucide:check-circle" size="10" />
+            Tersimpan Offline
+          </div>
+        </div>
         <h1 class="font-serif text-3xl font-bold text-default leading-tight">{{ doa.title }}</h1>
         
         <!-- Penjelasan/Khasiat Doa -->
@@ -62,7 +82,7 @@
     </div>
 
     <!-- Audio Player (Floating) -->
-    <div v-if="doa.audioUrl" 
+    <div v-if="doa?.audioUrl" 
          class="fixed bottom-24 left-6 right-6 lg:left-auto lg:right-10 lg:w-[400px] lg:bottom-10 z-40 animate-fade-in-up">
       <div class="bg-elevated/95 backdrop-blur-sm text-default p-4 rounded-2xl shadow-2xl flex items-center gap-4 border border-default ring-1 ring-black/5">
         <button @click="isPlaying = !isPlaying" class="w-12 h-12 rounded-xl bg-brand flex items-center justify-center active:scale-95 transition-all">
@@ -79,14 +99,22 @@
     </div>
   </div>
   <div v-else class="min-h-screen flex items-center justify-center">
-    <span class="loading loading-spinner"></span>
+    <div class="text-center opacity-40">
+      <Icon name="lucide:file-question" size="48" class="mx-auto mb-2" />
+      <p>Doa tidak ditemukan atau Anda sedang offline.</p>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { useDoaStore } from '~/stores/doa.store'
+
 const route = useRoute()
+const doaStore = useDoaStore()
 const isPlaying = ref(false)
 const isBookmarked = ref(false)
+
+const isCached = computed(() => !!doaStore.doaDetails[route.params.id as string])
 
 const prayerExplanation = computed(() => {
   if (!doa.value) return ''
@@ -115,6 +143,12 @@ const parseContent = (doc: any) => {
 }
 
 const { data: doa, pending: loading } = await useAsyncData(`prayer-${route.params.id}`, async () => {
+  // 1. First check the store (offline-first)
+  const cached = doaStore.getDoaBySlug(route.params.id as string)
+  if (cached && !navigator.onLine) {
+    return cached
+  }
+
   try {
     const { $appwrite } = useNuxtApp()
     const prayersData = (await import('~/data/prayers.json')).default
@@ -130,7 +164,7 @@ const { data: doa, pending: loading } = await useAsyncData(`prayer-${route.param
       }
     } catch(err) {}
 
-    if (!localItem && !appDoc) return null
+    if (!localItem && !appDoc) return cached || null
 
     // Merge logic
     const finalDoa = localItem ? { ...localItem } : {} as any
@@ -140,15 +174,16 @@ const { data: doa, pending: loading } = await useAsyncData(`prayer-${route.param
         category: appDoc.category_name || (appDoc.category_id ? 'Kategori ' + appDoc.category_id : 'Lainnya'),
         content: parseContent(appDoc)
       })
-      if (appDoc.content) finalDoa.content = parseContent(appDoc)
     } else if (localItem) {
       finalDoa.category = localItem.category_name
     }
 
+    // Cache to store for future offline use
+    doaStore.setDoaDetail(route.params.id as string, finalDoa)
     return finalDoa
   } catch (e) {
-    console.error('Error loading prayer detail:', e)
-    return null
+    console.warn('Error loading prayer detail, falling back to cache:', e)
+    return cached || null
   }
 })
 

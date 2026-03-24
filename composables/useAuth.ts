@@ -108,7 +108,6 @@ export const useAuth = () => {
 
   const refreshUserSession = async () => {
     try {
-      // Basic check: if we're on client and have no session cookie, don't even try to avoid 401 console noise
       if (import.meta.client) {
         const hasSession = document.cookie.includes('a_session_')
         if (!hasSession && !authStore.isLoggedIn) {
@@ -117,7 +116,15 @@ export const useAuth = () => {
         }
       }
 
-      const user = await $appwrite.account.get()
+      // Add a 5s safety timeout for the network request
+      const fetchWithTimeout = (promise: Promise<any>, ms: number) => {
+        return Promise.race([
+          promise,
+          new Promise((_, reject) => setTimeout(() => reject(new Error('Network Timeout')), ms))
+        ])
+      }
+
+      const user = await fetchWithTimeout($appwrite.account.get(), 5000)
       authStore.setUser(user)
       return user
     } catch {

@@ -4,8 +4,9 @@ export const useRealtimeNews = () => {
   const DB_ID = 'sanatana-dharma-db'
   const COLL_ID = 'news'
   
-  const newsItems = useState<any[]>('realtime-news', () => [])
-  const total = useState<number>('realtime-news-total', () => 0)
+  const newsStore = useNewsStore()
+  const newsItems = useState<any[]>('realtime-news', () => newsStore.newsList)
+  const total = useState<number>('realtime-news-total', () => newsStore.newsList.length)
   const loading = useState<boolean>('realtime-news-loading', () => false)
   
   let unsubscribe: (() => void) | null = null
@@ -25,8 +26,9 @@ export const useRealtimeNews = () => {
       const res = await $appwrite.databases.listDocuments(DB_ID, COLL_ID, queries)
       newsItems.value = res.documents
       total.value = res.total
+      newsStore.setNewsList(res.documents)
     } catch (e: any) {
-      console.error('Error fetching news:', e.message)
+      console.warn('News fetch failed, using cache:', e.message)
     } finally {
       loading.value = false
     }

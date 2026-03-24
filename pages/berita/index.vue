@@ -8,7 +8,14 @@
       <div class="grid lg:grid-cols-[1fr_320px] gap-8">
         <div class="space-y-6">
           <BeritaTabBar />
-          <div v-if="newsItems.length > 0" class="space-y-4">
+          <div v-if="loading && newsItems.length === 0" class="space-y-4">
+            <div v-for="i in 3" :key="i" class="p-4 bg-surface border border-default rounded-3xl space-y-3">
+              <UiSkeleton height="200px" width="100%" class="rounded-2xl" />
+              <UiSkeleton height="1.5rem" width="80%" />
+              <UiSkeleton height="1rem" width="40%" />
+            </div>
+          </div>
+          <div v-else-if="newsItems.length > 0" class="space-y-4">
             <NuxtLink v-for="item in newsItems" :key="item.$id" :to="`/berita/${item.$id}`" class="block no-underline">
               <BeritaCard :news="item" />
             </NuxtLink>

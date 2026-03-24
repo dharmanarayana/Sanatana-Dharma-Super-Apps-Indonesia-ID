@@ -40,17 +40,21 @@
         </div>
       </div>
 
-      <div v-if="selectedCategory && isLoading && filteredDoa.length === 0" class="py-20 text-center">
-        <Icon name="lucide:loader-2" class="animate-spin text-brand mx-auto mb-2" size="40" />
-        <p class="text-muted italic">Sinkronisasi data...</p>
+      <div v-if="isLoading && filteredDoa.length === 0" class="space-y-4">
+        <div class="grid grid-cols-2 gap-4">
+          <div v-for="i in 6" :key="i" class="p-4 bg-surface border border-default rounded-2xl">
+            <UiSkeleton height="2rem" width="80%" class="mb-2" />
+            <UiSkeleton height="1rem" width="40%" />
+          </div>
+        </div>
       </div>
 
-      <UiGrid v-else-if="selectedCategory && filteredDoa.length > 0" cols="2" gap="md">
+      <UiGrid v-else-if="filteredDoa.length > 0" cols="2" gap="md">
         <NuxtLink v-for="doa in filteredDoa" :key="doa.$id" :to="`/doa-mantra/${doa.slug}`" class="block no-underline">
           <DoaMantraDoaCard :doa="doa" />
         </NuxtLink>
       </UiGrid>
-      <div v-else-if="selectedCategory && filteredDoa.length === 0" class="text-center py-20 opacity-40 italic">
+      <div v-else-if="!isLoading && filteredDoa.length === 0" class="text-center py-20 opacity-40 italic">
         Belum ada doa atau mantra yang terdaftar di kategori ini.
       </div>
     </div>
@@ -58,6 +62,8 @@
 </template>
 
 <script setup lang="ts">
+import { useDoaStore } from '~/stores/doa.store'
+
 useSeoMeta({
   title: 'Doa & Mantra Hindu | Sanatana Dharma',
   ogTitle: 'Daftar Doa & Mantra Lengkap | Sanatana Dharma',
@@ -68,9 +74,10 @@ useSeoMeta({
 })
 
 const { $appwrite } = useNuxtApp()
+const doaStore = useDoaStore()
 const DB_ID = 'sanatana-dharma-db'
 
-const doaList = ref<any[]>([])
+const doaList = ref<any[]>(doaStore.doaList) // Use store as initial state
 const searchQuery = ref('')
 const selectedCategory = ref<string | null>(null)
 const isLoading = ref(true)
@@ -81,15 +88,10 @@ const categories = computed(() => {
 })
 
 const parseContent = (doc: any) => {
-  // If content is already an array (from JSON), return it
   if (Array.isArray(doc.content)) return doc.content;
-  
-  // If it's a JSON string from Appwrite
   if (typeof doc.content === 'string' && doc.content.trim().startsWith('[')) {
     try { return JSON.parse(doc.content) } catch (e) {}
   }
-  
-  // Otherwise wrap it in the expected format
   return [{
     sanskrit: '',
     transliteration: doc.transliteration || '',
@@ -99,21 +101,25 @@ const parseContent = (doc: any) => {
 
 const fetchDoa = async () => {
   isLoading.value = true
-  let localData: any[] = []
-  try {
-    const prayersData = (await import('~/data/prayers.json')).default
-    localData = prayersData.map((d: any) => ({
-      ...d,
-      $id: d.id.toString(),
-      category: d.category_name
-    }))
-  } catch (e: any) {
-    console.error('Error loading local prayers data:', e.message)
+  
+  // 1. Merge current list with local JSON data if empty
+  let localData: any[] = [...doaList.value]
+  if (localData.length === 0) {
+    try {
+      const prayersData = (await import('~/data/prayers.json')).default
+      localData = prayersData.map((d: any) => ({
+        ...d,
+        $id: d.id.toString(),
+        category: d.category_name
+      }))
+    } catch (e: any) {
+      console.error('Error loading local prayers data:', e.message)
+    }
   }
   
-  // Set initial local data first to be fast
   doaList.value = localData
 
+  // 2. Try Appwrite fetch
   try {
     const res = await $appwrite.databases.listDocuments(DB_ID, 'prayers')
     const appwriteData = res.documents.map((d: any) => ({
@@ -122,26 +128,24 @@ const fetchDoa = async () => {
       content: parseContent(d)
     }))
 
-    // Merge Appwrite data over localData by title
     appwriteData.forEach(appDoc => {
       const existingIdx = localData.findIndex(ld => ld.title.toLowerCase().trim() === appDoc.title.toLowerCase().trim())
       if (existingIdx >= 0) {
-        // Update existing record, prioritizing local metadata but taking Appwrite updates (like audioUrl)
         localData[existingIdx] = { 
           ...localData[existingIdx], 
           ...appDoc, 
-          // Prefer local category unless Appwrite has a specific custom one (not the fallback)
           category: localData[existingIdx].category || appDoc.category,
-          // Always preserve local content for merged items to avoid overwrite with simple strings
           content: localData[existingIdx].content 
         }
       } else {
         localData.push(appDoc)
       }
     })
+    
     doaList.value = [...localData]
+    doaStore.setDoaList(doaList.value) // Persist merged list
   } catch (e: any) {
-    console.error('Error fetching prayers from Appwrite:', e.message)
+    console.warn('Appwrite fetch failed (likely offline). Using cached data.')
   } finally {
     isLoading.value = false
   }
