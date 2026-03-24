@@ -261,7 +261,7 @@ const currentDate = ref(new Date())
 
 const dateInput = computed({
   get: () => currentDate.value.toISOString().split('T')[0],
-  set: (val) => {
+  set: (val: string) => {
     currentDate.value = new Date(val)
   }
 })

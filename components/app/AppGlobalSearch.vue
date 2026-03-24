@@ -110,7 +110,7 @@ const goTo = (link: string) => {
 }
 
 // Autofocus input when visible
-watch(isVisible, (newVal) => {
+watch(isVisible, (newVal: boolean) => {
   if (newVal) {
     nextTick(() => {
       searchInput.value?.focus()

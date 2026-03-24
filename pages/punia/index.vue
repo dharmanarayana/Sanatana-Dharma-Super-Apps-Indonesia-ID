@@ -5,7 +5,7 @@ const categories = ['Semua', 'Pura', 'Sosial', 'Pendidikan', 'Bencana']
 
 const filteredCampaigns = computed(() => {
   if (activeCategory.value === 'Semua') return campaigns.value
-  return campaigns.value.filter(c => c.category === activeCategory.value)
+  return campaigns.value.filter((c: any) => c.category === activeCategory.value)
 })
 
 const calculateProgress = (current: number, target: number) => {

@@ -46,12 +46,12 @@ export const useRealtimeNews = () => {
         newsItems.value = [payload, ...newsItems.value].slice(0, 50)
         total.value++
       } else if (events.some((e: string) => e.includes('.update'))) {
-        const idx = newsItems.value.findIndex(v => v.$id === payload.$id)
+        const idx = newsItems.value.findIndex((v: any) => v.$id === payload.$id)
         if (idx !== -1) {
           newsItems.value[idx] = payload
         }
       } else if (events.some((e: string) => e.includes('.delete'))) {
-        newsItems.value = newsItems.value.filter(v => v.$id !== payload.$id)
+        newsItems.value = newsItems.value.filter((v: any) => v.$id !== payload.$id)
         total.value--
       }
     })

@@ -1,6 +1,6 @@
 import { Client, Databases, Query } from 'node-appwrite';
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async (event: any) => {
   const query = getQuery(event);
   const q = (query.q as string || '').trim();
   

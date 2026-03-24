@@ -1,4 +1,4 @@
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async (event: any) => {
   const query = getQuery(event)
   const activity = (query.activity as string) || ''
   const month = parseInt(query.bulan as string) || new Date().getMonth() + 1

@@ -23,7 +23,7 @@ export const useForum = () => {
   // Fetch initial category counts
   const fetchCategoryCounts = async () => {
     try {
-      const promises = categories.value.map(async (cat) => {
+      const promises = categories.value.map(async (cat: { name: string; count: number }) => {
         const res = await $appwrite.databases.listDocuments(
           DATABASE_ID,
           COLLECTION_ID,
@@ -66,28 +66,28 @@ export const useForum = () => {
         if (event.includes('.create')) {
           posts.value = [payload, ...posts.value]
           // Update category count
-          const cat = categories.value.find(c => c.name === payload.category)
+          const cat = categories.value.find((c: any) => c.name === payload.category)
           if (cat) cat.count++
         } else if (event.includes('.update')) {
-          const index = posts.value.findIndex(p => p.$id === payload.$id)
+          const index = posts.value.findIndex((p: any) => p.$id === payload.$id)
           if (index !== -1) {
             // Check if category changed
             const oldPost = posts.value[index]
             if (oldPost.category !== payload.category) {
-              const oldCat = categories.value.find(c => c.name === oldPost.category)
-              const newCat = categories.value.find(c => c.name === payload.category)
+              const oldCat = categories.value.find((c: any) => c.name === oldPost.category)
+              const newCat = categories.value.find((c: any) => c.name === payload.category)
               if (oldCat) oldCat.count--
               if (newCat) newCat.count++
             }
             posts.value[index] = payload
           }
         } else if (event.includes('.delete')) {
-          const deletedPost = posts.value.find(p => p.$id === payload.$id)
+          const deletedPost = posts.value.find((p: any) => p.$id === payload.$id)
           if (deletedPost) {
-            const cat = categories.value.find(c => c.name === deletedPost.category)
+            const cat = categories.value.find((c: any) => c.name === deletedPost.category)
             if (cat) cat.count--
           }
-          posts.value = posts.value.filter(p => p.$id !== payload.$id)
+          posts.value = posts.value.filter((p: any) => p.$id !== payload.$id)
         }
       }
     )
@@ -126,7 +126,7 @@ export const useForum = () => {
         $createdAt: new Date().toISOString() 
       }
       posts.value = [newPost, ...posts.value]
-      const cat = categories.value.find(c => c.name === category)
+      const cat = categories.value.find((c: any) => c.name === category)
       if (cat) cat.count++
     }
   }
