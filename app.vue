@@ -6,6 +6,24 @@
       <NuxtPage />
     </NuxtLayout>
     <AppSocialPopup />
+
+    <!-- PWA Update Notification -->
+    <div v-if="$pwa?.needRefresh" 
+         class="fixed bottom-24 left-4 right-4 z-[100] bg-surface/90 backdrop-blur-xl border border-brand/20 p-4 rounded-2xl shadow-2xl flex items-center justify-between animate-fade-up">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 bg-brand/10 rounded-full flex items-center justify-center text-brand">
+          <Icon name="lucide:refresh-cw" size="20" />
+        </div>
+        <div>
+          <p class="text-xs font-bold text-default">Update Tersedia!</p>
+          <p class="text-[10px] text-muted">Aplikasi versi terbaru siap digunakan.</p>
+        </div>
+      </div>
+      <button @click="$pwa.updateServiceWorker()" 
+              class="bg-brand text-inverse px-4 py-2 rounded-xl text-xs font-bold active:scale-95 transition-all">
+        Update
+      </button>
+    </div>
   </div>
 </template>
 

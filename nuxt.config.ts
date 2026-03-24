@@ -65,11 +65,20 @@ export default defineNuxtConfig({
     },
     workbox: {
       navigateFallback: '/',
+      navigateFallbackDenylist: [/^\/api/],
       globPatterns: ['**/*.{js,css,html,png,svg,ico,woff2,json}'],
       cleanupOutdatedCaches: true,
       clientsClaim: true,
       skipWaiting: true,
       runtimeCaching: [
+        {
+          urlPattern: ({ request }) => request.mode === 'navigate',
+          handler: 'NetworkFirst',
+          options: {
+            cacheName: 'pages-cache',
+            expiration: { maxEntries: 50 }
+          }
+        },
         {
           urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
           handler: 'CacheFirst',
@@ -87,7 +96,7 @@ export default defineNuxtConfig({
           }
         },
         {
-          // Support regional Appwrite endpoints (e.g., fra.cloud.appwrite.io)
+          // Support regional Appwrite endpoints
           urlPattern: /^https:\/\/.*\.appwrite\.io\/v1\/databases\/.*/i,
           handler: 'NetworkFirst',
           options: { 
@@ -103,8 +112,16 @@ export default defineNuxtConfig({
         }
       ]
     },
-    client: { installPrompt: true },
-    devOptions: { enabled: true, type: 'module' }
+    injectRegister: 'auto',
+    client: { 
+      installPrompt: true,
+      periodicSyncForUpdates: 3600 // Check every hour
+    },
+    devOptions: { 
+      enabled: true, 
+      type: 'module',
+      navigateFallback: '/'
+    }
   },
 
   runtimeConfig: {
