@@ -3,10 +3,8 @@ import { Client, Account, Databases, Storage, Functions, Messaging } from 'appwr
 export default defineNuxtPlugin(() => {
   const config = useRuntimeConfig()
 
-  if (import.meta.client) {
-  // Client configuration
-  }
-
+  // Appwrite Web SDK (universal-ready in newer versions)
+  // On the server, this will work for basic data fetching for SEO
   const client = new Client()
     .setEndpoint(config.public.appwriteEndpoint)
     .setProject(config.public.appwriteProjectId)

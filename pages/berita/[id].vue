@@ -94,6 +94,7 @@ const COLL_ID = 'news'
 
 const { data: news, pending: loading } = await useAsyncData(`news-${route.params.id}`, async () => {
   try {
+    const { $appwrite } = useNuxtApp()
     return await $appwrite.databases.getDocument(DB_ID, COLL_ID, route.params.id as string)
   } catch (e: any) {
     console.error('Error fetching news:', e.message)
@@ -101,22 +102,24 @@ const { data: news, pending: loading } = await useAsyncData(`news-${route.params
   }
 })
 
-// Set SEO metadata at top level for SSR
-if (news.value) {
-  useSeoMeta({
-    title: `${news.value.title}`,
-    ogTitle: `${news.value.title}`,
-    description: news.value.content?.substring(0, 160) + '...',
-    ogDescription: news.value.content?.substring(0, 160) + '...',
-    ogImage: news.value.image || '/og-berita.png',
-    ogType: 'article',
-    ogSiteName: 'Sanatana Dharma Digital',
-    twitterCard: 'summary_large_image',
-    twitterTitle: `${news.value.title}`,
-    twitterDescription: news.value.content?.substring(0, 160) + '...',
-    twitterImage: news.value.image || '/og-berita.png',
-  })
-}
+// Set SEO metadata at top level for SSR using computed
+const metaTitle = computed(() => news.value?.title || 'Berita Dharma')
+const metaDesc = computed(() => news.value?.content ? (news.value.content.substring(0, 160) + '...') : 'Baca berita dan artikel dharma terbaru.')
+const metaImage = computed(() => news.value?.image || '/og-berita.png')
+
+useSeoMeta({
+  title: metaTitle,
+  ogTitle: metaTitle,
+  description: metaDesc,
+  ogDescription: metaDesc,
+  ogImage: metaImage,
+  ogType: 'article',
+  ogSiteName: 'Sanatana Dharma Digital',
+  twitterCard: 'summary_large_image',
+  twitterTitle: metaTitle,
+  twitterDescription: metaDesc,
+  twitterImage: metaImage,
+})
 
 const formatDate = (dateStr: string) => {
   if (!dateStr) return ''

@@ -112,6 +112,7 @@ const selectedChannel = ref(SUPPORTED_CHANNELS[Math.floor(Math.random() * SUPPOR
 
 const { data: videoData, pending: loading } = await useAsyncData(`video-${route.params.id}`, async () => {
   try {
+    const { $appwrite } = useNuxtApp()
     const res = await $appwrite.databases.listDocuments(DB_ID, 'videos', [
       useAppwriteQuery().equal('slug', route.params.id as string),
       useAppwriteQuery().limit(1)
@@ -156,26 +157,26 @@ const youtubeId = computed(() => {
   return (match && match[2].length === 11) ? match[2] : null;
 })
 
-// SEO Meta at top level
+// SEO Meta at top level using computed for SSR reliability
+const metaTitle = computed(() => video.value?.title || 'Video Dharma')
+const metaDesc = computed(() => video.value?.description ? (video.value.description.substring(0, 160) + '...') : 'Tonton video dharma di Sanatana Dharma Digital.')
+const metaImage = computed(() => video.value?.thumbnail || (youtubeId.value ? `https://i.ytimg.com/vi/${youtubeId.value}/maxresdefault.jpg` : '/og-video.png'))
+
+useSeoMeta({
+  title: metaTitle,
+  ogTitle: metaTitle,
+  description: metaDesc,
+  ogDescription: metaDesc,
+  ogImage: metaImage,
+  ogType: 'video.other',
+  ogSiteName: 'Sanatana Dharma Digital',
+  twitterCard: 'summary_large_image',
+  twitterTitle: metaTitle,
+  twitterDescription: metaDesc,
+  twitterImage: metaImage,
+})
+
 if (video.value) {
-  const metaTitle = video.value.title
-  const metaDesc = video.value.description ? (video.value.description.substring(0, 160) + '...') : `Tonton video dharma mengenai ${video.value.category}: ${video.value.title}.`
-  const metaImage = video.value.thumbnail || (youtubeId.value ? `https://i.ytimg.com/vi/${youtubeId.value}/maxresdefault.jpg` : '/og-video.png')
-
-  useSeoMeta({
-    title: metaTitle,
-    ogTitle: metaTitle,
-    description: metaDesc,
-    ogDescription: metaDesc,
-    ogImage: metaImage,
-    ogType: 'video.other',
-    ogSiteName: 'Sanatana Dharma Digital',
-    twitterCard: 'summary_large_image',
-    twitterTitle: metaTitle,
-    twitterDescription: metaDesc,
-    twitterImage: metaImage,
-  })
-
   useBreadcrumbs().setBreadcrumbLabel(route.params.id as string, video.value.title)
 }
 

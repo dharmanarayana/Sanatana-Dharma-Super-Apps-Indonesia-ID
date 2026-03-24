@@ -181,6 +181,7 @@ const COLL_ID = 'temples'
 
 const { data: temple, pending: loading } = await useAsyncData(`temple-${route.params.id}`, async () => {
     try {
+        const { $appwrite } = useNuxtApp()
         const response = await $appwrite.databases.listDocuments(DB_ID, COLL_ID, [
             useAppwriteQuery().equal('slug', route.params.id as string)
         ])
@@ -192,21 +193,26 @@ const { data: temple, pending: loading } = await useAsyncData(`temple-${route.pa
 })
 
 // Set SEO metadata at top level for SSR
+// Use computed for title to handle template if needed
+const metaTitle = computed(() => temple.value?.name || 'Pura Hindu')
+const metaDesc = computed(() => temple.value?.description?.substring(0, 160) || 'Daftar Pura Hindu Indonesia')
+const metaImage = computed(() => temple.value?.image || '/og-pura.png')
+
+useSeoMeta({
+    title: metaTitle,
+    ogTitle: metaTitle,
+    description: metaDesc,
+    ogDescription: metaDesc,
+    ogImage: metaImage,
+    ogType: 'website',
+    ogSiteName: 'Sanatana Dharma Digital',
+    twitterCard: 'summary_large_image',
+    twitterTitle: metaTitle,
+    twitterDescription: metaDesc,
+    twitterImage: metaImage,
+})
+
 if (temple.value) {
-    useSeoMeta({
-        title: `${temple.value.name}`,
-        ogTitle: `${temple.value.name}`,
-        description: `Pelajari sejarah, lokasi, dan informasi lengkap mengenai ${temple.value.name} yang terletak di ${temple.value.city}, ${temple.value.province}. Platform Sanatana Dharma membantu Anda menemukan pura terdekat dan panduan spiritual Hindu.`,
-        ogDescription: `Pelajari sejarah, lokasi, dan informasi lengkap mengenai ${temple.value.name} yang terletak di ${temple.value.city}, ${temple.value.province}.`,
-        ogImage: temple.value.image || '/og-image.png',
-        ogType: 'website',
-        ogSiteName: 'Sanatana Dharma Digital',
-        twitterCard: 'summary_large_image',
-        twitterTitle: `${temple.value.name}`,
-        twitterDescription: `Informasi lengkap mengenai ${temple.value.name} di ${temple.value.city}, ${temple.value.province}.`,
-        twitterImage: temple.value.image || '/og-image.png',
-    })
-    
     // Set breadcrumb label
     useBreadcrumbs().setBreadcrumbLabel(route.params.id as string, temple.value.name)
 }

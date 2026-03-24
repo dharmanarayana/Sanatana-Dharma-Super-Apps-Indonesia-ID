@@ -116,12 +116,12 @@ const parseContent = (doc: any) => {
 
 const { data: doa, pending: loading } = await useAsyncData(`prayer-${route.params.id}`, async () => {
   try {
+    const { $appwrite } = useNuxtApp()
     const prayersData = (await import('~/data/prayers.json')).default
     let localItem = prayersData.find((d: any) => d.slug === route.params.id)
     
     let appDoc = null;
     try {
-      const { $appwrite } = useNuxtApp()
       const res = await $appwrite.databases.listDocuments('sanatana-dharma-db', 'prayers', [
           useAppwriteQuery().equal('slug', route.params.id as string)
       ])
@@ -140,7 +140,6 @@ const { data: doa, pending: loading } = await useAsyncData(`prayer-${route.param
         category: appDoc.category_name || (appDoc.category_id ? 'Kategori ' + appDoc.category_id : 'Lainnya'),
         content: parseContent(appDoc)
       })
-      // Ensure content from appDoc is used if available, but parse it correctly
       if (appDoc.content) finalDoa.content = parseContent(appDoc)
     } else if (localItem) {
       finalDoa.category = localItem.category_name
@@ -153,20 +152,26 @@ const { data: doa, pending: loading } = await useAsyncData(`prayer-${route.param
   }
 })
 
-// Set SEO metadata at top level for SSR
+// Set SEO metadata at top level for SSR using computed
+const metaTitle = computed(() => doa.value?.title || 'Doa & Mantra')
+const metaDesc = computed(() => doa.value ? `Baca ${doa.value.title} (${doa.value.category}). Tersedia teks Sansekerta, transliterasi, dan terjemahan bahasa Indonesia lengkap.` : 'Daftar doa dan mantra Hindu.')
+const metaImage = computed(() => '/og-doa.png')
+
+useSeoMeta({
+  title: metaTitle,
+  ogTitle: metaTitle,
+  description: metaDesc,
+  ogDescription: metaDesc,
+  ogImage: metaImage,
+  ogType: 'article',
+  ogSiteName: 'Sanatana Dharma Digital',
+  twitterCard: 'summary_large_image',
+  twitterTitle: metaTitle,
+  twitterDescription: metaDesc,
+  twitterImage: metaImage,
+})
+
 if (doa.value) {
-  useSeoMeta({
-    title: `${doa.value.title}`,
-    ogTitle: `${doa.value.title}`,
-    description: `Baca ${doa.value.title} (${doa.value.category}). Tersedia teks Sansekerta, transliterasi, dan terjemahan bahasa Indonesia lengkap.`,
-    ogDescription: `Baca ${doa.value.title} (${doa.value.category}). Lengkap dengan Sansekerta, transliterasi, dan terjemahan.`,
-    ogImage: '/og-doa.png', // Fallback for prayers
-    ogType: 'article',
-    ogSiteName: 'Sanatana Dharma Digital',
-    twitterCard: 'summary_large_image',
-    twitterTitle: `${doa.value.title}`,
-    twitterDescription: `Baca ${doa.value.title} (${doa.value.category}) dengan transliterasi dan terjemahan.`,
-  })
   useBreadcrumbs().setBreadcrumbLabel(route.params.id as string, doa.value.title)
 }
 
