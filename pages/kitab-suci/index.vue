@@ -15,6 +15,13 @@
 </template>
 
 <script setup lang="ts">
+useSeoMeta({
+  title: 'Kitab Suci Digital',
+  ogTitle: 'Perpustakaan Kitab Suci Hindu - Sanatana Dharma Digital',
+  description: 'Akses berbagai kitab suci Hindu seperti Weda, Bhagavad Gita, Sarasamuscaya, dan lainnya secara digital.',
+  ogDescription: 'Akses berbagai kitab suci Hindu seperti Weda, Bhagavad Gita, Sarasamuscaya, dan lainnya secara digital.',
+})
+
 const { $appwrite } = useNuxtApp()
 const DB_ID = 'sanatana-dharma-db'
 const kitabList = ref<any[]>([])

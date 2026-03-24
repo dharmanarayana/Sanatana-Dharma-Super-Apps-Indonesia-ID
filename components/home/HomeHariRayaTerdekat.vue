@@ -36,13 +36,15 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import dayjs from 'dayjs'
 import { useKalender } from '~/composables/useKalender'
 
 const kalender = useKalender()
 const currentMonthData = kalender.currentMonthData
+const realToday = dayjs()
+const todayDate = realToday.date()
 
 const upcomingEvents = computed(() => {
-  const today = kalender.selectedDate.value
   const rerainan = kalender.currentReligiousDays.value || []
   const holidays = kalender.currentHolidays.value || []
   
@@ -59,8 +61,8 @@ const upcomingEvents = computed(() => {
   }
 
   const all = [
-    ...rerainan.map((r: any) => ({ ...r, isRerainan: true }))
-  ].filter(e => e && typeof e.date === 'number' && e.date >= (today || 0))
+    ...(Array.isArray(rerainan) ? rerainan.map((r: any) => ({ ...r, isRerainan: true })) : [])
+  ].filter(e => e && typeof e.date === 'number' && e.date >= todayDate)
   
   all.sort((a, b) => a.date - b.date)
   
@@ -72,7 +74,7 @@ const upcomingEvents = computed(() => {
       const catInfo = getCat(item.name, item.isRerainan)
       unique.push({
         ...item,
-        daysLeft: item.date - today,
+        daysLeft: item.date - todayDate,
         cat: catInfo
       })
       seen.add(key)

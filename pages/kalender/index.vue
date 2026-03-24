@@ -44,4 +44,11 @@
 import { useKalender } from '~/composables/useKalender'
 
 const kalender = useKalender()
+
+useSeoMeta({
+  title: 'Kalender Hindu Saka',
+  ogTitle: 'Kalender Bali & Hindu Saka Indonesia - Sanatana Dharma Digital',
+  description: 'Cek Kalender Hindu Saka, Wuku, Titi, Anyar, dan Hari Raya Hindu terbaru hari ini.',
+  ogDescription: 'Cek Kalender Hindu Saka, Wuku, Titi, Anyar, dan Hari Raya Hindu terbaru hari ini.',
+})
 </script>

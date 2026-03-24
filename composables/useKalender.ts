@@ -23,9 +23,10 @@ export const useKalender = () => {
     isFetching.value = true
     isLoading.value = true
     try {
-      const data = await $fetch(`/data/calendar-${year}.json`)
-      if (data) {
-        calendarData.value = data as any[]
+      // Use useAsyncData to handle SSR and prevent double fetching
+      const { data } = await useAsyncData(`calendar-${year}`, () => $fetch(`/api/calendar`, { query: { year } }))
+      if (data.value) {
+        calendarData.value = data.value as any[]
       } else {
         calendarData.value = []
       }
@@ -85,9 +86,9 @@ export const useKalender = () => {
   })
 
   // Watch for year changes to fetch new data
-  watch(selectedYear, (newYear: number) => {
+  watch(selectedYear, async (newYear: number) => {
     if (newYear >= 2025 && newYear <= 2026) {
-       fetchCalendarData(newYear)
+       await fetchCalendarData(newYear)
     }
   }, { immediate: true })
 

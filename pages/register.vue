@@ -72,6 +72,12 @@
 <script setup>
 definePageMeta({ layout: false })
 
+useSeoMeta({
+  title: 'Daftar',
+  ogTitle: 'Gabung dengan Sanatana Dharma Digital',
+  description: 'Daftar akun baru untuk mulai perjalanan spiritual Anda bersama Sanatana Dharma Digital.',
+})
+
 const { register } = useAuth()
 const name = ref('')
 const email = ref('')

@@ -74,6 +74,12 @@
 <script setup>
 definePageMeta({ layout: false })
 
+useSeoMeta({
+  title: 'Masuk',
+  ogTitle: 'Masuk ke Akun Sanatana Dharma Digital',
+  description: 'Masuk ke akun Anda untuk mengakses fitur lengkap Sanatana Dharma Digital.',
+})
+
 const { login, loginWithGoogle } = useAuth()
 const email = ref('')
 const password = ref('')

@@ -84,6 +84,13 @@
 </template>
 
 <script setup lang="ts">
+useSeoMeta({
+  title: 'Pura Hindu Indonesia',
+  ogTitle: 'Cari Pura Hindu Terdekat - Sanatana Dharma Digital',
+  description: 'Temukan lokasi Pura Hindu di seluruh Indonesia. Lengkap dengan koordinat GPS, alamat, dan informasi sejarah pura.',
+  ogDescription: 'Temukan lokasi Pura Hindu di seluruh Indonesia. Lengkap dengan koordinat GPS, alamat, dan informasi sejarah pura.',
+})
+
 const { $appwrite } = useNuxtApp()
 const DB_ID = 'sanatana-dharma-db'
 const temples = ref<any[]>([])

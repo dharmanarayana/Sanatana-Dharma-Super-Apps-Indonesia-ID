@@ -1,9 +1,10 @@
 import fs from 'fs'
 import path from 'path'
+import { resolvePublicDataPath } from '../utils/paths'
 import axios from 'axios'
 import * as cheerio from 'cheerio'
 
-export default defineEventHandler(async (event) => {
+export default defineCachedEventHandler(async (event) => {
   const query = getQuery(event)
   const tanggal = query.tanggal || new Date().getDate()
   const bulan = query.bulan || new Date().getMonth() + 1
@@ -13,8 +14,8 @@ export default defineEventHandler(async (event) => {
 
   // 1. Try to read from local JSON fallback first
   try {
-    const filePath = path.resolve(`public/data/dewasa-${tahun}.json`)
-    if (fs.existsSync(filePath)) {
+    const filePath = resolvePublicDataPath(`dewasa-${tahun}.json`)
+    if (filePath && fs.existsSync(filePath)) {
       const fileData = fs.readFileSync(filePath, 'utf-8')
       const allDewasa = JSON.parse(fileData)
       
@@ -33,9 +34,7 @@ export default defineEventHandler(async (event) => {
   }
 
   // 2. Fallback to live API Scraping
-  // URL pattern: https://kalenderbali.com/ala-ayuning-dewasa/?tg=23&bl=3&th=2026
   const url = `https://kalenderbali.com/ala-ayuning-dewasa/?tg=${tanggal}&bl=${bulan}&th=${tahun}`
-  
   const USER_AGENT = `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36`
 
   try {
@@ -50,7 +49,6 @@ export default defineEventHandler(async (event) => {
     const $ = cheerio.load(data)
     const items: { name: string; description: string }[] = []
 
-    // Structure on kalenderbali.com is typically in div.isi ul li
     $('div.isi ul li').each((i, el) => {
       const html = $(el).html()
       if (html && html.includes('<b>')) {
@@ -80,5 +78,15 @@ export default defineEventHandler(async (event) => {
       items: [],
       error: 'Failed to fetch'
     }
+  }
+}, {
+  maxAge: 60 * 60 * 24, // 24 hours
+  swr: true,
+  getKey: (event) => {
+    const query = getQuery(event)
+    const t = query.tanggal || new Date().getDate()
+    const b = query.bulan || new Date().getMonth() + 1
+    const th = query.tahun || new Date().getFullYear()
+    return `dewasa-${th}-${b}-${t}`
   }
 })

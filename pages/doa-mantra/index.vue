@@ -31,7 +31,12 @@
 </template>
 
 <script setup lang="ts">
-// We will fetch this dynamically in fetchDoa
+useSeoMeta({
+  title: 'Doa & Mantra',
+  ogTitle: 'Daftar Doa & Mantra Hindu - Sanatana Dharma Digital',
+  description: 'Kumpulan doa dan mantra Hindu lengkap dengan aksara Sansekerta, transliterasi, dan terjemahan bahasa Indonesia.',
+  ogDescription: 'Kumpulan doa dan mantra Hindu lengkap dengan aksara Sansekerta, transliterasi, dan terjemahan bahasa Indonesia.',
+})
 
 const { $appwrite } = useNuxtApp()
 const DB_ID = 'sanatana-dharma-db'

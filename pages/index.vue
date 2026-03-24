@@ -55,7 +55,9 @@
     <section class="mb-6">
       <h2 class="font-bold text-default text-lg mb-3">Berita Terkini</h2>
       <UiGrid v-if="news.length > 0" cols="2" gap="md">
-        <BeritaCard v-for="item in news" :key="item.$id" :news="item" />
+        <NuxtLink v-for="item in news" :key="item.$id" :to="`/berita/${item.$id}`" class="block no-underline">
+          <BeritaCard :news="item" />
+        </NuxtLink>
       </UiGrid>
       <div v-else class="text-center py-10 opacity-50 italic text-sm">Belum ada berita.</div>
     </section>
@@ -66,6 +68,13 @@
 <script setup lang="ts">
 const { $appwrite } = useNuxtApp()
 const authStore = useAuthStore()
+
+useSeoMeta({
+  title: 'Beranda',
+  ogTitle: 'Sanatana Dharma Digital - Beranda',
+  description: 'Selamat datang di Sanatana Dharma Digital, platform keagamaan Hindu Indonesia yang lengkap dengan Kalender Saka, Doa Mantra, dan Kitab Suci.',
+  ogDescription: 'Selamat datang di Sanatana Dharma Digital, platform keagamaan Hindu Indonesia yang lengkap dengan Kalender Saka, Doa Mantra, dan Kitab Suci.',
+})
 
 const DB_ID = 'sanatana-dharma-db'
 

@@ -11,6 +11,15 @@
 <script setup lang="ts">
 const { refreshUserSession, checkDailyLogin } = useAuth()
 
+useSeoMeta({
+  title: 'Sanatana Dharma Digital',
+  ogTitle: 'Sanatana Dharma Digital',
+  description: 'Platform Keagamaan Hindu Indonesia — Kalender Saka, Doa Mantra, Kitab Suci, dan lebih banyak lagi',
+  ogDescription: 'Platform Keagamaan Hindu Indonesia — Kalender Saka, Doa Mantra, Kitab Suci, dan lebih banyak lagi',
+  ogImage: '/og-image.png',
+  twitterCard: 'summary_large_image',
+})
+
 onMounted(async () => {
   document.documentElement.style.visibility = 'visible'
   

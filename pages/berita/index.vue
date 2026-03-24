@@ -9,7 +9,9 @@
         <div class="space-y-6">
           <BeritaTabBar />
           <div v-if="newsItems.length > 0" class="space-y-4">
-            <BeritaCard v-for="item in newsItems" :key="item.$id" :news="item" />
+            <NuxtLink v-for="item in newsItems" :key="item.$id" :to="`/berita/${item.$id}`" class="block no-underline">
+              <BeritaCard :news="item" />
+            </NuxtLink>
           </div>
           <div v-else class="text-center py-20 opacity-40 italic">
             Belum ada berita yang diterbitkan.
@@ -39,6 +41,13 @@
 </template>
 
 <script setup lang="ts">
+useSeoMeta({
+  title: 'Berita & Informasi',
+  ogTitle: 'Kabar Terkini Sanatana Dharma - Sanatana Dharma Digital',
+  description: 'Baca berita dan pengumuman terbaru seputar kegiatan umat Hindu dan informasi keagamaan lainnya.',
+  ogDescription: 'Baca berita dan pengumuman terbaru seputar kegiatan umat Hindu dan informasi keagamaan lainnya.',
+})
+
 const { $appwrite } = useNuxtApp()
 const DB_ID = 'sanatana-dharma-db'
 const newsItems = ref<any[]>([])

@@ -188,6 +188,12 @@ const fetchTempleDetail = async () => {
         ])
         if (response.documents.length > 0) {
             temple.value = response.documents[0]
+            useSeoMeta({
+              title: temple.value.name,
+              ogTitle: `${temple.value.name} - Pura Hindu Indonesia`,
+              description: `Informasi lengkap mengenai ${temple.value.name} di ${temple.value.city}, ${temple.value.province}. Sejarah, lokasi, dan galeri foto.`,
+              ogDescription: `Informasi lengkap mengenai ${temple.value.name} di ${temple.value.city}, ${temple.value.province}. Sejarah, lokasi, dan galeri foto.`,
+            })
             useBreadcrumbs().setBreadcrumbLabel(route.params.id as string, temple.value.name)
         } else {
             temple.value = null

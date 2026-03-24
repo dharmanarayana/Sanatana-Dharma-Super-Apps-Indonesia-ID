@@ -158,8 +158,14 @@ const fetchDetail = async () => {
       console.error('Appwrite merge failed:', err)
     }
 
-    // Set breadcrumb override
+    // Set SEO metadata
     if (doa.value) {
+      useSeoMeta({
+        title: doa.value.title,
+        ogTitle: `${doa.value.title} - Doa & Mantra Hindu`,
+        description: `Baca ${doa.value.title} (${doa.value.category_name}). Lengkap dengan Sansekerta, transliterasi, dan terjemahan.`,
+        ogDescription: `Baca ${doa.value.title} (${doa.value.category_name}). Lengkap dengan Sansekerta, transliterasi, dan terjemahan.`,
+      })
       useBreadcrumbs().setBreadcrumbLabel(route.params.id as string, doa.value.title)
     }
   } catch (e) {

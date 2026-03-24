@@ -43,7 +43,8 @@ import dayjs from 'dayjs'
 
 const kalender = useKalender()
 const gridDays = kalender.gridDays
-const currentDayName = computed(() => dayjs().format('dddd'))
+const realToday = dayjs()
+const currentDayName = computed(() => realToday.format('dddd'))
 
 // -----------------------------------------------------------------
 // GPS LOCATION LOGIC
@@ -118,8 +119,9 @@ onMounted(() => {
 
 const { getMasehiToSaka } = useKalenderSaka()
 
-const today = new Date()
-const { tahunSaka } = getMasehiToSaka(today)
+// Use REAL today for info
+const todayMasehi = new Date()
+const { tahunSaka } = getMasehiToSaka(todayMasehi)
 
 const WUKU_LIST = [
   'Sinta', 'Landep', 'Ukir', 'Kulantir', 'Tolu', 'Gumbreg', 'Wariga', 'Warigadean', 'Julungwangi', 'Sungsang', 
@@ -131,39 +133,39 @@ const SASIH_LIST = [
   'Kasa', 'Karo', 'Katiga', 'Kapat', 'Kalima', 'Kanam', 'Kapitu', 'Kawalu', 'Kasanga', 'Kedasa', 'Jyestha', 'Sadha'
 ]
 
-const sakaInfo = computed(() => kalender.selectedDayInfo.value?.sakaInfo || 'Memuat Data...')
+// Fetch Today's Saka Info specifically for the banner
+const { data: todaySakaData } = useAsyncData('today-saka-info', () => {
+  const y = realToday.year()
+  const m = realToday.month() + 1
+  const d = realToday.date()
+  return $fetch(`/api/calendar`, { query: { year: y } }).then((res: any) => {
+    if (!Array.isArray(res)) return null
+    const monthData = res.find((item: any) => item?.month === m)
+    return monthData?.days?.find((day: any) => day?.date === d)
+  }).catch(() => null)
+})
+
+const sakaInfo = computed(() => todaySakaData.value?.sakaInfo || kalender.selectedDayInfo.value?.sakaInfo || 'Memuat Data...')
 
 const wukuToday = computed(() => {
   const info = sakaInfo.value
-  // Attempt 1: Search for known wuku name in the scraped string
   if (info && info !== 'Tidak Ada Info' && info !== 'Memuat Data...') {
     const found = WUKU_LIST.find(w => info.includes(w))
     if (found) return found
   }
   
-  // Attempt 2: Programmatically calculate based on selected date
-  const year = kalender.selectedYear.value
-  const month = kalender.selectedMonth.value
-  const date = kalender.selectedDate.value
-  if (year && month && date) {
-    const { getWuku } = useKalenderSaka()
-    const targetDate = new Date(year, month - 1, date)
-    return getWuku(targetDate)
-  }
-  
-  return '-'
+  const { getWuku } = useKalenderSaka()
+  return getWuku(todayMasehi)
 })
 
 const bulanSaka = computed(() => {
   const info = sakaInfo.value
-  // 1. Try to find explicit Sasih name in the string
   if (info && info !== 'Tidak Ada Info' && info !== 'Memuat Data...') {
     const found = SASIH_LIST.find(s => info.toLowerCase().includes(s.toLowerCase()))
     if (found) return found
   }
   
-  // 2. Fallback to current month approximations
-  const month = kalender.selectedMonth.value
+  const month = realToday.month() + 1
   const monthMap: Record<number, string> = {
     1: 'Kapitu', 2: 'Kawalu', 3: 'Kasanga', 4: 'Kedasa', 5: 'Jyestha', 6: 'Sadha',
     7: 'Kasa', 8: 'Karo', 9: 'Katiga', 10: 'Kapat', 11: 'Kalima', 12: 'Kanam'

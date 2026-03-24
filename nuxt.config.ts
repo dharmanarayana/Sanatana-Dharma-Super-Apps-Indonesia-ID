@@ -83,15 +83,36 @@ export default defineNuxtConfig({
   app: {
     head: {
       title: 'Sanatana Dharma Digital',
+      titleTemplate: '%s | Sanatana Dharma Digital',
+      htmlAttrs: {
+        lang: 'id'
+      },
       meta: [
+        { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1, viewport-fit=cover' },
         { name: 'theme-color', content: '#FF6B00' },
-        { name: 'mobile-web-app-capable', content: 'yes' },
+        { name: 'format-detection', content: 'telephone=no' },
+        { name: 'apple-mobile-web-app-capable', content: 'yes' },
         { name: 'apple-mobile-web-app-status-bar-style', content: 'default' },
-        { name: 'description', content: 'Platform Keagamaan Hindu Indonesia — Kalender Saka, Doa Mantra, Kitab Suci, dan lebih banyak lagi' }
+        { name: 'apple-mobile-web-app-title', content: 'Sanatana Dharma' },
+        { name: 'description', content: 'Platform Keagamaan Hindu Indonesia — Kalender Saka, Doa Mantra, Kitab Suci, dan lebih banyak lagi' },
+        // SEO Open Graph
+        { property: 'og:type', content: 'website' },
+        { property: 'og:site_name', content: 'Sanatana Dharma Digital' },
+        { property: 'og:title', content: 'Sanatana Dharma Digital' },
+        { property: 'og:description', content: 'Platform Keagamaan Hindu Indonesia — Kalender Saka, Doa Mantra, Kitab Suci, dan lebih banyak lagi' },
+        { property: 'og:image', content: '/og-image.png' },
+        // Twitter
+        { name: 'twitter:card', content: 'summary_large_image' },
+        { name: 'twitter:title', content: 'Sanatana Dharma Digital' },
+        { name: 'twitter:description', content: 'Platform Keagamaan Hindu Indonesia — Kalender Saka, Doa Mantra, Kitab Suci, dan lebih banyak lagi' },
+        { name: 'twitter:image', content: '/og-image.png' }
       ],
       link: [
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+        { rel: 'apple-touch-icon', href: '/icons/icon-192x192.png' },
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+        { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
         { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600;700&display=swap' }
       ],
       script: [
