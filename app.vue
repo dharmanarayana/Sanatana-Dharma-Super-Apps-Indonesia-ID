@@ -1,5 +1,6 @@
 <template>
   <div>
+    <AppSplashScreen :show="showSplash" />
     <NuxtLoadingIndicator color="var(--brand-primary)" />
     <NuxtLayout>
       <NuxtPage />
@@ -10,6 +11,7 @@
 
 <script setup lang="ts">
 const { refreshUserSession, checkDailyLogin } = useAuth()
+const showSplash = ref(true)
 
 useSeoMeta({
   title: 'Sanatana Dharma Digital',
@@ -21,11 +23,14 @@ useSeoMeta({
 })
 
 onMounted(async () => {
-  document.documentElement.style.visibility = 'visible'
-  
   // Check session and daily login points
   await refreshUserSession()
   await checkDailyLogin()
+  
+  // Hide splash screen with a slight delay for better UX
+  setTimeout(() => {
+    showSplash.value = false
+  }, 1200)
 })
 </script>
 

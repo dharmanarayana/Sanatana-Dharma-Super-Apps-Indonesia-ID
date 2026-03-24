@@ -1,22 +1,13 @@
-import fs from 'fs'
-import path from 'path'
-import { resolvePublicDataPath } from '../utils/paths'
-
 export default defineCachedEventHandler(async (event) => {
   const query = getQuery(event)
   const year = query.year || new Date().getFullYear()
 
   try {
-    const filePath = resolvePublicDataPath(`calendar-${year}.json`)
-    
-    if (filePath && fs.existsSync(filePath)) {
-      const fileData = fs.readFileSync(filePath, 'utf-8')
-      const calendarData = JSON.parse(fileData)
+    const calendarData: any = await useStorage('assets:server').getItem(`data/calendar-${year}.json`)
+    if (calendarData) {
       return calendarData
-    } else {
-      console.warn(`Calendar file not found: ${filePath}`)
-      return []
     }
+    return []
   } catch (err) {
     console.error(`Error reading calendar data for year ${year}:`, err)
     return []
@@ -26,6 +17,6 @@ export default defineCachedEventHandler(async (event) => {
   swr: true,
   getKey: (event) => {
     const query = getQuery(event)
-    return `calendar-${query.year || new Date().getFullYear()}`
+    return `calendar-v2-${query.year || new Date().getFullYear()}`
   }
 })

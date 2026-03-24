@@ -1,0 +1,232 @@
+[
+  {
+    "month": 3,
+    "year": 2026,
+    "days": [
+      {
+        "date": 1,
+        "sakaInfo": "Wuku"
+      },
+      {
+        "date": 2,
+        "sakaInfo": "Soma Pon Ugu"
+      },
+      {
+        "date": 3,
+        "sakaInfo": "Purnama Kesanga, Anggara Wage Ugu"
+      },
+      {
+        "date": 4,
+        "sakaInfo": "Penanggal: 4"
+      },
+      {
+        "date": 5,
+        "sakaInfo": "Pangelong: 5"
+      },
+      {
+        "date": 6,
+        "sakaInfo": "Pangelong: 6"
+      },
+      {
+        "date": 7,
+        "sakaInfo": "Pangelong: 7"
+      },
+      {
+        "date": 8,
+        "sakaInfo": "Redite Wage Wayang"
+      },
+      {
+        "date": 9,
+        "sakaInfo": "Soma Keliwon Wayang"
+      },
+      {
+        "date": 10,
+        "sakaInfo": "Anggara Umanis Wayang"
+      },
+      {
+        "date": 11,
+        "sakaInfo": "Penanggal: 11"
+      },
+      {
+        "date": 12,
+        "sakaInfo": "Pangelong: 12"
+      },
+      {
+        "date": 13,
+        "sakaInfo": "Penanggal: 13"
+      },
+      {
+        "date": 14,
+        "sakaInfo": "Penanggal: 14"
+      },
+      {
+        "date": 15,
+        "sakaInfo": "Redite Umanis Kulawu"
+      },
+      {
+        "date": 16,
+        "sakaInfo": "Soma Paing Kulawu"
+      },
+      {
+        "date": 17,
+        "sakaInfo": "Anggara Pon Kulawu"
+      },
+      {
+        "date": 18,
+        "sakaInfo": "Hari ini pemujaan terhadap Bhatara Rambut Sedhana yang melimpahkan kemakmuran dan kesejahteraan."
+      },
+      {
+        "date": 19,
+        "sakaInfo": "Hari ini melakukan catur brata penyepian dan meitasi"
+      },
+      {
+        "date": 20,
+        "sakaInfo": ""
+      },
+      {
+        "date": 21,
+        "sakaInfo": "Saniscara Paing Kulawu"
+      },
+      {
+        "date": 22,
+        "sakaInfo": "Redite Pon Dukut"
+      },
+      {
+        "date": 23,
+        "sakaInfo": "Soma Wage Dukut"
+      },
+      {
+        "date": 24,
+        "sakaInfo": "Anggara Kasih Dukut"
+      },
+      {
+        "date": 25,
+        "sakaInfo": "Buda Umanis Dukut"
+      },
+      {
+        "date": 26,
+        "sakaInfo": "Wuku"
+      },
+      {
+        "date": 27,
+        "sakaInfo": "Wuku"
+      },
+      {
+        "date": 28,
+        "sakaInfo": "Wuku"
+      },
+      {
+        "date": 29,
+        "sakaInfo": "Wuku"
+      },
+      {
+        "date": 30,
+        "sakaInfo": "Wuku"
+      },
+      {
+        "date": 31,
+        "sakaInfo": "Pain-paidan (Anggara Paing Watugunung)"
+      }
+    ],
+    "religiousDays": [
+      {
+        "date": 3,
+        "name": "Purnama"
+      },
+      {
+        "date": 4,
+        "name": "Buda Keliwon Ugu"
+      },
+      {
+        "date": 14,
+        "name": "Kajeng Keliwon Uwudan"
+      },
+      {
+        "date": 14,
+        "name": "Tumpek Wayang"
+      },
+      {
+        "date": 18,
+        "name": "Buda Wage Kulawu"
+      },
+      {
+        "date": 18,
+        "name": "Tilem"
+      },
+      {
+        "date": 19,
+        "name": "Hari Raya Nyepi"
+      },
+      {
+        "date": 20,
+        "name": "Hari Bhatara Sri"
+      },
+      {
+        "date": 20,
+        "name": "Ngembak Geni"
+      },
+      {
+        "date": 24,
+        "name": "Anggar Kasih Dukut"
+      },
+      {
+        "date": 29,
+        "name": "Kajeng Keliwon Enyitan"
+      },
+      {
+        "date": 29,
+        "name": "Kajeng Keliwon Pamelastali/Watugunung Runtuh"
+      },
+      {
+        "date": 31,
+        "name": "Paid-Paidan"
+      }
+    ],
+    "holidays": [
+      {
+        "date": 19,
+        "name": "Hari Raya Nyepi"
+      },
+      {
+        "date": 21,
+        "name": "Hari Raya Idul Fitri 1447 Hijriyah"
+      },
+      {
+        "date": 22,
+        "name": "Hari Raya Idul Fitri 1447 Hijriyah"
+      },
+      {
+        "date": 20,
+        "name": "Ngembak Geni"
+      },
+      {
+        "date": 1,
+        "name": "Hari Kehakiman Indonesia"
+      },
+      {
+        "date": 3,
+        "name": "Hari Dewan Kerajinan Indonesia"
+      },
+      {
+        "date": 6,
+        "name": "HUT Kostrad"
+      },
+      {
+        "date": 11,
+        "name": "Hari Supersemar"
+      },
+      {
+        "date": 18,
+        "name": "Hari Arsitektur Indonesia"
+      },
+      {
+        "date": 23,
+        "name": "Hari Meteorologi Sedunia"
+      },
+      {
+        "date": 30,
+        "name": "HUT Kota Singaraja"
+      }
+    ]
+  }
+]

@@ -1,0 +1,2646 @@
+[
+  {
+    "month": 1,
+    "year": 2026,
+    "days": [
+      {
+        "date": 1,
+        "sakaInfo": "Wraspati Pon Krulut"
+      },
+      {
+        "date": 2,
+        "sakaInfo": "Sukra Wage Krulut"
+      },
+      {
+        "date": 3,
+        "sakaInfo": "Purnama Kepitu, Tumpek Krulut (Saniscara Keliwon Krulut)"
+      },
+      {
+        "date": 4,
+        "sakaInfo": "Redite Umanis Merakih"
+      },
+      {
+        "date": 5,
+        "sakaInfo": "Soma Paing Merakih"
+      },
+      {
+        "date": 6,
+        "sakaInfo": "Anggara Pon Merakih"
+      },
+      {
+        "date": 7,
+        "sakaInfo": "Buda Wage Merakih"
+      },
+      {
+        "date": 8,
+        "sakaInfo": "Wraspati Keliwon Merakih"
+      },
+      {
+        "date": 9,
+        "sakaInfo": "Sukra Umanis Merakih"
+      },
+      {
+        "date": 10,
+        "sakaInfo": "Saniscara Paing Merakih"
+      },
+      {
+        "date": 11,
+        "sakaInfo": "Redite Pon Tambir"
+      },
+      {
+        "date": 12,
+        "sakaInfo": "Soma Wage Tambir"
+      },
+      {
+        "date": 13,
+        "sakaInfo": "Anggara Kasih Tambir, Kajeng Keliwon"
+      },
+      {
+        "date": 14,
+        "sakaInfo": "Buda Umanis Tambir"
+      },
+      {
+        "date": 15,
+        "sakaInfo": "Wraspati Paing Tambir"
+      },
+      {
+        "date": 16,
+        "sakaInfo": "Sukra Pon Tambir"
+      },
+      {
+        "date": 18,
+        "sakaInfo": "Tilem Kepitu, Redite Keliwon Medangkungan"
+      },
+      {
+        "date": 19,
+        "sakaInfo": "Soma Umanis Medangkungan"
+      },
+      {
+        "date": 20,
+        "sakaInfo": "Anggara Paing Medangkungan"
+      },
+      {
+        "date": 21,
+        "sakaInfo": "Buda Pon Medangkungan"
+      },
+      {
+        "date": 22,
+        "sakaInfo": "Wraspati Wage Medangkungan"
+      },
+      {
+        "date": 23,
+        "sakaInfo": "Sukra Keliwon Medangkungan"
+      },
+      {
+        "date": 24,
+        "sakaInfo": "Saniscara Umanis Medangkungan"
+      },
+      {
+        "date": 25,
+        "sakaInfo": "Redite Paing Matal"
+      },
+      {
+        "date": 26,
+        "sakaInfo": "Soma Pon Matal"
+      },
+      {
+        "date": 27,
+        "sakaInfo": "Anggara Wage Matal"
+      },
+      {
+        "date": 28,
+        "sakaInfo": "Buda Keliwon Matal, Kajeng Keliwon"
+      },
+      {
+        "date": 29,
+        "sakaInfo": "Wraspati Umanis Matal"
+      },
+      {
+        "date": 30,
+        "sakaInfo": "Sukra Paing Matal"
+      },
+      {
+        "date": 31,
+        "sakaInfo": "Saniscara Pon Matal"
+      }
+    ],
+    "religiousDays": [
+      {
+        "date": 3,
+        "name": "Tumpek Krulut"
+      },
+      {
+        "date": 3,
+        "name": "Purnama"
+      },
+      {
+        "date": 7,
+        "name": "Buda Wage Merakih"
+      },
+      {
+        "date": 9,
+        "name": "Hari Bhatara Sri"
+      },
+      {
+        "date": 13,
+        "name": "Anggar Kasih Tambir"
+      },
+      {
+        "date": 13,
+        "name": "Kajeng Keliwon Uwudan"
+      },
+      {
+        "date": 17,
+        "name": "Hari Siwa Ratri"
+      },
+      {
+        "date": 18,
+        "name": "Tilem"
+      },
+      {
+        "date": 20,
+        "name": "Anggara Paing Medangkungan"
+      },
+      {
+        "date": 28,
+        "name": "Kajeng Keliwon Enyitan"
+      },
+      {
+        "date": 28,
+        "name": "Buda Keliwon Matal"
+      }
+    ],
+    "holidays": [
+      {
+        "date": 9,
+        "name": "Hari Bhatara Sri"
+      },
+      {
+        "date": 17,
+        "name": "Hari Siwa Ratri"
+      },
+      {
+        "date": 1,
+        "name": "Tahun Baru Masehi"
+      },
+      {
+        "date": 16,
+        "name": "Isra Mikraj Nabi Muhammad SAW"
+      },
+      {
+        "date": 2,
+        "name": "HUT Legiun Veteran RI"
+      },
+      {
+        "date": 3,
+        "name": "HUT Departemen Agama"
+      },
+      {
+        "date": 5,
+        "name": "HUT Korp. Wanita Angkatan Laut"
+      },
+      {
+        "date": 10,
+        "name": "Hari Tri Tura"
+      },
+      {
+        "date": 12,
+        "name": "Hari Keselamatan dan Kesehatan Kerja"
+      },
+      {
+        "date": 26,
+        "name": "HUT Maskapai Penerangan Garuda"
+      },
+      {
+        "date": 31,
+        "name": "Hari Lahir NU (Nahdatul Ulama)"
+      }
+    ]
+  },
+  {
+    "month": 2,
+    "year": 2026,
+    "days": [
+      {
+        "date": 1,
+        "sakaInfo": "Redite Wage Uye"
+      },
+      {
+        "date": 2,
+        "sakaInfo": "Purnama Kewulu, Soma Keliwon Uye"
+      },
+      {
+        "date": 3,
+        "sakaInfo": "Anggara Umanis Uye"
+      },
+      {
+        "date": 4,
+        "sakaInfo": "Buda Paing Uye"
+      },
+      {
+        "date": 5,
+        "sakaInfo": "Wraspati Pon Uye"
+      },
+      {
+        "date": 6,
+        "sakaInfo": "Sukra Wage Uye"
+      },
+      {
+        "date": 7,
+        "sakaInfo": "Tumpek Kandang (Saniscara Keliwon Uye)"
+      },
+      {
+        "date": 8,
+        "sakaInfo": "Redite Umanis Menail"
+      },
+      {
+        "date": 9,
+        "sakaInfo": "Soma Paing Menail"
+      },
+      {
+        "date": 10,
+        "sakaInfo": "Anggara Pon Menail"
+      },
+      {
+        "date": 11,
+        "sakaInfo": "Buda Wage Menail"
+      },
+      {
+        "date": 12,
+        "sakaInfo": "Wraspati Keliwon Menail, Kajeng Keliwon"
+      },
+      {
+        "date": 13,
+        "sakaInfo": "Sukra Umanis Menail"
+      },
+      {
+        "date": 14,
+        "sakaInfo": "Saniscara Paing Menail"
+      },
+      {
+        "date": 15,
+        "sakaInfo": "Redite Pon Prangbakat"
+      },
+      {
+        "date": 16,
+        "sakaInfo": "Tilem Kewulu, Soma Wage Prangbakat"
+      },
+      {
+        "date": 17,
+        "sakaInfo": "Anggara Kasih Prangbakat"
+      },
+      {
+        "date": 18,
+        "sakaInfo": "Buda Umanis Prangbakat"
+      },
+      {
+        "date": 19,
+        "sakaInfo": "Wraspati Paing Prangbakat"
+      },
+      {
+        "date": 20,
+        "sakaInfo": "Sukra Pon Prangbakat"
+      },
+      {
+        "date": 21,
+        "sakaInfo": "Saniscara Wage Prangbakat"
+      },
+      {
+        "date": 22,
+        "sakaInfo": "Redite Keliwon Bala"
+      },
+      {
+        "date": 23,
+        "sakaInfo": "Soma Umanis Bala"
+      },
+      {
+        "date": 24,
+        "sakaInfo": "Anggara Paing Bala"
+      },
+      {
+        "date": 25,
+        "sakaInfo": "Buda Pon Bala"
+      },
+      {
+        "date": 26,
+        "sakaInfo": "Wraspati Wage Bala"
+      },
+      {
+        "date": 27,
+        "sakaInfo": "Sukra Keliwon Bala, Kajeng Keliwon"
+      },
+      {
+        "date": 28,
+        "sakaInfo": "Saniscara Umanis Bala"
+      }
+    ],
+    "religiousDays": [
+      {
+        "date": 2,
+        "name": "Purnama"
+      },
+      {
+        "date": 7,
+        "name": "Tumpek Kandang"
+      },
+      {
+        "date": 11,
+        "name": "Buda Wage Menail"
+      },
+      {
+        "date": 12,
+        "name": "Kajeng Keliwon Uwudan"
+      },
+      {
+        "date": 13,
+        "name": "Hari Bhatara Sri"
+      },
+      {
+        "date": 16,
+        "name": "Tilem"
+      },
+      {
+        "date": 27,
+        "name": "Kajeng Keliwon Enyitan"
+      }
+    ],
+    "holidays": [
+      {
+        "date": 13,
+        "name": "Hari Bhatara Sri"
+      },
+      {
+        "date": 16,
+        "name": "Tahun Baru Imlek 2577 Kongzili"
+      },
+      {
+        "date": 5,
+        "name": "HUT HMI (Himpunan Mahasiswa Islam)"
+      },
+      {
+        "date": 9,
+        "name": "HUT PWI (Persatuan Wartawan Indonesia)"
+      },
+      {
+        "date": 13,
+        "name": "HUT Persatuan Farmasi Indonesia"
+      },
+      {
+        "date": 23,
+        "name": "HUT Rotary Club"
+      }
+    ]
+  },
+  {
+    "month": 3,
+    "year": 2026,
+    "days": [
+      {
+        "date": 1,
+        "sakaInfo": "Redite Paing Ugu"
+      },
+      {
+        "date": 2,
+        "sakaInfo": "Soma Pon Ugu"
+      },
+      {
+        "date": 3,
+        "sakaInfo": "Purnama Kesanga, Anggara Wage Ugu"
+      },
+      {
+        "date": 4,
+        "sakaInfo": "Buda Keliwon Ugu"
+      },
+      {
+        "date": 5,
+        "sakaInfo": "Wraspati Umanis Ugu"
+      },
+      {
+        "date": 6,
+        "sakaInfo": "Sukra Paing Ugu"
+      },
+      {
+        "date": 7,
+        "sakaInfo": "Saniscara Pon Ugu"
+      },
+      {
+        "date": 8,
+        "sakaInfo": "Redite Wage Wayang"
+      },
+      {
+        "date": 9,
+        "sakaInfo": "Soma Keliwon Wayang"
+      },
+      {
+        "date": 10,
+        "sakaInfo": "Anggara Umanis Wayang"
+      },
+      {
+        "date": 11,
+        "sakaInfo": "Buda Paing Wayang"
+      },
+      {
+        "date": 12,
+        "sakaInfo": "Wraspati Pon Wayang"
+      },
+      {
+        "date": 13,
+        "sakaInfo": "Sukra Wage Wayang"
+      },
+      {
+        "date": 14,
+        "sakaInfo": "Tumpek Wayang (Saniscara Keliwon Wayang), Kajeng Keliwon"
+      },
+      {
+        "date": 15,
+        "sakaInfo": "Redite Umanis Kulawu"
+      },
+      {
+        "date": 16,
+        "sakaInfo": "Soma Paing Kulawu"
+      },
+      {
+        "date": 17,
+        "sakaInfo": "Anggara Pon Kulawu"
+      },
+      {
+        "date": 18,
+        "sakaInfo": "Tilem Kesanga, Buda Wage Kulawu"
+      },
+      {
+        "date": 19,
+        "sakaInfo": "Hari Raya Nyepi Tahun Baru Saka 1948, Wraspati Keliwon Kulawu"
+      },
+      {
+        "date": 21,
+        "sakaInfo": "Saniscara Paing Kulawu"
+      },
+      {
+        "date": 22,
+        "sakaInfo": "Redite Pon Dukut"
+      },
+      {
+        "date": 23,
+        "sakaInfo": "Soma Wage Dukut"
+      },
+      {
+        "date": 24,
+        "sakaInfo": "Anggara Kasih Dukut"
+      },
+      {
+        "date": 25,
+        "sakaInfo": "Buda Umanis Dukut"
+      },
+      {
+        "date": 26,
+        "sakaInfo": "Wraspati Paing Dukut"
+      },
+      {
+        "date": 27,
+        "sakaInfo": "Sukra Pon Dukut"
+      },
+      {
+        "date": 28,
+        "sakaInfo": "Saniscara Wage Dukut"
+      },
+      {
+        "date": 29,
+        "sakaInfo": "Redite Keliwon Watugunung, Kajeng Keliwon"
+      },
+      {
+        "date": 30,
+        "sakaInfo": "Candungwatang (Soma Umanis Watugunung)"
+      },
+      {
+        "date": 31,
+        "sakaInfo": "Pain-paidan (Anggara Paing Watugunung)"
+      }
+    ],
+    "religiousDays": [
+      {
+        "date": 3,
+        "name": "Purnama"
+      },
+      {
+        "date": 4,
+        "name": "Buda Keliwon Ugu"
+      },
+      {
+        "date": 14,
+        "name": "Kajeng Keliwon Uwudan"
+      },
+      {
+        "date": 14,
+        "name": "Tumpek Wayang"
+      },
+      {
+        "date": 18,
+        "name": "Buda Wage Kulawu"
+      },
+      {
+        "date": 18,
+        "name": "Tilem"
+      },
+      {
+        "date": 19,
+        "name": "Hari Raya Nyepi"
+      },
+      {
+        "date": 20,
+        "name": "Hari Bhatara Sri"
+      },
+      {
+        "date": 20,
+        "name": "Ngembak Geni"
+      },
+      {
+        "date": 24,
+        "name": "Anggar Kasih Dukut"
+      },
+      {
+        "date": 29,
+        "name": "Kajeng Keliwon Enyitan"
+      },
+      {
+        "date": 29,
+        "name": "Kajeng Keliwon Pamelastali/Watugunung Runtuh"
+      },
+      {
+        "date": 31,
+        "name": "Paid-Paidan"
+      }
+    ],
+    "holidays": [
+      {
+        "date": 19,
+        "name": "Hari Raya Nyepi"
+      },
+      {
+        "date": 20,
+        "name": "Hari Bhatara Sri"
+      },
+      {
+        "date": 22,
+        "name": "Hari Raya Idul Fitri 1447 Hijriyah"
+      },
+      {
+        "date": 18,
+        "name": "Nyepi Tahun Baru Saka 1948"
+      },
+      {
+        "date": 1,
+        "name": "Hari Kehakiman Indonesia"
+      },
+      {
+        "date": 3,
+        "name": "Hari Dewan Kerajinan Indonesia"
+      },
+      {
+        "date": 6,
+        "name": "HUT Kostrad"
+      },
+      {
+        "date": 11,
+        "name": "Hari Supersemar"
+      },
+      {
+        "date": 18,
+        "name": "Hari Arsitektur Indonesia"
+      },
+      {
+        "date": 23,
+        "name": "Hari Meteorologi Sedunia"
+      },
+      {
+        "date": 30,
+        "name": "HUT Kota Singaraja"
+      }
+    ]
+  },
+  {
+    "month": 4,
+    "year": 2026,
+    "days": [
+      {
+        "date": 1,
+        "sakaInfo": "Hari Urip (Buda Pon Watugunung)"
+      },
+      {
+        "date": 2,
+        "sakaInfo": "Purnama Kedasa, Hari Pategtegan (Wraspati Wage Watugunung)"
+      },
+      {
+        "date": 3,
+        "sakaInfo": "Pangredanaan (Sukra Keliwon Watugunung)"
+      },
+      {
+        "date": 5,
+        "sakaInfo": "Banyu Pinaruh (Redite Paing Sinta)"
+      },
+      {
+        "date": 6,
+        "sakaInfo": "Soma Ribek (Soma Pon Sinta)"
+      },
+      {
+        "date": 7,
+        "sakaInfo": "Anggara Wage Sinta"
+      },
+      {
+        "date": 9,
+        "sakaInfo": "Wraspati Umanis Sinta"
+      },
+      {
+        "date": 10,
+        "sakaInfo": "Sukra Paing Sinta"
+      },
+      {
+        "date": 11,
+        "sakaInfo": "Saniscara Pon Sinta"
+      },
+      {
+        "date": 12,
+        "sakaInfo": "Redite Wage Landep"
+      },
+      {
+        "date": 13,
+        "sakaInfo": "Soma Keliwon Landep, Kajeng Keliwon"
+      },
+      {
+        "date": 14,
+        "sakaInfo": "Anggara Umanis Landep"
+      },
+      {
+        "date": 15,
+        "sakaInfo": "Buda Paing Landep"
+      },
+      {
+        "date": 16,
+        "sakaInfo": "Tilem Kedasa, Wraspati Pon Landep"
+      },
+      {
+        "date": 17,
+        "sakaInfo": "Sukra Wage Landep"
+      },
+      {
+        "date": 18,
+        "sakaInfo": "Tumpek Landep (Saniscara Keliwon Landep)"
+      },
+      {
+        "date": 19,
+        "sakaInfo": "Redite Umanis Ukir"
+      },
+      {
+        "date": 20,
+        "sakaInfo": "Soma Paing Ukir"
+      },
+      {
+        "date": 21,
+        "sakaInfo": "Anggara Pon Ukir"
+      },
+      {
+        "date": 22,
+        "sakaInfo": "Buda Wage Ukir"
+      },
+      {
+        "date": 23,
+        "sakaInfo": "Wraspati Keliwon Ukir"
+      },
+      {
+        "date": 24,
+        "sakaInfo": "Sukra Umanis Ukir"
+      },
+      {
+        "date": 25,
+        "sakaInfo": "Saniscara Paing Ukir"
+      },
+      {
+        "date": 26,
+        "sakaInfo": "Redite Pon Kulantir"
+      },
+      {
+        "date": 27,
+        "sakaInfo": "Soma Wage Kulantir"
+      },
+      {
+        "date": 28,
+        "sakaInfo": "Anggara Kasih Kulantir, Kajeng Keliwon"
+      },
+      {
+        "date": 29,
+        "sakaInfo": "Buda Umanis Kulantir"
+      },
+      {
+        "date": 30,
+        "sakaInfo": "Wraspati Paing Kulantir"
+      }
+    ],
+    "religiousDays": [
+      {
+        "date": 1,
+        "name": "Hari Urip"
+      },
+      {
+        "date": 2,
+        "name": "Hari Patetegan"
+      },
+      {
+        "date": 2,
+        "name": "Purnama"
+      },
+      {
+        "date": 3,
+        "name": "Hari Pangredanaan"
+      },
+      {
+        "date": 4,
+        "name": "Hari Raya Saraswati"
+      },
+      {
+        "date": 5,
+        "name": "Banyu Pinaruh"
+      },
+      {
+        "date": 6,
+        "name": "Soma Ribek"
+      },
+      {
+        "date": 7,
+        "name": "Sabuh Mas"
+      },
+      {
+        "date": 8,
+        "name": "Pagerwesi"
+      },
+      {
+        "date": 13,
+        "name": "Kajeng Keliwon Uwudan"
+      },
+      {
+        "date": 16,
+        "name": "Tilem"
+      },
+      {
+        "date": 18,
+        "name": "Tumpek Landep"
+      },
+      {
+        "date": 19,
+        "name": "Redite Umanis Ukir"
+      },
+      {
+        "date": 22,
+        "name": "Buda Wage Ukir"
+      },
+      {
+        "date": 24,
+        "name": "Hari Bhatara Sri"
+      },
+      {
+        "date": 28,
+        "name": "Kajeng Keliwon Enyitan"
+      },
+      {
+        "date": 28,
+        "name": "Anggar Kasih Kulantir"
+      }
+    ],
+    "holidays": [
+      {
+        "date": 1,
+        "name": "Hari Urip"
+      },
+      {
+        "date": 2,
+        "name": "Hari Patetegan"
+      },
+      {
+        "date": 3,
+        "name": "Hari Pangredanaan"
+      },
+      {
+        "date": 4,
+        "name": "Hari Raya Saraswati"
+      },
+      {
+        "date": 24,
+        "name": "Hari Bhatara Sri"
+      },
+      {
+        "date": 4,
+        "name": "Hari Saraswati"
+      },
+      {
+        "date": 8,
+        "name": "Hari Pagerwesi"
+      },
+      {
+        "date": 6,
+        "name": "Hari Nelayan"
+      },
+      {
+        "date": 7,
+        "name": "Hari Kesehatan Sedunia"
+      },
+      {
+        "date": 9,
+        "name": "Hari Penerbangan Nasional"
+      },
+      {
+        "date": 15,
+        "name": "Hari Zeni TNI AD"
+      },
+      {
+        "date": 16,
+        "name": "Hari Kopasus"
+      },
+      {
+        "date": 18,
+        "name": "Hari Konferensi Asia Afrika"
+      },
+      {
+        "date": 19,
+        "name": "Hari Hansip"
+      },
+      {
+        "date": 21,
+        "name": "Hari Kartini"
+      },
+      {
+        "date": 24,
+        "name": "Hari Angkutan Nasional"
+      },
+      {
+        "date": 27,
+        "name": "Hari Permasyarakatan Indonesia"
+      },
+      {
+        "date": 28,
+        "name": "Hari Puputan Klungkung Bali"
+      }
+    ]
+  },
+  {
+    "month": 5,
+    "year": 2026,
+    "days": [
+      {
+        "date": 1,
+        "sakaInfo": "Purnama Jiyestha, Sukra Pon Kulantir"
+      },
+      {
+        "date": 2,
+        "sakaInfo": "Saniscara Wage Kulantir"
+      },
+      {
+        "date": 3,
+        "sakaInfo": "Redite Keliwon Tolu"
+      },
+      {
+        "date": 4,
+        "sakaInfo": "Soma Umanis Tolu"
+      },
+      {
+        "date": 5,
+        "sakaInfo": "Anggara Paing Tolu"
+      },
+      {
+        "date": 6,
+        "sakaInfo": "Buda Pon Tolu"
+      },
+      {
+        "date": 7,
+        "sakaInfo": "Wraspati Wage Tolu"
+      },
+      {
+        "date": 8,
+        "sakaInfo": "Sukra Keliwon Tolu"
+      },
+      {
+        "date": 9,
+        "sakaInfo": "Saniscara Umanis Tolu"
+      },
+      {
+        "date": 10,
+        "sakaInfo": "Redite Paing Gumbreg"
+      },
+      {
+        "date": 11,
+        "sakaInfo": "Soma Pon Gumbreg"
+      },
+      {
+        "date": 12,
+        "sakaInfo": "Anggara Wage Gumbreg"
+      },
+      {
+        "date": 13,
+        "sakaInfo": "Buda Keliwon Gumbreg, Kajeng Keliwon"
+      },
+      {
+        "date": 14,
+        "sakaInfo": "Wraspati Umanis Gumbreg"
+      },
+      {
+        "date": 15,
+        "sakaInfo": "Sukra Paing Gumbreg"
+      },
+      {
+        "date": 16,
+        "sakaInfo": "Tilem Jiyestha, Saniscara Pon Gumbreg"
+      },
+      {
+        "date": 17,
+        "sakaInfo": "Redite Wage Wariga"
+      },
+      {
+        "date": 18,
+        "sakaInfo": "Soma Keliwon Wariga"
+      },
+      {
+        "date": 19,
+        "sakaInfo": "Anggara Umanis Wariga"
+      },
+      {
+        "date": 20,
+        "sakaInfo": "Buda Paing Wariga"
+      },
+      {
+        "date": 21,
+        "sakaInfo": "Wraspati Pon Wariga"
+      },
+      {
+        "date": 22,
+        "sakaInfo": "Sukra Wage Wariga"
+      },
+      {
+        "date": 23,
+        "sakaInfo": "Tumpek Uduh/Pengatag (Saniscara Keliwon Wariga)"
+      },
+      {
+        "date": 24,
+        "sakaInfo": "Redite Umanis Warigadean"
+      },
+      {
+        "date": 25,
+        "sakaInfo": "Soma Paing Warigadean"
+      },
+      {
+        "date": 26,
+        "sakaInfo": "Anggara Pon Warigadean"
+      },
+      {
+        "date": 27,
+        "sakaInfo": "Buda Wage Warigadean"
+      },
+      {
+        "date": 28,
+        "sakaInfo": "Wraspati Keliwon Warigadean, Kajeng Keliwon"
+      },
+      {
+        "date": 29,
+        "sakaInfo": "Sukra Umanis Warigadean"
+      },
+      {
+        "date": 30,
+        "sakaInfo": "Saniscara Paing Warigadean"
+      },
+      {
+        "date": 31,
+        "sakaInfo": "Purnama Sadha, Redite Pon Julungwangi"
+      }
+    ],
+    "religiousDays": [
+      {
+        "date": 1,
+        "name": "Purnama"
+      },
+      {
+        "date": 4,
+        "name": "Soma Umanis Tolu"
+      },
+      {
+        "date": 13,
+        "name": "Kajeng Keliwon Uwudan"
+      },
+      {
+        "date": 13,
+        "name": "Buda Keliwon Gumbreg"
+      },
+      {
+        "date": 16,
+        "name": "Tilem"
+      },
+      {
+        "date": 23,
+        "name": "Tumpek Uduh/Pengatag/Pengarah/Bubuh"
+      },
+      {
+        "date": 25,
+        "name": "Soma Paing Warigadean"
+      },
+      {
+        "date": 27,
+        "name": "Buda Wage Warigadean"
+      },
+      {
+        "date": 28,
+        "name": "Kajeng Keliwon Enyitan"
+      },
+      {
+        "date": 29,
+        "name": "Hari Bhatara Sri"
+      },
+      {
+        "date": 31,
+        "name": "Purnama"
+      }
+    ],
+    "holidays": [
+      {
+        "date": 29,
+        "name": "Hari Bhatara Sri"
+      },
+      {
+        "date": 1,
+        "name": "Hari Buruh Internasional"
+      },
+      {
+        "date": 27,
+        "name": "Hari Raya Idul Adha 1447 Hijriyah"
+      },
+      {
+        "date": 31,
+        "name": "Hari Raya Waisak 2570"
+      },
+      {
+        "date": 1,
+        "name": "Hari Pembebasan Irian Barat"
+      },
+      {
+        "date": 2,
+        "name": "Hari Pendidikan Nasional"
+      },
+      {
+        "date": 8,
+        "name": "Hari Palang Merah Sedunia"
+      },
+      {
+        "date": 11,
+        "name": "Hari POM ABRI"
+      },
+      {
+        "date": 19,
+        "name": "Hari Korps Cacad Veteran Indonesia"
+      },
+      {
+        "date": 20,
+        "name": "Hari Kebangkitan Nasional"
+      },
+      {
+        "date": 21,
+        "name": "Hari Buku Nasional"
+      },
+      {
+        "date": 27,
+        "name": "HUT Kodam IX Udayana"
+      },
+      {
+        "date": 29,
+        "name": "Hari Lansia Nasional"
+      },
+      {
+        "date": 31,
+        "name": "Hari Tanpa Tembakau Sedunia"
+      }
+    ]
+  },
+  {
+    "month": 6,
+    "year": 2026,
+    "days": [
+      {
+        "date": 1,
+        "sakaInfo": "Soma Wage Julungwangi"
+      },
+      {
+        "date": 2,
+        "sakaInfo": "Anggara Kasih Julungwangi"
+      },
+      {
+        "date": 3,
+        "sakaInfo": "Buda Umanis Julungwangi"
+      },
+      {
+        "date": 4,
+        "sakaInfo": "Wraspati Paing Julungwangi"
+      },
+      {
+        "date": 5,
+        "sakaInfo": "Sukra Pon Julungwangi"
+      },
+      {
+        "date": 6,
+        "sakaInfo": "Saniscara Wage Julungwangi"
+      },
+      {
+        "date": 7,
+        "sakaInfo": "Redite Keliwon Sungsang"
+      },
+      {
+        "date": 8,
+        "sakaInfo": "Soma Umanis Sungsang"
+      },
+      {
+        "date": 9,
+        "sakaInfo": "Anggara Paing Sungsang"
+      },
+      {
+        "date": 10,
+        "sakaInfo": "Buda Pon Sungsang"
+      },
+      {
+        "date": 11,
+        "sakaInfo": "Sugimanek Jawa (Wraspati Wage Sungsang)"
+      },
+      {
+        "date": 12,
+        "sakaInfo": "Sugihan Bali (Sukra Keliwon Sungsang), Kajeng Keliwon"
+      },
+      {
+        "date": 13,
+        "sakaInfo": "Saniscara Umanis Sungsang"
+      },
+      {
+        "date": 14,
+        "sakaInfo": "Tilem Sadha, Hari Penyekeban (Redite Paing Dunggulan)"
+      },
+      {
+        "date": 15,
+        "sakaInfo": "Penyajaan Galungan (Soma Pon Dunggulan)"
+      },
+      {
+        "date": 16,
+        "sakaInfo": "Penampahan Galungan (Anggara Wage Dunggulan)"
+      },
+      {
+        "date": 19,
+        "sakaInfo": "Sukra Paing Dunggulan"
+      },
+      {
+        "date": 20,
+        "sakaInfo": "Pemaridan Guru (Saniscara Pon Dunggulan)"
+      },
+      {
+        "date": 21,
+        "sakaInfo": "Redite Wage Kuningan"
+      },
+      {
+        "date": 22,
+        "sakaInfo": "Pemacekan Agung (Soma Keliwon Kuningan)"
+      },
+      {
+        "date": 23,
+        "sakaInfo": "Anggara Umanis Kuningan"
+      },
+      {
+        "date": 24,
+        "sakaInfo": "Buda Paing Kuningan"
+      },
+      {
+        "date": 25,
+        "sakaInfo": "Wraspati Pon Kuningan"
+      },
+      {
+        "date": 26,
+        "sakaInfo": "Sukra Wage Kuningan"
+      },
+      {
+        "date": 28,
+        "sakaInfo": "Redite Umanis Langkir"
+      },
+      {
+        "date": 29,
+        "sakaInfo": "Purnama Kasa, Soma Paing Langkir"
+      },
+      {
+        "date": 30,
+        "sakaInfo": "Anggara Pon Langkir"
+      }
+    ],
+    "religiousDays": [
+      {
+        "date": 2,
+        "name": "Anggar Kasih Julungwangi"
+      },
+      {
+        "date": 11,
+        "name": "Sugihan Jawa"
+      },
+      {
+        "date": 12,
+        "name": "Kajeng Keliwon Uwudan"
+      },
+      {
+        "date": 12,
+        "name": "Sugihan Bali"
+      },
+      {
+        "date": 14,
+        "name": "Hari Penyekeban"
+      },
+      {
+        "date": 14,
+        "name": "Tilem"
+      },
+      {
+        "date": 15,
+        "name": "Penyajaan Galungan"
+      },
+      {
+        "date": 16,
+        "name": "Penampahan Galungan"
+      },
+      {
+        "date": 17,
+        "name": "Hari Raya Galungan"
+      },
+      {
+        "date": 18,
+        "name": "Manis Galungan"
+      },
+      {
+        "date": 20,
+        "name": "Pemaridan Guru"
+      },
+      {
+        "date": 21,
+        "name": "Ulihan"
+      },
+      {
+        "date": 22,
+        "name": "Pemacekan Agung"
+      },
+      {
+        "date": 24,
+        "name": "Buda Paing Kuningan"
+      },
+      {
+        "date": 26,
+        "name": "Penampahan Kuningan"
+      },
+      {
+        "date": 27,
+        "name": "Kajeng Keliwon Enyitan"
+      },
+      {
+        "date": 27,
+        "name": "Hari Raya Kuningan"
+      },
+      {
+        "date": 29,
+        "name": "Purnama"
+      }
+    ],
+    "holidays": [
+      {
+        "date": 14,
+        "name": "Hari Penyekeban"
+      },
+      {
+        "date": 17,
+        "name": "Hari Raya Galungan"
+      },
+      {
+        "date": 27,
+        "name": "Hari Raya Kuningan"
+      },
+      {
+        "date": 1,
+        "name": "Hari Lahirnya Pancasila"
+      },
+      {
+        "date": 16,
+        "name": "Tahun Baru Islam 1448 Hijriyah"
+      },
+      {
+        "date": 1,
+        "name": "Hari Anak-anak Sedunia"
+      },
+      {
+        "date": 3,
+        "name": "Hari Pasar Modal Indonesia"
+      },
+      {
+        "date": 5,
+        "name": "Hari Lingkungan Hidup Sedunia"
+      },
+      {
+        "date": 21,
+        "name": "Hari Krida Pertanian"
+      },
+      {
+        "date": 22,
+        "name": "HUT Kota Jakarta"
+      },
+      {
+        "date": 24,
+        "name": "Hari Bidan Indonesia"
+      },
+      {
+        "date": 29,
+        "name": "Hari Keluarga Berencana Nasional"
+      }
+    ]
+  },
+  {
+    "month": 7,
+    "year": 2026,
+    "days": [
+      {
+        "date": 1,
+        "sakaInfo": "Buda Wage Langkir"
+      },
+      {
+        "date": 2,
+        "sakaInfo": "Wraspati Keliwon Langkir"
+      },
+      {
+        "date": 3,
+        "sakaInfo": "Sukra Umanis Langkir"
+      },
+      {
+        "date": 4,
+        "sakaInfo": "Saniscara Paing Langkir"
+      },
+      {
+        "date": 5,
+        "sakaInfo": "Redite Pon Medangsia"
+      },
+      {
+        "date": 6,
+        "sakaInfo": "Soma Wage Medangsia"
+      },
+      {
+        "date": 7,
+        "sakaInfo": "Anggara Kasih Medangsia"
+      },
+      {
+        "date": 8,
+        "sakaInfo": "Buda Umanis Medangsia"
+      },
+      {
+        "date": 9,
+        "sakaInfo": "Wraspati Paing Medangsia"
+      },
+      {
+        "date": 10,
+        "sakaInfo": "Sukra Pon Medangsia"
+      },
+      {
+        "date": 11,
+        "sakaInfo": "Saniscara Wage Medangsia"
+      },
+      {
+        "date": 12,
+        "sakaInfo": "Redite Keliwon Pujut, Kajeng Keliwon"
+      },
+      {
+        "date": 13,
+        "sakaInfo": "Soma Umanis Pujut"
+      },
+      {
+        "date": 14,
+        "sakaInfo": "Tilem Kasa, Anggara Paing Pujut"
+      },
+      {
+        "date": 15,
+        "sakaInfo": "Buda Pon Pujut"
+      },
+      {
+        "date": 16,
+        "sakaInfo": "Wraspati Wage Pujut"
+      },
+      {
+        "date": 17,
+        "sakaInfo": "Sukra Keliwon Pujut"
+      },
+      {
+        "date": 18,
+        "sakaInfo": "Saniscara Umanis Pujut"
+      },
+      {
+        "date": 19,
+        "sakaInfo": "Redite Paing Pahang"
+      },
+      {
+        "date": 20,
+        "sakaInfo": "Soma Pon Pahang"
+      },
+      {
+        "date": 21,
+        "sakaInfo": "Anggara Wage Pahang"
+      },
+      {
+        "date": 22,
+        "sakaInfo": "Buda Keliwon Pahang"
+      },
+      {
+        "date": 23,
+        "sakaInfo": "Wraspati Umanis Pahang"
+      },
+      {
+        "date": 24,
+        "sakaInfo": "Sukra Paing Pahang"
+      },
+      {
+        "date": 25,
+        "sakaInfo": "Saniscara Pon Pahang"
+      },
+      {
+        "date": 26,
+        "sakaInfo": "Redite Wage Krulut"
+      },
+      {
+        "date": 27,
+        "sakaInfo": "Soma Keliwon Krulut, Kajeng Keliwon"
+      },
+      {
+        "date": 28,
+        "sakaInfo": "Anggara Umanis Krulut"
+      },
+      {
+        "date": 29,
+        "sakaInfo": "Purnama Karo, Buda Paing Krulut"
+      },
+      {
+        "date": 30,
+        "sakaInfo": "Wraspati Pon Krulut"
+      },
+      {
+        "date": 31,
+        "sakaInfo": "Sukra Wage Krulut"
+      }
+    ],
+    "religiousDays": [
+      {
+        "date": 1,
+        "name": "Buda Wage Langkir"
+      },
+      {
+        "date": 3,
+        "name": "Hari Bhatara Sri"
+      },
+      {
+        "date": 7,
+        "name": "Anggar Kasih Medangsia"
+      },
+      {
+        "date": 12,
+        "name": "Kajeng Keliwon Uwudan"
+      },
+      {
+        "date": 14,
+        "name": "Tilem"
+      },
+      {
+        "date": 22,
+        "name": "Buda Keliwon Pegatuwakan"
+      },
+      {
+        "date": 27,
+        "name": "Kajeng Keliwon Enyitan"
+      },
+      {
+        "date": 29,
+        "name": "Purnama"
+      }
+    ],
+    "holidays": [
+      {
+        "date": 3,
+        "name": "Hari Bhatara Sri"
+      },
+      {
+        "date": 1,
+        "name": "Hari Bhayangkara RI"
+      },
+      {
+        "date": 5,
+        "name": "Hari Bank Nasional"
+      },
+      {
+        "date": 12,
+        "name": "Hari Koperasi Indonesia"
+      },
+      {
+        "date": 16,
+        "name": "HUT TVRI Stasiun Denpasar"
+      },
+      {
+        "date": 22,
+        "name": "Hari Kejaksaan"
+      },
+      {
+        "date": 23,
+        "name": "HUT KNPI"
+      },
+      {
+        "date": 29,
+        "name": "Hari Bakti TNI AU"
+      }
+    ]
+  },
+  {
+    "month": 8,
+    "year": 2026,
+    "days": [
+      {
+        "date": 1,
+        "sakaInfo": "Tumpek Krulut (Saniscara Keliwon Krulut)"
+      },
+      {
+        "date": 2,
+        "sakaInfo": "Redite Umanis Merakih"
+      },
+      {
+        "date": 3,
+        "sakaInfo": "Soma Paing Merakih"
+      },
+      {
+        "date": 4,
+        "sakaInfo": "Anggara Pon Merakih"
+      },
+      {
+        "date": 5,
+        "sakaInfo": "Buda Wage Merakih"
+      },
+      {
+        "date": 6,
+        "sakaInfo": "Wraspati Keliwon Merakih"
+      },
+      {
+        "date": 7,
+        "sakaInfo": "Sukra Umanis Merakih"
+      },
+      {
+        "date": 8,
+        "sakaInfo": "Saniscara Paing Merakih"
+      },
+      {
+        "date": 9,
+        "sakaInfo": "Redite Pon Tambir"
+      },
+      {
+        "date": 10,
+        "sakaInfo": "Soma Wage Tambir"
+      },
+      {
+        "date": 11,
+        "sakaInfo": "Anggara Kasih Tambir, Kajeng Keliwon"
+      },
+      {
+        "date": 12,
+        "sakaInfo": "Tilem Karo, Buda Umanis Tambir"
+      },
+      {
+        "date": 13,
+        "sakaInfo": "Wraspati Paing Tambir"
+      },
+      {
+        "date": 14,
+        "sakaInfo": "Sukra Pon Tambir"
+      },
+      {
+        "date": 15,
+        "sakaInfo": "Saniscara Wage Tambir"
+      },
+      {
+        "date": 16,
+        "sakaInfo": "Redite Keliwon Medangkungan"
+      },
+      {
+        "date": 17,
+        "sakaInfo": "Soma Umanis Medangkungan"
+      },
+      {
+        "date": 18,
+        "sakaInfo": "Anggara Paing Medangkungan"
+      },
+      {
+        "date": 19,
+        "sakaInfo": "Buda Pon Medangkungan"
+      },
+      {
+        "date": 20,
+        "sakaInfo": "Wraspati Wage Medangkungan"
+      },
+      {
+        "date": 21,
+        "sakaInfo": "Sukra Keliwon Medangkungan"
+      },
+      {
+        "date": 22,
+        "sakaInfo": "Saniscara Umanis Medangkungan"
+      },
+      {
+        "date": 23,
+        "sakaInfo": "Redite Paing Matal"
+      },
+      {
+        "date": 24,
+        "sakaInfo": "Soma Pon Matal"
+      },
+      {
+        "date": 25,
+        "sakaInfo": "Anggara Wage Matal"
+      },
+      {
+        "date": 26,
+        "sakaInfo": "Buda Keliwon Matal, Kajeng Keliwon"
+      },
+      {
+        "date": 27,
+        "sakaInfo": "Purnama Ketiga, Wraspati Umanis Matal"
+      },
+      {
+        "date": 28,
+        "sakaInfo": "Sukra Paing Matal"
+      },
+      {
+        "date": 29,
+        "sakaInfo": "Saniscara Pon Matal"
+      },
+      {
+        "date": 30,
+        "sakaInfo": "Redite Wage Uye"
+      },
+      {
+        "date": 31,
+        "sakaInfo": "Soma Keliwon Uye"
+      }
+    ],
+    "religiousDays": [
+      {
+        "date": 1,
+        "name": "Tumpek Krulut"
+      },
+      {
+        "date": 5,
+        "name": "Buda Wage Merakih"
+      },
+      {
+        "date": 7,
+        "name": "Hari Bhatara Sri"
+      },
+      {
+        "date": 11,
+        "name": "Anggar Kasih Tambir"
+      },
+      {
+        "date": 11,
+        "name": "Kajeng Keliwon Uwudan"
+      },
+      {
+        "date": 12,
+        "name": "Tilem"
+      },
+      {
+        "date": 18,
+        "name": "Anggara Paing Medangkungan"
+      },
+      {
+        "date": 26,
+        "name": "Kajeng Keliwon Enyitan"
+      },
+      {
+        "date": 26,
+        "name": "Buda Keliwon Matal"
+      },
+      {
+        "date": 27,
+        "name": "Purnama"
+      }
+    ],
+    "holidays": [
+      {
+        "date": 7,
+        "name": "Hari Bhatara Sri"
+      },
+      {
+        "date": 17,
+        "name": "Hari Proklamasi Kemerdekaan RI"
+      },
+      {
+        "date": 5,
+        "name": "HUT Dharma Wanita Indonesia"
+      },
+      {
+        "date": 10,
+        "name": "Hari Veteran Nasional"
+      },
+      {
+        "date": 14,
+        "name": "Hari Pramuka"
+      },
+      {
+        "date": 14,
+        "name": "HUT Propinsi Bali"
+      },
+      {
+        "date": 19,
+        "name": "Hari Departemen Luar Negeri"
+      },
+      {
+        "date": 21,
+        "name": "Hari Maritim Nasional"
+      },
+      {
+        "date": 24,
+        "name": "HUT TVRI"
+      }
+    ]
+  },
+  {
+    "month": 9,
+    "year": 2026,
+    "days": [
+      {
+        "date": 1,
+        "sakaInfo": "Anggara Umanis Uye"
+      },
+      {
+        "date": 2,
+        "sakaInfo": "Buda Paing Uye"
+      },
+      {
+        "date": 3,
+        "sakaInfo": "Wraspati Pon Uye"
+      },
+      {
+        "date": 4,
+        "sakaInfo": "Sukra Wage Uye"
+      },
+      {
+        "date": 5,
+        "sakaInfo": "Tumpek Kandang (Saniscara Keliwon Uye)"
+      },
+      {
+        "date": 6,
+        "sakaInfo": "Redite Umanis Menail"
+      },
+      {
+        "date": 7,
+        "sakaInfo": "Soma Paing Menail"
+      },
+      {
+        "date": 8,
+        "sakaInfo": "Anggara Pon Menail"
+      },
+      {
+        "date": 9,
+        "sakaInfo": "Buda Wage Menail"
+      },
+      {
+        "date": 10,
+        "sakaInfo": "Wraspati Keliwon Menail, Kajeng Keliwon"
+      },
+      {
+        "date": 11,
+        "sakaInfo": "Tilem Ketiga, Sukra Umanis Menail"
+      },
+      {
+        "date": 12,
+        "sakaInfo": "Saniscara Paing Menail"
+      },
+      {
+        "date": 13,
+        "sakaInfo": "Redite Pon Prangbakat"
+      },
+      {
+        "date": 14,
+        "sakaInfo": "Soma Wage Prangbakat"
+      },
+      {
+        "date": 15,
+        "sakaInfo": "Anggara Kasih Prangbakat"
+      },
+      {
+        "date": 16,
+        "sakaInfo": "Buda Umanis Prangbakat"
+      },
+      {
+        "date": 17,
+        "sakaInfo": "Wraspati Paing Prangbakat"
+      },
+      {
+        "date": 18,
+        "sakaInfo": "Sukra Pon Prangbakat"
+      },
+      {
+        "date": 19,
+        "sakaInfo": "Saniscara Wage Prangbakat"
+      },
+      {
+        "date": 20,
+        "sakaInfo": "Redite Keliwon Bala"
+      },
+      {
+        "date": 21,
+        "sakaInfo": "Soma Umanis Bala"
+      },
+      {
+        "date": 22,
+        "sakaInfo": "Anggara Paing Bala"
+      },
+      {
+        "date": 23,
+        "sakaInfo": "Buda Pon Bala"
+      },
+      {
+        "date": 24,
+        "sakaInfo": "Wraspati Wage Bala"
+      },
+      {
+        "date": 25,
+        "sakaInfo": "Sukra Keliwon Bala, Kajeng Keliwon"
+      },
+      {
+        "date": 26,
+        "sakaInfo": "Purnama Kapat, Saniscara Umanis Bala"
+      },
+      {
+        "date": 27,
+        "sakaInfo": "Redite Paing Ugu"
+      },
+      {
+        "date": 28,
+        "sakaInfo": "Soma Pon Ugu"
+      },
+      {
+        "date": 29,
+        "sakaInfo": "Anggara Wage Ugu"
+      },
+      {
+        "date": 30,
+        "sakaInfo": "Buda Keliwon Ugu"
+      }
+    ],
+    "religiousDays": [
+      {
+        "date": 5,
+        "name": "Tumpek Kandang"
+      },
+      {
+        "date": 9,
+        "name": "Buda Wage Menail"
+      },
+      {
+        "date": 10,
+        "name": "Kajeng Keliwon Uwudan"
+      },
+      {
+        "date": 11,
+        "name": "Hari Bhatara Sri"
+      },
+      {
+        "date": 11,
+        "name": "Tilem"
+      },
+      {
+        "date": 25,
+        "name": "Kajeng Keliwon Enyitan"
+      },
+      {
+        "date": 26,
+        "name": "Purnama"
+      },
+      {
+        "date": 30,
+        "name": "Buda Keliwon Ugu"
+      }
+    ],
+    "holidays": [
+      {
+        "date": 11,
+        "name": "Hari Bhatara Sri"
+      },
+      {
+        "date": 1,
+        "name": "Hari AIDS Sedunia"
+      },
+      {
+        "date": 1,
+        "name": "Hari Polwan"
+      },
+      {
+        "date": 8,
+        "name": "Hari Aksara"
+      },
+      {
+        "date": 8,
+        "name": "Hari Pamong Praja"
+      },
+      {
+        "date": 11,
+        "name": "Hari RRI"
+      },
+      {
+        "date": 17,
+        "name": "Hari Perhubungan"
+      },
+      {
+        "date": 17,
+        "name": "Hari Palang Merah Indonesia"
+      },
+      {
+        "date": 20,
+        "name": "Hari Puputan Badung Bali"
+      },
+      {
+        "date": 24,
+        "name": "Hari Bakti Agraria (UUPA)"
+      },
+      {
+        "date": 27,
+        "name": "Hari Pos dan Telekomonikasi"
+      },
+      {
+        "date": 28,
+        "name": "Hari Kereta Api"
+      },
+      {
+        "date": 29,
+        "name": "Hari Sarjana Indonesia"
+      },
+      {
+        "date": 29,
+        "name": "Hari Universitas Udayana"
+      },
+      {
+        "date": 30,
+        "name": "Hari Pemberontakan PKI"
+      }
+    ]
+  },
+  {
+    "month": 10,
+    "year": 2026,
+    "days": [
+      {
+        "date": 1,
+        "sakaInfo": "Wraspati Umanis Ugu"
+      },
+      {
+        "date": 2,
+        "sakaInfo": "Sukra Paing Ugu"
+      },
+      {
+        "date": 3,
+        "sakaInfo": "Saniscara Pon Ugu"
+      },
+      {
+        "date": 4,
+        "sakaInfo": "Redite Wage Wayang"
+      },
+      {
+        "date": 5,
+        "sakaInfo": "Soma Keliwon Wayang"
+      },
+      {
+        "date": 6,
+        "sakaInfo": "Anggara Umanis Wayang"
+      },
+      {
+        "date": 7,
+        "sakaInfo": "Buda Paing Wayang"
+      },
+      {
+        "date": 8,
+        "sakaInfo": "Wraspati Pon Wayang"
+      },
+      {
+        "date": 9,
+        "sakaInfo": "Sukra Wage Wayang"
+      },
+      {
+        "date": 10,
+        "sakaInfo": "Tumpek Wayang (Saniscara Keliwon Wayang), Kajeng Keliwon"
+      },
+      {
+        "date": 11,
+        "sakaInfo": "Tilem Kapat, Redite Umanis Kulawu"
+      },
+      {
+        "date": 12,
+        "sakaInfo": "Soma Paing Kulawu"
+      },
+      {
+        "date": 13,
+        "sakaInfo": "Anggara Pon Kulawu"
+      },
+      {
+        "date": 14,
+        "sakaInfo": "Buda Wage Kulawu"
+      },
+      {
+        "date": 15,
+        "sakaInfo": "Wraspati Keliwon Kulawu"
+      },
+      {
+        "date": 16,
+        "sakaInfo": "Sukra Umanis Kulawu"
+      },
+      {
+        "date": 17,
+        "sakaInfo": "Saniscara Paing Kulawu"
+      },
+      {
+        "date": 18,
+        "sakaInfo": "Redite Pon Dukut"
+      },
+      {
+        "date": 19,
+        "sakaInfo": "Soma Wage Dukut"
+      },
+      {
+        "date": 20,
+        "sakaInfo": "Anggara Kasih Dukut"
+      },
+      {
+        "date": 21,
+        "sakaInfo": "Buda Umanis Dukut"
+      },
+      {
+        "date": 22,
+        "sakaInfo": "Wraspati Paing Dukut"
+      },
+      {
+        "date": 23,
+        "sakaInfo": "Sukra Pon Dukut"
+      },
+      {
+        "date": 24,
+        "sakaInfo": "Saniscara Wage Dukut"
+      },
+      {
+        "date": 25,
+        "sakaInfo": "Purnama Kelima, Redite Keliwon Watugunung, Kajeng Keliwon"
+      },
+      {
+        "date": 26,
+        "sakaInfo": "Candungwatang (Soma Umanis Watugunung)"
+      },
+      {
+        "date": 27,
+        "sakaInfo": "Pain-paidan (Anggara Paing Watugunung)"
+      },
+      {
+        "date": 28,
+        "sakaInfo": "Hari Urip (Buda Pon Watugunung)"
+      },
+      {
+        "date": 29,
+        "sakaInfo": "Hari Pategtegan (Wraspati Wage Watugunung)"
+      },
+      {
+        "date": 30,
+        "sakaInfo": "Pangredanaan (Sukra Keliwon Watugunung)"
+      }
+    ],
+    "religiousDays": [
+      {
+        "date": 10,
+        "name": "Kajeng Keliwon Uwudan"
+      },
+      {
+        "date": 10,
+        "name": "Tumpek Wayang"
+      },
+      {
+        "date": 11,
+        "name": "Tilem"
+      },
+      {
+        "date": 14,
+        "name": "Buda Wage Kulawu"
+      },
+      {
+        "date": 16,
+        "name": "Hari Bhatara Sri"
+      },
+      {
+        "date": 20,
+        "name": "Anggar Kasih Dukut"
+      },
+      {
+        "date": 25,
+        "name": "Kajeng Keliwon Pamelastali/Watugunung Runtuh"
+      },
+      {
+        "date": 25,
+        "name": "Purnama"
+      },
+      {
+        "date": 27,
+        "name": "Paid-Paidan"
+      },
+      {
+        "date": 28,
+        "name": "Hari Urip"
+      },
+      {
+        "date": 29,
+        "name": "Hari Patetegan"
+      },
+      {
+        "date": 30,
+        "name": "Hari Pangredanaan"
+      },
+      {
+        "date": 31,
+        "name": "Hari Raya Saraswati"
+      }
+    ],
+    "holidays": [
+      {
+        "date": 16,
+        "name": "Hari Bhatara Sri"
+      },
+      {
+        "date": 28,
+        "name": "Hari Urip"
+      },
+      {
+        "date": 29,
+        "name": "Hari Patetegan"
+      },
+      {
+        "date": 30,
+        "name": "Hari Pangredanaan"
+      },
+      {
+        "date": 31,
+        "name": "Hari Raya Saraswati"
+      },
+      {
+        "date": 31,
+        "name": "Hari Saraswati"
+      },
+      {
+        "date": 1,
+        "name": "Hari Kesaktian Pancasila"
+      },
+      {
+        "date": 5,
+        "name": "HUT ABRI"
+      },
+      {
+        "date": 16,
+        "name": "Hari Pangan Sedunia"
+      },
+      {
+        "date": 20,
+        "name": "HUT Golkar"
+      },
+      {
+        "date": 24,
+        "name": "Hari Dokter Indonesia"
+      },
+      {
+        "date": 24,
+        "name": "Hari Perserikatan Bangsa-Bangsa"
+      },
+      {
+        "date": 26,
+        "name": "Hari Keuangan"
+      },
+      {
+        "date": 27,
+        "name": "Hari Listrik Nasional"
+      },
+      {
+        "date": 28,
+        "name": "Hari Sumpah Pemuda"
+      }
+    ]
+  },
+  {
+    "month": 11,
+    "year": 2026,
+    "days": [
+      {
+        "date": 1,
+        "sakaInfo": "Banyu Pinaruh (Redite Paing Sinta)"
+      },
+      {
+        "date": 2,
+        "sakaInfo": "Soma Ribek (Soma Pon Sinta)"
+      },
+      {
+        "date": 3,
+        "sakaInfo": "Anggara Wage Sinta"
+      },
+      {
+        "date": 5,
+        "sakaInfo": "Wraspati Umanis Sinta"
+      },
+      {
+        "date": 6,
+        "sakaInfo": "Sukra Paing Sinta"
+      },
+      {
+        "date": 7,
+        "sakaInfo": "Saniscara Pon Sinta"
+      },
+      {
+        "date": 8,
+        "sakaInfo": "Redite Wage Landep"
+      },
+      {
+        "date": 9,
+        "sakaInfo": "Tilem Kelima, Soma Keliwon Landep, Kajeng Keliwon"
+      },
+      {
+        "date": 10,
+        "sakaInfo": "Anggara Umanis Landep"
+      },
+      {
+        "date": 11,
+        "sakaInfo": "Buda Paing Landep"
+      },
+      {
+        "date": 12,
+        "sakaInfo": "Wraspati Pon Landep"
+      },
+      {
+        "date": 13,
+        "sakaInfo": "Sukra Wage Landep"
+      },
+      {
+        "date": 14,
+        "sakaInfo": "Tumpek Landep (Saniscara Keliwon Landep)"
+      },
+      {
+        "date": 15,
+        "sakaInfo": "Redite Umanis Ukir"
+      },
+      {
+        "date": 16,
+        "sakaInfo": "Soma Paing Ukir"
+      },
+      {
+        "date": 17,
+        "sakaInfo": "Anggara Pon Ukir"
+      },
+      {
+        "date": 18,
+        "sakaInfo": "Buda Wage Ukir"
+      },
+      {
+        "date": 19,
+        "sakaInfo": "Wraspati Keliwon Ukir"
+      },
+      {
+        "date": 20,
+        "sakaInfo": "Sukra Umanis Ukir"
+      },
+      {
+        "date": 21,
+        "sakaInfo": "Saniscara Paing Ukir"
+      },
+      {
+        "date": 22,
+        "sakaInfo": "Redite Pon Kulantir"
+      },
+      {
+        "date": 23,
+        "sakaInfo": "Soma Wage Kulantir"
+      },
+      {
+        "date": 24,
+        "sakaInfo": "Purnama Kenam, Anggara Kasih Kulantir, Kajeng Keliwon"
+      },
+      {
+        "date": 25,
+        "sakaInfo": "Buda Umanis Kulantir"
+      },
+      {
+        "date": 26,
+        "sakaInfo": "Wraspati Paing Kulantir"
+      },
+      {
+        "date": 27,
+        "sakaInfo": "Sukra Pon Kulantir"
+      },
+      {
+        "date": 28,
+        "sakaInfo": "Saniscara Wage Kulantir"
+      },
+      {
+        "date": 29,
+        "sakaInfo": "Redite Keliwon Tolu"
+      },
+      {
+        "date": 30,
+        "sakaInfo": "Soma Umanis Tolu"
+      }
+    ],
+    "religiousDays": [
+      {
+        "date": 1,
+        "name": "Banyu Pinaruh"
+      },
+      {
+        "date": 2,
+        "name": "Soma Ribek"
+      },
+      {
+        "date": 3,
+        "name": "Sabuh Mas"
+      },
+      {
+        "date": 4,
+        "name": "Pagerwesi"
+      },
+      {
+        "date": 9,
+        "name": "Tilem"
+      },
+      {
+        "date": 14,
+        "name": "Tumpek Landep"
+      },
+      {
+        "date": 15,
+        "name": "Redite Umanis Ukir"
+      },
+      {
+        "date": 18,
+        "name": "Buda Wage Ukir"
+      },
+      {
+        "date": 20,
+        "name": "Hari Bhatara Sri"
+      },
+      {
+        "date": 24,
+        "name": "Anggar Kasih Kulantir"
+      },
+      {
+        "date": 24,
+        "name": "Purnama"
+      },
+      {
+        "date": 30,
+        "name": "Soma Umanis Tolu"
+      }
+    ],
+    "holidays": [
+      {
+        "date": 20,
+        "name": "Hari Bhatara Sri"
+      },
+      {
+        "date": 4,
+        "name": "Hari Pagerwesi"
+      },
+      {
+        "date": 10,
+        "name": "Hari Pahlawan"
+      },
+      {
+        "date": 12,
+        "name": "Hasi Kesehatan Nasional"
+      },
+      {
+        "date": 14,
+        "name": "Hari Brimob"
+      },
+      {
+        "date": 20,
+        "name": "Hari Puputan Margarana (Ngurah Rai)"
+      },
+      {
+        "date": 25,
+        "name": "Hari Guru (HUT PGRI)"
+      },
+      {
+        "date": 29,
+        "name": "Hari Korpri"
+      }
+    ]
+  },
+  {
+    "month": 12,
+    "year": 2026,
+    "days": [
+      {
+        "date": 1,
+        "sakaInfo": "Anggara Paing Tolu"
+      },
+      {
+        "date": 2,
+        "sakaInfo": "Buda Pon Tolu"
+      },
+      {
+        "date": 3,
+        "sakaInfo": "Wraspati Wage Tolu"
+      },
+      {
+        "date": 4,
+        "sakaInfo": "Sukra Keliwon Tolu"
+      },
+      {
+        "date": 5,
+        "sakaInfo": "Saniscara Umanis Tolu"
+      },
+      {
+        "date": 6,
+        "sakaInfo": "Redite Paing Gumbreg"
+      },
+      {
+        "date": 7,
+        "sakaInfo": "Soma Pon Gumbreg"
+      },
+      {
+        "date": 8,
+        "sakaInfo": "Anggara Wage Gumbreg"
+      },
+      {
+        "date": 9,
+        "sakaInfo": "Tilem Kenam, Buda Keliwon Gumbreg, Kajeng Keliwon"
+      },
+      {
+        "date": 10,
+        "sakaInfo": "Wraspati Umanis Gumbreg"
+      },
+      {
+        "date": 11,
+        "sakaInfo": "Sukra Paing Gumbreg"
+      },
+      {
+        "date": 12,
+        "sakaInfo": "Saniscara Pon Gumbreg"
+      },
+      {
+        "date": 13,
+        "sakaInfo": "Redite Wage Wariga"
+      },
+      {
+        "date": 14,
+        "sakaInfo": "Soma Keliwon Wariga"
+      },
+      {
+        "date": 15,
+        "sakaInfo": "Anggara Umanis Wariga"
+      },
+      {
+        "date": 16,
+        "sakaInfo": "Buda Paing Wariga"
+      },
+      {
+        "date": 17,
+        "sakaInfo": "Wraspati Pon Wariga"
+      },
+      {
+        "date": 18,
+        "sakaInfo": "Sukra Wage Wariga"
+      },
+      {
+        "date": 19,
+        "sakaInfo": "Tumpek Uduh/Pengatag (Saniscara Keliwon Wariga)"
+      },
+      {
+        "date": 20,
+        "sakaInfo": "Redite Umanis Warigadean"
+      },
+      {
+        "date": 21,
+        "sakaInfo": "Soma Paing Warigadean"
+      },
+      {
+        "date": 22,
+        "sakaInfo": "Anggara Pon Warigadean"
+      },
+      {
+        "date": 23,
+        "sakaInfo": "Purnama Kepitu, Buda Wage Warigadean"
+      },
+      {
+        "date": 24,
+        "sakaInfo": "Wraspati Keliwon Warigadean, Kajeng Keliwon"
+      },
+      {
+        "date": 25,
+        "sakaInfo": "Sukra Umanis Warigadean"
+      },
+      {
+        "date": 26,
+        "sakaInfo": "Saniscara Paing Warigadean"
+      },
+      {
+        "date": 27,
+        "sakaInfo": "Redite Pon Julungwangi"
+      },
+      {
+        "date": 28,
+        "sakaInfo": "Soma Wage Julungwangi"
+      },
+      {
+        "date": 29,
+        "sakaInfo": "Anggara Kasih Julungwangi"
+      },
+      {
+        "date": 30,
+        "sakaInfo": "Buda Umanis Julungwangi"
+      },
+      {
+        "date": 31,
+        "sakaInfo": "Wraspati Paing Julungwangi"
+      }
+    ],
+    "religiousDays": [
+      {
+        "date": 9,
+        "name": "Buda Keliwon Gumbreg"
+      },
+      {
+        "date": 9,
+        "name": "Tilem"
+      },
+      {
+        "date": 19,
+        "name": "Tumpek Uduh/Pengatag/Pengarah/Bubuh"
+      },
+      {
+        "date": 21,
+        "name": "Soma Paing Warigadean"
+      },
+      {
+        "date": 23,
+        "name": "Buda Wage Warigadean"
+      },
+      {
+        "date": 23,
+        "name": "Purnama"
+      },
+      {
+        "date": 24,
+        "name": "Kajeng Keliwon Uwudan"
+      },
+      {
+        "date": 25,
+        "name": "Hari Bhatara Sri"
+      },
+      {
+        "date": 29,
+        "name": "Anggar Kasih Julungwangi"
+      }
+    ],
+    "holidays": [
+      {
+        "date": 25,
+        "name": "Hari Bhatara Sri"
+      },
+      {
+        "date": 25,
+        "name": "Hari Raya Natal"
+      },
+      {
+        "date": 9,
+        "name": "Hari Armada RI"
+      },
+      {
+        "date": 10,
+        "name": "Hari Hak Asasi Manusia"
+      },
+      {
+        "date": 12,
+        "name": "Hari Transmigrasi"
+      },
+      {
+        "date": 15,
+        "name": "Hari Infantri"
+      },
+      {
+        "date": 19,
+        "name": "Hari Trikora"
+      },
+      {
+        "date": 20,
+        "name": "Hari Kesetiakawanan Sosial Nasional"
+      },
+      {
+        "date": 22,
+        "name": "Hari Ibu"
+      },
+      {
+        "date": 22,
+        "name": "Hari KOWAD (Korps Wanita Angkatan Darat)"
+      },
+      {
+        "date": 27,
+        "name": "Hari Indonesia Masuk PBB"
+      }
+    ]
+  }
+]

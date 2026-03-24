@@ -1,6 +1,3 @@
-import fs from 'fs'
-import path from 'path'
-import { resolvePublicDataPath } from '../utils/paths'
 import axios from 'axios'
 import * as cheerio from 'cheerio'
 
@@ -14,18 +11,14 @@ export default defineCachedEventHandler(async (event) => {
 
   // 1. Try to read from local JSON fallback first
   try {
-    const filePath = resolvePublicDataPath(`dewasa-${tahun}.json`)
-    if (filePath && fs.existsSync(filePath)) {
-      const fileData = fs.readFileSync(filePath, 'utf-8')
-      const allDewasa = JSON.parse(fileData)
-      
-      if (allDewasa[dateKey]) {
-        // We found the data locally, return it immediately (0 latency fallback).
-        return {
-          date: dateKey,
-          items: allDewasa[dateKey],
-          source: 'local-json'
-        }
+    const allDewasa: any = await useStorage('assets:server').getItem(`data/dewasa-${tahun}.json`)
+    
+    if (allDewasa && allDewasa[dateKey]) {
+      // We found the data locally, return it immediately (0 latency fallback).
+      return {
+        date: dateKey,
+        items: allDewasa[dateKey],
+        source: 'local-json'
       }
     }
   } catch (err) {
