@@ -78,10 +78,9 @@ const firstName = computed(() => {
         </template>
         <div v-else class="border-t border-default mx-3 mb-3" />
 
-        <!-- Nav items -->
         <template v-for="item in group.items" :key="item.path">
           <NuxtLink
-            v-if="item.path !== '/tersimpan' || authStore.isLoggedIn"
+            v-if="(item.path !== '/tersimpan' && item.path !== '/alarm') || authStore.isLoggedIn"
             :to="item.path"
             class="flex items-center gap-3 mx-2 px-3 py-2.5 rounded-xl
                    transition-all duration-150 group relative"
