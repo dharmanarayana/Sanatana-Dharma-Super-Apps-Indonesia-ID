@@ -33,7 +33,7 @@ export const useAuth = () => {
   const register = async (email: string, password: string, name: string) => {
     try {
       const config = useRuntimeConfig()
-      const DB_ID = config.public.appwriteDatabaseId
+      const DB_ID = config.public.appwriteDatabaseId as string
       const userId = 'unique()'
       
       const response = await $appwrite.account.create(userId, email, password, name)

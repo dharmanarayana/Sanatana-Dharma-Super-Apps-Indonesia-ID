@@ -6,8 +6,8 @@ export default defineNuxtPlugin(() => {
   // Appwrite Web SDK (universal-ready in newer versions)
   // On the server, this will work for basic data fetching for SEO
   const client = new Client()
-    .setEndpoint(config.public.appwriteEndpoint)
-    .setProject(config.public.appwriteProjectId)
+    .setEndpoint(config.public.appwriteEndpoint as string)
+    .setProject(config.public.appwriteProjectId as string)
 
   const account = new Account(client)
   const databases = new Databases(client)

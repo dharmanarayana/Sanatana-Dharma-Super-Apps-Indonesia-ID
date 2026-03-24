@@ -6,7 +6,7 @@ export const useForum = () => {
   const { $appwrite } = useNuxtApp()
   const config = useRuntimeConfig()
   
-  const DATABASE_ID = config.public.appwriteDatabaseId || 'main'
+  const DATABASE_ID = (config.public.appwriteDatabaseId as string) || 'main'
   const COLLECTION_ID = 'posts'
 
   const posts = ref<any[]>([])

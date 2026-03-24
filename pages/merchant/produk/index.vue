@@ -88,7 +88,7 @@ const saveProduct = async () => {
     if (imageFile.value) {
       const upload = await $appwrite.storage.createFile(BUCKET_ID, ID.unique(), imageFile.value)
       // Get the preview/view URL
-      imageUrl = `${useRuntimeConfig().public.appwriteEndpoint}/storage/buckets/${BUCKET_ID}/files/${upload.$id}/view?project=${useRuntimeConfig().public.appwriteProjectId}`
+      imageUrl = `${useRuntimeConfig().public.appwriteEndpoint as string}/storage/buckets/${BUCKET_ID}/files/${upload.$id}/view?project=${useRuntimeConfig().public.appwriteProjectId as string}`
     }
 
     const payload = {

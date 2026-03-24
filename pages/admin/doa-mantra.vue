@@ -143,7 +143,7 @@ const handleSave = async (data: any) => {
       const bucketId = 'audio'
       try {
         const uploadedFile = await $appwrite.storage.createFile(bucketId, 'unique()', data.audioFile)
-        finalAudioUrl = `${useRuntimeConfig().public.appwriteEndpoint}/storage/buckets/${bucketId}/files/${uploadedFile.$id}/view?project=${useRuntimeConfig().public.appwriteProjectId}`
+        finalAudioUrl = `${useRuntimeConfig().public.appwriteEndpoint as string}/storage/buckets/${bucketId}/files/${uploadedFile.$id}/view?project=${useRuntimeConfig().public.appwriteProjectId as string}`
       } catch (err: any) {
         if (err.message.includes('Bucket not found')) {
           alert('Gagal: Bucket storage bernama "audio" belum dibuat di Appwrite. Buat bucket dengan ID "audio" dan beri permission Any untuk read.')
