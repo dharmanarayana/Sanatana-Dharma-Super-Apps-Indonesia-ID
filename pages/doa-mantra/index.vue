@@ -40,7 +40,12 @@
         </div>
       </div>
 
-      <UiGrid v-if="selectedCategory && filteredDoa.length > 0" cols="2" gap="md">
+      <div v-if="selectedCategory && isLoading && filteredDoa.length === 0" class="py-20 text-center">
+        <Icon name="lucide:loader-2" class="animate-spin text-brand mx-auto mb-2" size="40" />
+        <p class="text-muted italic">Sinkronisasi data...</p>
+      </div>
+
+      <UiGrid v-else-if="selectedCategory && filteredDoa.length > 0" cols="2" gap="md">
         <NuxtLink v-for="doa in filteredDoa" :key="doa.$id" :to="`/doa-mantra/${doa.slug}`" class="block no-underline">
           <DoaMantraDoaCard :doa="doa" />
         </NuxtLink>
@@ -68,6 +73,7 @@ const DB_ID = 'sanatana-dharma-db'
 const doaList = ref<any[]>([])
 const searchQuery = ref('')
 const selectedCategory = ref<string | null>(null)
+const isLoading = ref(true)
 
 const categories = computed(() => {
   const cats = new Set(doaList.value.map(d => d.category))
@@ -92,6 +98,7 @@ const parseContent = (doc: any) => {
 }
 
 const fetchDoa = async () => {
+  isLoading.value = true
   let localData: any[] = []
   try {
     const prayersData = (await import('~/data/prayers.json')).default
@@ -103,6 +110,9 @@ const fetchDoa = async () => {
   } catch (e: any) {
     console.error('Error loading local prayers data:', e.message)
   }
+  
+  // Set initial local data first to be fast
+  doaList.value = localData
 
   try {
     const res = await $appwrite.databases.listDocuments(DB_ID, 'prayers')
@@ -129,11 +139,12 @@ const fetchDoa = async () => {
         localData.push(appDoc)
       }
     })
+    doaList.value = [...localData]
   } catch (e: any) {
     console.error('Error fetching prayers from Appwrite:', e.message)
+  } finally {
+    isLoading.value = false
   }
-  
-  doaList.value = localData
 }
 
 const filteredDoa = computed(() => {

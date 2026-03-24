@@ -72,12 +72,18 @@
           </div>
         </div>
 
-        <UiGrid v-if="displayedTemples.length > 0" cols="2" gap="md">
-          <PuraCard v-for="temple in displayedTemples" :key="temple.$id" :temple="temple" />
-        </UiGrid>
-        <div v-else class="py-20 text-center card bg-surface/30 border-dashed">
-          <p class="text-muted text-sm">Data Pura belum tersedia untuk kriteria ini.</p>
+        <div v-if="isLoading" class="py-20 text-center">
+          <Icon name="lucide:loader-2" class="animate-spin text-brand mx-auto mb-2" size="40" />
+          <p class="text-muted italic">Memuat data pura...</p>
         </div>
+        <template v-else>
+          <UiGrid v-if="displayedTemples.length > 0" cols="2" gap="md">
+            <PuraCard v-for="temple in displayedTemples" :key="temple.$id" :temple="temple" />
+          </UiGrid>
+          <div v-else class="py-20 text-center card bg-surface/30 border-dashed">
+            <p class="text-muted text-sm">Data Pura belum tersedia untuk kriteria ini.</p>
+          </div>
+        </template>
       </div>
     </div>
   </div>
@@ -104,15 +110,19 @@ const mobileProvince = ref('')
 const sortOrder = ref('asc')
 const userCoords = ref<{lat: number, lng: number} | null>(null)
 const geoError = ref('')
+const isLoading = ref(true)
 
 const fetchTemples = async () => {
   try {
+    isLoading.value = true
     const res = await $appwrite.databases.listDocuments(DB_ID, 'temples', [
       useAppwriteQuery().limit(200)
     ])
     temples.value = res.documents
   } catch (e: any) {
     console.error('Error fetching temples:', e.message)
+  } finally {
+    isLoading.value = false
   }
 }
 
