@@ -20,7 +20,7 @@ const offlineSupportedPrefixes = [
 
 const showOfflineFallback = computed(() => {
   // If online, never show fallback
-  if (isOnline.value) return false
+  if (isOnline.value === true) return false
   
   // If home page, it is supported
   if (route.path === '/') return false

@@ -65,20 +65,11 @@ export default defineNuxtConfig({
     },
     workbox: {
       navigateFallback: '/',
-      navigateFallbackDenylist: [/^\/api/],
       globPatterns: ['**/*.{js,css,html,png,svg,ico,woff2,json}'],
       cleanupOutdatedCaches: true,
       clientsClaim: true,
       skipWaiting: true,
       runtimeCaching: [
-        {
-          urlPattern: ({ request }) => request.mode === 'navigate',
-          handler: 'NetworkFirst',
-          options: {
-            cacheName: 'pages-cache',
-            expiration: { maxEntries: 50 }
-          }
-        },
         {
           urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
           handler: 'CacheFirst',
@@ -96,26 +87,27 @@ export default defineNuxtConfig({
           }
         },
         {
-          // Support regional Appwrite endpoints
+          urlPattern: ({ request }) => request.mode === 'navigate',
+          handler: 'NetworkFirst',
+          options: {
+            cacheName: 'pages-cache',
+            expiration: { maxEntries: 50, maxAgeSeconds: 86400 }
+          }
+        },
+        {
           urlPattern: /^https:\/\/.*\.appwrite\.io\/v1\/databases\/.*/i,
           handler: 'NetworkFirst',
           options: { 
             cacheName: 'appwrite-api-cache', 
-            expiration: { maxEntries: 100, maxAgeSeconds: 86400 },
-            cacheableResponse: { statuses: [0, 200] }
+            expiration: { maxEntries: 100, maxAgeSeconds: 86400 }
           }
-        },
-        {
-          // EXCLUDE account/sessions from caching to prevent SW interference with auth
-          urlPattern: /^https:\/\/.*\.appwrite\.io\/v1\/account\/.*/i,
-          handler: 'NetworkOnly',
         }
       ]
     },
-    injectRegister: 'auto',
+    injectRegister: 'inline',
     client: { 
       installPrompt: true,
-      periodicSyncForUpdates: 3600 // Check every hour
+      periodicSyncForUpdates: 3600
     },
     devOptions: { 
       enabled: true, 
@@ -185,8 +177,9 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
   
   nitro: {
-    externals: {
-      inline: ['@nuxtjs/i18n']
+    compressPublicAssets: true,
+    prerender: {
+      routes: ['/', '/_offline']
     }
   }
 })
