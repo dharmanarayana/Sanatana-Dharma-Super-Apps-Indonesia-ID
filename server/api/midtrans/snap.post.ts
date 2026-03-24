@@ -1,4 +1,4 @@
-import { Snap } from 'midtrans-client';
+import midtransClient from 'midtrans-client';
 import { Client, Databases, ID } from 'node-appwrite';
 
 export default defineEventHandler(async (event) => {
@@ -8,7 +8,7 @@ export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig();
   
   // 1. Initialize Midtrans Snap
-  const snap = new Snap({
+  const snap = new midtransClient.Snap({
     isProduction: process.env.MIDTRANS_IS_PRODUCTION === 'true',
     serverKey: process.env.MIDTRANS_SERVER_KEY,
     clientKey: process.env.MIDTRANS_CLIENT_KEY

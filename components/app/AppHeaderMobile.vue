@@ -6,7 +6,7 @@
 
     <!-- Back Button (only when not on home) -->
     <button v-if="route.path !== '/' && route.path !== ''" 
-            @click="router.back()"
+            @click="goBack()"
             class="flex items-center gap-1 p-2 -ml-2 rounded-full hover:bg-white/10 active:scale-95 transition-all text-brand font-bold"
             aria-label="Kembali">
       <Icon name="lucide:chevron-left" class="w-6 h-6" />
@@ -60,6 +60,7 @@ import { useRoute, useRouter } from 'vue-router'
 const route = useRoute()
 const router = useRouter()
 const authStore = useAuthStore()
+const { goBack } = useNavBack()
 
 const firstName = computed(() => {
   return authStore.user?.name?.split(' ')[0] || 'User'
