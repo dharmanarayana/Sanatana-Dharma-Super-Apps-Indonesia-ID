@@ -62,14 +62,17 @@
 
 <script setup>
 const authStore = useAuthStore()
-const { posts, loading, fetchPosts, subscribeToPosts, createPost } = useForum()
+const { posts, loading, categories, fetchPosts, fetchCategoryCounts, subscribeToPosts, createPost } = useForum()
 
 const showModal = ref(false)
 const newPostContent = ref('')
 const selectedCategory = ref('Umum')
 
 onMounted(async () => {
-  await fetchPosts()
+  await Promise.all([
+    fetchPosts(),
+    fetchCategoryCounts()
+  ])
   const unsubscribe = subscribeToPosts()
   
   onUnmounted(() => {
@@ -83,12 +86,4 @@ const handleSendPost = async () => {
   newPostContent.value = ''
   showModal.value = false
 }
-
-const categories = [
-  { name: 'Upacara', count: 124 },
-  { name: 'Filsafat', count: 56 },
-  { name: 'Sejarah', count: 32 },
-  { name: 'Tanya Jawab', count: 89 },
-  { name: 'Umum', count: 210 }
-]
 </script>

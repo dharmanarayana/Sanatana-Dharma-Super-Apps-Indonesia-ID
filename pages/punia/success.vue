@@ -22,7 +22,7 @@
         <div class="pt-6 space-y-3">
            <button @click="navigateTo('/punia')" 
                    class="w-full bg-brand text-white py-4 rounded-2xl font-black uppercase tracking-widest text-sm shadow-xl shadow-brand/20 active:scale-95 transition-all">
-              Kembali ke Beranda Punia
+              Kembali ke Beranda Dana Punia
            </button>
            <button @click="navigateTo('/')" 
                    class="w-full py-4 rounded-2xl font-black uppercase tracking-widest text-xs text-muted hover:bg-default/5 transition-all">

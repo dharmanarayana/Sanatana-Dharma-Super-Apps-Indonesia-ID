@@ -1,72 +1,52 @@
 <script setup lang="ts">
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
+import 'dayjs/locale/id'
+
+dayjs.extend(relativeTime)
+dayjs.locale('id')
+
 const route = useRoute()
+const { fetchCampaignById } = usePunia()
 const { $appwrite } = useNuxtApp()
 const authStore = useAuthStore()
 
-const DB_ID = 'sanatana-dharma-db'
-const COLL_ID = 'punia_campaigns'
-
 const isLoading = ref(true)
 const campaign = ref<any>(null)
+const donations = ref<any[]>([])
 const donationAmount = ref(50000)
 const isAnonymous = ref(false)
 const showCheckout = ref(false)
+const isProcessing = ref(false)
 
 const presets = [10000, 50000, 100000, 250000, 500000]
 
-const fetchCampaign = async () => {
-  try {
-    isLoading.value = true
-    const id = route.params.id as string
-    
-    // In demo mode, if ID is 1, 2, or 3, we use mock data
-    if (['1', '2', '3'].includes(id)) {
-       const mocks: any = {
-         '1': {
-            $id: '1',
-            name: 'Renovasi Pura Luhur Batukaru',
-            category: 'Pura',
-            description: 'Penjor hiasan di Pura Luhur Batukaru mengalami kerusakan parah akibat badai baru-baru ini. Kami berencana merestorasi arsitektur tradisional Bali yang menjadi ciri khas Pura ini untuk menjaga kelestarian warisan budaya dunia.\n\nSetiap Rupiah yang Anda donasikan akan digunakan untuk pembelian material batu paras, ukiran kayu jati, dan upah para seniman ukir lokal.',
-            target_amount: 500000000,
-            current_amount: 151250000,
-            image: 'https://images.unsplash.com/photo-1590059530472-7634f31c238b?auto=format&fit=crop&q=80&w=1200',
-            days_left: 12,
-            donors_count: 342,
-            recent_donors: [
-              { name: 'Wayan S.', amount: 500000, time: '2 jam lalu' },
-              { name: 'Hamba Tuhan', amount: 100000, time: '5 jam lalu' },
-              { name: 'Made Karta', amount: 250000, time: 'Yesterday' }
-            ]
-         },
-         '2': {
-            $id: '2',
-            name: 'Beasiswa Anak Ashram',
-            category: 'Pendidikan',
-            description: 'Ashram di Bali Timur saat ini menampung 50 anak yatim piatu dan kurang mampu. Mereka membutuhkan biaya SPP, seragam, dan alat tulis untuk tahun ajaran baru.\n\nMari bantu mereka meraih cita-cita melalui pendidikan yang layak.',
-            target_amount: 75000000,
-            current_amount: 68000000,
-            image: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&q=80&w=1200',
-            days_left: 5,
-            donors_count: 89,
-            recent_donors: [
-              { name: 'Budi Santoso', amount: 1000000, time: '1 jam lalu' },
-              { name: 'Ni Made L.', amount: 50000, time: '3 jam lalu' }
-            ]
-         }
-       }
-       campaign.value = mocks[id] || mocks['1']
-    } else {
-       const res = await $appwrite.databases.getDocument(DB_ID, COLL_ID, id)
-       campaign.value = res
+// Load Midtrans Snap Script
+useHead({
+  script: [
+    {
+      src: process.env.MIDTRANS_IS_PRODUCTION === 'true' 
+        ? 'https://app.midtrans.com/snap/snap.js' 
+        : 'https://app.sandbox.midtrans.com/snap/snap.js',
+      'data-client-key': process.env.MIDTRANS_CLIENT_KEY
     }
-  } catch (error: any) {
-    console.error('Failed to fetch campaign detail:', error.message)
-  } finally {
-    isLoading.value = false
+  ]
+})
+
+const fetchCampaign = async () => {
+  isLoading.value = true
+  const id = route.params.id as string
+  const { fetchRecentDonations } = usePunia()
+  
+  campaign.value = await fetchCampaignById(id)
+  if (campaign.value) {
+    donations.value = await fetchRecentDonations(id)
   }
+  isLoading.value = false
 }
 
 const calculateProgress = (current: number, target: number) => {
+  if (!target) return 0
   return Math.min(Math.round((current / target) * 100), 100)
 }
 
@@ -75,14 +55,52 @@ const formatCurrency = (num: number) => {
     style: 'currency',
     currency: 'IDR',
     minimumFractionDigits: 0
-  }).format(num)
+  }).format(num || 0)
 }
 
-const processDonation = () => {
-    // Navigate to a simulation of success or payment
-    alert(`Mengarahkan ke pembayaran sebesar ${formatCurrency(donationAmount.value)}...`)
-    showCheckout.value = false
-    navigateTo('/punia/success')
+const processDonation = async () => {
+  if (donationAmount.value < 10000) {
+    alert('Minimal donasi adalah Rp 10.000')
+    return
+  }
+
+  isProcessing.value = true
+  try {
+    const response = await $fetch('/api/midtrans/snap', {
+      method: 'POST',
+      body: {
+        campaignId: campaign.value.$id,
+        amount: donationAmount.value,
+        userName: isAnonymous.value ? 'Hamba Tuhan' : (authStore.user?.name || 'Hamba Tuhan'),
+        userEmail: authStore.user?.email || ''
+      }
+    })
+
+    if (response.token) {
+      // @ts-ignore
+      window.snap.pay(response.token, {
+        onSuccess: (result: any) => {
+          showCheckout.value = false
+          navigateTo('/punia/success')
+        },
+        onPending: (result: any) => {
+          alert('Pembayaran tertunda. Silakan selesaikan pembayaran Anda.')
+          showCheckout.value = false
+        },
+        onError: (result: any) => {
+          alert('Pembayaran gagal. Silakan coba lagi.')
+          isProcessing.value = false
+        },
+        onClose: () => {
+          isProcessing.value = false
+        }
+      })
+    }
+  } catch (error: any) {
+    console.error('Donation error:', error)
+    alert('Terjadi kesalahan saat memproses pembayaran: ' + (error.data?.statusMessage || error.message))
+    isProcessing.value = false
+  }
 }
 
 onMounted(() => {
@@ -149,27 +167,29 @@ onMounted(() => {
             </div>
 
             <!-- Transparency / Activity -->
-            <section class="space-y-6">
-               <div class="flex items-center justify-between">
-                  <h3 class="font-bold text-default">Daftar Donatur Terakhir</h3>
-                  <button class="text-xs text-brand font-bold hover:underline">Lihat Semua</button>
-               </div>
-               <div class="space-y-3">
-                  <div v-for="d in campaign.recent_donors" :key="d.name" 
-                       class="flex items-center gap-4 p-4 rounded-3xl bg-surface border border-default/50">
-                     <div class="w-10 h-10 rounded-full bg-default flex items-center justify-center text-sm font-black text-muted">
-                        {{ d.name.charAt(0) }}
-                     </div>
-                     <div class="flex-1">
-                        <div class="flex items-center justify-between font-bold text-sm">
-                           <span class="text-default">{{ d.name }}</span>
-                           <span class="text-brand">{{ formatCurrency(d.amount) }}</span>
-                        </div>
-                        <p class="text-[10px] text-muted">{{ d.time }}</p>
-                     </div>
-                  </div>
-               </div>
-            </section>
+             <section class="space-y-6">
+                <div class="flex items-center justify-between">
+                   <h3 class="font-bold text-default">Daftar Donatur Terakhir</h3>
+                </div>
+                <div v-if="donations.length > 0" class="space-y-3">
+                   <div v-for="d in donations" :key="d.$id" 
+                        class="flex items-center gap-4 p-4 rounded-3xl bg-surface border border-default/50">
+                      <div class="w-10 h-10 rounded-full bg-default flex items-center justify-center text-sm font-black text-muted">
+                         {{ d.user_name.charAt(0) }}
+                      </div>
+                      <div class="flex-1">
+                         <div class="flex items-center justify-between font-bold text-sm">
+                            <span class="text-default">{{ d.user_name }}</span>
+                            <span class="text-brand">{{ formatCurrency(d.amount) }}</span>
+                         </div>
+                         <p class="text-[10px] text-muted">{{ dayjs(d.$createdAt).fromNow() }}</p>
+                      </div>
+                   </div>
+                </div>
+                <div v-else class="text-center py-8 bg-default/5 rounded-3xl border border-dashed border-default">
+                   <p class="text-xs text-muted font-bold">Belum ada donasi. Jadilah yang pertama!</p>
+                </div>
+             </section>
          </div>
 
          <!-- Sticky Sidebar -->
@@ -191,9 +211,16 @@ onMounted(() => {
                </div>
 
                <button @click="showCheckout = true" 
-                       class="w-full bg-brand text-white p-4 rounded-2xl font-black uppercase tracking-widest text-sm shadow-lg shadow-brand/20 active:scale-95 transition-all flex items-center justify-center gap-3 group">
-                  Beri Punia Sekarang
-                  <Icon name="lucide:heart" class="w-5 h-5 group-hover:scale-125 transition-transform" />
+                       :disabled="isProcessing"
+                       class="w-full bg-brand text-white p-4 rounded-2xl font-black uppercase tracking-widest text-sm shadow-lg shadow-brand/20 active:scale-95 transition-all flex items-center justify-center gap-3 group disabled:opacity-50">
+                  <template v-if="isProcessing">
+                    <Icon name="lucide:loader-2" class="w-5 h-5 animate-spin" />
+                    Memproses...
+                  </template>
+                  <template v-else>
+                    Beri Dana Punia Sekarang
+                    <Icon name="lucide:heart" class="w-5 h-5 group-hover:scale-125 transition-transform" />
+                  </template>
                </button>
 
                <div class="p-4 bg-default/5 rounded-2xl border border-default">
@@ -207,11 +234,11 @@ onMounted(() => {
     </div>
 
     <!-- Donation Checkout Modal -->
-    <UiModal :show="showCheckout" title="Donasi Punia" @close="showCheckout = false">
+    <UiModal :show="showCheckout" title="Donasi Dana Punia" @close="showCheckout = false">
        <div class="space-y-6 pt-2 pb-4">
           <!-- Amount Preset -->
           <div class="space-y-3">
-             <label class="text-[10px] font-black text-muted uppercase tracking-widest">Pilih Nominal Punia</label>
+             <label class="text-[10px] font-black text-muted uppercase tracking-widest">Pilih Nominal Dana Punia</label>
              <div class="grid grid-cols-3 gap-2">
                 <button v-for="p in presets" :key="p"
                         @click="donationAmount = p"
@@ -246,12 +273,18 @@ onMounted(() => {
 
           <!-- Payment Button -->
           <button @click="processDonation" 
-                  class="w-full bg-brand text-white p-4 rounded-2xl font-black uppercase tracking-widest text-sm shadow-xl shadow-brand/20 active:scale-95 transition-all">
-             Lanjutkan Pembayaran
+                  :disabled="isProcessing"
+                  class="w-full bg-brand text-white p-4 rounded-2xl font-black uppercase tracking-widest text-sm shadow-xl shadow-brand/20 active:scale-95 transition-all disabled:opacity-50">
+             <template v-if="isProcessing">
+                <Icon name="lucide:loader-2" class="w-5 h-5 animate-spin mx-auto" />
+             </template>
+             <template v-else>
+                Lanjutkan Pembayaran
+             </template>
           </button>
           
           <p class="text-[10px] text-center text-muted px-6">
-             *Dengan memberi punia, Anda menyetujui syarat & ketentuan penggalangan dana umat Sanatana Dharma.
+             *Dengan memberi dana punia, Anda menyetujui syarat & ketentuan penggalangan dana umat Sanatana Dharma.
           </p>
        </div>
     </UiModal>

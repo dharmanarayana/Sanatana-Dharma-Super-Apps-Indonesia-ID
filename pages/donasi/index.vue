@@ -8,7 +8,7 @@
       
       <div>
         <div class="flex items-center justify-between mb-6 px-1">
-          <h4 class="card-label text-muted text-[10px]">PROGRAM PUNIA PILIHAN</h4>
+          <h4 class="card-label text-muted text-[10px]">PROGRAM DANA PUNIA PILIHAN</h4>
           <div class="flex gap-2">
              <button v-for="t in ['Terbaru', 'Hampir Selesai']" :key="t"
                      class="text-[10px] font-bold border border-default px-3 py-1 rounded-full hover:bg-brand/5 transition-colors">
@@ -20,7 +20,7 @@
           <ProgramDonasiCard v-for="p in programs" :key="p.$id" :program="p" @click="openPaymentModal(p)" />
         </UiGrid>
         <div v-else class="py-12 text-center card bg-surface/50 border-dashed">
-          <p class="text-muted text-sm">Belum ada program punia aktif saat ini.</p>
+          <p class="text-muted text-sm">Belum ada program dana punia aktif saat ini.</p>
         </div>
       </div>
     </div>

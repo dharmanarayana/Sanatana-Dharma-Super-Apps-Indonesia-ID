@@ -19,7 +19,7 @@ const props = defineProps<{
 
 const statItems = computed(() => [
   { label: 'Point', value: props.stats.points },
-  { label: 'Punia', value: props.stats.donations, color: 'text-error' },
+  { label: 'Dana Punia', value: props.stats.donations, color: 'text-error' },
   { label: 'Badge', value: props.stats.badges, color: 'text-brand-gold' }
 ])
 </script>

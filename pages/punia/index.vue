@@ -1,69 +1,15 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
-
-const { $appwrite } = useNuxtApp()
-
-const DB_ID = 'sanatana-dharma-db'
-const COLL_ID = 'punia_campaigns'
-
-const isLoading = ref(true)
-const rawCampaigns = ref<any[]>([])
+const { campaigns, loading: isLoading, fetchCampaigns, subscribe, stop } = usePunia()
 const activeCategory = ref('Semua')
 const categories = ['Semua', 'Pura', 'Sosial', 'Pendidikan', 'Bencana']
 
-const fetchCampaigns = async () => {
-  try {
-    isLoading.value = true
-    const res = await $appwrite.databases.listDocuments(DB_ID, COLL_ID)
-    rawCampaigns.value = res.documents
-  } catch (error: any) {
-    console.warn('Punia campaigns collection not found or error:', error.message)
-    // Fallback/Placeholder data for demo
-    if (rawCampaigns.value.length === 0) {
-      rawCampaigns.value = [
-        {
-          $id: '1',
-          name: 'Renovasi Pura Luhur Batukaru',
-          category: 'Pura',
-          description: 'Membantu perbaikan atap Meru Tumpang yang rusak akibat cuaca ekstrem.',
-          target_amount: 500000000,
-          current_amount: 150000000,
-          image: 'https://images.unsplash.com/photo-1590059530472-7634f31c238b?auto=format&fit=crop&q=80&w=800',
-          days_left: 12
-        },
-        {
-          $id: '2',
-          name: 'Beasiswa Anak Ashram',
-          category: 'Pendidikan',
-          description: 'Pemberian fasilitas belajar & biaya sekolah untuk 50 anak kurang mampu di Bali Timur.',
-          target_amount: 75000000,
-          current_amount: 68000000,
-          image: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&q=80&w=800',
-          days_left: 5
-        },
-        {
-          $id: '3',
-          name: 'Sembako untuk Lansia',
-          category: 'Sosial',
-          description: 'Penyaluran paket pangan sehat untuk lansia di pelosok desa secara rutin.',
-          target_amount: 25000000,
-          current_amount: 12500000,
-          image: 'https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&q=80&w=800',
-          days_left: 20
-        }
-      ]
-    }
-  } finally {
-    isLoading.value = false
-  }
-}
-
 const filteredCampaigns = computed(() => {
-  if (activeCategory.value === 'Semua') return rawCampaigns.value
-  return rawCampaigns.value.filter(c => c.category === activeCategory.value)
+  if (activeCategory.value === 'Semua') return campaigns.value
+  return campaigns.value.filter(c => c.category === activeCategory.value)
 })
 
 const calculateProgress = (current: number, target: number) => {
+  if (!target) return 0
   return Math.min(Math.round((current / target) * 100), 100)
 }
 
@@ -72,11 +18,16 @@ const formatCurrency = (num: number) => {
     style: 'currency',
     currency: 'IDR',
     minimumFractionDigits: 0
-  }).format(num)
+  }).format(num || 0)
 }
 
 onMounted(() => {
   fetchCampaigns()
+  subscribe()
+})
+
+onUnmounted(() => {
+  stop()
 })
 </script>
 
@@ -84,8 +35,8 @@ onMounted(() => {
   <div class="space-y-6 pb-20">
     <UiPageHeader 
       icon="🙏" 
-      title="Punia & Donasi"
-      subtitle="Saluran derma untuk kemanusiaan dan pelestarian dharma"
+      title="Dana Punia & Donasi"
+      subtitle="Saluran dana punia untuk kemanusiaan dan pelestarian dharma"
       back-path="/" 
     />
 
@@ -145,7 +96,7 @@ onMounted(() => {
                </div>
                <NuxtLink :to="`/punia/${c.$id}`" 
                          class="bg-brand/10 text-brand px-6 py-2 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-brand hover:text-white transition-all active:scale-95 shadow-sm shadow-brand/10">
-                 Beri Punia
+                 Beri Dana Punia
                </NuxtLink>
             </div>
           </div>
@@ -158,10 +109,10 @@ onMounted(() => {
        <div class="p-8 bg-brand rounded-[3rem] text-white text-center space-y-4 shadow-2xl shadow-brand/20 relative overflow-hidden">
           <Icon name="fa6-solid:om" class="absolute -top-10 -right-10 w-40 h-40 opacity-10 rotate-12" />
           <p class="text-lg font-serif italic leading-relaxed opacity-90 max-w-2xl mx-auto">
-             "Dharmena Hanyate Vyadhih, Dharmena Hanyate Grahah, Dharmena Hanyate Satruh, Yato Dharmastato Jayah."
+             "Dātavyam iti yad dānaṁ dīyate ‘nupakāriṇe, deśe kāle ca pātre ca tad dānaṁ sāttvikaṁ smṛtam."
           </p>
           <div class="h-px w-20 bg-white/30 mx-auto"></div>
-          <p class="text-xs font-bold tracking-[0.2em] uppercase">Setiap Kebenaran Adalah Kebaikan</p>
+          <p class="text-xs font-bold tracking-[0.2em] uppercase">Bhagavad Gita 17.20 — Dana Punia yang Utama</p>
        </div>
     </div>
   </div>

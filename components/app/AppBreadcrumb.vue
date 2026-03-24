@@ -18,7 +18,7 @@ const crumbMap: Record<string, string> = {
   'sarana-upacara': 'Sarana Upacara',
   'kelas':       'Kelas Pasraman',
   'galeri':      'Galeri & Event',
-  'lelang':      'Lelang Punia',
+  'lelang':      'Lelang Dana Punia',
   'marketplace': 'Marketplace',
   'profil':      'Profil',
 }
