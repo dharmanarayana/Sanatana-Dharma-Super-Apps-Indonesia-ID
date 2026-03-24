@@ -196,6 +196,8 @@ const fetchTempleDetail = async () => {
               description: `Pelajari sejarah, lokasi, dan informasi lengkap mengenai ${temple.value.name} yang terletak di ${temple.value.city}, ${temple.value.province}. Platform Sanatana Dharma membantu Anda menemukan pura terdekat dan panduan spiritual Hindu.`,
               ogDescription: `Pelajari sejarah, lokasi, dan informasi lengkap mengenai ${temple.value.name} yang terletak di ${temple.value.city}, ${temple.value.province}.`,
               ogImage: temple.value.image,
+              ogType: 'website',
+              ogSiteName: 'Sanatana Dharma Digital',
               twitterCard: 'summary_large_image',
               twitterTitle: `${temple.value.name}`,
               twitterDescription: `Informasi lengkap mengenai ${temple.value.name} di ${temple.value.city}, ${temple.value.province}.`,

@@ -108,6 +108,8 @@ const fetchNewsDetail = async () => {
       description: news.value.content?.substring(0, 160) + '...',
       ogDescription: news.value.content?.substring(0, 160) + '...',
       ogImage: news.value.image,
+      ogType: 'article',
+      ogSiteName: 'Sanatana Dharma Digital',
       twitterCard: 'summary_large_image',
       twitterTitle: `${news.value.title}`,
       twitterDescription: news.value.content?.substring(0, 160) + '...',

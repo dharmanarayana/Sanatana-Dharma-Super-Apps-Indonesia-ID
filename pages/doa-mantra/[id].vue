@@ -160,11 +160,14 @@ const fetchDetail = async () => {
       useSeoMeta({
         title: `${doa.value.title}`,
         ogTitle: `${doa.value.title}`,
-        description: `Baca ${doa.value.title} (${doa.value.category_name}). Tersedia teks Sansekerta, transliterasi, dan terjemahan bahasa Indonesia lengkap hanya di Sanatana Dharma.`,
-        ogDescription: `Baca ${doa.value.title} (${doa.value.category_name}). Lengkap dengan Sansekerta, transliterasi, dan terjemahan.`,
-        twitterCard: 'summary',
+        description: `Baca ${doa.value.title} (${doa.value.category}). Tersedia teks Sansekerta, transliterasi, dan terjemahan bahasa Indonesia lengkap hanya di Sanatana Dharma.`,
+        ogDescription: `Baca ${doa.value.title} (${doa.value.category}). Lengkap dengan Sansekerta, transliterasi, dan terjemahan.`,
+        ogImage: '/og-doa.png',
+        ogType: 'article',
+        ogSiteName: 'Sanatana Dharma Digital',
+        twitterCard: 'summary_large_image',
         twitterTitle: `${doa.value.title}`,
-        twitterDescription: `Baca ${doa.value.title} (${doa.value.category_name}) dengan transliterasi dan terjemahan.`,
+        twitterDescription: `Baca ${doa.value.title} (${doa.value.category}) dengan transliterasi dan terjemahan.`,
       })
       useBreadcrumbs().setBreadcrumbLabel(route.params.id as string, doa.value.title)
     }

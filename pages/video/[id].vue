@@ -131,10 +131,13 @@ const fetchDetail = async () => {
       ogTitle: `${doc.title}`,
       description: doc.description ? (doc.description.substring(0, 160) + '...') : `Tonton video dharma mengenai ${doc.category}: ${doc.title} di platform Sanatana Dharma.`,
       ogDescription: doc.description ? (doc.description.substring(0, 160) + '...') : `Tonton video dharma mengenai ${doc.category}: ${doc.title}.`,
-      ogImage: doc.thumbnail || '/og-video.png', // Assuming there's a thumbnail or default
+      ogImage: doc.thumbnail || '/og-video.png',
+      ogType: 'video.other',
+      ogSiteName: 'Sanatana Dharma Digital',
       twitterCard: 'summary_large_image',
       twitterTitle: `${doc.title}`,
       twitterDescription: doc.description?.substring(0, 160),
+      twitterImage: doc.thumbnail || '/og-video.png',
     })
 
     // Subscribe to this specific video
