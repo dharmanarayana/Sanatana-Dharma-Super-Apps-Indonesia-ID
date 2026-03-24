@@ -18,6 +18,7 @@ const navGroups = [
       { path: '/doa-mantra',    icon: '🙏', label: 'Doa & Mantra' },
       { path: '/kitab-suci',    icon: '📖', label: 'Kitab Suci' },
       { path: '/alarm',         icon: '⏰', label: 'Tri Sandhya' },
+      { path: '/japa-mala',     icon: '📿', label: 'Japa Mala' },
     ]
   },
   {

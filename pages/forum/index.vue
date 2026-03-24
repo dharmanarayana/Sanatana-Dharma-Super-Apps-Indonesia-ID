@@ -5,24 +5,32 @@
                   back-path="/" />
     <div class="px-4 lg:px-0 py-4 grid lg:grid-cols-[1fr_300px] gap-8">
       <div class="space-y-4">
-        <button v-if="authStore.isLoggedIn" @click="showModal = true" class="btn-primary w-full py-4 justify-center gap-2 mb-4 shadow-md hover:shadow-lg active:scale-[0.98] transition-all">
-          Buat Postingan Baru ✍️
+        <button v-if="authStore.isLoggedIn" @click="showModal = true" 
+                class="btn-primary w-full py-4 justify-center gap-2 mb-4 shadow-xl shadow-brand/10 hover:shadow-brand/20 active:scale-[0.98] transition-all">
+          {{ activeTab === 'Tanya Pinandita (Pemangku)' ? 'Tanya Pinandita (Pemangku) ✍️' : 'Buat Postingan Baru ✍️' }}
         </button>
         <div class="space-y-4">
-          <div class="flex items-center gap-4 border-b border-default pb-2">
-            <button v-for="t in ['Terbaru', 'Populer', 'Tanya Jawab']" :key="t"
-                    class="text-[10px] font-bold uppercase tracking-wider px-2 py-1"
-                    :class="t === 'Terbaru' ? 'text-brand border-b-2 border-brand' : 'text-muted'">
-              {{ t }}
+          <div class="flex items-center gap-4 border-b border-default pb-2 overflow-x-auto scrollbar-hide">
+            <button v-for="t in tabs" :key="t"
+                    @click="activeTab = t"
+                    class="text-[10px] font-black uppercase tracking-wider px-4 py-2 transition-all whitespace-nowrap"
+                    :class="activeTab === t ? 'text-brand border-b-2 border-brand translate-y-[1px]' : 'text-muted hover:text-brand/60'">
+              {{ t.startsWith('Tanya Pinandita') ? '🙏 ' + t : t }}
             </button>
           </div>
           
           <div v-if="loading" class="space-y-4 animate-pulse">
             <div v-for="i in 3" :key="i" class="card h-32 bg-muted/20"></div>
           </div>
-          <template v-else>
-            <ForumPostCard v-for="post in posts" :key="post.$id" :post="post" />
+          <template v-else-if="filteredPosts.length > 0">
+            <ForumPostCard v-for="post in filteredPosts" :key="post.$id" :post="post" />
           </template>
+          <div v-else class="text-center py-20 card bg-surface/30 border-dashed border-brand/20">
+            <Icon name="lucide:message-square-dashed" class="w-12 h-12 text-muted mx-auto mb-4 opacity-30" />
+            <p class="text-sm text-secondary italic">
+              {{ activeTab === 'Tanya Pinandita (Pemangku)' ? 'Belum ada sesi tanya jawab dengan Pinandita (Pemangku).' : 'Belum ada postingan yang diterbitkan.' }}
+            </p>
+          </div>
         </div>
       </div>
       <aside class="hidden lg:block space-y-6">
@@ -67,6 +75,24 @@ const { posts, loading, categories, fetchPosts, fetchCategoryCounts, subscribeTo
 const showModal = ref(false)
 const newPostContent = ref('')
 const selectedCategory = ref('Umum')
+const activeTab = ref('Terbaru')
+
+const tabs = ['Terbaru', 'Populer', 'Tanya Pinandita (Pemangku)']
+
+const filteredPosts = computed(() => {
+  if (activeTab.value === 'Tanya Pinandita (Pemangku)') {
+    return posts.value.filter(p => p.category === 'Pinandita (Pemangku)')
+  }
+  return posts.value
+})
+
+watch(activeTab, (val) => {
+  if (val === 'Tanya Pinandita (Pemangku)') {
+    selectedCategory.value = 'Pinandita (Pemangku)'
+  } else {
+    selectedCategory.value = 'Umum'
+  }
+})
 
 onMounted(async () => {
   await Promise.all([

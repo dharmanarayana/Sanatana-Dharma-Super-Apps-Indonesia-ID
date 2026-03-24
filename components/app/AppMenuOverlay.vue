@@ -11,6 +11,7 @@ const authStore = useAuthStore()
 const menuItems = computed(() => {
   const items = [
     { label: 'Kalender', icon: 'lucide:calendar', color: 'text-blue-500', path: '/kalender' },
+    { label: 'Japa Mala', icon: 'lucide:clock-9', color: 'text-orange-500', path: '/japa-mala' },
     { label: 'Doa Mantra', icon: 'lucide:scroll-text', color: 'text-green-500', path: '/doa-mantra' },
     { label: 'Kitab Suci', icon: 'lucide:book-open', color: 'text-purple-500', path: '/kitab-suci' },
     { label: 'Tersimpan', icon: 'lucide:bookmark', color: 'text-brand', path: '/tersimpan', auth: true },

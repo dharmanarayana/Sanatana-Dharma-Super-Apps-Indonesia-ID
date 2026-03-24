@@ -16,6 +16,7 @@ export const useForum = () => {
     { name: 'Filsafat', count: 0 },
     { name: 'Sejarah', count: 0 },
     { name: 'Tanya Jawab', count: 0 },
+    { name: 'Pinandita (Pemangku)', count: 0 },
     { name: 'Umum', count: 0 }
   ])
 
@@ -106,6 +107,7 @@ export const useForum = () => {
           category, 
           author: user.name,
           author_id: user.$id,
+          author_role: user.prefs?.role || 'user',
           likes: 0,
           comments: 0,
           $createdAt: new Date().toISOString()
@@ -116,6 +118,7 @@ export const useForum = () => {
       const newPost = { 
         $id: Date.now().toString(), 
         author: user.name, 
+        author_role: user.prefs?.role || 'user',
         content, 
         category, 
         likes: 0, 

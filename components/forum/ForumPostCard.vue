@@ -1,13 +1,24 @@
 <template>
-  <div class="card p-4 space-y-4">
+  <div class="card p-4 space-y-4 transition-all duration-300" 
+       :class="post.author_role === 'pinandita' ? 'border-brand/40 bg-brand/[0.02] shadow-brand/5 shadow-lg' : ''">
     <div class="flex items-center gap-3">
-      <div class="w-10 h-10 rounded-full bg-muted flex items-center justify-center text-lg">👤</div>
+      <div class="w-10 h-10 rounded-full flex items-center justify-center text-lg shadow-inner"
+           :class="post.author_role === 'pinandita' ? 'bg-brand text-white' : 'bg-muted'">
+        {{ post.author_role === 'pinandita' ? '🙏' : '👤' }}
+      </div>
       <div class="flex-1">
-        <div class="flex items-center gap-1.5">
+        <div class="flex items-center gap-1.5 flex-wrap">
           <h4 class="font-black italic text-xs text-default">{{ post.author || 'Anonim' }}</h4>
-          <span v-if="post.isAuthorAdmin" class="text-blue-500 text-[10px]" title="Verified Admin">✓</span>
+          <span v-if="post.author_role === 'pinandita'" 
+                class="flex items-center gap-1 px-1.5 py-0.5 bg-brand text-white text-[8px] font-black uppercase tracking-widest rounded-full shadow-sm">
+            <Icon name="lucide:check-circle" class="w-2.5 h-2.5" />
+            Verified Pinandita (Pemangku)
+          </span>
+          <span v-else-if="post.isAuthorAdmin" class="text-blue-500 text-[10px]" title="Verified Admin">✓</span>
         </div>
-        <p class="text-[9px] font-bold text-muted uppercase tracking-tight">Baru saja • {{ post.category }}</p>
+        <p class="text-[9px] font-bold text-muted uppercase tracking-tight">
+          {{ formatDate(post.$createdAt) }} • {{ post.category }}
+        </p>
       </div>
     </div>
     <p class="body-text text-xs leading-relaxed text-charcoal/80">{{ post.content }}</p>
@@ -29,6 +40,16 @@ const props = defineProps<{
 
 const authStore = useAuthStore()
 const { addPoints } = useAuth()
+
+const formatDate = (date: string) => {
+  if (!date) return 'Baru saja'
+  try {
+    const d = new Date(date)
+    return d.toLocaleDateString('id-ID', { day: 'numeric', month: 'short' })
+  } catch (e) {
+    return 'Baru saja'
+  }
+}
 
 const handleInteraction = async (type: 'like' | 'comment') => {
   if (!authStore.isLoggedIn) {
