@@ -26,16 +26,14 @@
         <div class="flex flex-col sm:flex-row gap-4 items-start sm:items-center w-full lg:w-auto overflow-x-auto pb-1 sm:pb-0 scrollbar-hide">
           
           <!-- Merchant Actions -->
-          <div v-if="authStore.isLoggedIn" class="flex items-center gap-2 border-r border-default pr-4 mr-2">
+          <div v-if="authStore.isLoggedIn" class="flex items-center gap-2 border-r border-default pr-4 mr-2 shrink-0">
             <button 
               v-if="!authStore.isMerchant"
-              @click="handleJoinMerchant"
-              :disabled="isUpdatingRole"
-              class="flex items-center gap-2 px-4 py-2 bg-brand/10 text-brand rounded-xl text-sm font-bold hover:bg-brand/20 transition-all active:scale-95 disabled:opacity-50"
+              @click="showMerchantInfo = true"
+              class="flex items-center gap-2 px-4 py-2 bg-brand text-white rounded-xl text-sm font-bold hover:bg-brand/90 transition-all active:scale-95 shadow-md shadow-brand/20"
             >
-              <Icon v-if="isUpdatingRole" name="lucide:loader-2" class="w-4 h-4 animate-spin" />
-              <Icon v-else name="lucide:store" class="w-4 h-4" />
-              Buka Toko
+              <Icon name="lucide:store" class="w-4 h-4" />
+              Pendaftaran Penjual
             </button>
             <button 
               v-else
@@ -355,14 +353,6 @@ const detectLocation = () => {
 // Initialization
 onMounted(() => {
   fetchSarana()
-  
-  // Show merchant invitation alert after 10 seconds
-  setTimeout(() => {
-    // Only show if user isn't already a merchant or admin
-    if (!authStore.isMerchant && !authStore.isAdmin) {
-      showMerchantInfo.value = true
-    }
-  }, 10000)
 })
 </script>
 
