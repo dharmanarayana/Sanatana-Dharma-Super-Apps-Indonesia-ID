@@ -94,7 +94,15 @@ const fetchDoa = async () => {
     appwriteData.forEach(appDoc => {
       const existingIdx = localData.findIndex(ld => ld.title.toLowerCase().trim() === appDoc.title.toLowerCase().trim())
       if (existingIdx >= 0) {
-        localData[existingIdx] = { ...localData[existingIdx], ...appDoc, content: localData[existingIdx].content }
+        // Update existing record, prioritizing local metadata but taking Appwrite updates (like audioUrl)
+        localData[existingIdx] = { 
+          ...localData[existingIdx], 
+          ...appDoc, 
+          // Prefer local category unless Appwrite has a specific custom one (not the fallback)
+          category: localData[existingIdx].category || appDoc.category,
+          // Always preserve local content for merged items to avoid overwrite with simple strings
+          content: localData[existingIdx].content 
+        }
       } else {
         localData.push(appDoc)
       }
