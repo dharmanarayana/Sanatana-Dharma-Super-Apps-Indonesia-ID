@@ -11,8 +11,10 @@
   },
   "dependencies": {
     "@appwrite.io/pink-icons": "^1.0.0",
+    "@intlify/unplugin-vue-i18n": "^11.0.7",
     "@nuxt/image": "^1.8.1",
     "@nuxtjs/color-mode": "^3.4.6",
+    "@nuxtjs/i18n": "^10.2.4",
     "@pinia-plugin-persistedstate/nuxt": "^1.2.1",
     "@pinia/nuxt": "^0.5.5",
     "@tailwindcss/vite": "^4.0.1",

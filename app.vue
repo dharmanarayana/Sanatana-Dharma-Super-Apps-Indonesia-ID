@@ -23,6 +23,10 @@ useSeoMeta({
 })
 
 onMounted(async () => {
+  // Apply accent theme
+  const { applyTheme } = useTheme()
+  applyTheme()
+
   // Check session and daily login points
   await refreshUserSession()
   await checkDailyLogin()

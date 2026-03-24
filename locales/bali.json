@@ -1,0 +1,50 @@
+{
+  "common": {
+    "back": "Wali",
+    "search": "Rereh...",
+    "save": "Simpen",
+    "share": "Gedubur",
+    "loading": "Mamargi...",
+    "coming_soon": "Jagi Rawuh"
+  },
+  "nav": {
+    "home": "Mrajan",
+    "pura": "Pura",
+    "video": "Kalpika",
+    "berita": "Orti",
+    "doa_mantra": "Doa & Mantra",
+    "profil": "Profil",
+    "tersimpan": "Simpen",
+    "kalender": "Kalender",
+    "toko": "Toko",
+    "donasi": "Donasi",
+    "sarana": "Banten",
+    "library": "Pustaka",
+    "galeri": "Galeri",
+    "sosial": "Pasemetonan",
+    "menu": "Menu",
+    "select_service": "Pilih Ayahan"
+  },
+  "profile": {
+    "title": "Profil Titiang",
+    "settings": "PENGATURAN & APLIKASI",
+    "security": "Kajagajayen",
+    "notifications": "Pawingat",
+    "appearance": "Tampilan",
+    "language": "Basa",
+    "logout": "MEDAL",
+    "admin": "ADMIN DASHBOARD"
+  },
+  "settings": {
+    "theme_title": "Pengaturan Tampilan",
+    "theme_desc": "Personalize the app theme for your comfort.",
+    "theme_system": "Sistem",
+    "theme_light": "Mode Galang",
+    "theme_dark": "Mode Peteng",
+    "lang_title": "Pilih Basa",
+    "lang_desc": "Sanatana Dharma kantun sajeroning makudang-kudang basa daerah.",
+    "lang_bali_warning": "Basa Bali ring galah mangkin kantun sajeroning panglimbak. Yening raris masepuk iwang utawi madue saran, tulungin tityang mangda sayan becik.",
+    "notif_title": "Pangaturan Notifikasi",
+    "notif_desc": "Manage how you receive updates from Sanatana Dharma."
+  }
+}

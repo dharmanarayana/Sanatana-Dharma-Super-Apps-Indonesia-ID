@@ -13,7 +13,26 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@vite-pwa/nuxt',
     '@pinia-plugin-persistedstate/nuxt',
+    '@nuxtjs/i18n',
   ],
+
+  i18n: {
+    lazy: true,
+    langDir: 'locales',
+    defaultLocale: 'id',
+    strategy: 'no_prefix',
+    locales: [
+      { code: 'id', name: 'Bahasa Indonesia', file: 'id.json' },
+      { code: 'en', name: 'English', file: 'en.json' },
+      { code: 'bali', name: 'Basa Bali', file: 'bali.json' }
+    ],
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      alwaysRedirect: true,
+      fallbackLocale: 'id'
+    }
+  },
 
   vite: {
     plugins: [

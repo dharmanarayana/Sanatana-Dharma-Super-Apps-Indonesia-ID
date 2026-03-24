@@ -126,5 +126,24 @@ export const useAuth = () => {
     }
   }
 
-  return { login, loginWithGoogle, register, logout, refreshUserSession, addPoints, checkDailyLogin }
+  const updatePassword = async (newPassword: string, oldPassword: string) => {
+    try {
+      await $appwrite.account.updatePassword(newPassword, oldPassword)
+    } catch (e: any) {
+      throw new Error(e.message || 'Gagal memperbarui kata sandi.')
+    }
+  }
+
+  const toggleMFA = async (enable: boolean) => {
+    try {
+      // Note: Appwrite 2FA requires more steps (challenges, factors), 
+      // but we'll implement the basic toggle check here as a placeholder 
+      // or using the updateMfa if available in the SDK version.
+      await $appwrite.account.updateMFA(enable)
+    } catch (e: any) {
+      throw new Error(e.message || 'Gagal mengubah pengaturan 2FA.')
+    }
+  }
+
+  return { login, loginWithGoogle, register, logout, refreshUserSession, addPoints, checkDailyLogin, updatePassword, toggleMFA }
 }

@@ -1,0 +1,50 @@
+{
+  "common": {
+    "back": "Back",
+    "search": "Search...",
+    "save": "Save",
+    "share": "Share",
+    "loading": "Loading...",
+    "coming_soon": "Coming Soon"
+  },
+  "nav": {
+    "home": "Home",
+    "pura": "Temples",
+    "video": "Videos",
+    "berita": "News",
+    "doa_mantra": "Prayers & Mantras",
+    "profil": "Profile",
+    "tersimpan": "Saved",
+    "kalender": "Calendar",
+    "toko": "Shop",
+    "donasi": "Donate",
+    "sarana": "Rituals",
+    "library": "Library",
+    "galeri": "Gallery",
+    "sosial": "Social",
+    "menu": "Menu",
+    "select_service": "Select Service"
+  },
+  "profile": {
+    "title": "My Profile",
+    "settings": "SETTINGS & APPLICATION",
+    "security": "Security",
+    "notifications": "Notifications",
+    "appearance": "Appearance",
+    "language": "Language",
+    "logout": "LOGOUT",
+    "admin": "ADMIN DASHBOARD"
+  },
+  "settings": {
+    "theme_title": "Appearance Settings",
+    "theme_desc": "Personalize the app theme for your comfort.",
+    "theme_system": "Follow System",
+    "theme_light": "Light Mode",
+    "theme_dark": "Dark Mode",
+    "lang_title": "Select Language",
+    "lang_desc": "Sanatana Dharma is available in several regional languages.",
+    "lang_bali_warning": "Balinese language is currently under development. If you find any issues or have suggestions, please help us improve it.",
+    "notif_title": "Notification Settings",
+    "notif_desc": "Manage how you receive updates from Sanatana Dharma."
+  }
+}

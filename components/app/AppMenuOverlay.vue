@@ -10,19 +10,19 @@ const authStore = useAuthStore()
 
 const menuItems = computed(() => {
   const items = [
-    { label: 'Kalender', icon: 'lucide:calendar', color: 'text-blue-500', path: '/kalender' },
-    { label: 'Doa', icon: 'lucide:scroll-text', color: 'text-green-500', path: '/doa-mantra' },
-    { label: 'Kitab', icon: 'lucide:book-open', color: 'text-purple-500', path: '/kitab-suci' },
-    { label: 'Tersimpan', icon: 'lucide:bookmark', color: 'text-brand', path: '/tersimpan', auth: true },
-    { label: 'Toko', icon: 'lucide:shopping-bag', color: 'text-orange-500', path: '/marketplace' },
-    { label: 'Video', icon: 'lucide:clapperboard', color: 'text-yellow-500', path: '/video' },
-    { label: 'Pura', icon: 'lucide:map-pin', color: 'text-emerald-500', path: '/pura' },
-    { label: 'Donasi', icon: 'lucide:heart', color: 'text-red-500', path: '/donasi' },
-    { label: 'Sarana', icon: 'lucide:sparkles', color: 'text-amber-500', path: '/sarana-upacara' },
-    { label: 'Library', icon: 'lucide:library', color: 'text-indigo-500', path: '/e-library' },
-    { label: 'Galeri', icon: 'lucide:image', color: 'text-pink-500', path: '/galeri' },
-    { label: 'Berita', icon: 'lucide:newspaper', color: 'text-slate-500', path: '/berita' },
-    { label: 'Sosial', icon: 'lucide:message-square', color: 'text-cyan-500', path: '/forum' },
+    { label: 'nav.kalender', icon: 'lucide:calendar', color: 'text-blue-500', path: '/kalender' },
+    { label: 'nav.doa_mantra', icon: 'lucide:scroll-text', color: 'text-green-500', path: '/doa-mantra' },
+    { label: 'nav.pura', icon: 'lucide:book-open', color: 'text-purple-500', path: '/kitab-suci' }, // Kitab
+    { label: 'nav.tersimpan', icon: 'lucide:bookmark', color: 'text-brand', path: '/tersimpan', auth: true },
+    { label: 'nav.toko', icon: 'lucide:shopping-bag', color: 'text-orange-500', path: '/marketplace' },
+    { label: 'nav.video', icon: 'lucide:clapperboard', color: 'text-yellow-500', path: '/video' },
+    { label: 'nav.pura', icon: 'lucide:map-pin', color: 'text-emerald-500', path: '/pura' },
+    { label: 'nav.donasi', icon: 'lucide:heart', color: 'text-red-500', path: '/donasi' },
+    { label: 'nav.sarana', icon: 'lucide:sparkles', color: 'text-amber-500', path: '/sarana-upacara' },
+    { label: 'nav.library', icon: 'lucide:library', color: 'text-indigo-500', path: '/e-library' },
+    { label: 'nav.galeri', icon: 'lucide:image', color: 'text-pink-500', path: '/galeri' },
+    { label: 'nav.berita', icon: 'lucide:newspaper', color: 'text-slate-500', path: '/berita' },
+    { label: 'nav.sosial', icon: 'lucide:message-square', color: 'text-cyan-500', path: '/forum' },
   ]
   
   return items.filter(item => !item.auth || authStore.isLoggedIn)
@@ -42,7 +42,7 @@ const close = () => emit('close')
           <!-- Menu Card -->
           <div class="relative w-full max-w-lg bg-surface rounded-t-[40px] p-8 shadow-2xl animate-slide-up">
             <div class="flex items-center justify-between mb-8">
-              <h3 class="text-xl font-bold text-default font-serif">Pilih Layanan</h3>
+              <h3 class="text-xl font-bold text-default font-serif">{{ $t('nav.select_service') }}</h3>
               <button @click="close" class="p-2 rounded-full bg-default/5 hover:bg-default/10 transition-colors">
                 <Icon name="lucide:x" class="w-6 h-6 text-muted" />
               </button>
@@ -59,7 +59,7 @@ const close = () => emit('close')
                   <Icon :name="item.icon" class="w-9 h-9" :class="item.color" />
                 </div>
                 <span class="text-[11px] font-bold text-default text-center leading-tight">
-                  {{ item.label }}
+                  {{ $t(item.label) }}
                 </span>
               </NuxtLink>
             </div>

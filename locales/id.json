@@ -1,0 +1,50 @@
+{
+  "common": {
+    "back": "Kembali",
+    "search": "Cari...",
+    "save": "Simpan",
+    "share": "Bagikan",
+    "loading": "Memuat...",
+    "coming_soon": "Segera Hadir"
+  },
+  "nav": {
+    "home": "Beranda",
+    "pura": "Pura",
+    "video": "Video",
+    "berita": "Berita",
+    "doa_mantra": "Doa & Mantra",
+    "profil": "Profil",
+    "tersimpan": "Tersimpan",
+    "kalender": "Kalender",
+    "toko": "Toko",
+    "donasi": "Donasi",
+    "sarana": "Sarana",
+    "library": "Library",
+    "galeri": "Galeri",
+    "sosial": "Sosial",
+    "menu": "Menu",
+    "select_service": "Pilih Layanan"
+  },
+  "profile": {
+    "title": "Profil Saya",
+    "settings": "PENGATURAN & APLIKASI",
+    "security": "Keamanan",
+    "notifications": "Notifikasi",
+    "appearance": "Tampilan",
+    "language": "Bahasa",
+    "logout": "KELUAR AKUN",
+    "admin": "ADMIN DASHBOARD"
+  },
+  "settings": {
+    "theme_title": "Pengaturan Tampilan",
+    "theme_desc": "Personalisasi tema aplikasi sesuai kenyamanan Anda.",
+    "theme_system": "Ikuti Sistem",
+    "theme_light": "Mode Terang",
+    "theme_dark": "Mode Gelap",
+    "lang_title": "Pilih Bahasa",
+    "lang_desc": "Sanatana Dharma tersedia dalam beberapa bahasa regional.",
+    "lang_bali_warning": "Bahasa Bali saat ini masih dalam tahap pengembangan. Jika Anda menemukan kesalahan atau memiliki saran, mohon bantu kami untuk menyempurnakannya.",
+    "notif_title": "Pengaturan Notifikasi",
+    "notif_desc": "Atur bagaimana Anda menerima pembaruan dari Sanatana Dharma."
+  }
+}

@@ -15,11 +15,28 @@ export const useNotificationStore = defineStore('notifications', {
   state: () => ({
     notifications: [] as NotificationItem[],
     showPanel: false,
+    settings: {
+      calendar: true,
+      news: true,
+      tips: true,
+      video: true,
+      post: true,
+      donation: true,
+    },
     latestToast: null as NotificationItem | null,
     toastTimer: null as ReturnType<typeof setTimeout> | null,
   }),
   actions: {
+    updateSetting(key: keyof (ReturnType<typeof useNotificationStore>['settings']), value: boolean) {
+      if (this.settings) {
+        this.settings[key] = value
+      }
+    },
     addNotification(notif: Omit<NotificationItem, 'id' | 'read' | 'createdAt'>) {
+      // Check if this type of notification is enabled
+      if (this.settings && !this.settings[notif.type as keyof typeof this.settings]) {
+        return
+      }
       const newNotif: NotificationItem = {
         ...notif,
         id: Date.now().toString() + Math.random().toString(36).slice(2, 7),
