@@ -265,16 +265,33 @@ const toggleNotif = (id: string, val: boolean) => {
 
 <style scoped>
 .toggle {
-  @apply appearance-none w-10 h-5 bg-muted/30 rounded-full relative cursor-pointer transition-all border border-default;
+  appearance: none;
+  width: 2.5rem;
+  height: 1.25rem;
+  background-color: var(--state-disabled);
+  border-radius: 9999px;
+  position: relative;
+  cursor: pointer;
+  transition: all var(--transition);
+  border: 1px solid var(--border-default);
 }
 .toggle::before {
   content: '';
-  @apply absolute left-0.5 top-0.5 w-4 h-4 bg-white rounded-full transition-all shadow-sm;
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  width: 1rem;
+  height: 1rem;
+  background-color: white;
+  border-radius: 9999px;
+  transition: all var(--transition);
+  box-shadow: var(--shadow-sm);
 }
 .toggle:checked {
-  @apply bg-brand border-brand;
+  background-color: var(--brand-primary);
+  border-color: var(--brand-primary);
 }
 .toggle:checked::before {
-  @apply translate-x-5;
+  transform: translateX(1.25rem);
 }
 </style>
