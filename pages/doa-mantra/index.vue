@@ -4,18 +4,40 @@
                   subtitle="Kumpulan doa lengkap Hindu"
                   back-path="/" />
     <div class="px-4 lg:px-0 py-4 space-y-4">
+      <div v-if="selectedCategory" class="flex items-center justify-between">
+        <button @click="selectedCategory = null" 
+                class="flex items-center gap-2 px-3 py-1.5 bg-surface border border-default rounded-lg text-sm font-bold text-muted hover:text-brand hover:border-brand transition-all active:scale-95">
+          <Icon name="lucide:chevron-left" size="18" />
+          Ganti Kategori
+        </button>
+        <div class="text-xs font-bold uppercase tracking-widest text-brand">
+          {{ selectedCategory }}
+        </div>
+      </div>
+
       <div class="relative">
         <input type="text" v-model="searchQuery" placeholder="Cari doa atau mantra..." class="input-field pl-10 h-12" />
         <Icon name="lucide:search" class="absolute left-3 top-1/2 -translate-y-1/2 opacity-30" />
       </div>
 
-      <div class="flex gap-2 overflow-x-auto pb-2 no-scrollbar">
-        <button v-for="cat in categories" :key="cat"
-                @click="selectedCategory = cat"
-                :class="['px-5 py-2 rounded-full text-sm font-bold border transition-all whitespace-nowrap',
-                         selectedCategory === cat ? 'bg-brand text-white border-brand shadow-lg shadow-brand/20' : 'bg-surface border-default text-muted']">
-          {{ cat }}
-        </button>
+      <div v-if="!selectedCategory" class="space-y-4">
+        <h3 class="text-sm font-bold uppercase tracking-widest text-muted px-1">Pilih Kategori</h3>
+        <div class="grid grid-cols-1 gap-3">
+          <button v-for="cat in categories" :key="cat"
+                  @click="selectedCategory = cat"
+                  class="flex items-center justify-between p-4 bg-surface border border-default rounded-2xl hover:border-brand hover:bg-brand/5 transition-all text-left group active:scale-[0.98]">
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-xl bg-brand/5 flex items-center justify-center text-brand group-hover:bg-brand group-hover:text-white transition-all">
+                <Icon :name="cat === 'Semua' ? 'lucide:layers' : 'lucide:scroll-text'" size="24" />
+              </div>
+              <div>
+                <div class="font-bold text-lg text-default leading-tight">{{ cat }}</div>
+                <div class="text-xs text-muted mt-0.5">Lihat kumpulan {{ cat.toLowerCase() }}</div>
+              </div>
+            </div>
+            <Icon name="lucide:chevron-right" size="20" class="text-muted group-hover:text-brand group-hover:translate-x-1 transition-all" />
+          </button>
+        </div>
       </div>
 
       <UiGrid v-if="selectedCategory && filteredDoa.length > 0" cols="2" gap="md">
@@ -23,13 +45,7 @@
           <DoaMantraDoaCard :doa="doa" />
         </NuxtLink>
       </UiGrid>
-      <div v-else-if="!selectedCategory" class="text-center py-20">
-        <div class="w-20 h-20 bg-brand/5 rounded-full flex items-center justify-center mx-auto mb-4 text-brand/40">
-          <Icon name="lucide:arrow-up" size="32" class="animate-bounce" />
-        </div>
-        <p class="text-muted italic">Pilih kategori di atas untuk melihat daftar doa.</p>
-      </div>
-      <div v-else class="text-center py-20 opacity-40 italic">
+      <div v-else-if="selectedCategory && filteredDoa.length === 0" class="text-center py-20 opacity-40 italic">
         Belum ada doa atau mantra yang terdaftar di kategori ini.
       </div>
     </div>
