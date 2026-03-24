@@ -160,9 +160,10 @@
 
 <script setup lang="ts">
 const colorMode = useColorMode()
-const { locale, locales, setLocale } = useI18n()
+const { t, locale, locales, setLocale } = useI18n()
 const { updatePassword, toggleMFA } = useAuth()
 const { accentColors, selectedColorId, applyTheme } = useTheme()
+const { requestPermission, permission: browserPermission } = useNotificationPermission()
 const authStore = useAuthStore()
 
 onMounted(() => {
@@ -258,7 +259,14 @@ const notificationOptions = computed(() => [
   { id: 'tips', label: 'Inspirasi Harian', desc: 'Kutipan sloka harian', enabled: notifStore.settings.tips },
 ])
 
-const toggleNotif = (id: string, val: boolean) => {
+const toggleNotif = async (id: string, val: boolean) => {
+  if (val) {
+    const granted = await requestPermission()
+    if (!granted) {
+      alert(t('settings.notif_permission_denied'))
+      return
+    }
+  }
   notifStore.updateSetting(id as any, val)
 }
 </script>

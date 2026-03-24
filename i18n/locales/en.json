@@ -46,6 +46,7 @@
     "lang_desc": "Sanatana Dharma is available in several regional languages.",
     "lang_bali_warning": "Balinese language is currently under development. If you find any issues or have suggestions, please help us improve it.",
     "notif_title": "Notification Settings",
-    "notif_desc": "Manage how you receive updates from Sanatana Dharma."
+    "notif_desc": "Manage how you receive updates from Sanatana Dharma.",
+    "notif_permission_denied": "Please enable notification permissions in your browser to receive updates."
   }
 }

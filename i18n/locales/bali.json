@@ -46,6 +46,7 @@
     "lang_desc": "Sanatana Dharma kantun sajeroning makudang-kudang basa daerah.",
     "lang_bali_warning": "Basa Bali ring galah mangkin kantun sajeroning panglimbak. Yening raris masepuk iwang utawi madue saran, tulungin tityang mangda sayan becik.",
     "notif_title": "Pangaturan Notifikasi",
-    "notif_desc": "Manage how you receive updates from Sanatana Dharma."
+    "notif_desc": "Manage how you receive updates from Sanatana Dharma.",
+    "notif_permission_denied": "Suksma aktifkan izin notifikasi ring browser druene mangda prasida polih pawaringat."
   }
 }

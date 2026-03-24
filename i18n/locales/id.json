@@ -46,6 +46,7 @@
     "lang_desc": "Sanatana Dharma tersedia dalam beberapa bahasa regional.",
     "lang_bali_warning": "Bahasa Bali saat ini masih dalam tahap pengembangan. Jika Anda menemukan kesalahan atau memiliki saran, mohon bantu kami untuk menyempurnakannya.",
     "notif_title": "Pengaturan Notifikasi",
-    "notif_desc": "Atur bagaimana Anda menerima pembaruan dari Sanatana Dharma."
+    "notif_desc": "Atur bagaimana Anda menerima pembaruan dari Sanatana Dharma.",
+    "notif_permission_denied": "Mohon aktifkan izin notifikasi di browser Anda untuk menerima pemberitahuan."
   }
 }
