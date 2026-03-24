@@ -16,7 +16,7 @@ const menuItems = computed(() => {
     { label: 'Tersimpan', icon: 'lucide:bookmark', color: 'text-brand', path: '/tersimpan', auth: true },
     { label: 'Video', icon: 'lucide:clapperboard', color: 'text-yellow-500', path: '/video' },
     { label: 'Pura', icon: 'lucide:map-pin', color: 'text-emerald-500', path: '/pura' },
-    { label: 'Donasi', icon: 'lucide:heart', color: 'text-red-500', path: '/donasi' },
+    { label: 'Punia', icon: 'lucide:heart', color: 'text-red-500', path: '/punia' },
     { label: 'Belanja', icon: 'lucide:shopping-bag', color: 'text-orange-500', path: '/sarana-upacara' },
     { label: 'E-Library', icon: 'lucide:library', color: 'text-indigo-500', path: '/e-library' },
     { label: 'Forum', icon: 'lucide:message-square', color: 'text-cyan-500', path: '/forum' },

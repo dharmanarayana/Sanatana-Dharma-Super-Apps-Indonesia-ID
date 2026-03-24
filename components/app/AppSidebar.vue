@@ -26,7 +26,7 @@ const navGroups = [
       { path: '/video',         icon: '▶️', label: 'Video' },
       { path: '/e-library',     icon: '📚', label: 'E-Library' },
       { path: '/berita',        icon: '📰', label: 'Berita' },
-      { path: '/donasi',        icon: '💛', label: 'Donasi' },
+      { path: '/punia',         icon: '💛', label: 'Punia' },
     ]
   },
   {
