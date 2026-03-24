@@ -50,6 +50,7 @@ const sidebarCollapsed = ref(false)
       <AppBottomNav />
 
     </template>
-
+    
+    <AppGlobalSearch />
   </div>
 </template>

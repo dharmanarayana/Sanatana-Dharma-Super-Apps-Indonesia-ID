@@ -29,6 +29,9 @@
 
     <!-- Aksi kanan -->
     <div class="flex items-center gap-2">
+      <button @click="openSearch" class="p-2 rounded-lg text-muted hover:text-brand transition-all" aria-label="Cari">
+        <Icon name="lucide:search" class="w-5 h-5" />
+      </button>
       <AppThemeToggle />
       <AppNotificationBell />
 
@@ -61,6 +64,7 @@ const route = useRoute()
 const router = useRouter()
 const authStore = useAuthStore()
 const { goBack } = useNavBack()
+const { openSearch } = useGlobalSearch()
 
 const firstName = computed(() => {
   return authStore.user?.name?.split(' ')[0] || 'User'

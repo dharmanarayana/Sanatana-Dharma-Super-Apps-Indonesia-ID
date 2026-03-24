@@ -1,6 +1,6 @@
-<!-- components/app/AppHeaderDesktop.vue -->
 <script setup lang="ts">
 defineEmits(['toggle-sidebar'])
+const { openSearch } = useGlobalSearch()
 </script>
 
 <template>
@@ -20,6 +20,9 @@ defineEmits(['toggle-sidebar'])
 
     <!-- Actions -->
     <div class="flex items-center gap-2">
+      <button @click="openSearch" class="p-2 rounded-lg hover:bg-default/5 text-muted hover:text-brand transition-all" aria-label="Cari">
+        <Icon name="lucide:search" class="w-5 h-5" />
+      </button>
       <AppThemeToggle />
       <AppNotificationBell />
     </div>

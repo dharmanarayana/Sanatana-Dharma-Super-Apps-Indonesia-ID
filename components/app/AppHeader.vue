@@ -14,6 +14,9 @@
     
     <div class="flex items-center gap-3">
       <ClientOnly>
+        <button @click="openSearch" class="p-2 rounded-lg hover:bg-default/5 text-muted hover:text-brand transition-all" aria-label="Cari">
+          <Icon name="lucide:search" class="w-5 h-5" />
+        </button>
         <AppThemeToggle />
         <AppNotificationBell />
         
@@ -48,6 +51,7 @@
 <script setup>
 const authStore = useAuthStore()
 const colorMode = useColorMode()
+const { openSearch } = useGlobalSearch()
 
 const firstName = computed(() => {
   return authStore.user?.name?.split(' ')[0] || 'User'
