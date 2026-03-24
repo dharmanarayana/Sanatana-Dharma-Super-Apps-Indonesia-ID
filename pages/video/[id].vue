@@ -110,67 +110,24 @@ const SUPPORTED_CHANNELS = [
 
 const selectedChannel = ref(SUPPORTED_CHANNELS[Math.floor(Math.random() * SUPPORTED_CHANNELS.length)])
 
-const youtubeId = computed(() => {
-  if (!video.value?.url) return null
-  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-  const match = video.value.url.match(regExp);
-  return (match && match[2].length === 11) ? match[2] : null;
-})
-
-const fetchDetail = async () => {
+const { data: videoData, pending: loading } = await useAsyncData(`video-${route.params.id}`, async () => {
   try {
-    // Fetch by slug
     const res = await $appwrite.databases.listDocuments(DB_ID, 'videos', [
       useAppwriteQuery().equal('slug', route.params.id as string),
       useAppwriteQuery().limit(1)
     ])
     
-    if (res.documents.length === 0) throw new Error('Video tidak ditemukan')
-    
-    const doc = res.documents[0]
-    video.value = doc
-    
-    // Breadcrumb title
-    useBreadcrumbs().setBreadcrumbLabel(route.params.id as string, doc.title)
-
-    // SEO Meta
-    useSeoMeta({
-      title: `${doc.title}`,
-      ogTitle: `${doc.title}`,
-      description: doc.description ? (doc.description.substring(0, 160) + '...') : `Tonton video dharma mengenai ${doc.category}: ${doc.title} di platform Sanatana Dharma.`,
-      ogDescription: doc.description ? (doc.description.substring(0, 160) + '...') : `Tonton video dharma mengenai ${doc.category}: ${doc.title}.`,
-      ogImage: doc.thumbnail || '/og-video.png',
-      ogType: 'video.other',
-      ogSiteName: 'Sanatana Dharma Digital',
-      twitterCard: 'summary_large_image',
-      twitterTitle: `${doc.title}`,
-      twitterDescription: doc.description?.substring(0, 160),
-      twitterImage: doc.thumbnail || '/og-video.png',
-    })
-
-    // Subscribe to this specific video
-    unsubscribe = $appwrite.client.subscribe(
-      `databases.${DB_ID}.collections.videos.documents.${doc.$id}`, 
-      (response: any) => {
-        if (response.events.some((e: string) => e.includes('.update'))) {
-          video.value = response.payload
-          useBreadcrumbs().setBreadcrumbLabel(route.params.id as string, response.payload.title)
-        } else if (response.events.some((e: string) => e.includes('.delete'))) {
-          navigateTo('/video')
-        }
-      }
-    )
-
-    // Fetch related
-    const relatedRes = await $appwrite.databases.listDocuments(DB_ID, 'videos', [
-      useAppwriteQuery().equal('category', doc.category),
-      useAppwriteQuery().notEqual('$id', doc.$id),
-      useAppwriteQuery().limit(4)
-    ])
-    relatedVideos.value = relatedRes.documents
+    if (res.documents.length === 0) return null
+    return res.documents[0]
   } catch (e: any) {
     console.error('Error fetching video detail:', e.message)
+    return null
   }
+})
+
+// Sync videoData to video ref for compatibility with existing code
+if (videoData.value) {
+  video.value = videoData.value
 }
 
 const formatDate = (date: string) => {
@@ -192,7 +149,64 @@ const handleShare = async () => {
   }
 }
 
-onMounted(fetchDetail)
+const youtubeId = computed(() => {
+  if (!video.value?.url) return null
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+  const match = video.value.url.match(regExp);
+  return (match && match[2].length === 11) ? match[2] : null;
+})
+
+// SEO Meta at top level
+if (video.value) {
+  const metaTitle = video.value.title
+  const metaDesc = video.value.description ? (video.value.description.substring(0, 160) + '...') : `Tonton video dharma mengenai ${video.value.category}: ${video.value.title}.`
+  const metaImage = video.value.thumbnail || (youtubeId.value ? `https://i.ytimg.com/vi/${youtubeId.value}/maxresdefault.jpg` : '/og-video.png')
+
+  useSeoMeta({
+    title: metaTitle,
+    ogTitle: metaTitle,
+    description: metaDesc,
+    ogDescription: metaDesc,
+    ogImage: metaImage,
+    ogType: 'video.other',
+    ogSiteName: 'Sanatana Dharma Digital',
+    twitterCard: 'summary_large_image',
+    twitterTitle: metaTitle,
+    twitterDescription: metaDesc,
+    twitterImage: metaImage,
+  })
+
+  useBreadcrumbs().setBreadcrumbLabel(route.params.id as string, video.value.title)
+}
+
+// Related videos fetch (client-side is fine after main data)
+const { data: relatedRes } = await useAsyncData(`related-videos-${route.params.id}`, async () => {
+  if (!video.value) return null
+  return await $appwrite.databases.listDocuments(DB_ID, 'videos', [
+    useAppwriteQuery().equal('category', video.value.category),
+    useAppwriteQuery().notEqual('$id', video.value.$id),
+    useAppwriteQuery().limit(4)
+  ])
+})
+if (relatedRes.value) {
+  relatedVideos.value = relatedRes.value.documents
+}
+
+// Realtime subscription
+onMounted(() => {
+  if (!video.value) return
+  unsubscribe = $appwrite.client.subscribe(
+    `databases.${DB_ID}.collections.videos.documents.${video.value.$id}`, 
+    (response: any) => {
+      if (response.events.some((e: string) => e.includes('.update'))) {
+        video.value = response.payload
+        useBreadcrumbs().setBreadcrumbLabel(route.params.id as string, response.payload.title)
+      } else if (response.events.some((e: string) => e.includes('.delete'))) {
+        navigateTo('/video')
+      }
+    }
+  )
+})
 onUnmounted(() => {
   if (unsubscribe) unsubscribe()
 })

@@ -179,40 +179,36 @@ const { $appwrite } = useNuxtApp()
 const DB_ID = 'sanatana-dharma-db'
 const COLL_ID = 'temples'
 
-const temple = ref<any>(null)
-const loading = ref(true)
-
-const fetchTempleDetail = async () => {
-    loading.value = true
+const { data: temple, pending: loading } = await useAsyncData(`temple-${route.params.id}`, async () => {
     try {
         const response = await $appwrite.databases.listDocuments(DB_ID, COLL_ID, [
             useAppwriteQuery().equal('slug', route.params.id as string)
         ])
-        if (response.documents.length > 0) {
-            temple.value = response.documents[0]
-            useSeoMeta({
-              title: `${temple.value.name}`,
-              ogTitle: `${temple.value.name}`,
-              description: `Pelajari sejarah, lokasi, dan informasi lengkap mengenai ${temple.value.name} yang terletak di ${temple.value.city}, ${temple.value.province}. Platform Sanatana Dharma membantu Anda menemukan pura terdekat dan panduan spiritual Hindu.`,
-              ogDescription: `Pelajari sejarah, lokasi, dan informasi lengkap mengenai ${temple.value.name} yang terletak di ${temple.value.city}, ${temple.value.province}.`,
-              ogImage: temple.value.image,
-              ogType: 'website',
-              ogSiteName: 'Sanatana Dharma Digital',
-              twitterCard: 'summary_large_image',
-              twitterTitle: `${temple.value.name}`,
-              twitterDescription: `Informasi lengkap mengenai ${temple.value.name} di ${temple.value.city}, ${temple.value.province}.`,
-              twitterImage: temple.value.image,
-            })
-            useBreadcrumbs().setBreadcrumbLabel(route.params.id as string, temple.value.name)
-        } else {
-            temple.value = null
-        }
+        return response.documents.length > 0 ? response.documents[0] : null
     } catch (e: any) {
         console.error('Error fetching temple:', e.message)
-        temple.value = null
-    } finally {
-        loading.value = false
+        return null
     }
+})
+
+// Set SEO metadata at top level for SSR
+if (temple.value) {
+    useSeoMeta({
+        title: `${temple.value.name}`,
+        ogTitle: `${temple.value.name}`,
+        description: `Pelajari sejarah, lokasi, dan informasi lengkap mengenai ${temple.value.name} yang terletak di ${temple.value.city}, ${temple.value.province}. Platform Sanatana Dharma membantu Anda menemukan pura terdekat dan panduan spiritual Hindu.`,
+        ogDescription: `Pelajari sejarah, lokasi, dan informasi lengkap mengenai ${temple.value.name} yang terletak di ${temple.value.city}, ${temple.value.province}.`,
+        ogImage: temple.value.image || '/og-image.png',
+        ogType: 'website',
+        ogSiteName: 'Sanatana Dharma Digital',
+        twitterCard: 'summary_large_image',
+        twitterTitle: `${temple.value.name}`,
+        twitterDescription: `Informasi lengkap mengenai ${temple.value.name} di ${temple.value.city}, ${temple.value.province}.`,
+        twitterImage: temple.value.image || '/og-image.png',
+    })
+    
+    // Set breadcrumb label
+    useBreadcrumbs().setBreadcrumbLabel(route.params.id as string, temple.value.name)
 }
 
 const mapUrl = computed(() => {
@@ -243,7 +239,7 @@ const openExternalMaps = () => {
 }
 
 const sharePura = () => {
-    if (navigator.share) {
+    if (navigator.share && temple.value) {
         navigator.share({
             title: temple.value.name,
             text: `Detail ${temple.value.name} di Sanatana Dharma Super App`,
@@ -255,7 +251,8 @@ const sharePura = () => {
     }
 }
 
-onMounted(fetchTempleDetail)
+// onMounted is no longer needed for initial fetch with useAsyncData
+
 </script>
 
 <style scoped>

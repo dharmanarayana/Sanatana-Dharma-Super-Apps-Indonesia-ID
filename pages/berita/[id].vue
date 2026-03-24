@@ -92,35 +92,30 @@ const { $appwrite } = useNuxtApp()
 const DB_ID = 'sanatana-dharma-db'
 const COLL_ID = 'news'
 
-const news = ref<any>(null)
-const loading = ref(true)
-
-const fetchNewsDetail = async () => {
-  loading.value = true
+const { data: news, pending: loading } = await useAsyncData(`news-${route.params.id}`, async () => {
   try {
-    const response = await $appwrite.databases.getDocument(DB_ID, COLL_ID, route.params.id as string)
-    news.value = response
-    
-    // Set SEO metadata
-    useSeoMeta({
-      title: `${news.value.title}`,
-      ogTitle: `${news.value.title}`,
-      description: news.value.content?.substring(0, 160) + '...',
-      ogDescription: news.value.content?.substring(0, 160) + '...',
-      ogImage: news.value.image,
-      ogType: 'article',
-      ogSiteName: 'Sanatana Dharma Digital',
-      twitterCard: 'summary_large_image',
-      twitterTitle: `${news.value.title}`,
-      twitterDescription: news.value.content?.substring(0, 160) + '...',
-      twitterImage: news.value.image,
-    })
+    return await $appwrite.databases.getDocument(DB_ID, COLL_ID, route.params.id as string)
   } catch (e: any) {
     console.error('Error fetching news:', e.message)
-    news.value = null
-  } finally {
-    loading.value = false
+    return null
   }
+})
+
+// Set SEO metadata at top level for SSR
+if (news.value) {
+  useSeoMeta({
+    title: `${news.value.title}`,
+    ogTitle: `${news.value.title}`,
+    description: news.value.content?.substring(0, 160) + '...',
+    ogDescription: news.value.content?.substring(0, 160) + '...',
+    ogImage: news.value.image || '/og-berita.png',
+    ogType: 'article',
+    ogSiteName: 'Sanatana Dharma Digital',
+    twitterCard: 'summary_large_image',
+    twitterTitle: `${news.value.title}`,
+    twitterDescription: news.value.content?.substring(0, 160) + '...',
+    twitterImage: news.value.image || '/og-berita.png',
+  })
 }
 
 const formatDate = (dateStr: string) => {
@@ -145,7 +140,8 @@ const shareNews = () => {
   }
 }
 
-onMounted(fetchNewsDetail)
+// onMounted is no longer needed for initial fetch with useAsyncData
+
 </script>
 
 <style scoped>

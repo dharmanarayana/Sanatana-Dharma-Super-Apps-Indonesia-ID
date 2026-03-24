@@ -120,6 +120,8 @@ export default defineNuxtConfig({
         { property: 'og:title', content: 'Sanatana Dharma Digital' },
         { property: 'og:description', content: 'Platform Keagamaan Hindu Indonesia — Kalender Saka, Doa Mantra, Kitab Suci, dan lebih banyak lagi' },
         { property: 'og:image', content: '/og-image.png' },
+        { property: 'og:image:width', content: '1200' },
+        { property: 'og:image:height', content: '630' },
         // Twitter
         { name: 'twitter:card', content: 'summary_large_image' },
         { name: 'twitter:title', content: 'Sanatana Dharma Digital' },

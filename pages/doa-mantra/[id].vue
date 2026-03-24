@@ -87,7 +87,6 @@
 const route = useRoute()
 const isPlaying = ref(false)
 const isBookmarked = ref(false)
-const doa = ref<any>(null)
 
 const prayerExplanation = computed(() => {
   if (!doa.value) return ''
@@ -115,65 +114,60 @@ const parseContent = (doc: any) => {
   return [{ sanskrit: '', transliteration: doc.transliteration || '', translation: doc.content || '' }]
 }
 
-const fetchDetail = async () => {
+const { data: doa, pending: loading } = await useAsyncData(`prayer-${route.params.id}`, async () => {
   try {
     const prayersData = (await import('~/data/prayers.json')).default
-    let localData = prayersData.find((d: any) => d.slug === route.params.id)
+    let localItem = prayersData.find((d: any) => d.slug === route.params.id)
     
-    // Convert to proper format if matched local
-    if (localData) {
-      localData = { ...localData, category: localData.category_name } as any
-      doa.value = localData
-    }
-
+    let appDoc = null;
     try {
       const { $appwrite } = useNuxtApp()
-      let appDoc = null;
-      try {
-        const res = await $appwrite.databases.listDocuments('sanatana-dharma-db', 'prayers', [
-            useAppwriteQuery().equal('slug', route.params.id as string)
-        ])
-        if (res.documents.length > 0) {
-            appDoc = res.documents[0]
-        }
-      } catch(err) {}
-
-      if (appDoc) {
-        const parsedDoc = {
-          ...appDoc,
-          category: appDoc.category_name || (appDoc.category_id ? 'Kategori ' + appDoc.category_id : 'Lainnya'),
-          content: parseContent(appDoc)
-        }
-        
-        if (doa.value) {
-          doa.value = { ...doa.value, ...parsedDoc, content: doa.value.content } as any
-        } else {
-          doa.value = parsedDoc as any
-        }
+      const res = await $appwrite.databases.listDocuments('sanatana-dharma-db', 'prayers', [
+          useAppwriteQuery().equal('slug', route.params.id as string)
+      ])
+      if (res.documents.length > 0) {
+          appDoc = res.documents[0]
       }
-    } catch(err) {
-      console.error('Appwrite merge failed:', err)
+    } catch(err) {}
+
+    if (!localItem && !appDoc) return null
+
+    // Merge logic
+    const finalDoa = localItem ? { ...localItem } : {} as any
+    if (appDoc) {
+      Object.assign(finalDoa, {
+        ...appDoc,
+        category: appDoc.category_name || (appDoc.category_id ? 'Kategori ' + appDoc.category_id : 'Lainnya'),
+        content: parseContent(appDoc)
+      })
+      // Ensure content from appDoc is used if available, but parse it correctly
+      if (appDoc.content) finalDoa.content = parseContent(appDoc)
+    } else if (localItem) {
+      finalDoa.category = localItem.category_name
     }
 
-    // Set SEO metadata
-    if (doa.value) {
-      useSeoMeta({
-        title: `${doa.value.title}`,
-        ogTitle: `${doa.value.title}`,
-        description: `Baca ${doa.value.title} (${doa.value.category}). Tersedia teks Sansekerta, transliterasi, dan terjemahan bahasa Indonesia lengkap hanya di Sanatana Dharma.`,
-        ogDescription: `Baca ${doa.value.title} (${doa.value.category}). Lengkap dengan Sansekerta, transliterasi, dan terjemahan.`,
-        ogImage: '/og-doa.png',
-        ogType: 'article',
-        ogSiteName: 'Sanatana Dharma Digital',
-        twitterCard: 'summary_large_image',
-        twitterTitle: `${doa.value.title}`,
-        twitterDescription: `Baca ${doa.value.title} (${doa.value.category}) dengan transliterasi dan terjemahan.`,
-      })
-      useBreadcrumbs().setBreadcrumbLabel(route.params.id as string, doa.value.title)
-    }
+    return finalDoa
   } catch (e) {
     console.error('Error loading prayer detail:', e)
+    return null
   }
+})
+
+// Set SEO metadata at top level for SSR
+if (doa.value) {
+  useSeoMeta({
+    title: `${doa.value.title}`,
+    ogTitle: `${doa.value.title}`,
+    description: `Baca ${doa.value.title} (${doa.value.category}). Tersedia teks Sansekerta, transliterasi, dan terjemahan bahasa Indonesia lengkap.`,
+    ogDescription: `Baca ${doa.value.title} (${doa.value.category}). Lengkap dengan Sansekerta, transliterasi, dan terjemahan.`,
+    ogImage: '/og-doa.png', // Fallback for prayers
+    ogType: 'article',
+    ogSiteName: 'Sanatana Dharma Digital',
+    twitterCard: 'summary_large_image',
+    twitterTitle: `${doa.value.title}`,
+    twitterDescription: `Baca ${doa.value.title} (${doa.value.category}) dengan transliterasi dan terjemahan.`,
+  })
+  useBreadcrumbs().setBreadcrumbLabel(route.params.id as string, doa.value.title)
 }
 
 const handleShare = async () => {
@@ -185,6 +179,4 @@ const handleShare = async () => {
     })
   }
 }
-
-onMounted(fetchDetail)
 </script>
