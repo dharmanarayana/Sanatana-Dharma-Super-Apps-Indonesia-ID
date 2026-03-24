@@ -1,6 +1,6 @@
 <template>
   <div>
-    <UiPageHeader icon="🕌" title="Daftar Pura"
+    <UiPageHeader icon="🛕" title="Daftar Pura"
                   subtitle="Temukan tempat suci di sekitar Anda"
                   back-path="/" />
     <div class="px-4 lg:px-0 py-4 grid lg:grid-cols-[280px_1fr] gap-8">
@@ -50,7 +50,7 @@
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-default pb-3">
           <div class="relative flex-1 max-w-sm">
             <input v-model="searchQuery" type="text" placeholder="Cari nama Pura..." class="input-field pl-9 h-11" />
-            <span class="absolute left-3 top-1/2 -translate-y-1/2 opacity-30">🕌</span>
+            <span class="absolute left-3 top-1/2 -translate-y-1/2 opacity-30">🛕</span>
           </div>
           <div class="flex items-center gap-2">
             <!-- Mobile GPS Toggle -->

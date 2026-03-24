@@ -33,7 +33,7 @@ const navGroups = [
     label: 'Sosial & Ekonomi',
     items: [
       { path: '/forum',         icon: '💬', label: 'Forum' },
-      { path: '/pura',          icon: '🗺️', label: 'Direktori Pura' },
+      { path: '/pura',          icon: '🛕', label: 'Daftar Pura' },
       { path: '/wisata-rohani', icon: '🏖️', label: 'Wisata Rohani' },
       { path: '/sarana-upacara',  icon: '🛍️', label: 'Sarana Upacara' },
     ]
