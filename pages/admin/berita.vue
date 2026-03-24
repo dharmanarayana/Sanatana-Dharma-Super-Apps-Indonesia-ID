@@ -61,6 +61,7 @@ const fields = [
     { label: 'Pura', value: 'Pura' },
     { label: 'Kegiatan', value: 'Kegiatan' },
     { label: 'Warta', value: 'Warta' },
+    { label: 'Pengumuman', value: 'Pengumuman' },
   ]},
   { key: 'publishedAt', label: 'Tanggal Terbit', type: 'datetime-local', required: true, default: new Date().toISOString().slice(0, 16) },
   { key: 'image', label: 'URL Gambar Utama', placeholder: 'https://...' },
