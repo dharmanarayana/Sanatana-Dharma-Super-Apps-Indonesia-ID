@@ -18,13 +18,19 @@
         </button>
       </div>
 
-      <UiGrid v-if="filteredDoa.length > 0" cols="2" gap="md">
+      <UiGrid v-if="selectedCategory && filteredDoa.length > 0" cols="2" gap="md">
         <NuxtLink v-for="doa in filteredDoa" :key="doa.$id" :to="`/doa-mantra/${doa.slug}`" class="block no-underline">
           <DoaMantraDoaCard :doa="doa" />
         </NuxtLink>
       </UiGrid>
+      <div v-else-if="!selectedCategory" class="text-center py-20">
+        <div class="w-20 h-20 bg-brand/5 rounded-full flex items-center justify-center mx-auto mb-4 text-brand/40">
+          <Icon name="lucide:arrow-up" size="32" class="animate-bounce" />
+        </div>
+        <p class="text-muted italic">Pilih kategori di atas untuk melihat daftar doa.</p>
+      </div>
       <div v-else class="text-center py-20 opacity-40 italic">
-        Belum ada doa atau mantra yang terdaftar.
+        Belum ada doa atau mantra yang terdaftar di kategori ini.
       </div>
     </div>
   </div>
@@ -45,7 +51,7 @@ const DB_ID = 'sanatana-dharma-db'
 
 const doaList = ref<any[]>([])
 const searchQuery = ref('')
-const selectedCategory = ref('Semua')
+const selectedCategory = ref<string | null>(null)
 
 const categories = computed(() => {
   const cats = new Set(doaList.value.map(d => d.category))
@@ -115,6 +121,8 @@ const fetchDoa = async () => {
 }
 
 const filteredDoa = computed(() => {
+  if (!selectedCategory.value) return []
+  
   return doaList.value.filter(d => {
     const matchesSearch = d.title.toLowerCase().includes(searchQuery.value.toLowerCase())
     const matchesCategory = selectedCategory.value === 'Semua' || d.category === selectedCategory.value
