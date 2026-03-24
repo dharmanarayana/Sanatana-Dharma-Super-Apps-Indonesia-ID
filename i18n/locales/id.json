@@ -23,9 +23,12 @@
     "galeri": "Galeri",
     "sosial": "Sosial",
     "menu": "Menu",
-    "select_service": "Pilih Layanan"
+    "select_service": "Pilih Layanan",
+    "kitab_suci": "Kitab Suci",
+    "forum": "Forum"
   },
   "profile": {
+    "login": "Masuk / Daftar",
     "title": "Profil Saya",
     "settings": "PENGATURAN & APLIKASI",
     "settings_desc": "Kelola akun, notifikasi, dan preferensi tampilan Anda.",

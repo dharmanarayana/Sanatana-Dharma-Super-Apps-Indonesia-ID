@@ -39,7 +39,7 @@
           <div class="w-6 h-6 rounded-full bg-brand/10 flex items-center justify-center">
             <Icon name="lucide:user" class="w-4 h-4 text-brand" />
           </div>
-          <span class="text-sm font-bold text-default">Login</span>
+          <span class="text-sm font-bold text-default">Masuk / Daftar</span>
         </NuxtLink>
 
         <NuxtLink v-else 

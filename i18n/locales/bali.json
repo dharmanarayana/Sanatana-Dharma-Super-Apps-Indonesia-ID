@@ -23,9 +23,12 @@
     "galeri": "Galeri",
     "sosial": "Pasemetonan",
     "menu": "Menu",
-    "select_service": "Pilih Ayahan"
+    "select_service": "Pilih Ayahan",
+    "kitab_suci": "Pustaka Suci",
+    "forum": "Pasemetonan"
   },
   "profile": {
+    "login": "Manjing / Daftar",
     "title": "Profil Titiang",
     "settings": "PENGATURAN & APLIKASI",
     "settings_desc": "Ngwangun akun, pawingat, miwah tampilan druene.",

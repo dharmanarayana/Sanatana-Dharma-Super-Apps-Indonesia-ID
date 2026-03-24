@@ -23,7 +23,7 @@
           <div class="w-6 h-6 rounded-full bg-brand/10 flex items-center justify-center">
             <Icon name="lucide:user" class="w-4 h-4 text-brand" />
           </div>
-          <span class="text-sm font-bold text-default">{{ $t('profile.login') || 'Login' }}</span>
+          <span class="text-sm font-bold text-default">{{ $t('profile.login') }}</span>
         </NuxtLink>
 
         <NuxtLink v-else to="/profil" class="flex items-center gap-2 pl-3 pr-1 py-1 bg-surface border border-brand/20 rounded-full active:scale-95 transition-all shadow-sm">

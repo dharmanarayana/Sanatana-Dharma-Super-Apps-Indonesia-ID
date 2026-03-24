@@ -13,10 +13,10 @@ const toggleMenu = () => {
 
 const navItems = computed(() => [
   { path: '/',           icon: 'lucide:house',           label: 'nav.home'  },
-  { path: '/kalender',   icon: 'lucide:calendar-days',   label: 'nav.pura' }, // Use 'pura' for now or add 'calendar'
+  { path: '/kalender',   icon: 'lucide:calendar-days',   label: 'nav.kalender' },
   { type: 'menu',        label: 'nav.menu' },
-  { path: '/kitab-suci', icon: 'lucide:book-open-text',  label: 'nav.doa_mantra'    }, // Adjusting to existing keys
-  { path: '/forum',     icon: 'lucide:message-square',  label: 'nav.profil'   },
+  { path: '/kitab-suci', icon: 'lucide:book-open-text',  label: 'nav.kitab_suci' },
+  { path: '/forum',      icon: 'lucide:message-square',  label: 'nav.forum' },
 ])
 </script>
 
@@ -39,7 +39,7 @@ const navItems = computed(() => [
           :class="isActive(item.path) ? 'text-brand' : 'text-muted/60'"
         >
           <Icon :name="item.icon!" class="w-6 h-6" :class="isActive(item.path) ? 'scale-110' : ''" />
-          <span class="text-sm font-bold">{{ $t(item.label) }}</span>
+          <span class="text-[10px] font-bold whitespace-nowrap">{{ $t(item.label) }}</span>
         </NuxtLink>
 
         <!-- Center MENU FAB -->
@@ -53,7 +53,7 @@ const navItems = computed(() => [
                     class="w-8 h-8 text-brand transition-all duration-300" />
             </button>
           </div>
-          <span class="text-sm font-extrabold text-default mt-2 transition-opacity" 
+          <span class="text-[10px] font-extrabold text-brand mt-2 transition-opacity" 
                 :class="showMenu ? 'opacity-0' : 'opacity-100'">
             {{ $t('nav.menu') }}
           </span>

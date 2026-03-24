@@ -23,9 +23,12 @@
     "galeri": "Gallery",
     "sosial": "Social",
     "menu": "Menu",
-    "select_service": "Select Service"
+    "select_service": "Select Service",
+    "kitab_suci": "Holy Scriptures",
+    "forum": "Forum"
   },
   "profile": {
+    "login": "Login / Sign Up",
     "title": "My Profile",
     "settings": "SETTINGS & APPLICATION",
     "settings_desc": "Manage your account, notifications, and appearance preferences.",
