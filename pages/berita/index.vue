@@ -63,7 +63,7 @@ useSeoMeta({
   twitterCard: 'summary_large_image',
 })
 
-const { newsItems, fetchNews, subscribe: subscribeNews, stop: stopNews } = useRealtimeNews()
+const { newsItems, loading, fetchNews, subscribe: subscribeNews, stop: stopNews } = useRealtimeNews()
 const { announcements, fetchAnnouncements, subscribe: subscribeAnnouncements, stop: stopAnnouncements } = useRealtimeAnnouncements()
 
 const topNews = computed(() => newsItems.value.slice(0, 3))
