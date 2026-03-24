@@ -64,9 +64,25 @@ export default defineNuxtConfig({
       ]
     },
     workbox: {
-      navigateFallback: null,
-      globPatterns: ['**/*.{js,css,html,png,svg,ico,woff2}'],
+      navigateFallback: '/',
+      globPatterns: ['**/*.{js,css,html,png,svg,ico,woff2,json}'],
       runtimeCaching: [
+        {
+          urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
+          handler: 'CacheFirst',
+          options: {
+            cacheName: 'google-fonts-stylesheets',
+            expiration: { maxEntries: 10, maxAgeSeconds: 60 * 60 * 24 * 365 }
+          }
+        },
+        {
+          urlPattern: /^https:\/\/fonts\.gstatic\.com\/.*/i,
+          handler: 'CacheFirst',
+          options: {
+            cacheName: 'google-fonts-webfonts',
+            expiration: { maxEntries: 30, maxAgeSeconds: 60 * 60 * 24 * 365 }
+          }
+        },
         {
           // Support regional Appwrite endpoints (e.g., fra.cloud.appwrite.io)
           urlPattern: /^https:\/\/.*\.appwrite\.io\/v1\/databases\/.*/i,
