@@ -1,7 +1,7 @@
 <template>
   <div>
     <UiPageHeader icon="👤" :title="$t('profile.title')"
-                  :subtitle="$t('common.loading')"
+                  :subtitle="loading ? $t('common.loading') : $t('profile.settings_desc')"
                   back-path="/" />
     <div class="px-4 lg:px-0 py-4">
       <div v-if="authStore.isLoggedIn" class="grid lg:grid-cols-2 gap-8">

@@ -14,7 +14,7 @@
     </button>
 
     <!-- Modals -->
-    <UiModal :show="activeModal === 'Keamanan'" :title="$t('profile.security')" @close="closeSecurityModal">
+    <UiModal :show="activeModal === 'Security'" :title="$t('profile.security')" @close="closeSecurityModal">
       <div v-if="securityMode === 'list'" class="space-y-6">
         <p class="text-xs text-muted leading-relaxed">Kelola keamanan akun Anda untuk melindungi data personal.</p>
         <div class="space-y-4">
@@ -79,7 +79,7 @@
       </div>
     </UiModal>
 
-    <UiModal :show="activeModal === 'Notifikasi'" :title="$t('profile.notifications')" @close="activeModal = null">
+    <UiModal :show="activeModal === 'Notifications'" :title="$t('profile.notifications')" @close="activeModal = null">
       <div class="space-y-6">
         <p class="text-xs text-muted">{{ $t('settings.notif_desc') }}</p>
         <div class="space-y-2">
@@ -94,7 +94,7 @@
       </div>
     </UiModal>
 
-    <UiModal :show="activeModal === 'Tampilan'" :title="$t('settings.theme_title')" @close="activeModal = null">
+    <UiModal :show="activeModal === 'Appearance'" :title="$t('settings.theme_title')" @close="activeModal = null">
       <div class="space-y-8">
         <!-- Theme Mode Selection -->
         <div class="space-y-4">
@@ -128,7 +128,7 @@
       </div>
     </UiModal>
 
-    <UiModal :show="activeModal === 'Bahasa'" :title="$t('settings.lang_title')" @close="activeModal = null">
+    <UiModal :show="activeModal === 'Language'" :title="$t('settings.lang_title')" @close="activeModal = null">
       <div class="space-y-6">
         <p class="text-xs text-muted font-medium">{{ $t('settings.lang_desc') }}</p>
         <div class="space-y-2">

@@ -28,6 +28,7 @@
   "profile": {
     "title": "My Profile",
     "settings": "SETTINGS & APPLICATION",
+    "settings_desc": "Manage your account, notifications, and appearance preferences.",
     "security": "Security",
     "notifications": "Notifications",
     "appearance": "Appearance",
