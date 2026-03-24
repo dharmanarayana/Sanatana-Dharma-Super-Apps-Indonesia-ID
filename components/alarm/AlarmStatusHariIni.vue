@@ -10,12 +10,14 @@ const alarmStore = useAlarmStore()
       <div v-for="(alarm, idx) in alarmStore.alarms" :key="alarm.id" 
            :class="[
              'w-10 h-10 rounded-2xl flex items-center justify-center text-xs font-bold transition-all duration-500',
-             alarm.isEnabled ? 'bg-brand text-white shadow-lg shadow-brand/20' : 'bg-gray-100 dark:bg-gray-800 text-gray-400'
+             alarmStore.isCompletedToday(alarm.id) 
+               ? 'bg-green-500 text-white shadow-lg shadow-green-500/20' 
+               : 'bg-gray-100 dark:bg-gray-800 text-gray-400'
            ]">
-        <span v-if="alarm.isEnabled">✅</span>
+        <span v-if="alarmStore.isCompletedToday(alarm.id)">✅</span>
         <span v-else>{{ idx + 1 }}</span>
       </div>
     </div>
-    <p class="text-[10px] mt-4 text-muted italic">* Aktifkan alarm untuk menerima pengingat otomatis.</p>
+    <p class="text-[10px] mt-4 text-muted italic">* Centang akan muncul jika Anda telah menyelesaikan sembahyang hari ini.</p>
   </div>
 </template>

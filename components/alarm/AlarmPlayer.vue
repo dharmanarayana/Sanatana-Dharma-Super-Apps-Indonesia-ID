@@ -10,24 +10,24 @@ const checkAlarms = () => {
   const now = new Date()
   const currentTime = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`
   
-  const triggeredAlarm = alarmStore.alarms.find(a => a.isEnabled && a.time === currentTime)
+  const triggeredAlarm = alarmStore.alarms.find(a => a.isEnabled && a.time === currentTime && !alarmStore.isCompletedToday(a.id))
   
   if (triggeredAlarm && !alarmStore.isPlaying) {
     console.log(`⏰ Alarm triggered: ${triggeredAlarm.name} at ${currentTime}`)
-    alarmStore.setPlaying(true)
+    alarmStore.setPlaying(true, triggeredAlarm.id)
     
     // Auto stop after 5 minutes (300 seconds) if not manual
     setTimeout(() => {
-      alarmStore.setPlaying(false)
+      alarmStore.setPlaying(false, triggeredAlarm.id)
     }, 300000)
   }
 }
 
 // Start interval
-useIntervalFn(checkAlarms, 60000) // check every minute
+useIntervalFn(checkAlarms, 30000) // check every 30s for better accuracy
 
 const stopAudio = () => {
-  alarmStore.setPlaying(false)
+  alarmStore.setPlaying(false, alarmStore.activeAlarmId)
 }
 </script>
 

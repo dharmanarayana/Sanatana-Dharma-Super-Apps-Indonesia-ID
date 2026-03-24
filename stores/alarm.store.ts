@@ -5,6 +5,7 @@ export interface Alarm {
   name: string
   time: string
   isEnabled: boolean
+  completedAt?: string // ISO date string of completion
 }
 
 export const useAlarmStore = defineStore('alarm', {
@@ -16,7 +17,8 @@ export const useAlarmStore = defineStore('alarm', {
     ] as Alarm[],
     youtubeUrl: 'https://www.youtube.com/watch?v=1L4pm8vUF4c',
     youtubeId: '1L4pm8vUF4c',
-    isPlaying: false
+    isPlaying: false,
+    activeAlarmId: null as string | null
   }),
   actions: {
     toggleAlarm(id: string) {
@@ -31,8 +33,28 @@ export const useAlarmStore = defineStore('alarm', {
         alarm.time = time
       }
     },
-    setPlaying(playing: boolean) {
+    setPlaying(playing: boolean, alarmId: string | null = null) {
       this.isPlaying = playing
+      this.activeAlarmId = alarmId
+      
+      // If stopping, mark as completed if it was active
+      if (!playing && alarmId) {
+        this.markCompleted(alarmId)
+      }
+    },
+    markCompleted(id: string) {
+      const alarm = this.alarms.find(a => a.id === id)
+      if (alarm) {
+        alarm.completedAt = new Date().toISOString()
+      }
+    },
+    isCompletedToday(id: string) {
+      const alarm = this.alarms.find(a => a.id === id)
+      if (!alarm?.completedAt) return false
+      
+      const completedDate = new Date(alarm.completedAt).toDateString()
+      const today = new Date().toDateString()
+      return completedDate === today
     }
   },
   persist: true
