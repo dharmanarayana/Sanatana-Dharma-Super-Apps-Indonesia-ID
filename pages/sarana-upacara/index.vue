@@ -111,10 +111,6 @@
               <div class="bg-white/90 dark:bg-black/90 backdrop-blur-sm px-2.5 py-1 rounded-full text-xs font-bold text-brand shadow-sm">
                 {{ product.category }}
               </div>
-              <div v-if="product.location" class="bg-white/90 dark:bg-black/90 backdrop-blur-sm px-2 py-1 rounded-full text-[10px] font-medium text-muted shadow-sm flex items-center gap-1">
-                <Icon name="lucide:map-pin" class="w-3 h-3" />
-                {{ product.location }}
-              </div>
             </div>
           </div>
           
@@ -125,15 +121,14 @@
             
             <div class="mt-auto pt-3 flex items-end justify-between border-t border-default/50">
               <div>
-                <span class="text-xs text-muted block mb-0.5">Mulai dari</span>
+                <span class="text-xs text-muted block mb-0.5">Harga</span>
                 <span class="font-bold text-brand text-lg">{{ formatRupiah(product.price) }}</span>
               </div>
               <button 
                 @click="buyItem(product)"
                 class="bg-primary hover:bg-primary/90 text-primary-foreground px-4 py-2.5 rounded-xl transition-transform active:scale-95 shadow-sm font-bold tracking-wide text-sm flex items-center gap-2"
-                title="Beli Sekarang"
               >
-                Beli
+                + Keranjang
                 <Icon name="lucide:shopping-cart" class="w-4 h-4" />
               </button>
             </div>
@@ -152,6 +147,31 @@
           Tampilkan Semua
         </button>
       </div>
+
+      <!-- Floating Cart Button -->
+      <Transition name="fade-up">
+        <div v-if="cartStore.totalItems > 0" class="fixed bottom-24 left-1/2 -translate-x-1/2 z-[60] w-[90%] max-w-md">
+           <NuxtLink to="/marketplace/checkout" 
+                     class="bg-brand text-white p-4 rounded-2xl shadow-2xl flex items-center justify-between border-2 border-white/20 backdrop-blur-md animate-bounce-subtle">
+             <div class="flex items-center gap-4 text-left">
+                <div class="relative">
+                  <Icon name="lucide:shopping-bag" class="w-6 h-6" />
+                  <span class="absolute -top-2 -right-2 bg-white text-brand text-[10px] font-black w-5 h-5 rounded-full flex items-center justify-center shadow-md">
+                    {{ cartStore.totalItems }}
+                  </span>
+                </div>
+                <div>
+                   <p class="text-[10px] font-bold uppercase tracking-widest opacity-80">Total Pesanan</p>
+                   <p class="text-lg font-bold">{{ formatRupiah(cartStore.totalAmount) }}</p>
+                </div>
+             </div>
+             <div class="flex items-center gap-2 font-black text-sm uppercase tracking-tighter">
+                Checkout
+                <Icon name="lucide:arrow-right" class="w-5 h-5" />
+             </div>
+           </NuxtLink>
+        </div>
+      </Transition>
 
     </div>
 
@@ -191,6 +211,7 @@ import { ref, computed, onMounted } from 'vue'
 
 const { $appwrite } = useNuxtApp()
 const authStore = useAuthStore()
+const cartStore = useCartStore()
 const { becomeMerchant } = useAuth()
 
 const DB_ID = 'sanatana-dharma-db'
@@ -200,6 +221,10 @@ const isLoading = ref(true)
 const isUpdatingRole = ref(false)
 const showMerchantInfo = ref(false)
 const rawProducts = ref<any[]>([])
+
+const buyItem = (product: any) => {
+  cartStore.addItem(product)
+}
 
 const handleJoinMerchant = async () => {
   if (!confirm('Apakah Anda yakin ingin mendaftar sebagai penjual sarana upacara?')) return
@@ -223,9 +248,6 @@ const categories = ['Semua', 'Banten', 'Perlengkapan', 'Upacara']
 
 // GPS States
 const isLocating = ref(false)
-
-// Admin / CS Whatsapp Number
-const WA_PHONE = '6281234567890'
 
 // Fetch Data from Appwrite
 const fetchSarana = async () => {
@@ -287,13 +309,6 @@ const formatRupiah = (number: number) => {
   }).format(number)
 }
 
-const buyItem = (product: any) => {
-  const text = `Om Swastyastu,%0A%0ASaya tertarik untuk memesan sarana berikut dari aplikasi Sanatana Dharma:%0A%0A📦 *${product.name}*%0A💰 Harga: ${formatRupiah(product.price)}%0A📍 Lokasi Pengiriman: ${product.location || '-'}%0A%0AMohon info lebih lanjut mengenai ketersediaan dan pengiriman. Suksma.`
-  const waUrl = `https://wa.me/${WA_PHONE}?text=${text}`
-  window.open(waUrl, '_blank')
-}
-
-// -----------------------------------------------------------------
 // GPS AUTO-FILTER LOGIC
 // -----------------------------------------------------------------
 const detectLocation = () => {
@@ -325,7 +340,6 @@ const detectLocation = () => {
             
             if (match) {
               activeLocation.value = match
-              // Optional: Provide a nice UX toast here
             } else {
               alert(`GPS Anda terdeteksi di "${detectedCity}", namun belum ada penjual/produk sarana di area ini.`)
             }
