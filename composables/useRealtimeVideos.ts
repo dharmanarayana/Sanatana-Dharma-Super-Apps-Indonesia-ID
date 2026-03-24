@@ -5,17 +5,27 @@ export const useRealtimeVideos = () => {
   const COLL_ID = 'videos'
   
   const videos = useState<any[]>('realtime-videos', () => [])
+  const total = useState<number>('realtime-videos-total', () => 0)
   const loading = useState<boolean>('realtime-videos-loading', () => false)
   
   let unsubscribe: (() => void) | null = null
 
-  const fetchVideos = async () => {
+  const fetchVideos = async (page = 1, limit = 12, category = 'Semua') => {
     loading.value = true
     try {
-      const res = await $appwrite.databases.listDocuments(DB_ID, COLL_ID, [
-        useAppwriteQuery().orderDesc('$createdAt')
-      ])
+      const queries = [
+        useAppwriteQuery().orderDesc('$createdAt'),
+        useAppwriteQuery().limit(limit),
+        useAppwriteQuery().offset((page - 1) * limit)
+      ]
+
+      if (category && category !== 'Semua') {
+        queries.push(useAppwriteQuery().equal('category', category))
+      }
+
+      const res = await $appwrite.databases.listDocuments(DB_ID, COLL_ID, queries)
       videos.value = res.documents
+      total.value = res.total
     } catch (e: any) {
       console.error('Error fetching videos:', e.message)
     } finally {
@@ -33,7 +43,9 @@ export const useRealtimeVideos = () => {
       const payload = response.payload
       
       if (events.some((e: string) => e.includes('.create'))) {
-        videos.value = [payload, ...videos.value]
+        // For simple realtime, we just add to the top, but pagination might make this messy.
+        // However, we'll keep it for now as per original design.
+        videos.value = [payload, ...videos.value].slice(0, 50) // Keep it reasonable
       } else if (events.some((e: string) => e.includes('.update'))) {
         const idx = videos.value.findIndex(v => v.$id === payload.$id)
         if (idx !== -1) {
@@ -54,6 +66,7 @@ export const useRealtimeVideos = () => {
 
   return {
     videos,
+    total,
     loading,
     fetchVideos,
     subscribe,

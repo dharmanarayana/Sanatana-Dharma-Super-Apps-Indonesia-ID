@@ -50,10 +50,10 @@
                   <p class="text-[11px] font-black text-red-500 uppercase tracking-[0.2em]">Dukung Syiar Dharma</p>
                 </div>
                 <p class="text-default text-base font-medium leading-relaxed">
-                  Bantu kami menjangkau lebih banyak umat! Subscribe ke channel YouTube <span class="text-brand font-bold underline">@idabagussubagia</span> untuk mendapatkan pencerahan rutin dan konten spiritual yang menginspirasi setiap minggunya.
+                  Bantu kami menjangkau lebih banyak umat! Subscribe ke channel YouTube <span class="text-brand font-bold underline">{{ selectedChannel.handle }}</span> untuk mendapatkan pencerahan rutin dan konten spiritual yang menginspirasi setiap minggunya.
                 </p>
               </div>
-              <a href="https://www.youtube.com/@idabagussubagia?sub_confirmation=1" 
+              <a :href="`https://www.youtube.com/${selectedChannel.handle}?sub_confirmation=1`" 
                  target="_blank" 
                  class="btn-youtube group flex items-center gap-3 px-8 py-4 shrink-0 shadow-2xl shadow-red-600/40 active:scale-95 transition-all">
                 <Icon name="lucide:youtube" size="24" class="group-hover:scale-125 transition-transform" />
@@ -101,6 +101,14 @@ const DB_ID = 'sanatana-dharma-db'
 const video = ref<any>(null)
 const relatedVideos = ref<any[]>([])
 let unsubscribe: (() => void) | null = null
+
+const SUPPORTED_CHANNELS = [
+  { name: 'Dharma satya luhur', handle: '@Dharmasatyaluhur' },
+  { name: 'Haring Kaharingan', handle: '@haringkaharingan4406' },
+  { name: 'Ida Bagus Subagia', handle: '@idabagussubagia' }
+]
+
+const selectedChannel = ref(SUPPORTED_CHANNELS[Math.floor(Math.random() * SUPPORTED_CHANNELS.length)])
 
 const youtubeId = computed(() => {
   if (!video.value?.url) return null
