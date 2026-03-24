@@ -12,7 +12,8 @@
       </div>
       
       <UiGrid v-if="filteredItems.length > 0" cols="2" gap="md">
-        <ArtikelCard v-for="item in filteredItems" :key="item.$id" :item="item" />
+        <ArtikelCard v-for="item in filteredItems" :key="item.$id" :item="item" 
+                     @click="openPdf(item.fileUrl)" />
       </UiGrid>
       <div v-else class="text-center py-20 opacity-40 italic">
         Belum ada koleksi di perpustakaan digital ini.
@@ -42,9 +43,14 @@ const filteredItems = computed(() => {
   if (!searchQuery.value) return items.value
   return items.value.filter(i => 
     i.title.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-    i.author.toLowerCase().includes(searchQuery.value.toLowerCase())
+    (i.author && i.author.toLowerCase().includes(searchQuery.value.toLowerCase()))
   )
 })
+
+const openPdf = (url: string) => {
+  if (!url) return
+  window.open(url, '_blank')
+}
 
 onMounted(fetchItems)
 </script>

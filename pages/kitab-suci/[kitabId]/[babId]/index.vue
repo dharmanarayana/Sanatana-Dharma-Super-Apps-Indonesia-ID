@@ -17,19 +17,24 @@
     </div>
 
     <!-- Reader Content -->
-    <div class="max-w-2xl mx-auto px-6 pt-24 pb-32">
+    <div v-if="loadingChapter || loadingSlokas" class="flex flex-col items-center justify-center min-h-screen opacity-40">
+      <Icon name="lucide:loader-2" class="w-10 h-10 animate-spin mb-4" />
+      <p class="text-sm italic">Memuat sloka suci...</p>
+    </div>
+
+    <div v-else-if="chapter" class="max-w-2xl mx-auto px-6 pt-24 pb-32">
       <div class="text-center mb-16 opacity-60">
-        <p class="text-[10px] uppercase font-bold tracking-[0.4em] mb-2 text-default">Bhagavad Gita</p>
-        <h2 class="font-serif text-xl font-bold text-default">Bab 1, Sloka 1</h2>
+        <p class="text-[10px] uppercase font-bold tracking-[0.4em] mb-2 text-default">{{ route.params.kitabId }}</p>
+        <h2 class="font-serif text-xl font-bold text-default">Bab {{ chapter.chapter_number }}: {{ chapter.title }}</h2>
       </div>
 
-      <div class="space-y-20">
-        <div v-for="sloka in slokas" :key="sloka.id" class="animate-fade-up">
+      <div v-if="slokas && slokas.length > 0" class="space-y-20">
+        <div v-for="sloka in slokas" :key="sloka.$id" class="animate-fade-up">
           <div class="text-center space-y-8">
             <!-- Number -->
             <div class="flex items-center justify-center gap-4 opacity-30">
               <div class="h-px w-8 bg-default"></div>
-              <span class="font-serif italic text-sm text-default">|| {{ sloka.id }} ||</span>
+              <span class="font-serif italic text-sm text-default">|| {{ sloka.verse_number }} ||</span>
               <div class="h-px w-8 bg-default"></div>
             </div>
 
@@ -39,12 +44,12 @@
             </p>
             
             <!-- Transliteration -->
-            <p :class="fontSizeClassSmall" class="opacity-80 italic text-default leading-relaxed">
+            <p v-if="sloka.transliteration" :class="fontSizeClassSmall" class="opacity-80 italic text-default leading-relaxed">
               {{ sloka.transliteration }}
             </p>
             
             <!-- Translation -->
-            <div class="mt-10 border-t border-b border-default/20 py-8 px-4">
+            <div class="mt-10 border-t border-default/20 py-8 px-4">
               <p :class="fontSizeClassSmall" class="text-default leading-relaxed font-serif opacity-90">
                 <span class="block mb-4 font-sans font-bold text-[10px] uppercase tracking-widest opacity-60 text-center">Terjemahan</span>
                 "{{ sloka.translation }}"
@@ -52,7 +57,7 @@
             </div>
             
             <!-- Commentary/Interpretation -->
-            <div class="text-left bg-surface/10 p-6 rounded-2xl italic">
+            <div v-if="sloka.commentary" class="text-left bg-surface/10 p-6 rounded-2xl italic">
                <p class="text-xs text-muted leading-relaxed">
                   <span class="font-bold border-b border-brand mb-2 inline-block text-default">Tafsir:</span><br/>
                   {{ sloka.commentary }}
@@ -61,14 +66,28 @@
           </div>
         </div>
       </div>
+      <div v-else class="text-center py-20 opacity-40 italic text-xs">
+        Belum ada sloka yang terdaftar untuk bab ini.
+      </div>
+    </div>
+
+    <div v-else class="flex flex-col items-center justify-center min-h-screen py-20 px-8 text-center">
+      <Icon name="lucide:file-question" class="w-16 h-16 text-muted mb-4 opacity-20" />
+      <h2 class="font-serif text-xl font-bold text-default mb-2">Bab tidak ditemukan</h2>
+      <NuxtLink :to="`/kitab-suci/${route.params.kitabId}`" class="text-brand font-bold text-sm">Kembali ke Daftar Bab</NuxtLink>
     </div>
 
     <!-- Navigation Bar -->
-    <div class="fixed bottom-0 left-0 right-0 p-6 flex items-center justify-between">
-      <button class="bg-surface/50 backdrop-blur-md border border-default px-6 py-3 rounded-full text-default font-bold text-sm active:scale-95 transition-all">
+    <div v-if="chapter" class="fixed bottom-0 left-0 right-0 p-6 flex items-center justify-between z-40 bg-gradient-to-t from-base to-transparent pointer-events-none">
+      <button 
+        @click="navigateToChapter(chapter.chapter_number - 1)"
+        :disabled="chapter.chapter_number <= 1"
+        class="bg-surface/80 backdrop-blur-md border border-default px-6 py-3 rounded-full text-default font-bold text-sm active:scale-95 transition-all pointer-events-auto disabled:opacity-30 disabled:pointer-events-none">
         Sebelumnya
       </button>
-      <button class="bg-brand shadow-lg px-8 py-3 rounded-full text-inverse font-bold text-sm active:scale-95 transition-all">
+      <button 
+        @click="navigateToChapter(chapter.chapter_number + 1)"
+        class="bg-brand shadow-lg px-8 py-3 rounded-full text-inverse font-bold text-sm active:scale-95 transition-all pointer-events-auto">
         Berikutnya
       </button>
     </div>
@@ -108,13 +127,57 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 definePageMeta({ layout: false })
+
+const route = useRoute()
+const { $appwrite } = useNuxtApp()
+const DB_ID = 'sanatana-dharma-db'
 
 const showSettings = ref(false)
 const isBookmarked = ref(false)
 const fontSize = ref('M')
 const theme = ref('white')
+
+// Fetch Chapter Info
+const { data: chapter, pending: loadingChapter } = await useAsyncData(`chapter-${route.params.kitabId}-${route.params.babId}`, async () => {
+  try {
+    // First need to get the book ID to find the correct chapter if multiple books have same bab numbers
+    // But assuming babId is unique or we can filter by book slug too
+    const bookRes = await $appwrite.databases.listDocuments(DB_ID, 'holy_books', [
+      useAppwriteQuery().equal('slug', route.params.kitabId as string),
+      useAppwriteQuery().limit(1)
+    ])
+    if (bookRes.documents.length === 0) return null
+    const book = bookRes.documents[0]
+
+    const res = await $appwrite.databases.listDocuments(DB_ID, 'holy_chapters', [
+      useAppwriteQuery().equal('book_id', book.$id),
+      useAppwriteQuery().equal('chapter_number', parseInt(route.params.babId as string)),
+      useAppwriteQuery().limit(1)
+    ])
+    return res.documents.length > 0 ? res.documents[0] : null
+  } catch (e: any) {
+    console.error('Error fetching chapter:', e.message)
+    return null
+  }
+})
+
+// Fetch Slokas
+const { data: slokas, pending: loadingSlokas } = await useAsyncData(`slokas-${route.params.kitabId}-${route.params.babId}`, async () => {
+  if (!chapter.value) return []
+  try {
+    const res = await $appwrite.databases.listDocuments(DB_ID, 'holy_verses', [
+      useAppwriteQuery().equal('chapter_id', chapter.value.$id),
+      useAppwriteQuery().orderAsc('verse_number'),
+      useAppwriteQuery().limit(100)
+    ])
+    return res.documents
+  } catch (e: any) {
+    console.error('Error fetching slokas:', e.message)
+    return []
+  }
+})
 
 const themes = [
   { name: 'white', label: 'Putih', bg: '#FFF8F0', text: '#2D2D2D' },
@@ -129,22 +192,25 @@ const readerBgClass = computed(() => {
 })
 
 const fontSizeClass = computed(() => {
-  const sizes = { S: 'text-xl', M: 'text-2xl', L: 'text-3xl', XL: 'text-4xl' }
-  return sizes[fontSize.value]
+  const sizes: Record<string, string> = { S: 'text-xl', M: 'text-2xl', L: 'text-3xl', XL: 'text-4xl' }
+  return sizes[fontSize.value] || 'text-2xl'
 })
 
 const fontSizeClassSmall = computed(() => {
-  const sizes = { S: 'text-xs', M: 'text-sm', L: 'text-base', XL: 'text-lg' }
-  return sizes[fontSize.value]
+  const sizes: Record<string, string> = { S: 'text-xs', M: 'text-sm', L: 'text-base', XL: 'text-lg' }
+  return sizes[fontSize.value] || 'text-sm'
 })
 
-const slokas = [
-  {
-    id: 1,
-    sanskrit: "dhṛtarāṣṭra uvāca dharmakṣetre kurukṣetre samavetā yuyutsavaḥ māmakāḥ pāṇḍavāścaiva kim akurvata sañjaya",
-    transliteration: "dhritarashtra uvacha dharma-kshetre kuru-kshetre samaveta yuyutsavah mamakah pandavashcaiva kim akurvata sanjaya",
-    translation: "Dhritarashtra berkata: Wahai Sanjaya, setelah berkumpul di medan suci Kurukshetra dan berkeinginan untuk berperang, apa yang dilakukan oleh putra-putraku dan putra-putra Pandu?",
-    commentary: "Ayat pembuka ini menggambarkan konflik batin dan fisik. Kurukshetra disebut Dharmakshetra (medan kebenaran) karena Krishna ada di sana."
-  }
-]
+// SEO Meta
+const metaTitle = computed(() => chapter.value ? `${chapter.value.title} - ${route.params.kitabId}` : 'Baca Kitab Suci')
+useSeoMeta({
+  title: metaTitle,
+  ogTitle: metaTitle,
+  description: `Baca sloka dan terjemahan ${metaTitle.value} di Sanatana Dharma Digital.`,
+})
+
+const navigateToChapter = (num: number) => {
+  if (num < 1) return
+  navigateTo(`/kitab-suci/${route.params.kitabId}/${num}`)
+}
 </script>

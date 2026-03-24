@@ -5,7 +5,8 @@
                   back-path="/" />
     <div class="px-4 lg:px-0 py-4">
       <UiGrid v-if="kitabList.length > 0" cols="4" gap="md">
-        <KitabCard v-for="k in kitabList" :key="k.$id" :kitab="k" />
+        <KitabCard v-for="k in kitabList" :key="k.$id" :kitab="k" 
+                   @click="navigateTo(`/kitab-suci/${k.slug}`)" />
       </UiGrid>
       <div v-else class="text-center py-20 opacity-40 italic">
         Belum ada kitab suci yang terdaftar.
