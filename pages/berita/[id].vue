@@ -75,6 +75,7 @@
           </button>
           
           <div class="flex items-center gap-4">
+            <AppSaveButton :item="news" type="news" :path="route.path" />
             <button @click="shareNews" class="p-3 bg-surface border border-default rounded-full hover:border-brand transition-colors text-muted hover:text-brand">
               <Icon name="lucide:share-2" size="20" />
             </button>

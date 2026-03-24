@@ -8,10 +8,7 @@
         <span class="text-sm font-bold">Kembali</span>
       </button>
       <div class="flex items-center gap-2 ml-auto">
-        <button @click="toggleBookmark" class="p-2 rounded-full hover:bg-surface transition-colors">
-          <Icon :name="isBookmarked ? 'lucide:bookmark-check' : 'lucide:bookmark'" 
-                :class="isBookmarked ? 'text-brand' : 'text-muted'" class="w-6 h-6" />
-        </button>
+        <AppSaveButton v-if="doa" :item="doa" type="prayer" :path="route.path" />
         <button @click="handleShare" class="p-2 rounded-full hover:bg-surface transition-colors">
           <Icon name="lucide:share-2" class="w-6 h-6 text-muted" />
         </button>
@@ -172,8 +169,6 @@ const fetchDetail = async () => {
     console.error('Error loading prayer detail:', e)
   }
 }
-
-const toggleBookmark = () => isBookmarked.value = !isBookmarked.value
 
 const handleShare = async () => {
   if (navigator.share && doa.value) {

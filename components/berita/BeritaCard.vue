@@ -1,5 +1,10 @@
+```html
 <template>
-  <div class="card p-3 flex gap-4 hover:border-brand/30 transition-all cursor-pointer group">
+  <div class="card p-3 flex gap-4 hover:border-brand/30 transition-all cursor-pointer group relative">
+    <!-- Save Button -->
+    <div class="absolute top-2 right-2 z-10">
+      <AppSaveButton :item="news" type="news" :path="`/berita/${news.$id}`" size="sm" />
+    </div>
     <div class="w-24 h-24 bg-surface-variant overflow-hidden rounded-xl shrink-0">
       <NuxtImg v-if="news.image" :src="news.image" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
       <div v-else class="w-full h-full flex items-center justify-center opacity-20">

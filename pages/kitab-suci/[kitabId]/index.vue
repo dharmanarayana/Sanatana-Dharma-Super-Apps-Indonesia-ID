@@ -7,8 +7,9 @@
           <Icon name="lucide:chevron-left" class="w-6 h-6" />
           <span class="text-sm">Kembali</span>
         </button>
-        <h2 class="font-serif font-bold text-default ml-2">Bhagavad Gita</h2>
+        <h2 class="font-serif font-bold text-default ml-2">Detail Kitab</h2>
       </div>
+      <AppSaveButton :item="{ id: route.params.kitabId, title: kitabTitle, image: '', type: 'scripture' }" type="scripture" :path="route.path" />
     </div>
 
     <!-- Book Info -->

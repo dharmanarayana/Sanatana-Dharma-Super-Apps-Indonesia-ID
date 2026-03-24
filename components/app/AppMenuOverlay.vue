@@ -6,20 +6,27 @@ defineProps<{
 
 const emit = defineEmits(['close'])
 
-const menuItems = [
-  { label: 'Kalender', icon: 'lucide:calendar', color: 'text-blue-500', path: '/kalender' },
-  { label: 'Doa', icon: 'lucide:scroll-text', color: 'text-green-500', path: '/doa-mantra' },
-  { label: 'Kitab', icon: 'lucide:book-open', color: 'text-purple-500', path: '/kitab-suci' },
-  { label: 'Toko', icon: 'lucide:shopping-bag', color: 'text-orange-500', path: '/marketplace' },
-  { label: 'Video', icon: 'lucide:clapperboard', color: 'text-yellow-500', path: '/video' },
-  { label: 'Pura', icon: 'lucide:map-pin', color: 'text-emerald-500', path: '/pura' },
-  { label: 'Donasi', icon: 'lucide:heart', color: 'text-red-500', path: '/donasi' },
-  { label: 'Sarana', icon: 'lucide:sparkles', color: 'text-amber-500', path: '/sarana-upacara' },
-  { label: 'Library', icon: 'lucide:library', color: 'text-indigo-500', path: '/e-library' },
-  { label: 'Galeri', icon: 'lucide:image', color: 'text-pink-500', path: '/galeri' },
-  { label: 'Berita', icon: 'lucide:newspaper', color: 'text-slate-500', path: '/berita' },
-  { label: 'Sosial', icon: 'lucide:message-square', color: 'text-cyan-500', path: '/forum' },
-]
+const authStore = useAuthStore()
+
+const menuItems = computed(() => {
+  const items = [
+    { label: 'Kalender', icon: 'lucide:calendar', color: 'text-blue-500', path: '/kalender' },
+    { label: 'Doa', icon: 'lucide:scroll-text', color: 'text-green-500', path: '/doa-mantra' },
+    { label: 'Kitab', icon: 'lucide:book-open', color: 'text-purple-500', path: '/kitab-suci' },
+    { label: 'Tersimpan', icon: 'lucide:bookmark', color: 'text-brand', path: '/tersimpan', auth: true },
+    { label: 'Toko', icon: 'lucide:shopping-bag', color: 'text-orange-500', path: '/marketplace' },
+    { label: 'Video', icon: 'lucide:clapperboard', color: 'text-yellow-500', path: '/video' },
+    { label: 'Pura', icon: 'lucide:map-pin', color: 'text-emerald-500', path: '/pura' },
+    { label: 'Donasi', icon: 'lucide:heart', color: 'text-red-500', path: '/donasi' },
+    { label: 'Sarana', icon: 'lucide:sparkles', color: 'text-amber-500', path: '/sarana-upacara' },
+    { label: 'Library', icon: 'lucide:library', color: 'text-indigo-500', path: '/e-library' },
+    { label: 'Galeri', icon: 'lucide:image', color: 'text-pink-500', path: '/galeri' },
+    { label: 'Berita', icon: 'lucide:newspaper', color: 'text-slate-500', path: '/berita' },
+    { label: 'Sosial', icon: 'lucide:message-square', color: 'text-cyan-500', path: '/forum' },
+  ]
+  
+  return items.filter(item => !item.auth || authStore.isLoggedIn)
+})
 
 const close = () => emit('close')
 </script>

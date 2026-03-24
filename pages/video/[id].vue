@@ -68,10 +68,7 @@
               <Icon name="lucide:share-2" size="18" />
               Bagikan Video
             </button>
-            <button class="btn-ghost flex items-center gap-2 px-6 py-3 text-muted hover:text-brand">
-              <Icon name="lucide:bookmark" size="18" />
-              Simpan
-            </button>
+            <AppSaveButton :item="video" type="video" :path="route.path" />
           </div>
         </div>
 

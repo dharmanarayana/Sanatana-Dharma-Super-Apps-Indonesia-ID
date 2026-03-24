@@ -13,6 +13,7 @@ const navGroups = [
     label: 'Peribadatan & Ritual',
     items: [
       { path: '/',              icon: '🏠', label: 'Beranda' },
+      { path: '/tersimpan',     icon: '🔖', label: 'Tersimpan' },
       { path: '/kalender',      icon: '🗓️', label: 'Kalender Saka' },
       { path: '/doa-mantra',    icon: '🙏', label: 'Doa & Mantra' },
       { path: '/kitab-suci',    icon: '📖', label: 'Kitab Suci' },
@@ -78,37 +79,38 @@ const firstName = computed(() => {
         <div v-else class="border-t border-default mx-3 mb-3" />
 
         <!-- Nav items -->
-        <NuxtLink
-          v-for="item in group.items"
-          :key="item.path"
-          :to="item.path"
-          class="flex items-center gap-3 mx-2 px-3 py-2.5 rounded-xl
-                 transition-all duration-150 group relative"
-          :class="isActive(item.path)
-            ? 'bg-[var(--state-active)] text-brand font-semibold'
-            : 'text-secondary hover:bg-[var(--state-hover)] hover:text-default'"
-        >
-          <span class="text-xl shrink-0 w-7 text-center">{{ item.icon }}</span>
+        <template v-for="item in group.items" :key="item.path">
+          <NuxtLink
+            v-if="item.path !== '/tersimpan' || authStore.isLoggedIn"
+            :to="item.path"
+            class="flex items-center gap-3 mx-2 px-3 py-2.5 rounded-xl
+                   transition-all duration-150 group relative"
+            :class="isActive(item.path)
+              ? 'bg-[var(--state-active)] text-brand font-semibold'
+              : 'text-secondary hover:bg-[var(--state-hover)] hover:text-default'"
+          >
+            <span class="text-xl shrink-0 w-7 text-center">{{ item.icon }}</span>
 
-          <Transition name="fade-label">
-            <span v-if="!collapsed" class="text-base truncate">
+            <Transition name="fade-label">
+              <span v-if="!collapsed" class="text-base truncate">
+                {{ item.label }}
+              </span>
+            </Transition>
+
+            <!-- Tooltip saat collapsed -->
+            <div v-if="collapsed"
+                 class="absolute left-full ml-3 px-3 py-1.5 bg-charcoal text-white
+                        text-base rounded-lg whitespace-nowrap opacity-0 pointer-events-none
+                        group-hover:opacity-100 transition-opacity duration-150 z-50
+                        shadow-lg">
               {{ item.label }}
-            </span>
-          </Transition>
+            </div>
 
-          <!-- Tooltip saat collapsed -->
-          <div v-if="collapsed"
-               class="absolute left-full ml-3 px-3 py-1.5 bg-charcoal text-white
-                      text-base rounded-lg whitespace-nowrap opacity-0 pointer-events-none
-                      group-hover:opacity-100 transition-opacity duration-150 z-50
-                      shadow-lg">
-            {{ item.label }}
-          </div>
-
-          <!-- Active dot -->
-          <div v-if="isActive(item.path) && !collapsed"
-               class="ml-auto w-1.5 h-1.5 rounded-full bg-brand shrink-0" />
-        </NuxtLink>
+            <!-- Active dot -->
+            <div v-if="isActive(item.path) && !collapsed"
+                 class="ml-auto w-1.5 h-1.5 rounded-full bg-brand shrink-0" />
+          </NuxtLink>
+        </template>
 
       </div>
     </nav>
