@@ -145,5 +145,23 @@ export const useAuth = () => {
     }
   }
 
-  return { login, loginWithGoogle, register, logout, refreshUserSession, addPoints, checkDailyLogin, updatePassword, toggleMFA }
+  const becomeMerchant = async () => {
+    if (!authStore.user) return
+    try {
+      const prefs = await $appwrite.account.getPrefs()
+      const updatedPrefs = { ...prefs, role: 'merchant' }
+      await $appwrite.account.updatePrefs(updatedPrefs)
+      
+      // Update local store
+      if (authStore.user) {
+        authStore.user.prefs = updatedPrefs
+      }
+      return true
+    } catch (e: any) {
+      console.error('Merchant Role Error:', e)
+      throw new Error(e.message || 'Gagal mendaftar sebagai penjual.')
+    }
+  }
+
+  return { login, loginWithGoogle, register, logout, refreshUserSession, addPoints, checkDailyLogin, updatePassword, toggleMFA, becomeMerchant }
 }

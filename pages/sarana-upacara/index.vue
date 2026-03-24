@@ -25,6 +25,28 @@
 
         <div class="flex flex-col sm:flex-row gap-4 items-start sm:items-center w-full lg:w-auto overflow-x-auto pb-1 sm:pb-0 scrollbar-hide">
           
+          <!-- Merchant Actions -->
+          <div v-if="authStore.isLoggedIn" class="flex items-center gap-2 border-r border-default pr-4 mr-2">
+            <button 
+              v-if="!authStore.isMerchant"
+              @click="handleJoinMerchant"
+              :disabled="isUpdatingRole"
+              class="flex items-center gap-2 px-4 py-2 bg-brand/10 text-brand rounded-xl text-sm font-bold hover:bg-brand/20 transition-all active:scale-95 disabled:opacity-50"
+            >
+              <Icon v-if="isUpdatingRole" name="lucide:loader-2" class="w-4 h-4 animate-spin" />
+              <Icon v-else name="lucide:store" class="w-4 h-4" />
+              Buka Toko
+            </button>
+            <button 
+              v-else
+              @click="navigateTo('/merchant')"
+              class="flex items-center gap-2 px-4 py-2 bg-green-500/10 text-green-600 rounded-xl text-sm font-bold hover:bg-green-500/20 transition-all active:scale-95 border border-green-500/20"
+            >
+              <Icon name="lucide:layout-dashboard" class="w-4 h-4" />
+              Dashboard Penjual
+            </button>
+          </div>
+
           <!-- Category Filter -->
           <div class="flex items-center gap-2">
             <button 
@@ -141,12 +163,29 @@
 import { ref, computed, onMounted } from 'vue'
 
 const { $appwrite } = useNuxtApp()
+const authStore = useAuthStore()
+const { becomeMerchant } = useAuth()
 
 const DB_ID = 'sanatana-dharma-db'
 const COLL_ID = 'sarana_upacara'
 
 const isLoading = ref(true)
+const isUpdatingRole = ref(false)
 const rawProducts = ref<any[]>([])
+
+const handleJoinMerchant = async () => {
+  if (!confirm('Apakah Anda yakin ingin mendaftar sebagai penjual sarana upacara?')) return
+  
+  try {
+    isUpdatingRole.value = true
+    await becomeMerchant()
+    alert('Selamat! Anda sekarang terdaftar sebagai penjual. Silakan mulai tambahkan produk Anda.')
+  } catch (error: any) {
+    alert(error.message || 'Gagal mendaftar sebagai penjual.')
+  } finally {
+    isUpdatingRole.value = false
+  }
+}
 
 // Filter States
 const searchQuery = ref('')
