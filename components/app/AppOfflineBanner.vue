@@ -17,17 +17,23 @@ const { isOnline } = useNetwork()
 
 <style scoped>
 .offline-banner {
-  position: fixed;
-  top: 0;
+  position: sticky;
+  top: 60px; /* Header mobile */
   left: 0;
   right: 0;
-  z-index: 9999;
+  z-index: 35;
   background-color: var(--status-error-bg, #fee2e2);
   border-bottom: 1px solid var(--status-error-border, #fecaca);
   padding: 0.75rem 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .offline-banner {
+    top: 64px; /* Header desktop */
+  }
 }
 
 .content {
