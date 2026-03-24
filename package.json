@@ -38,6 +38,7 @@
   },
   "devDependencies": {
     "@nuxt/icon": "^1.5.7",
+    "@types/midtrans-client": "^1.4.0",
     "@types/node": "^25.5.0",
     "dotenv": "^17.3.1",
     "node-appwrite": "^22.1.3",

@@ -1,7 +1,7 @@
 import midtransClient from 'midtrans-client';
 import { Client, Databases, ID } from 'node-appwrite';
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async (event: any) => {
   const body = await readBody(event);
   const { campaignId, amount, userName, userEmail } = body;
 
@@ -10,15 +10,15 @@ export default defineEventHandler(async (event) => {
   // 1. Initialize Midtrans Snap
   const snap = new midtransClient.Snap({
     isProduction: process.env.MIDTRANS_IS_PRODUCTION === 'true',
-    serverKey: process.env.MIDTRANS_SERVER_KEY,
-    clientKey: process.env.MIDTRANS_CLIENT_KEY
+    serverKey: process.env.MIDTRANS_SERVER_KEY as string,
+    clientKey: process.env.MIDTRANS_CLIENT_KEY as string
   });
 
   // 2. Initialize Appwrite
   const client = new Client()
-    .setEndpoint(config.public.appwriteEndpoint)
-    .setProject(config.public.appwriteProjectId)
-    .setKey(process.env.APPWRITE_API_KEY);
+    .setEndpoint(config.public.appwriteEndpoint as string)
+    .setProject(config.public.appwriteProjectId as string)
+    .setKey(process.env.APPWRITE_API_KEY as string);
 
   const databases = new Databases(client);
   const DB_ID = 'sanatana-dharma-db';

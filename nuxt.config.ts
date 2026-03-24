@@ -17,10 +17,9 @@ export default defineNuxtConfig({
   ],
 
   i18n: {
-    langDir: 'locales/',
+    langDir: 'i18n/locales',
     defaultLocale: 'id',
     strategy: 'no_prefix',
-    lazy: true,
     locales: [
       { code: 'id', name: 'Bahasa Indonesia', file: 'id.json' },
       { code: 'en', name: 'English', file: 'en.json' },
@@ -148,4 +147,10 @@ export default defineNuxtConfig({
   },
 
   css: ['~/assets/css/main.css'],
+  
+  nitro: {
+    externals: {
+      inline: ['@nuxtjs/i18n']
+    }
+  }
 })
