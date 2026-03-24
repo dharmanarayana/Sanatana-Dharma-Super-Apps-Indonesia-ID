@@ -156,6 +156,35 @@
       </div>
 
     </div>
+
+    <!-- Merchant Invitation Modal -->
+    <UiModal :show="showMerchantInfo" title="Peluang Kemitraan Penjual" @close="showMerchantInfo = false">
+      <div class="text-center space-y-4 py-2">
+        <div class="w-20 h-20 bg-brand/10 text-brand rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-brand/20 shadow-inner">
+          <Icon name="lucide:store" class="w-10 h-10" />
+        </div>
+        <h3 class="text-xl font-serif font-bold text-default">Om Swastyastu</h3>
+        <p class="text-secondary leading-relaxed">
+          Bagi Bapak/Ibu atau rekan-rekan yang berminat untuk bergabung sebagai penjual sarana upacara di platform <strong>Sanatana Dharma</strong>, kami mengundang Anda untuk bekerja sama.
+        </p>
+        <div class="p-4 bg-default/5 rounded-xl border border-default text-sm italic text-muted">
+          "Mari bersama-sama menebarkan manfaat dan memudahkan umat dalam menjalankan swadharma."
+        </div>
+        <div class="pt-4">
+          <p class="text-xs uppercase tracking-widest font-bold text-muted mb-2">Hubungi Tim Administrasi</p>
+          <a href="mailto:admin@sanatanadharma.me" class="inline-flex items-center gap-2 text-brand font-bold hover:underline bg-brand/5 px-4 py-2 rounded-lg transition-colors">
+            <Icon name="lucide:mail" class="w-4 h-4" />
+            admin@sanatanadharma.me
+          </a>
+        </div>
+        <button 
+          @click="showMerchantInfo = false"
+          class="w-full mt-6 py-3 bg-brand text-white rounded-xl font-bold shadow-lg shadow-brand/20 active:scale-[0.98] transition-all"
+        >
+          Suksma, Saya Mengerti
+        </button>
+      </div>
+    </UiModal>
   </div>
 </template>
 
@@ -171,6 +200,7 @@ const COLL_ID = 'sarana_upacara'
 
 const isLoading = ref(true)
 const isUpdatingRole = ref(false)
+const showMerchantInfo = ref(false)
 const rawProducts = ref<any[]>([])
 
 const handleJoinMerchant = async () => {
@@ -325,8 +355,14 @@ const detectLocation = () => {
 // Initialization
 onMounted(() => {
   fetchSarana()
-  // Note: We don't auto-prompt GPS immediately on load to prevent annoying popups.
-  // The user should explicitly click the GPS target icon button to use it, which is the best UX practice.
+  
+  // Show merchant invitation alert after 10 seconds
+  setTimeout(() => {
+    // Only show if user isn't already a merchant or admin
+    if (!authStore.isMerchant && !authStore.isAdmin) {
+      showMerchantInfo.value = true
+    }
+  }, 10000)
 })
 </script>
 
