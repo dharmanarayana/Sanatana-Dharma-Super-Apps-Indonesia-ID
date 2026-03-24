@@ -18,6 +18,15 @@
 </template>
 
 <script setup lang="ts">
+useSeoMeta({
+  title: 'Video Dharma | Sanatana Dharma',
+  ogTitle: 'Kumpulan Video Pembelajaran Dharma | Sanatana Dharma',
+  description: 'Tonton kumpulan video pembelajaran visual mengenai Sanatana Dharma, filsafat Hindu, dan tradisi spiritual di platform Sanatana Dharma.',
+  ogDescription: 'Tonton kumpulan video pembelajaran visual mengenai Sanatana Dharma, filsafat Hindu, dan tradisi spiritual.',
+  ogImage: '/og-video-list.png',
+  twitterCard: 'summary_large_image',
+})
+
 const { videos, loading, fetchVideos, subscribe, stop } = useRealtimeVideos()
 const selectedCategory = ref('Semua')
 

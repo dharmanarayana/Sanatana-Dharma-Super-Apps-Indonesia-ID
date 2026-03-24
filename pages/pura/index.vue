@@ -85,10 +85,12 @@
 
 <script setup lang="ts">
 useSeoMeta({
-  title: 'Pura Hindu Indonesia',
-  ogTitle: 'Cari Pura Hindu Terdekat - Sanatana Dharma Digital',
-  description: 'Temukan lokasi Pura Hindu di seluruh Indonesia. Lengkap dengan koordinat GPS, alamat, dan informasi sejarah pura.',
+  title: 'Daftar Pura Hindu Indonesia | Sanatana Dharma',
+  ogTitle: 'Cari Pura Hindu Terdekat | Sanatana Dharma',
+  description: 'Temukan lokasi Pura Hindu di seluruh Indonesia. Lengkap dengan koordinat GPS, alamat, dan informasi sejarah pura hanya di platform Sanatana Dharma.',
   ogDescription: 'Temukan lokasi Pura Hindu di seluruh Indonesia. Lengkap dengan koordinat GPS, alamat, dan informasi sejarah pura.',
+  ogImage: '/og-pura.png',
+  twitterCard: 'summary_large_image',
 })
 
 const { $appwrite } = useNuxtApp()

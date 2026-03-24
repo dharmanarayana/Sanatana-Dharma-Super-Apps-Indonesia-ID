@@ -127,13 +127,13 @@ const fetchDetail = async () => {
 
     // SEO Meta
     useSeoMeta({
-      title: `${doc.title} | Sanatana Dharma`,
-      ogTitle: `${doc.title} | Sanatana Dharma`,
+      title: `${doc.title}`,
+      ogTitle: `${doc.title}`,
       description: doc.description ? (doc.description.substring(0, 160) + '...') : `Tonton video dharma mengenai ${doc.category}: ${doc.title} di platform Sanatana Dharma.`,
       ogDescription: doc.description ? (doc.description.substring(0, 160) + '...') : `Tonton video dharma mengenai ${doc.category}: ${doc.title}.`,
       ogImage: doc.thumbnail || '/og-video.png', // Assuming there's a thumbnail or default
       twitterCard: 'summary_large_image',
-      twitterTitle: `${doc.title} | Sanatana Dharma`,
+      twitterTitle: `${doc.title}`,
       twitterDescription: doc.description?.substring(0, 160),
     })
 

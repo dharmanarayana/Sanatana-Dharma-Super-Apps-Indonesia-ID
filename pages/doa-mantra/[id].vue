@@ -158,12 +158,12 @@ const fetchDetail = async () => {
     // Set SEO metadata
     if (doa.value) {
       useSeoMeta({
-        title: `${doa.value.title} | Sanatana Dharma`,
-        ogTitle: `${doa.value.title} | Sanatana Dharma`,
+        title: `${doa.value.title}`,
+        ogTitle: `${doa.value.title}`,
         description: `Baca ${doa.value.title} (${doa.value.category_name}). Tersedia teks Sansekerta, transliterasi, dan terjemahan bahasa Indonesia lengkap hanya di Sanatana Dharma.`,
         ogDescription: `Baca ${doa.value.title} (${doa.value.category_name}). Lengkap dengan Sansekerta, transliterasi, dan terjemahan.`,
         twitterCard: 'summary',
-        twitterTitle: `${doa.value.title} | Sanatana Dharma`,
+        twitterTitle: `${doa.value.title}`,
         twitterDescription: `Baca ${doa.value.title} (${doa.value.category_name}) dengan transliterasi dan terjemahan.`,
       })
       useBreadcrumbs().setBreadcrumbLabel(route.params.id as string, doa.value.title)

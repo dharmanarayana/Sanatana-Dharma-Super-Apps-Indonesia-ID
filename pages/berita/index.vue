@@ -42,10 +42,12 @@
 
 <script setup lang="ts">
 useSeoMeta({
-  title: 'Berita & Informasi',
-  ogTitle: 'Kabar Terkini Sanatana Dharma - Sanatana Dharma Digital',
-  description: 'Baca berita dan pengumuman terbaru seputar kegiatan umat Hindu dan informasi keagamaan lainnya.',
-  ogDescription: 'Baca berita dan pengumuman terbaru seputar kegiatan umat Hindu dan informasi keagamaan lainnya.',
+  title: 'Berita & Informasi | Sanatana Dharma',
+  ogTitle: 'Kabar Terkini Sanatana Dharma | Sanatana Dharma',
+  description: 'Baca berita, pengumuman, dan artikel terbaru seputar kegiatan umat Hindu serta informasi keagamaan lainnya di platform Sanatana Dharma.',
+  ogDescription: 'Baca berita, pengumuman, dan artikel terbaru seputar kegiatan umat Hindu.',
+  ogImage: '/og-news.png',
+  twitterCard: 'summary_large_image',
 })
 
 const { $appwrite } = useNuxtApp()

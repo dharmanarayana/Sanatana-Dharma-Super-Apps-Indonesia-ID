@@ -32,10 +32,12 @@
 
 <script setup lang="ts">
 useSeoMeta({
-  title: 'Doa & Mantra',
-  ogTitle: 'Daftar Doa & Mantra Hindu - Sanatana Dharma Digital',
-  description: 'Kumpulan doa dan mantra Hindu lengkap dengan aksara Sansekerta, transliterasi, dan terjemahan bahasa Indonesia.',
+  title: 'Doa & Mantra Hindu | Sanatana Dharma',
+  ogTitle: 'Daftar Doa & Mantra Lengkap | Sanatana Dharma',
+  description: 'Kumpulan doa dan mantra Hindu lengkap dengan aksara Sansekerta, transliterasi, dan terjemahan bahasa Indonesia hanya di Sanatana Dharma Super App.',
   ogDescription: 'Kumpulan doa dan mantra Hindu lengkap dengan aksara Sansekerta, transliterasi, dan terjemahan bahasa Indonesia.',
+  ogImage: '/og-prayers.png',
+  twitterCard: 'summary_large_image',
 })
 
 const { $appwrite } = useNuxtApp()

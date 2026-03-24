@@ -103,13 +103,13 @@ const fetchNewsDetail = async () => {
     
     // Set SEO metadata
     useSeoMeta({
-      title: `${news.value.title} | Sanatana Dharma`,
-      ogTitle: `${news.value.title} | Sanatana Dharma`,
+      title: `${news.value.title}`,
+      ogTitle: `${news.value.title}`,
       description: news.value.content?.substring(0, 160) + '...',
       ogDescription: news.value.content?.substring(0, 160) + '...',
       ogImage: news.value.image,
       twitterCard: 'summary_large_image',
-      twitterTitle: `${news.value.title} | Sanatana Dharma`,
+      twitterTitle: `${news.value.title}`,
       twitterDescription: news.value.content?.substring(0, 160) + '...',
       twitterImage: news.value.image,
     })
