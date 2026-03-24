@@ -46,7 +46,7 @@
     <!-- Konten terbaru — sama di mobile & desktop -->
     <section class="mb-6">
       <h2 class="font-bold text-default text-lg mb-3">Video Terbaru</h2>
-      <UiGrid v-if="videos.length > 0" cols="3" gap="md">
+      <UiGrid v-if="videos?.length > 0" cols="3" gap="md">
         <VideoCard v-for="video in videos" :key="video.$id" :video="video" />
       </UiGrid>
       <div v-else class="text-center py-10 opacity-50 italic text-sm">Belum ada video.</div>
@@ -54,7 +54,7 @@
 
     <section class="mb-6">
       <h2 class="font-bold text-default text-lg mb-3">Berita Terkini</h2>
-      <UiGrid v-if="news.length > 0" cols="2" gap="md">
+      <UiGrid v-if="news?.length > 0" cols="2" gap="md">
         <NuxtLink v-for="item in news" :key="item.$id" :to="`/berita/${item.$id}`" class="block no-underline">
           <BeritaCard :news="item" />
         </NuxtLink>

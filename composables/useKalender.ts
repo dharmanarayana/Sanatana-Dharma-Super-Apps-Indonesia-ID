@@ -13,7 +13,7 @@ export const useKalender = () => {
   const selectedMonth = useState<number>('kalender_month', () => currentDate.month() + 1)
   const selectedDate = useState<number>('kalender_date', () => currentDate.date())
   const calendarStore = useCalendarStore()
-  const calendarData = useState<any[]>('kalender_data', () => calendarStore.events)
+  const calendarData = useState<any[]>('kalender_data', () => calendarStore.events || [])
   const isLoading = ref<boolean>(false)
   const isFetching = ref<boolean>(false)
 

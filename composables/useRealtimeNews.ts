@@ -5,8 +5,8 @@ export const useRealtimeNews = () => {
   const COLL_ID = 'news'
   
   const newsStore = useNewsStore()
-  const newsItems = useState<any[]>('realtime-news', () => newsStore.newsList)
-  const total = useState<number>('realtime-news-total', () => newsStore.newsList.length)
+  const newsItems = useState<any[]>('realtime-news', () => newsStore.newsList || [])
+  const total = useState<number>('realtime-news-total', () => (newsStore.newsList || []).length)
   const loading = useState<boolean>('realtime-news-loading', () => false)
   
   let unsubscribe: (() => void) | null = null

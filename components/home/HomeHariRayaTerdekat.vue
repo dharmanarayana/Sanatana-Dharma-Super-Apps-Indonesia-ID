@@ -10,7 +10,7 @@
       <div class="h-4 bg-default rounded w-3/4 animate-pulse"></div>
     </div>
     
-    <div v-else-if="upcomingEvents.length > 0" class="space-y-4 mt-4">
+    <div v-else-if="upcomingEvents?.length > 0" class="space-y-4 mt-4">
       <div v-for="(event, i) in upcomingEvents.slice(0, 3)" :key="i" class="group/item">
         <div class="flex items-start justify-between gap-3">
           <div class="flex-1 min-w-0">

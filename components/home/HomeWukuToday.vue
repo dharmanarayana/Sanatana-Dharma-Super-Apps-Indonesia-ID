@@ -7,7 +7,7 @@
     
     <div class="mt-2 pl-8 border-l-2 border-brand-secondary/10">
       <!-- Skeleton Loading -->
-      <div v-if="pendingDewasa && !displayedItems.length" class="space-y-2 opacity-60">
+      <div v-if="pendingDewasa && !(dewasaData?.items?.length)" class="space-y-2 opacity-60">
         <div class="h-4 bg-brand/20 rounded w-full animate-pulse"></div>
         <div class="h-4 bg-brand/20 rounded w-3/4 animate-pulse"></div>
       </div>
@@ -136,7 +136,7 @@ const startSlideShow = async () => {
 
   let charIdx = 0
   typingInterval = setInterval(() => {
-    if (charIdx < item.name.length) {
+    if (charIdx < (item?.name?.length || 0)) {
       currentTypedName.value += item.name[charIdx]
       charIdx++
     } else {
@@ -145,7 +145,7 @@ const startSlideShow = async () => {
       
       // Wait then next slide
       slideTimeout = setTimeout(() => {
-        currentSlideIndex.value = (currentSlideIndex.value + 1) % items.length
+        currentSlideIndex.value = (currentSlideIndex.value + 1) % (items?.length || 1)
         startSlideShow()
       }, 3000) // Stay visible for 3s
     }
