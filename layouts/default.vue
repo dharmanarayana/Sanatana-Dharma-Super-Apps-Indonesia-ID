@@ -52,5 +52,6 @@ const sidebarCollapsed = ref(false)
     </template>
     
     <AppGlobalSearch />
+    <AppOfflineBanner />
   </div>
 </template>

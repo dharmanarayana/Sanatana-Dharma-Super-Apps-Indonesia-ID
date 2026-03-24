@@ -27,9 +27,9 @@ onMounted(async () => {
   const { applyTheme } = useTheme()
   applyTheme()
 
-  // Check session and daily login points
-  await refreshUserSession()
-  await checkDailyLogin()
+  // Check session and daily login points without blocking splash hide
+  refreshUserSession()
+  checkDailyLogin()
   
   // Hide splash screen with a slight delay for better UX
   setTimeout(() => {
