@@ -13,10 +13,27 @@
           placeholder="Cari berita, donasi, doa..." 
           class="flex-1 bg-transparent border-none outline-none text-lg font-medium text-default placeholder:text-muted h-full"
           autocomplete="off"
+          @keyup.enter="handleEnterSearch"
         />
         <button @click="closeSearch" class="w-10 h-10 flex items-center justify-center bg-surface border border-default rounded-2xl hover:bg-brand/5 hover:border-brand/30 transition-all active:scale-90 text-muted hover:text-brand" aria-label="Tutup pencarian">
           <Icon name="lucide:x" class="w-6 h-6" />
         </button>
+      </div>
+
+      <!-- Category Tabs (Static filter of results) -->
+      <div v-if="hasSearched && !isLoading" class="px-4 py-3 border-b border-default overflow-x-auto no-scrollbar bg-surface/50">
+        <div class="flex items-center gap-2 max-w-4xl mx-auto">
+          <button v-for="cat in categories" :key="cat.id"
+                  @click="selectedCategory = cat.id"
+                  :class="[
+                    'px-4 py-1.5 rounded-full text-xs font-bold transition-all whitespace-nowrap border',
+                    selectedCategory === cat.id 
+                      ? 'bg-brand border-brand text-white shadow-lg shadow-brand/20' 
+                      : 'bg-surface border-default text-muted hover:border-brand/30 hover:text-brand'
+                  ]">
+            {{ cat.name }}
+          </button>
+        </div>
       </div>
 
       <!-- Results Area -->
@@ -29,16 +46,40 @@
           </div>
 
           <!-- No Results -->
-          <div v-else-if="hasSearched && results.length === 0" class="text-center py-20">
+          <div v-else-if="hasSearched && filteredResults.length === 0" class="text-center py-20">
              <div class="w-24 h-24 bg-brand/5 rounded-full flex items-center justify-center mx-auto mb-6">
                 <Icon name="lucide:search-x" class="w-12 h-12 text-muted opacity-30" />
              </div>
              <h3 class="text-xl font-bold text-default mb-2">Tidak Ada Hasil</h3>
-             <p class="text-secondary max-w-xs mx-auto text-sm">Maaf, kami tidak menemukan hasil untuk "{{ searchQuery }}". Coba gunakan kata kunci lain yang lebih umum.</p>
+             <p class="text-secondary max-w-xs mx-auto text-sm">
+               Maaf, kami tidak menemukan hasil {{ selectedCategory !== 'all' ? 'untuk kategori ini' : '' }} untuk "{{ searchQuery }}". 
+               Coba gunakan kata kunci lain.
+             </p>
           </div>
 
-          <!-- Initial State / Suggestions -->
+          <!-- Initial State / Suggestions / History -->
           <div v-else-if="!hasSearched" class="space-y-12 py-6">
+             <!-- Recent Searches -->
+             <div v-if="recentSearches.length > 0">
+                <div class="flex items-center justify-between mb-4">
+                  <div class="flex items-center gap-2">
+                    <div class="w-1 h-5 bg-brand rounded-full"></div>
+                    <h4 class="text-xs font-black uppercase tracking-[0.2em] text-muted">Pencarian Terkini</h4>
+                  </div>
+                  <button @click="clearRecentSearches" class="text-[10px] font-bold text-muted hover:text-brand uppercase tracking-widest">Hapus Semua</button>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                   <div v-for="search in recentSearches" :key="search" 
+                        class="flex items-center gap-2 px-4 py-2 bg-charcoal border border-default rounded-2xl group transition-all hover:border-brand/30">
+                      <span class="text-xs font-bold text-default cursor-pointer" @click="searchQuery = search">{{ search }}</span>
+                      <button @click.stop="removeSingleRecent(search)" class="w-4 h-4 flex items-center justify-center rounded-full bg-default/5 hover:bg-brand/20 transition-colors">
+                        <Icon name="lucide:x" class="w-2.5 h-2.5 text-muted hover:text-brand" />
+                      </button>
+                   </div>
+                </div>
+             </div>
+
+             <!-- Quick Tags -->
              <div>
                 <div class="flex items-center gap-2 mb-6">
                   <div class="w-1 h-5 bg-brand rounded-full"></div>
@@ -52,6 +93,7 @@
                 </div>
              </div>
 
+             <!-- Feature Links -->
              <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
                <div v-for="feat in categoryLinks" :key="feat.name" 
                     @click="goTo(feat.link)"
@@ -67,12 +109,12 @@
           <!-- Results List -->
           <div v-else class="space-y-4">
              <div class="flex items-center justify-between mb-4 px-2">
-                <h4 class="text-xs font-black uppercase tracking-widest text-muted">Hasil Pencarian ({{ results.length }})</h4>
-                <span class="text-[10px] font-bold text-brand px-2 py-0.5 bg-brand/10 rounded-full">Ditemukan</span>
+                <h4 class="text-xs font-black uppercase tracking-widest text-muted">Ditemukan ({{ filteredResults.length }})</h4>
+                <div class="text-[10px] font-bold text-brand px-2 py-0.5 bg-brand/10 rounded-full italic">Pencerahan Tersedia</div>
              </div>
              
              <div class="grid gap-3 sm:grid-cols-2">
-                <NuxtLink v-for="item in results" :key="item.id" :to="item.link" @click="closeSearch"
+                <NuxtLink v-for="item in filteredResults" :key="item.id" :to="item.link" @click="handleItemClick(item)"
                            class="group flex items-center gap-4 p-4 bg-surface border border-default hover:border-brand/40 rounded-3xl transition-all hover:shadow-2xl hover:shadow-brand/5 active:scale-[0.98]">
                    <div class="w-14 h-14 shrink-0 rounded-2xl overflow-hidden bg-brand/5 flex items-center justify-center text-2xl relative shadow-inner">
                       <img v-if="item.image" :src="item.image" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
@@ -93,9 +135,19 @@
 </template>
 
 <script setup lang="ts">
-const { isVisible, searchQuery, results, isLoading, hasSearched, closeSearch } = useGlobalSearch()
+const { isVisible, searchQuery, results, isLoading, hasSearched, recentSearches, closeSearch, addToRecentSearches, clearRecentSearches } = useGlobalSearch()
 const searchInput = ref<HTMLInputElement | null>(null)
+const selectedCategory = ref('all')
 const router = useRouter()
+
+const categories = [
+  { id: 'all', name: 'Semua' },
+  { id: 'video', name: 'Video' },
+  { id: 'news', name: 'Berita' },
+  { id: 'doa', name: 'Doa' },
+  { id: 'pura', name: 'Pura' },
+  { id: 'punia', name: 'Punia' }
+]
 
 const quickTags = ['Pura Besakih', 'Dana Punia', 'Mantram Gayatri', 'Nyepi 2026', 'Doa Tidur', 'Tri Sandya']
 
@@ -106,10 +158,41 @@ const categoryLinks = [
   { name: 'Pura', icon: 'lucide:map-pin', link: '/pura' }
 ]
 
+const filteredResults = computed(() => {
+  if (selectedCategory.value === 'all') return results.value
+  return results.value.filter(item => item.type === selectedCategory.value)
+})
+
+const handleItemClick = (item: any) => {
+  addToRecentSearches(searchQuery.value)
+  closeSearch()
+}
+
+const handleEnterSearch = () => {
+  if (searchQuery.value.length >= 2) {
+    addToRecentSearches(searchQuery.value)
+  }
+}
+
+const removeSingleRecent = (q: string) => {
+  const index = recentSearches.value.indexOf(q)
+  if (index > -1) {
+    recentSearches.value.splice(index, 1)
+    if (process.client) {
+      localStorage.setItem('recent-searches', JSON.stringify(recentSearches.value))
+    }
+  }
+}
+
 const goTo = (link: string) => {
   closeSearch()
   router.push(link)
 }
+
+// Reset category when new search starts
+watch(searchQuery, () => {
+  selectedCategory.value = 'all'
+})
 
 // Autofocus input when visible
 watch(isVisible, (newVal: boolean) => {
@@ -128,4 +211,7 @@ watch(isVisible, (newVal: boolean) => {
 .custom-scrollbar::-webkit-scrollbar { width: 5px; }
 .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
 .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(var(--color-brand-rgb), 0.1); border-radius: 10px; }
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 </style>

@@ -87,10 +87,19 @@ export default defineNuxtConfig({
           }
         },
         {
+          urlPattern: /\.(?:png|jpg|jpeg|svg|gif|webp)$/,
+          handler: 'StaleWhileRevalidate',
+          options: {
+            cacheName: 'images-cache',
+            expiration: { maxEntries: 100, maxAgeSeconds: 60 * 60 * 24 * 30 }
+          }
+        },
+        {
           urlPattern: ({ request }) => request.mode === 'navigate',
           handler: 'NetworkFirst',
           options: {
             cacheName: 'pages-cache',
+            networkTimeoutSeconds: 5,
             expiration: { maxEntries: 50, maxAgeSeconds: 86400 }
           }
         },
