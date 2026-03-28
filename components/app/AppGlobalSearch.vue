@@ -3,7 +3,9 @@
     <div v-if="isVisible" class="fixed inset-0 z-[1000] flex flex-col bg-surface/95 backdrop-blur-xl" @keydown.esc="closeSearch">
       <!-- Header -->
       <div class="h-[70px] border-b border-default flex items-center px-4 gap-4 safe-top shrink-0">
-        <Icon name="lucide:search" class="w-6 h-6 text-brand" />
+        <div class="w-10 h-10 bg-brand/10 rounded-2xl flex items-center justify-center shrink-0 shadow-inner">
+          <Icon name="fa6-solid:magnifying-glass" class="w-5 h-5 text-brand" />
+        </div>
         <input 
           ref="searchInput"
           v-model="searchQuery" 
@@ -12,8 +14,8 @@
           class="flex-1 bg-transparent border-none outline-none text-lg font-medium text-default placeholder:text-muted h-full"
           autocomplete="off"
         />
-        <button @click="closeSearch" class="p-2 hover:bg-default/5 rounded-full transition-all" aria-label="Tutup pencarian">
-          <Icon name="lucide:x" class="w-6 h-6 text-muted" />
+        <button @click="closeSearch" class="w-10 h-10 flex items-center justify-center bg-surface border border-default rounded-2xl hover:bg-brand/5 hover:border-brand/30 transition-all active:scale-90 text-muted hover:text-brand" aria-label="Tutup pencarian">
+          <Icon name="lucide:x" class="w-6 h-6" />
         </button>
       </div>
 

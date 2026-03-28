@@ -20,8 +20,8 @@ const { openSearch } = useGlobalSearch()
 
     <!-- Actions -->
     <div class="flex items-center gap-2">
-      <button @click="openSearch" class="p-2 rounded-lg hover:bg-default/5 text-muted hover:text-brand transition-all" aria-label="Cari">
-        <Icon name="lucide:search" class="w-5 h-5" />
+      <button @click="openSearch" class="p-2.5 rounded-xl bg-brand/5 border border-brand/10 text-brand hover:bg-brand hover:text-white transition-all shadow-sm active:scale-95" aria-label="Cari">
+        <Icon name="fa6-solid:magnifying-glass" class="w-4 h-4" />
       </button>
       <AppThemeToggle />
       <AppNotificationBell />

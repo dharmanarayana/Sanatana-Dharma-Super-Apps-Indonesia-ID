@@ -29,8 +29,8 @@
 
     <!-- Aksi kanan -->
     <div class="flex items-center gap-2">
-      <button @click="openSearch" class="p-2 rounded-lg text-muted hover:text-brand transition-all" aria-label="Cari">
-        <Icon name="lucide:search" class="w-5 h-5" />
+      <button @click="openSearch" class="w-10 h-10 flex items-center justify-center rounded-xl bg-brand/5 border border-brand/10 text-brand active:scale-90 transition-all shadow-sm" aria-label="Cari">
+        <Icon name="fa6-solid:magnifying-glass" class="w-4 h-4" />
       </button>
       <AppThemeToggle />
       <AppNotificationBell />
