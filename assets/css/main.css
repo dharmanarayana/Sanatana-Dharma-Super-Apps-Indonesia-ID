@@ -470,3 +470,38 @@
     justify-content: center;
   }
 }
+
+/* ── Plyr Video Player Customization ── */
+@import "plyr/dist/plyr.css";
+
+:root {
+  --plyr-color-main: var(--brand-primary);
+  --plyr-video-background: var(--bg-surface);
+  --plyr-menu-background: var(--bg-surface);
+  --plyr-menu-color: var(--text-primary);
+  --plyr-control-radius: 12px;
+  --plyr-tooltip-background: var(--bg-surface);
+  --plyr-tooltip-color: var(--text-primary);
+  --plyr-badge-border-radius: 6px;
+}
+
+.plyr--full-ui.plyr--video .plyr__control--overlaid {
+  background: var(--brand-primary);
+  padding: 1.5rem;
+}
+
+.plyr--video .plyr__controls {
+  padding: 1rem 1.25rem;
+  background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.4));
+  border-bottom-left-radius: var(--radius-lg);
+  border-bottom-right-radius: var(--radius-lg);
+}
+
+.plyr--full-ui input[type=range] {
+  color: var(--brand-primary);
+}
+
+.plyr--video .plyr__control:hover {
+  background: var(--state-hover);
+  color: var(--brand-primary);
+}

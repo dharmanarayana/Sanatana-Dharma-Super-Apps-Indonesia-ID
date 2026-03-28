@@ -10,15 +10,13 @@
 
     <div class="px-4 lg:px-8 max-w-6xl mx-auto pb-20">
       <!-- Player Container -->
-      <div class="aspect-video w-full bg-black rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10 mb-8">
-        <iframe v-if="youtubeId"
-                class="w-full h-full"
-                :src="`https://www.youtube.com/embed/${youtubeId}?rel=0&modestbranding=1`"
-                title="YouTube video player"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen></iframe>
-        <div v-else class="w-full h-full flex items-center justify-center text-muted italic">
+      <div class="mb-8">
+        <VideoPlayer 
+          v-if="youtubeId"
+          :src="youtubeId" 
+          provider="youtube"
+        />
+        <div v-else class="aspect-video w-full bg-black rounded-2xl flex items-center justify-center text-muted italic border border-white/10">
           Video tidak dapat dimuat.
         </div>
       </div>
