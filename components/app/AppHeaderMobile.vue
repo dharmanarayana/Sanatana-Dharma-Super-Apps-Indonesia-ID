@@ -14,18 +14,21 @@
     </button>
 
     <!-- Logo -->
-    <NuxtLink to="/" class="flex items-center gap-2.5 flex-1 active:opacity-70 transition-opacity translate-z-0">
-      <div v-if="route.path === '/' || route.path === ''" class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand to-gold/80 
+    <NuxtLink v-if="route.path === '/' || route.path === ''" 
+              to="/" 
+              class="flex items-center gap-2.5 flex-1 active:opacity-70 transition-opacity translate-z-0">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand to-gold/80 
                   flex items-center justify-center shadow-lg shadow-brand/20">
         <Icon name="fa6-solid:om" class="w-7 h-7 text-white" />
       </div>
-      <div v-if="route.path === '/' || route.path === ''">
+      <div>
         <p class="font-serif font-bold text-brand text-lg leading-tight">
           Sanatana Dharma
         </p>
         <p class="text-muted text-xs uppercase tracking-widest font-semibold leading-none">Digital</p>
       </div>
     </NuxtLink>
+    <div v-else class="flex-1"></div>
 
     <!-- Aksi kanan -->
     <div class="flex items-center gap-2">
