@@ -28,7 +28,7 @@ export default defineNuxtConfig({
     detectBrowserLanguage: {
       useCookie: true,
       cookieKey: 'i18n_redirected',
-      alwaysRedirect: true,
+      alwaysRedirect: false,
       fallbackLocale: 'id'
     }
   },
@@ -64,7 +64,7 @@ export default defineNuxtConfig({
       ]
     },
     workbox: {
-      navigateFallback: '/',
+      navigateFallback: undefined,
       globPatterns: ['**/*.{js,css,html,png,svg,ico,woff2,json}'],
       cleanupOutdatedCaches: true,
       clientsClaim: true,
@@ -121,7 +121,7 @@ export default defineNuxtConfig({
     devOptions: { 
       enabled: true, 
       type: 'module',
-      navigateFallback: '/'
+      navigateFallback: undefined
     }
   },
 

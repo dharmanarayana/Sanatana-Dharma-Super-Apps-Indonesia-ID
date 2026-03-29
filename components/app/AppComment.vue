@@ -98,15 +98,17 @@
 </template>
 
 <script setup lang="ts">
+import { useComments } from '~/composables/useComments'
+
 const props = defineProps<{
   itemId: string
-  itemType: 'pura' | 'video'
+  itemType: 'video' | 'pura'
 }>()
 
 const authStore = useAuthStore()
 const { comments, loading, fetchComments, addComment, subscribeToComments } = useComments()
 const newComment = ref('')
-const submitting = ref(false)
+const isPosting = ref(false)
 const fbLoaded = ref(false)
 const route = useRoute()
 
