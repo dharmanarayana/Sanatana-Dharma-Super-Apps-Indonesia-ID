@@ -81,7 +81,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 definePageMeta({ layout: false })
 
 useSeoMeta({
@@ -90,10 +90,41 @@ useSeoMeta({
   description: 'Masuk ke akun Anda untuk mengakses fitur lengkap Sanatana Dharma Digital.',
 })
 
-const { login, loginWithGoogle } = useAuth()
+const { login, loginWithGoogle, loginWithFacebook } = useAuth()
+const route = useRoute()
+const router = useRouter()
 const email = ref('')
 const password = ref('')
 const loading = ref(false)
+
+onMounted(() => {
+  // Handle OAuth errors from URL
+  const errorQuery = route.query.error
+  if (errorQuery) {
+    try {
+      const errorStr = Array.isArray(errorQuery) ? errorQuery[0] : errorQuery
+      if (errorStr) {
+        const errorData = JSON.parse(errorStr)
+        const message = errorData.message || 'Gagal masuk dengan OAuth.'
+        
+        // Map common Appwrite error messages to Indonesian
+        let friendlyMessage = message
+        if (message.toLowerCase().includes('failed to return email')) {
+          friendlyMessage = 'Penyedia layanan (Google/Facebook) gagal memberikan alamat email Anda. Pastikan Anda telah memberikan izin akses email pada akun Anda atau coba metode masuk lain.'
+        } else if (message.toLowerCase().includes('user_unauthorized')) {
+          friendlyMessage = 'Otorisasi gagal atau dibatalkan.'
+        }
+
+        alert(`⚠️ Terjadi Kesalahan: ${friendlyMessage}`)
+        
+        // Clear the error from URL to prevent alert showing again on refresh
+        router.replace({ query: { ...route.query, error: undefined } })
+      }
+    } catch (e) {
+      console.error('Failed to parse auth error:', e)
+    }
+  }
+})
 
 const handleLogin = async () => {
   loading.value = true

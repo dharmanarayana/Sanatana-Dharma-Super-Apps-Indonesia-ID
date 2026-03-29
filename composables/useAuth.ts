@@ -38,8 +38,9 @@ export const useAuth = () => {
 
     $appwrite.account.createOAuth2Session(
       'google' as any,
-      window.location.href,
-      `${window.location.origin}/login`
+      `${window.location.origin}/`,
+      `${window.location.origin}/login`,
+      ['email', 'profile', 'openid']
     )
   }
 
@@ -53,8 +54,9 @@ export const useAuth = () => {
 
     $appwrite.account.createOAuth2Session(
       'facebook' as any,
-      window.location.href,
-      `${window.location.origin}/login`
+      `${window.location.origin}/`,
+      `${window.location.origin}/login`,
+      ['email', 'public_profile']
     )
   }
 
