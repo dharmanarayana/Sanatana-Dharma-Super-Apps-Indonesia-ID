@@ -23,16 +23,16 @@
               v-model="newComment"
               placeholder="Tulis pendapat atau pertanyaan Anda..."
               class="w-full bg-surface border border-default rounded-2xl p-4 text-sm focus:border-brand focus:ring-1 focus:ring-brand outline-none transition-all min-h-[100px] resize-none"
-              :disabled="submitting"
+              :disabled="isPosting"
             ></textarea>
             <div class="flex justify-end">
               <button
                 @click="handleSubmit"
                 class="btn-primary py-2 px-6 text-sm flex items-center gap-2"
-                :disabled="!newComment.trim() || submitting"
+                :disabled="!newComment.trim() || isPosting"
               >
-                <Icon v-if="submitting" name="lucide:loader-2" class="animate-spin" />
-                <span>{{ submitting ? 'Mengirim...' : 'Kirim Komentar' }}</span>
+                <Icon v-if="isPosting" name="lucide:loader-2" class="animate-spin" />
+                <span>{{ isPosting ? 'Mengirim...' : 'Kirim Komentar' }}</span>
               </button>
             </div>
           </div>
@@ -138,15 +138,15 @@ onUnmounted(() => {
 })
 
 const handleSubmit = async () => {
-  if (!newComment.value.trim() || submitting.value) return
-  submitting.value = true
+  if (!newComment.value.trim() || isPosting.value) return
+  isPosting.value = true
   try {
-    await addComment(props.itemId, props.itemType, newComment.value)
+    await addComment(props.itemId, props.itemType, newComment.value.trim())
     newComment.value = ''
   } catch (e: any) {
     alert('Gagal mengirim komentar: ' + e.message)
   } finally {
-    submitting.value = false
+    isPosting.value = false
   }
 }
 
