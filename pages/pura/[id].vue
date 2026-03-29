@@ -117,6 +117,13 @@
               </div>
             </div>
           </section>
+
+          <!-- Commentary Section -->
+          <AppComment 
+            v-if="temple"
+            :itemId="temple.$id" 
+            itemType="pura" 
+          />
         </article>
 
         <!-- Sidebar / Quick Info -->

@@ -68,6 +68,13 @@
             </button>
             <AppSaveButton :item="video" type="video" :path="route.path" />
           </div>
+
+          <!-- Commentary Section -->
+          <AppComment 
+            v-if="video"
+            :itemId="video.$id" 
+            itemType="video" 
+          />
         </div>
 
         <!-- Sidebar (Related) -->
