@@ -3,6 +3,12 @@ export const useAuth = () => {
   const authStore = useAuthStore()
 
   const login = async (email: string, password: string) => {
+    // Safety guard for active sessions
+    if (authStore.isLoggedIn) {
+      navigateTo('/')
+      return
+    }
+
     try {
       await $appwrite.account.createEmailPasswordSession(email, password)
       const user = await $appwrite.account.get()
@@ -23,6 +29,13 @@ export const useAuth = () => {
   }
 
   const loginWithGoogle = async () => {
+    // Safety guard for active sessions
+    const hasSession = typeof document !== 'undefined' && document.cookie.includes('a_session_')
+    if (authStore.isLoggedIn || hasSession) {
+      navigateTo('/')
+      return
+    }
+
     $appwrite.account.createOAuth2Session(
       'google' as any,
       window.location.href,
@@ -31,6 +44,12 @@ export const useAuth = () => {
   }
 
   const register = async (email: string, password: string, name: string) => {
+    // Safety guard for active sessions
+    if (authStore.isLoggedIn) {
+      navigateTo('/')
+      return
+    }
+
     try {
       const config = useRuntimeConfig()
       const DB_ID = config.public.appwriteDatabaseId as string
