@@ -102,17 +102,46 @@ const handleDelete = async (item: any) => {
 
 const handleSave = async (data: any) => {
   try {
+    // 1. Strictly pick only relevant fields defined in our schema
+    const allowedKeys = fields.map(f => f.key)
+    const cleanData: any = {}
+    allowedKeys.forEach(key => {
+      if (data[key] !== undefined) {
+        cleanData[key] = data[key]
+      }
+    })
+
+    console.log('💾 [Admin] Saving Video Data:', cleanData)
+
     if (editingItem.value) {
-      // Clean data for update (remove system fields)
-      const { $id, $collectionId, $databaseId, $createdAt, $updatedAt, $permissions, ...cleanData } = data
-      await $appwrite.databases.updateDocument(DB_ID, COLL_ID, editingItem.value.$id, cleanData)
+      // 2. Update existing document
+      await $appwrite.databases.updateDocument(
+        DB_ID, 
+        COLL_ID, 
+        editingItem.value.$id, 
+        cleanData
+      )
     } else {
-      await $appwrite.databases.createDocument(DB_ID, COLL_ID, 'unique()', data)
+      // 3. Create new document
+      await $appwrite.databases.createDocument(
+        DB_ID, 
+        COLL_ID, 
+        'unique()', 
+        cleanData
+      )
     }
+    
     showForm.value = false
     await fetchVideos()
   } catch (e: any) {
-    alert('Gagal menyimpan: ' + e.message)
+    console.error('❌ [Admin] Save Error:', e)
+    
+    // Provide a more helpful message for authorization issues
+    if (e.code === 401 || e.code === 403) {
+      alert('Gagal menyimpan: Izin Ditolak. Pastikan akun Anda memiliki Hak Akses Admin di Appwrite Console (Collection: videos).')
+    } else {
+      alert('Gagal menyimpan: ' + e.message)
+    }
   }
 }
 

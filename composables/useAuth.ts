@@ -43,6 +43,21 @@ export const useAuth = () => {
     )
   }
 
+  const loginWithFacebook = async () => {
+    // Safety guard for active sessions
+    const hasSession = typeof document !== 'undefined' && document.cookie.includes('a_session_')
+    if (authStore.isLoggedIn || hasSession) {
+      navigateTo('/')
+      return
+    }
+
+    $appwrite.account.createOAuth2Session(
+      'facebook' as any,
+      window.location.href,
+      `${window.location.origin}/login`
+    )
+  }
+
   const register = async (email: string, password: string, name: string) => {
     // Safety guard for active sessions
     if (authStore.isLoggedIn) {
@@ -189,5 +204,5 @@ export const useAuth = () => {
     }
   }
 
-  return { login, loginWithGoogle, register, logout, refreshUserSession, addPoints, checkDailyLogin, updatePassword, toggleMFA, becomeMerchant }
+  return { login, loginWithGoogle, loginWithFacebook, register, logout, refreshUserSession, addPoints, checkDailyLogin, updatePassword, toggleMFA, becomeMerchant }
 }

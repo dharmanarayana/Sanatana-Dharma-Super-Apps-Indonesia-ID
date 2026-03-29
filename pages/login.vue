@@ -53,13 +53,23 @@
         <div class="relative flex justify-center text-xs uppercase"><span class="bg-base px-2 text-muted">Atau masuk dengan</span></div>
       </div>
 
-      <button 
-        @click="loginWithGoogle"
-        class="w-full bg-surface border border-default text-default font-medium py-3 rounded-xl flex items-center justify-center gap-3 hover:bg-[var(--state-hover)] transition-all"
-      >
-        <Icon name="logos:google-icon" class="w-5 h-5" />
-        Google
-      </button>
+      <div class="flex flex-col sm:flex-row gap-3">
+        <button 
+          @click="loginWithGoogle"
+          class="flex-1 bg-surface border border-default text-default font-medium py-3 rounded-xl flex items-center justify-center gap-3 hover:bg-[var(--state-hover)] transition-all"
+        >
+          <Icon name="logos:google-icon" class="w-5 h-5" />
+          Google
+        </button>
+
+        <button 
+          @click="loginWithFacebook"
+          class="flex-1 bg-[#1877F2] border border-[#1877F2] text-white font-medium py-3 rounded-xl flex items-center justify-center gap-3 hover:opacity-90 transition-all"
+        >
+          <Icon name="logos:facebook" class="w-5 h-5 brightness-0 invert" />
+          Facebook
+        </button>
+      </div>
     </div>
 
     <div class="mt-8 text-center text-sm">
