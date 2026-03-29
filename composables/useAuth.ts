@@ -56,7 +56,7 @@ export const useAuth = () => {
       'facebook' as any,
       `${window.location.origin}/`,
       `${window.location.origin}/login`,
-      ['email', 'public_profile']
+      ['public_profile', 'email']
     )
   }
 
