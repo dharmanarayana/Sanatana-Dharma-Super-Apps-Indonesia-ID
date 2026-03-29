@@ -52,12 +52,14 @@ const editingItem = ref<any>(null)
 const columns = [
   { key: 'title', label: 'Judul' },
   { key: 'category', label: 'Kategori' },
+  { key: 'youtubeHandle', label: 'YouTube Handle' },
   { key: 'url', label: 'URL Video' },
 ]
 
 const fields = [
   { key: 'title', label: 'Judul Video', required: true, placeholder: 'Masukkan judul video...' },
   { key: 'url', label: 'URL Video (YouTube/Vimeo)', required: true, placeholder: 'https://youtube.com/watch?v=...' },
+  { key: 'youtubeHandle', label: 'YouTube Handle (cth: @channel)', placeholder: '@username' },
   { key: 'category', label: 'Kategori', required: true, type: 'select', options: [
     { label: 'Edukasi', value: 'Edukasi' },
     { label: 'Ritual', value: 'Ritual' },

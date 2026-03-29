@@ -48,10 +48,10 @@
                   <p class="text-[11px] font-black text-red-500 uppercase tracking-[0.2em]">Dukung Syiar Dharma</p>
                 </div>
                 <p class="text-default text-base font-medium leading-relaxed">
-                  Bantu kami menjangkau lebih banyak umat! Subscribe ke channel YouTube <span class="text-brand font-bold underline">{{ selectedChannel.handle }}</span> untuk mendapatkan pencerahan rutin dan konten spiritual yang menginspirasi setiap minggunya.
+                  Bantu kami menjangkau lebih banyak umat! Subscribe ke channel YouTube <span class="text-brand font-bold underline">{{ youtubeHandle }}</span> untuk mendapatkan pencerahan rutin dan konten spiritual yang menginspirasi setiap minggunya.
                 </p>
               </div>
-              <a :href="`https://www.youtube.com/${selectedChannel.handle}?sub_confirmation=1`" 
+              <a :href="`https://www.youtube.com/${youtubeHandle}?sub_confirmation=1`" 
                  target="_blank" 
                  class="btn-youtube group flex items-center gap-3 px-8 py-4 shrink-0 shadow-2xl shadow-red-600/40 active:scale-95 transition-all">
                 <Icon name="lucide:youtube" size="24" class="group-hover:scale-125 transition-transform" />
@@ -113,7 +113,11 @@ const SUPPORTED_CHANNELS = [
   { name: 'Ida Bagus Subagia', handle: '@idabagussubagia' }
 ]
 
-const selectedChannel = ref(SUPPORTED_CHANNELS[Math.floor(Math.random() * SUPPORTED_CHANNELS.length)])
+const youtubeHandle = computed(() => {
+  if (video.value?.youtubeHandle) return video.value.youtubeHandle
+  // Fallback to random if not set
+  return SUPPORTED_CHANNELS[Math.floor(Math.random() * SUPPORTED_CHANNELS.length)].handle
+})
 
 const { data: videoData, pending: loading } = await useAsyncData(`video-${route.params.id}`, async () => {
   try {

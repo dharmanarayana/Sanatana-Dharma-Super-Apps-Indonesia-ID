@@ -29,6 +29,7 @@
 
 <script setup lang="ts">
 const route = useRoute()
+const router = useRouter()
 const { refreshUserSession, checkDailyLogin } = useAuth()
 const showSplash = ref(true)
 
@@ -53,25 +54,20 @@ if (import.meta.client) {
 }
 
 onMounted(async () => {
-  // Apply accent theme
   const { applyTheme } = useTheme()
   applyTheme()
 
-  console.log('🚀 App Mounted. Current Route:', route.fullPath)
+  // Wait for router to resolve before taking action
+  await router.isReady()
   
-  // Check session and daily login points without blocking splash hide
+  // Check session and daily login points
   refreshUserSession()
   checkDailyLogin()
-  
-  // Track routing changes
-  watch(() => route.fullPath, (newPath) => {
-    console.log('🔄 Route changed to:', newPath)
-  })
-  
-  // Normal hide with a slight delay
+
+  // Delay splash hide slightly to ensure hydration is complete
   setTimeout(() => {
     showSplash.value = false
-  }, 1200)
+  }, 1000)
 })
 </script>
 
