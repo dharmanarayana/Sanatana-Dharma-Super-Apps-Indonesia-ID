@@ -46,7 +46,7 @@ definePageMeta({
   middleware: 'admin'
 })
 
-const { $appwrite } = useNuxtApp()
+const { $appwrite, $db } = useNuxtApp()
 const DB_ID = 'sanatana-dharma-db'
 const COLL_ID = 'prayers'
 
@@ -87,7 +87,7 @@ const fetchData = async () => {
     
     let appwriteData: any[] = []
     try {
-      const res = await $appwrite.databases.listDocuments(DB_ID, COLL_ID)
+      const res = await $db.listDocuments(DB_ID, COLL_ID)
       appwriteData = res.documents
     } catch (e: any) {
       console.error('Appwrite fetch error:', e.message)
@@ -120,7 +120,7 @@ const handleEdit = (item: any) => {
 const handleDelete = async (item: any) => {
   if (confirm(`Hapus doa "${item.title}"?`)) {
     try {
-      await $appwrite.databases.deleteDocument(DB_ID, COLL_ID, item.$id)
+      await $db.deleteDocument(DB_ID, COLL_ID, item.$id)
       await fetchData()
     } catch (e: any) {
       alert('Gagal menghapus: ' + e.message)
@@ -162,10 +162,10 @@ const handleSave = async (data: any) => {
     if (finalAudioUrl) docData.audioUrl = finalAudioUrl
 
     if (editingItem.value.appwrite_id) {
-      await $appwrite.databases.updateDocument(DB_ID, COLL_ID, editingItem.value.appwrite_id, docData)
+      await $db.updateDocument(DB_ID, COLL_ID, editingItem.value.appwrite_id, docData)
     } else {
       // Create new link document
-      await $appwrite.databases.createDocument(DB_ID, COLL_ID, 'unique()', docData)
+      await $db.createDocument(DB_ID, COLL_ID, 'unique()', docData)
     }
     showForm.value = false
     await fetchData()

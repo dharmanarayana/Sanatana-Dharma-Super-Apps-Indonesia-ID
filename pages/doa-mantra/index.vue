@@ -73,7 +73,7 @@ useSeoMeta({
   twitterCard: 'summary_large_image',
 })
 
-const { $appwrite } = useNuxtApp()
+const { $appwrite, $db } = useNuxtApp()
 const doaStore = useDoaStore()
 const DB_ID = 'sanatana-dharma-db'
 
@@ -121,14 +121,14 @@ const fetchDoa = async () => {
 
   // 2. Try Appwrite fetch
   try {
-    const res = await $appwrite.databases.listDocuments(DB_ID, 'prayers')
+    const res = await $db.listDocuments(DB_ID, 'prayers')
     const appwriteData = res.documents.map((d: any) => ({
       ...d,
       category: d.category_name || (d.category_id ? 'Kategori ' + d.category_id : 'Lainnya'),
       content: parseContent(d)
     }))
 
-    appwriteData.forEach(appDoc => {
+    appwriteData.forEach((appDoc: any) => {
       const existingIdx = localData.findIndex(ld => ld.title.toLowerCase().trim() === appDoc.title.toLowerCase().trim())
       if (existingIdx >= 0) {
         localData[existingIdx] = { 

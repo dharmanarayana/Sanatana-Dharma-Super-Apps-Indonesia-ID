@@ -23,8 +23,9 @@ export const useForum = () => {
   // Fetch initial category counts
   const fetchCategoryCounts = async () => {
     try {
+      const { $db } = useNuxtApp()
       const promises = categories.value.map(async (cat: { name: string; count: number }) => {
-        const res = await $appwrite.databases.listDocuments(
+        const res = await $db.listDocuments(
           DATABASE_ID,
           COLLECTION_ID,
           [useAppwriteQuery().equal('category', cat.name), useAppwriteQuery().limit(1)]
@@ -42,7 +43,8 @@ export const useForum = () => {
   const fetchPosts = async () => {
     loading.value = true
     try {
-      const response = await $appwrite.databases.listDocuments(DATABASE_ID, COLLECTION_ID, [
+      const { $db } = useNuxtApp()
+      const response = await $db.listDocuments(DATABASE_ID, COLLECTION_ID, [
         useAppwriteQuery().orderDesc('$createdAt'),
         useAppwriteQuery().limit(25)
       ])
@@ -98,7 +100,8 @@ export const useForum = () => {
     if (!user) return
 
     try {
-      await $appwrite.databases.createDocument(
+      const { $db } = useNuxtApp()
+      await $db.createDocument(
         DATABASE_ID, 
         COLLECTION_ID, 
         'unique()', 

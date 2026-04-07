@@ -12,13 +12,13 @@ export const useRealtimeAnnouncements = () => {
   const fetchAnnouncements = async (limit = 5) => {
     loading.value = true
     try {
+      const { $db } = useNuxtApp()
       const queries = [
         useAppwriteQuery().equal('category', 'Pengumuman'),
         useAppwriteQuery().orderDesc('$createdAt'),
         useAppwriteQuery().limit(limit)
       ]
-
-      const res = await $appwrite.databases.listDocuments(DB_ID, COLL_ID, queries)
+      const res = await $db.listDocuments(DB_ID, COLL_ID, queries)
       announcements.value = res.documents
       // Optional: cache in store too if we had a specific field, 
       // but for now newsItems often contains these too.

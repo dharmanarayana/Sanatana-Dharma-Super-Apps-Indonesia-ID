@@ -93,7 +93,7 @@ import { useKitabStore } from '~/stores/kitab.store'
 
 const route = useRoute()
 const kitabStore = useKitabStore()
-const { $appwrite } = useNuxtApp()
+const { $appwrite, $db } = useNuxtApp()
 const DB_ID = 'sanatana-dharma-db'
 
 // Offline status check
@@ -106,7 +106,7 @@ const { data: kitab, pending: loadingKitab } = await useAsyncData(`kitab-${route
   if (cachedKitab && !navigator.onLine) return cachedKitab
 
   try {
-    const res = await $appwrite.databases.listDocuments(DB_ID, 'holy_books', [
+    const res = await $db.listDocuments(DB_ID, 'holy_books', [
       useAppwriteQuery().equal('slug', route.params.kitabId as string),
       useAppwriteQuery().limit(1)
     ])
@@ -126,7 +126,7 @@ const { data: chapters, pending: loadingChapters } = await useAsyncData(`chapter
   if (cachedChapters.length > 0 && !navigator.onLine) return cachedChapters
 
   try {
-    const res = await $appwrite.databases.listDocuments(DB_ID, 'holy_chapters', [
+    const res = await $db.listDocuments(DB_ID, 'holy_chapters', [
       useAppwriteQuery().equal('book_id', kitab.value.$id),
       useAppwriteQuery().orderAsc('chapter_number'),
       useAppwriteQuery().limit(100)

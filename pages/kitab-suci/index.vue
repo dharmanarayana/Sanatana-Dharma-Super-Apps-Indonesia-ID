@@ -34,7 +34,7 @@ useSeoMeta({
   ogDescription: 'Akses berbagai kitab suci Hindu seperti Weda, Bhagavad Gita, Sarasamuscaya, dan lainnya secara digital.',
 })
 
-const { $appwrite } = useNuxtApp()
+const { $appwrite, $db } = useNuxtApp()
 const kitabStore = useKitabStore()
 const DB_ID = 'sanatana-dharma-db'
 
@@ -44,7 +44,7 @@ const loading = ref(true)
 const fetchKitab = async () => {
   loading.value = true
   try {
-    const res = await $appwrite.databases.listDocuments(DB_ID, 'holy_books', [
+    const res = await $db.listDocuments(DB_ID, 'holy_books', [
       useAppwriteQuery().orderAsc('title')
     ])
     kitabList.value = res.documents

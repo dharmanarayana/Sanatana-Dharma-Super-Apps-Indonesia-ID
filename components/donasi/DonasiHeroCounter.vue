@@ -7,13 +7,13 @@
 </template>
 
 <script setup lang="ts">
-const { $appwrite } = useNuxtApp()
+const { $appwrite, $db } = useNuxtApp()
 const DB_ID = 'sanatana-dharma-db'
 const totalFunds = ref(0)
 
 const fetchTotal = async () => {
   try {
-    const res = await $appwrite.databases.listDocuments(DB_ID, 'donations')
+    const res = await $db.listDocuments(DB_ID, 'donations')
     totalFunds.value = res.documents.reduce((acc, curr) => acc + Number(curr.collected || 0), 0)
   } catch (e: any) {
     console.error('Error fetching total donations:', e.message)

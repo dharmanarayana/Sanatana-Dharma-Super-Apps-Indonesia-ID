@@ -1,5 +1,6 @@
 import midtransClient from 'midtrans-client';
 import { Client, Databases, ID } from 'node-appwrite';
+import { useServerDb } from '../../utils/db';
 
 export default defineEventHandler(async (event: any) => {
   const body = await readBody(event);
@@ -14,21 +15,16 @@ export default defineEventHandler(async (event: any) => {
     clientKey: process.env.MIDTRANS_CLIENT_KEY as string
   });
 
-  // 2. Initialize Appwrite
-  const client = new Client()
-    .setEndpoint(config.public.appwriteEndpoint as string)
-    .setProject(config.public.appwriteProjectId as string)
-    .setKey(process.env.APPWRITE_API_KEY as string);
-
-  const databases = new Databases(client);
+  // 2. Initialize Failover DB
+  const db = useServerDb();
   const DB_ID = 'sanatana-dharma-db';
   const COLL_DONATIONS = 'punia_donations';
 
   const orderId = `PUNIA-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
 
   try {
-    // 3. Create pending donation record in Appwrite
-    const donation = await databases.createDocument(
+    // 3. Create pending donation record in Failover DB
+    const donation = await db.createDocument(
       DB_ID,
       COLL_DONATIONS,
       ID.unique(),
@@ -62,7 +58,7 @@ export default defineEventHandler(async (event: any) => {
     const transaction = await snap.createTransaction(parameter);
     
     // 5. Update donation with snap token
-    await databases.updateDocument(DB_ID, COLL_DONATIONS, donation.$id, {
+    await db.updateDocument(DB_ID, COLL_DONATIONS, donation.$id, {
       snap_token: transaction.token
     });
 

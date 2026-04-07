@@ -66,7 +66,7 @@
 </template>
 
 <script setup lang="ts">
-const { $appwrite } = useNuxtApp()
+const { $appwrite, $db } = useNuxtApp()
 const authStore = useAuthStore()
 
 useSeoMeta({
@@ -89,11 +89,11 @@ const firstName = computed(() => {
 const fetchData = async () => {
   try {
     const [vRes, nRes] = await Promise.all([
-      $appwrite.databases.listDocuments(DB_ID, 'videos', [
+      $db.listDocuments(DB_ID, 'videos', [
         useAppwriteQuery().orderDesc('$createdAt'),
         useAppwriteQuery().limit(3)
       ]),
-      $appwrite.databases.listDocuments(DB_ID, 'news', [
+      $db.listDocuments(DB_ID, 'news', [
         useAppwriteQuery().orderDesc('$createdAt'),
         useAppwriteQuery().limit(2)
       ])

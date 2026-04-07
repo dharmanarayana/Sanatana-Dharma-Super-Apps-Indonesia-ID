@@ -14,7 +14,8 @@ export const useSavedItems = () => {
     
     isLoading.value = true
     try {
-      const res = await $appwrite.databases.listDocuments(DB_ID, COLLECTION_ID, [
+      const { $db } = useNuxtApp()
+      const res = await $db.listDocuments(DB_ID, COLLECTION_ID, [
         Query.equal('userId', authStore.user.$id),
         Query.orderDesc('$createdAt')
       ])
@@ -36,11 +37,12 @@ export const useSavedItems = () => {
     const existing = savedItems.value.find(i => i.itemId === item.id)
     
     try {
+      const { $db } = useNuxtApp()
       if (existing) {
-        await $appwrite.databases.deleteDocument(DB_ID, COLLECTION_ID, existing.$id)
+        await $db.deleteDocument(DB_ID, COLLECTION_ID, existing.$id)
         savedItems.value = savedItems.value.filter(i => i.$id !== existing.$id)
       } else {
-        const newDoc = await $appwrite.databases.createDocument(DB_ID, COLLECTION_ID, ID.unique(), {
+        const newDoc = await $db.createDocument(DB_ID, COLLECTION_ID, 'unique()', {
           userId: authStore.user.$id,
           itemId: item.id,
           itemType: item.type,

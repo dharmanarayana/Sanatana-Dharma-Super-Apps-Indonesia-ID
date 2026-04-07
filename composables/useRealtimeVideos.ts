@@ -23,7 +23,8 @@ export const useRealtimeVideos = () => {
         queries.push(useAppwriteQuery().equal('category', category))
       }
 
-      const res = await $appwrite.databases.listDocuments(DB_ID, COLL_ID, queries)
+      const { $db } = useNuxtApp()
+      const res = await $db.listDocuments(DB_ID, COLL_ID, queries)
       videos.value = res.documents
       total.value = res.total
     } catch (e: any) {

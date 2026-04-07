@@ -14,6 +14,7 @@ export const useRealtimeNews = () => {
   const fetchNews = async (limit = 10, category?: string) => {
     loading.value = true
     try {
+      const { $db } = useNuxtApp()
       const queries = [
         useAppwriteQuery().orderDesc('$createdAt'),
         useAppwriteQuery().limit(limit)
@@ -23,7 +24,7 @@ export const useRealtimeNews = () => {
         queries.push(useAppwriteQuery().equal('category', category))
       }
 
-      const res = await $appwrite.databases.listDocuments(DB_ID, COLL_ID, queries)
+      const res = await $db.listDocuments(DB_ID, COLL_ID, queries)
       newsItems.value = res.documents
       total.value = res.total
       newsStore.setNewsList(res.documents)

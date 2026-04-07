@@ -69,7 +69,8 @@ export const useProfile = () => {
 
       // 2. Fetch Rituals for Streak (Safe Catch)
       try {
-        const rituals = await $appwrite.databases.listDocuments(
+        const { $db } = useNuxtApp()
+        const rituals = await $db.listDocuments(
           DATABASE_ID, 
           COLLECTION_RITUALS,
           [Query.equal('userId', USER_ID), Query.limit(1), Query.orderDesc('completedAt')]
@@ -83,7 +84,8 @@ export const useProfile = () => {
 
       // 3. Fetch Forum Post Count (Safe Catch)
       try {
-        const forumPosts = await $appwrite.databases.listDocuments(
+        const { $db } = useNuxtApp()
+        const forumPosts = await $db.listDocuments(
           DATABASE_ID,
           COLLECTION_POSTS,
           [Query.equal('userId', USER_ID), Query.limit(1)]

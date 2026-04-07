@@ -23,14 +23,14 @@
 </template>
 
 <script setup lang="ts">
-const { $appwrite } = useNuxtApp()
+const { $appwrite, $db } = useNuxtApp()
 const DB_ID = 'sanatana-dharma-db'
 const items = ref<any[]>([])
 const searchQuery = ref('')
 
 const fetchItems = async () => {
   try {
-    const res = await $appwrite.databases.listDocuments(DB_ID, 'elibrary', [
+    const res = await $db.listDocuments(DB_ID, 'elibrary', [
       useAppwriteQuery().orderDesc('$createdAt')
     ])
     items.value = res.documents

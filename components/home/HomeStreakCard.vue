@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-const { $appwrite } = useNuxtApp()
+const { $appwrite, $db } = useNuxtApp()
 const authStore = useAuthStore()
 const DB_ID = 'sanatana-dharma-db'
 const activeUsers = ref(0)
@@ -23,7 +23,7 @@ const fetchActiveUsers = async () => {
     const today = new Date()
     today.setHours(0, 0, 0, 0)
     
-    const res = await $appwrite.databases.listDocuments(DB_ID, 'rituals', [
+    const res = await $db.listDocuments(DB_ID, 'rituals', [
       useAppwriteQuery().greaterThanEqual('completedAt', today.toISOString()),
       useAppwriteQuery().limit(100) // Rough estimate for now
     ])

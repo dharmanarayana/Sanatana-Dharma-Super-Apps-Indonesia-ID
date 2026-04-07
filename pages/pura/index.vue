@@ -99,7 +99,7 @@ useSeoMeta({
   twitterCard: 'summary_large_image',
 })
 
-const { $appwrite } = useNuxtApp()
+const { $appwrite, $db } = useNuxtApp()
 const DB_ID = 'sanatana-dharma-db'
 const temples = ref<any[]>([])
 
@@ -115,7 +115,7 @@ const isLoading = ref(true)
 const fetchTemples = async () => {
   try {
     isLoading.value = true
-    const res = await $appwrite.databases.listDocuments(DB_ID, 'temples', [
+    const res = await $db.listDocuments(DB_ID, 'temples', [
       useAppwriteQuery().limit(200)
     ])
     temples.value = res.documents

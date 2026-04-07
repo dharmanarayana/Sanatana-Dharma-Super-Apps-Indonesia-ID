@@ -91,7 +91,7 @@ import { useNewsStore } from '~/stores/news.store'
 
 const route = useRoute()
 const newsStore = useNewsStore()
-const { $appwrite } = useNuxtApp()
+const { $appwrite, $db } = useNuxtApp()
 const DB_ID = 'sanatana-dharma-db'
 const COLL_ID = 'news'
 
@@ -101,7 +101,7 @@ const { data: news, pending: loading } = await useAsyncData(`news-${route.params
   if (cached && !navigator.onLine) return cached
 
   try {
-    const res = await $appwrite.databases.getDocument(DB_ID, COLL_ID, route.params.id as string)
+    const res = await $db.getDocument(DB_ID, COLL_ID, route.params.id as string)
     if (res) newsStore.setNewsDetail(route.params.id as string, res)
     return res
   } catch (e: any) {

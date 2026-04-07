@@ -100,7 +100,7 @@
 
 <script setup lang="ts">
 const route = useRoute()
-const { $appwrite } = useNuxtApp()
+const { $appwrite, $db } = useNuxtApp()
 const DB_ID = 'sanatana-dharma-db'
 
 const video = ref<any>(null)
@@ -121,8 +121,7 @@ const youtubeHandle = computed(() => {
 
 const { data: videoData, pending: loading } = await useAsyncData(`video-${route.params.id}`, async () => {
   try {
-    const { $appwrite } = useNuxtApp()
-    const res = await $appwrite.databases.listDocuments(DB_ID, 'videos', [
+    const res = await $db.listDocuments(DB_ID, 'videos', [
       useAppwriteQuery().equal('slug', route.params.id as string),
       useAppwriteQuery().limit(1)
     ])
@@ -192,7 +191,7 @@ if (video.value) {
 // Related videos fetch (client-side is fine after main data)
 const { data: relatedRes } = await useAsyncData(`related-videos-${route.params.id}`, async () => {
   if (!video.value) return null
-  return await $appwrite.databases.listDocuments(DB_ID, 'videos', [
+  return await $db.listDocuments(DB_ID, 'videos', [
     useAppwriteQuery().equal('category', video.value.category),
     useAppwriteQuery().notEqual('$id', video.value.$id),
     useAppwriteQuery().limit(4)

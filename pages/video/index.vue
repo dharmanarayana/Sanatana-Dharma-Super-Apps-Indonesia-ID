@@ -43,7 +43,7 @@ useSeoMeta({
 })
 
 const { videos, total, loading, fetchVideos, subscribe, stop } = useRealtimeVideos()
-const { $appwrite } = useNuxtApp()
+const { $appwrite, $db } = useNuxtApp()
 
 const selectedCategory = ref('Semua')
 const currentPage = ref(1)
@@ -61,7 +61,7 @@ const uniqueCategories = computed(() => {
 
 const fetchAllCategories = async () => {
   try {
-    const res = await $appwrite.databases.listDocuments('sanatana-dharma-db', 'videos', [
+    const res = await $db.listDocuments('sanatana-dharma-db', 'videos', [
       useAppwriteQuery().select(['category']),
       useAppwriteQuery().limit(100)
     ])

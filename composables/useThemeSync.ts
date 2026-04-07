@@ -13,7 +13,8 @@ export const useThemeSync = () => {
   const saveTheme = async (theme: string) => {
     if (!authStore.user) return  // skip jika belum login
     try {
-      await $appwrite.databases.updateDocument(
+      const { $db } = useNuxtApp()
+      await $db.updateDocument(
         DB_ID, COLL_ID, authStore.user.$id,
         { preferred_theme: theme }
       )
@@ -21,7 +22,8 @@ export const useThemeSync = () => {
       // If document doesn't exist, create it
       if (e.code === 404) {
         try {
-          await $appwrite.databases.createDocument(
+          const { $db } = useNuxtApp()
+          await $db.createDocument(
             DB_ID, COLL_ID, authStore.user.$id,
             { 
               userId: authStore.user.$id,
@@ -44,7 +46,8 @@ export const useThemeSync = () => {
     if (!authStore.user) return
     try {
       // Use listDocuments with filter to avoid 404 network noise if doc missing
-      const { documents } = await $appwrite.databases.listDocuments(
+      const { $db } = useNuxtApp()
+      const { documents } = await $db.listDocuments(
         DB_ID, COLL_ID, 
         [Query.equal('$id', authStore.user.$id)]
       )

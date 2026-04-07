@@ -13,7 +13,8 @@ export const usePunia = () => {
     const fetchCampaigns = async () => {
         loading.value = true
         try {
-            const res = await $appwrite.databases.listDocuments(DB_ID, COLL_CAMPAIGNS)
+            const { $db } = useNuxtApp()
+            const res = await $db.listDocuments(DB_ID, COLL_CAMPAIGNS)
             campaigns.value = res.documents
         } catch (e: any) {
             console.error('Error fetching dana punia campaigns:', e.message)
@@ -24,7 +25,8 @@ export const usePunia = () => {
 
     const fetchCampaignById = async (id: string) => {
         try {
-            return await $appwrite.databases.getDocument(DB_ID, COLL_CAMPAIGNS, id)
+            const { $db } = useNuxtApp()
+            return await $db.getDocument(DB_ID, COLL_CAMPAIGNS, id)
         } catch (e: any) {
             console.error(`Error fetching campaign ${id}:`, e.message)
             return null
@@ -55,7 +57,8 @@ export const usePunia = () => {
 
     const fetchRecentDonations = async (campaignId: string, limit = 5) => {
         try {
-            const res = await $appwrite.databases.listDocuments(DB_ID, COLL_DONATIONS, [
+            const { $db } = useNuxtApp()
+            const res = await $db.listDocuments(DB_ID, COLL_DONATIONS, [
                 useAppwriteQuery().equal('campaign_id', campaignId),
                 useAppwriteQuery().equal('status', 'success'),
                 useAppwriteQuery().orderDesc('$createdAt'),

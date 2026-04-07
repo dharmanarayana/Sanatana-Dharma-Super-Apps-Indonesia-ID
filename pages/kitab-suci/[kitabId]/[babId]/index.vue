@@ -121,7 +121,7 @@ definePageMeta({ layout: false })
 
 const route = useRoute()
 const kitabStore = useKitabStore()
-const { $appwrite } = useNuxtApp()
+const { $appwrite, $db } = useNuxtApp()
 const DB_ID = 'sanatana-dharma-db'
 
 const showSettings = ref(false)
@@ -140,14 +140,14 @@ const { data: chapter, pending: loadingChapter } = await useAsyncData(`chapter-$
     if (cachedBab && !navigator.onLine) return cachedBab
 
     try {
-        const bookRes = await $appwrite.databases.listDocuments(DB_ID, 'holy_books', [
+        const bookRes = await $db.listDocuments(DB_ID, 'holy_books', [
             useAppwriteQuery().equal('slug', route.params.kitabId as string),
             useAppwriteQuery().limit(1)
         ])
         if (bookRes.documents.length === 0) return cachedBab || null
         const book = bookRes.documents[0]
 
-        const res = await $appwrite.databases.listDocuments(DB_ID, 'holy_chapters', [
+        const res = await $db.listDocuments(DB_ID, 'holy_chapters', [
             useAppwriteQuery().equal('book_id', book.$id),
             useAppwriteQuery().equal('chapter_number', parseInt(route.params.babId as string)),
             useAppwriteQuery().limit(1)
@@ -166,7 +166,7 @@ const { data: slokas, pending: loadingSlokas } = await useAsyncData(`slokas-${ro
   if (cachedSlokas.length > 0 && !navigator.onLine) return cachedSlokas
 
   try {
-    const res = await $appwrite.databases.listDocuments(DB_ID, 'holy_verses', [
+    const res = await $db.listDocuments(DB_ID, 'holy_verses', [
       useAppwriteQuery().equal('chapter_id', chapter.value.$id),
       useAppwriteQuery().orderAsc('verse_number'),
       useAppwriteQuery().limit(100)

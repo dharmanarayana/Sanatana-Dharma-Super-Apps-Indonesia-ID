@@ -209,7 +209,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 
-const { $appwrite } = useNuxtApp()
+const { $appwrite, $db } = useNuxtApp()
 const authStore = useAuthStore()
 const cartStore = useCartStore()
 const { becomeMerchant } = useAuth()
@@ -253,7 +253,7 @@ const isLocating = ref(false)
 const fetchSarana = async () => {
   try {
     isLoading.value = true
-    const res = await $appwrite.databases.listDocuments(DB_ID, COLL_ID)
+    const res = await $db.listDocuments(DB_ID, COLL_ID)
     rawProducts.value = res.documents
   } catch (error: any) {
     console.error('Failed to fetch sarana catalog:', error)

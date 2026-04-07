@@ -96,7 +96,7 @@
 </template>
 
 <script setup lang="ts">
-const { $appwrite } = useNuxtApp()
+const { $appwrite, $db } = useNuxtApp()
 const DB_ID = 'sanatana-dharma-db'
 
 const programs = ref<any[]>([])
@@ -107,7 +107,7 @@ const selectedAmount = ref<number | null>(null)
 
 const fetchPrograms = async () => {
   try {
-    const res = await $appwrite.databases.listDocuments(DB_ID, 'donations', [
+    const res = await $db.listDocuments(DB_ID, 'donations', [
       useAppwriteQuery().orderDesc('$createdAt')
     ])
     programs.value = res.documents

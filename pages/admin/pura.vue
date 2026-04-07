@@ -48,7 +48,7 @@ definePageMeta({
 import templesJson from '~/data/temples.json'
 import { Permission, Role } from 'appwrite'
 
-const { $appwrite } = useNuxtApp()
+const { $appwrite, $db } = useNuxtApp()
 const DB_ID = 'sanatana-dharma-db'
 const COLL_ID = 'temples'
 
@@ -79,7 +79,7 @@ const fields = [
 
 const fetchData = async () => {
   try {
-    const res = await $appwrite.databases.listDocuments(DB_ID, COLL_ID, [
+    const res = await $db.listDocuments(DB_ID, COLL_ID, [
       useAppwriteQuery().orderAsc('name'),
       useAppwriteQuery().limit(100)
     ])
@@ -100,7 +100,7 @@ const seedData = async () => {
       Permission.delete(Role.users()),
     ]
     for (const pura of templesJson) {
-      await $appwrite.databases.createDocument(DB_ID, COLL_ID, 'unique()', {
+      await $db.createDocument(DB_ID, COLL_ID, 'unique()', {
         name: pura.name,
         address: pura.address || '',
         city: pura.city || '',
@@ -108,7 +108,7 @@ const seedData = async () => {
         image: pura.image || '',
         description: pura.description || '',
         history: pura.history || ''
-      }, perms)
+      })
     }
     alert(`Berhasil mengimpor ${templesJson.length} pura!`)
     await fetchData()
@@ -132,7 +132,7 @@ const handleEdit = (item: any) => {
 const handleDelete = async (item: any) => {
   if (confirm(`Hapus pura "${item.name}"?`)) {
     try {
-      await $appwrite.databases.deleteDocument(DB_ID, COLL_ID, item.$id)
+      await $db.deleteDocument(DB_ID, COLL_ID, item.$id)
       await fetchData()
     } catch (e: any) {
       alert('Gagal menghapus: ' + e.message)
@@ -144,13 +144,9 @@ const handleSave = async (data: any) => {
   try {
     if (editingItem.value) {
       const { $id, $collectionId, $databaseId, $createdAt, $updatedAt, $permissions, ...cleanData } = data
-      await $appwrite.databases.updateDocument(DB_ID, COLL_ID, editingItem.value.$id, cleanData)
+      await $db.updateDocument(DB_ID, COLL_ID, editingItem.value.$id, cleanData)
     } else {
-      await $appwrite.databases.createDocument(DB_ID, COLL_ID, 'unique()', data, [
-        Permission.read(Role.any()),
-        Permission.write(Role.users()),
-        Permission.delete(Role.users()),
-      ])
+      await $db.createDocument(DB_ID, COLL_ID, 'unique()', data)
     }
     showForm.value = false
     await fetchData()

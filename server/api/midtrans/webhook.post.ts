@@ -1,5 +1,6 @@
 import { Client, Databases, Query } from 'node-appwrite';
 import crypto from 'crypto';
+import { useServerDb } from '../../utils/db';
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
@@ -18,20 +19,15 @@ export default defineEventHandler(async (event) => {
     return { status: 'error', message: 'Invalid signature' };
   }
 
-  // 2. Initialize Appwrite
-  const client = new Client()
-    .setEndpoint(config.public.appwriteEndpoint)
-    .setProject(config.public.appwriteProjectId)
-    .setKey(process.env.APPWRITE_API_KEY);
-
-  const databases = new Databases(client);
+  // 2. Initialize Failover DB
+  const db = useServerDb();
   const DB_ID = 'sanatana-dharma-db';
   const COLL_DONATIONS = 'punia_donations';
   const COLL_CAMPAIGNS = 'punia_campaigns';
 
   try {
     // 3. Find the donation record
-    const donationRes = await databases.listDocuments(DB_ID, COLL_DONATIONS, [
+    const donationRes = await db.listDocuments(DB_ID, COLL_DONATIONS, [
       Query.equal('order_id', order_id)
     ]);
 
@@ -50,16 +46,16 @@ export default defineEventHandler(async (event) => {
 
     // 4. Update status if changed
     if (donation.status !== newStatus) {
-      await databases.updateDocument(DB_ID, COLL_DONATIONS, donation.$id, {
+      await db.updateDocument(DB_ID, COLL_DONATIONS, donation.$id, {
         status: newStatus
       });
 
       // 5. If success, increment campaign amount
       if (newStatus === 'success') {
-        const campaign = await databases.getDocument(DB_ID, COLL_CAMPAIGNS, donation.campaign_id);
+        const campaign = await db.getDocument(DB_ID, COLL_CAMPAIGNS, donation.campaign_id);
         const updatedAmount = (campaign.current_amount || 0) + donation.amount;
         
-        await databases.updateDocument(DB_ID, COLL_CAMPAIGNS, campaign.$id, {
+        await db.updateDocument(DB_ID, COLL_CAMPAIGNS, campaign.$id, {
           current_amount: updatedAmount
         });
       }

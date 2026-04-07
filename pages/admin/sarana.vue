@@ -57,7 +57,7 @@ definePageMeta({
   middleware: 'admin'
 })
 
-const { $appwrite } = useNuxtApp()
+const { $appwrite, $db } = useNuxtApp()
 const DB_ID = 'sanatana-dharma-db'
 const COLL_ID = 'sarana_upacara'
 
@@ -89,7 +89,7 @@ const fields = [
 
 const fetchSarana = async () => {
   try {
-    const res = await $appwrite.databases.listDocuments(DB_ID, COLL_ID)
+    const res = await $db.listDocuments(DB_ID, COLL_ID)
     sarenas.value = res.documents
   } catch (e: any) {
     console.error('Error fetching sarana:', e.message)
@@ -117,7 +117,7 @@ const handleEdit = (item: any) => {
 const handleDelete = async (item: any) => {
   if (confirm(`Hapus produk "${item.name}"?`)) {
     try {
-      await $appwrite.databases.deleteDocument(DB_ID, COLL_ID, item.$id)
+      await $db.deleteDocument(DB_ID, COLL_ID, item.$id)
       await fetchSarana()
     } catch (e: any) {
       alert('Gagal menghapus: ' + e.message)
@@ -132,9 +132,9 @@ const handleSave = async (data: any) => {
     
     if (editingItem.value) {
       const { $id, $collectionId, $databaseId, $createdAt, $updatedAt, $permissions, ...cleanData } = data
-      await $appwrite.databases.updateDocument(DB_ID, COLL_ID, editingItem.value.$id, cleanData)
+      await $db.updateDocument(DB_ID, COLL_ID, editingItem.value.$id, cleanData)
     } else {
-      await $appwrite.databases.createDocument(DB_ID, COLL_ID, 'unique()', data)
+      await $db.createDocument(DB_ID, COLL_ID, 'unique()', data)
     }
     showForm.value = false
     await fetchSarana()

@@ -10,9 +10,16 @@ export const useAuth = () => {
     }
 
     try {
-      await $appwrite.account.createEmailPasswordSession(email, password)
-      const user = await $appwrite.account.get()
+      const { $db } = useNuxtApp()
+      const user = await $db.authenticate(email, password)
       authStore.setUser(user)
+
+      // Sync to GAS in background if Appwrite was successful
+      // (This ensures GAS has the latest user data/hash)
+      if (user && !user.isFailover) {
+        $db.registerUser(user.$id, email, password, user.name).catch(() => {})
+      }
+
       navigateTo('/')
     } catch (e: any) {
       console.error('--- ❌ Login Error Details:', e)
@@ -68,22 +75,27 @@ export const useAuth = () => {
     }
 
     try {
-      const config = useRuntimeConfig()
-      const DB_ID = config.public.appwriteDatabaseId as string
+      const { $db } = useNuxtApp()
       const userId = 'unique()'
       
-      const response = await $appwrite.account.create(userId, email, password, name)
+      // registerUser in FailoverProvider will try Appwrite then GAS
+      const response = await $db.registerUser(userId, email, password, name)
       const createdUserId = response.$id
       
-      // Auto login
-      await $appwrite.account.createEmailPasswordSession(email, password)
-      const user = await $appwrite.account.get()
+      // Auto login after registration
+      const user = await $db.authenticate(email, password)
       authStore.setUser(user)
+
+      // If Appwrite was successful, also explicitly ensure GAS is updated
+      // (Dual-write for future failover availability)
+      if (!response.isFailover) {
+        $db.registerUser(createdUserId, email, password, name).catch(() => {})
+      }
 
       // Create Profile Document
       try {
-        await $appwrite.databases.createDocument(
-          DB_ID,
+        await $db.createDocument(
+          'sanatana-dharma-db',
           'users_profile',
           createdUserId,
           {
@@ -92,10 +104,8 @@ export const useAuth = () => {
             points: 0
           }
         )
-        console.log('✅ Profile created for user:', createdUserId)
       } catch (profileError) {
         console.error('⚠️ Could not create profile document:', profileError)
-        // We don't throw here to allow user to still use the app
       }
 
       navigateTo('/')

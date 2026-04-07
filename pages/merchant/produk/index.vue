@@ -6,7 +6,7 @@ definePageMeta({
   middleware: 'merchant'
 })
 
-const { $appwrite } = useNuxtApp()
+const { $appwrite, $db } = useNuxtApp()
 const authStore = useAuthStore()
 
 const DB_ID = 'sanatana-dharma-db'
@@ -43,7 +43,7 @@ const onFileChange = (e: any) => {
 const fetchMyProducts = async () => {
   try {
     isLoading.value = true
-    const res = await $appwrite.databases.listDocuments(DB_ID, COLL_ID, [
+    const res = await $db.listDocuments(DB_ID, COLL_ID, [
       Query.equal('merchant_id', authStore.user.$id)
     ])
     products.value = res.documents
@@ -102,9 +102,9 @@ const saveProduct = async () => {
     }
 
     if (editingId.value) {
-      await $appwrite.databases.updateDocument(DB_ID, COLL_ID, editingId.value, payload)
+      await $db.updateDocument(DB_ID, COLL_ID, editingId.value, payload)
     } else {
-      await $appwrite.databases.createDocument(DB_ID, COLL_ID, ID.unique(), payload)
+      await $db.createDocument(DB_ID, COLL_ID, ID.unique(), payload)
     }
 
     await fetchMyProducts()
@@ -120,7 +120,7 @@ const saveProduct = async () => {
 const deleteProduct = async (id: string) => {
   if (!confirm('Apakah Anda yakin ingin menghapus produk ini?')) return
   try {
-    await $appwrite.databases.deleteDocument(DB_ID, COLL_ID, id)
+    await $db.deleteDocument(DB_ID, COLL_ID, id)
     await fetchMyProducts()
   } catch (error: any) {
     alert('Gagal menghapus produk: ' + error.message)

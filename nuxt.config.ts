@@ -132,6 +132,7 @@ export default defineNuxtConfig({
       appwriteProjectId: process.env.NUXT_PUBLIC_APPWRITE_PROJECT_ID || process.env.APPWRITE_PROJECT_ID || '',
       appwriteProjectName: process.env.NUXT_PUBLIC_APPWRITE_PROJECT_NAME || 'Sanatana Dharma Digital',
       appwriteDatabaseId: process.env.NUXT_PUBLIC_APPWRITE_DATABASE_ID || 'sanatana-dharma-db',
+      appwriteGasUrl: process.env.NUXT_PUBLIC_APPWRITE_GAS_URL || '',
     }
   },
 

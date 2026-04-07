@@ -15,7 +15,8 @@ export const useComments = () => {
   const fetchComments = async (itemId: string, itemType: 'pura' | 'video') => {
     loading.value = true
     try {
-      const response = await $appwrite.databases.listDocuments(DATABASE_ID, COLLECTION_ID, [
+      const { $db } = useNuxtApp()
+      const response = await $db.listDocuments(DATABASE_ID, COLLECTION_ID, [
         useAppwriteQuery().equal('itemId', itemId),
         useAppwriteQuery().equal('itemType', itemType),
         useAppwriteQuery().orderDesc('$createdAt'),
@@ -45,7 +46,8 @@ export const useComments = () => {
         $createdAt: new Date().toISOString()
       }
       
-      const response = await $appwrite.databases.createDocument(
+      const { $db } = useNuxtApp()
+      const response = await $db.createDocument(
         DATABASE_ID,
         COLLECTION_ID,
         'unique()',

@@ -150,13 +150,13 @@ const { data: doa, pending: loading } = await useAsyncData(`prayer-${route.param
   }
 
   try {
-    const { $appwrite } = useNuxtApp()
+    const { $appwrite, $db } = useNuxtApp()
     const prayersData = (await import('~/data/prayers.json')).default
     let localItem = prayersData.find((d: any) => d.slug === route.params.id)
     
     let appDoc = null;
     try {
-      const res = await $appwrite.databases.listDocuments('sanatana-dharma-db', 'prayers', [
+      const res = await $db.listDocuments('sanatana-dharma-db', 'prayers', [
           useAppwriteQuery().equal('slug', route.params.id as string)
       ])
       if (res.documents.length > 0) {

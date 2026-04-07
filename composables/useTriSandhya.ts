@@ -49,11 +49,12 @@ export const useTriSandhya = () => {
   // Mark Tri Sandhya as done for today
   const markDone = async (waktu: 'pagi' | 'siang' | 'sore') => {
     if (!authStore.user) return
+    const { $db } = useNuxtApp()
     const today = new Date().toISOString().split('T')[0]
     const { Query } = await import('appwrite')
 
     try {
-      const existing = await $appwrite.databases.listDocuments(DB_ID, STREAK_COLL, [
+      const existing = await $db.listDocuments(DB_ID, STREAK_COLL, [
         Query.equal('user_id', authStore.user.$id),
         Query.equal('tanggal', today),
       ])
@@ -61,9 +62,9 @@ export const useTriSandhya = () => {
       const update = { [`${waktu}_done`]: true }
 
       if (existing.documents.length > 0) {
-        await $appwrite.databases.updateDocument(DB_ID, STREAK_COLL, existing.documents[0].$id, update)
+        await $db.updateDocument(DB_ID, STREAK_COLL, existing.documents[0].$id, update)
       } else {
-        await $appwrite.databases.createDocument(DB_ID, STREAK_COLL, 'unique()', {
+        await $db.createDocument(DB_ID, STREAK_COLL, 'unique()', {
           user_id: authStore.user.$id,
           tanggal: today,
           pagi_done: waktu === 'pagi',
@@ -71,8 +72,8 @@ export const useTriSandhya = () => {
           sore_done: waktu === 'sore',
         })
       }
-    } catch (e) {
-      console.error('Error marking done:', e)
+    } catch (e: any) {
+      console.error('Error marking done (Failover active):', e.message)
     }
   }
 

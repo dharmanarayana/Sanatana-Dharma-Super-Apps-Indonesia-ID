@@ -11,20 +11,14 @@ export default defineEventHandler(async (event: any) => {
     return { results: [] };
   }
 
-  const config = useRuntimeConfig();
-  const client = new Client()
-    .setEndpoint(config.public.appwriteEndpoint as string)
-    .setProject(config.public.appwriteProjectId as string)
-    .setKey(process.env.APPWRITE_API_KEY as string);
-
-  const databases = new Databases(client);
+  const db = useServerDb();
   const DB_ID = 'sanatana-dharma-db';
 
   try {
     // 1. Search Local JSON (Very useful for development and static content)
     const localResults: any[] = [];
 
-    // Search Videos
+    // ... (rest of local search logic)
     const matchedVideos = (videoData as any[]).filter(v => 
       v.title.toLowerCase().includes(q) || 
       (v.category && v.category.toLowerCase().includes(q))
@@ -39,7 +33,6 @@ export default defineEventHandler(async (event: any) => {
     }));
     localResults.push(...matchedVideos);
 
-    // Search Prayers
     const matchedPrayers = (prayerData as any[]).filter(p => 
       p.title.toLowerCase().includes(q)
     ).slice(0, 5).map(p => ({
@@ -53,7 +46,6 @@ export default defineEventHandler(async (event: any) => {
     }));
     localResults.push(...matchedPrayers);
 
-    // Search Temples
     const matchedTemples = (templeData as any[]).filter(t => 
       t.name.toLowerCase().includes(q) || 
       (t.city && t.city.toLowerCase().includes(q)) ||
@@ -69,16 +61,16 @@ export default defineEventHandler(async (event: any) => {
     }));
     localResults.push(...matchedTemples);
 
-    // 2. Search Appwrite (Remote / Dynamic Content)
+    // 2. Search Appwrite/GAS (Remote / Dynamic Content)
     const searchPromises = [
       // Berita
-      databases.listDocuments(DB_ID, 'news', [
+      db.listDocuments(DB_ID, 'news', [
         Query.or([
           Query.search('title', q),
           Query.search('content', q)
         ]),
         Query.limit(5)
-      ]).then(res => res.documents.map(doc => ({
+      ]).then((res: any) => res.documents.map((doc: any) => ({
         id: doc.$id,
         title: doc.title,
         subtitle: doc.category || 'Berita',
@@ -89,13 +81,13 @@ export default defineEventHandler(async (event: any) => {
       }))).catch(() => []),
 
       // Dana Punia
-      databases.listDocuments(DB_ID, 'campaigns', [
+      db.listDocuments(DB_ID, 'campaigns', [
         Query.or([
           Query.search('name', q),
           Query.search('description', q)
         ]),
         Query.limit(5)
-      ]).then(res => res.documents.map(doc => ({
+      ]).then((res: any) => res.documents.map((doc: any) => ({
         id: doc.$id,
         title: doc.name,
         subtitle: doc.category || 'Punia',

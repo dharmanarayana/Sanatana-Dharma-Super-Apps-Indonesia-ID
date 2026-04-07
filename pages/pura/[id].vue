@@ -182,14 +182,13 @@
 
 <script setup lang="ts">
 const route = useRoute()
-const { $appwrite } = useNuxtApp()
+const { $appwrite, $db } = useNuxtApp()
 const DB_ID = 'sanatana-dharma-db'
 const COLL_ID = 'temples'
 
 const { data: temple, pending: loading } = await useAsyncData(`temple-${route.params.id}`, async () => {
     try {
-        const { $appwrite } = useNuxtApp()
-        const response = await $appwrite.databases.listDocuments(DB_ID, COLL_ID, [
+        const response = await $db.listDocuments(DB_ID, COLL_ID, [
             useAppwriteQuery().equal('slug', route.params.id as string)
         ])
         return response.documents.length > 0 ? response.documents[0] : null

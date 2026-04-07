@@ -41,7 +41,7 @@ definePageMeta({
   middleware: 'admin'
 })
 
-const { $appwrite } = useNuxtApp()
+const { $appwrite, $db } = useNuxtApp()
 const DB_ID = 'sanatana-dharma-db'
 const COLL_ID = 'videos'
 
@@ -72,7 +72,7 @@ const fields = [
 
 const fetchVideos = async () => {
   try {
-    const res = await $appwrite.databases.listDocuments(DB_ID, COLL_ID)
+    const res = await $db.listDocuments(DB_ID, COLL_ID)
     videos.value = res.documents
   } catch (e: any) {
     console.error('Error fetching videos:', e.message)
@@ -92,7 +92,7 @@ const handleEdit = (item: any) => {
 const handleDelete = async (item: any) => {
   if (confirm(`Hapus video "${item.title}"?`)) {
     try {
-      await $appwrite.databases.deleteDocument(DB_ID, COLL_ID, item.$id)
+      await $db.deleteDocument(DB_ID, COLL_ID, item.$id)
       await fetchVideos()
     } catch (e: any) {
       alert('Gagal menghapus: ' + e.message)
@@ -115,7 +115,7 @@ const handleSave = async (data: any) => {
 
     if (editingItem.value) {
       // 2. Update existing document
-      await $appwrite.databases.updateDocument(
+      await $db.updateDocument(
         DB_ID, 
         COLL_ID, 
         editingItem.value.$id, 
@@ -123,7 +123,7 @@ const handleSave = async (data: any) => {
       )
     } else {
       // 3. Create new document
-      await $appwrite.databases.createDocument(
+      await $db.createDocument(
         DB_ID, 
         COLL_ID, 
         'unique()', 

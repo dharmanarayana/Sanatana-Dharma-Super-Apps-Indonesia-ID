@@ -48,27 +48,34 @@
         </button>
       </form>
 
-      <div class="relative my-8">
-        <div class="absolute inset-0 flex items-center"><div class="divider"></div></div>
-        <div class="relative flex justify-center text-xs uppercase"><span class="bg-base px-2 text-muted">Atau masuk dengan</span></div>
+      <div v-if="!isFailoverMode">
+        <div class="relative my-8">
+          <div class="absolute inset-0 flex items-center"><div class="divider"></div></div>
+          <div class="relative flex justify-center text-xs uppercase"><span class="bg-base px-2 text-muted">Atau masuk dengan</span></div>
+        </div>
+  
+        <div class="flex flex-col sm:flex-row gap-3">
+          <button 
+            @click="loginWithGoogle"
+            class="flex-1 bg-surface border border-default text-default font-medium py-3 rounded-xl flex items-center justify-center gap-3 hover:bg-[var(--state-hover)] transition-all"
+          >
+            <Icon name="logos:google-icon" class="w-5 h-5" />
+            Google
+          </button>
+  
+          <button 
+            @click="loginWithFacebook"
+            class="flex-1 bg-[#1877F2] border border-[#1877F2] text-white font-medium py-3 rounded-xl flex items-center justify-center gap-3 hover:opacity-90 transition-all"
+          >
+            <Icon name="logos:facebook" class="w-5 h-5 brightness-0 invert" />
+            Facebook
+          </button>
+        </div>
       </div>
-
-      <div class="flex flex-col sm:flex-row gap-3">
-        <button 
-          @click="loginWithGoogle"
-          class="flex-1 bg-surface border border-default text-default font-medium py-3 rounded-xl flex items-center justify-center gap-3 hover:bg-[var(--state-hover)] transition-all"
-        >
-          <Icon name="logos:google-icon" class="w-5 h-5" />
-          Google
-        </button>
-
-        <button 
-          @click="loginWithFacebook"
-          class="flex-1 bg-[#1877F2] border border-[#1877F2] text-white font-medium py-3 rounded-xl flex items-center justify-center gap-3 hover:opacity-90 transition-all"
-        >
-          <Icon name="logos:facebook" class="w-5 h-5 brightness-0 invert" />
-          Facebook
-        </button>
+      <div v-else class="mt-8 p-4 bg-orange-500/10 border border-orange-500/20 rounded-2xl text-center">
+        <Icon name="lucide:shield-alert" class="w-6 h-6 text-orange-500 mb-2 mx-auto" />
+        <p class="text-xs font-bold text-orange-500 uppercase tracking-widest">Mode Darurat Aktif</p>
+        <p class="text-[10px] text-muted mt-1">Server utama sedang dalam perbaikan. Login sosial (Google/Facebook) dinonaktifkan sementara. Silakan masuk menggunakan Email & Kata Sandi.</p>
       </div>
     </div>
 
@@ -96,9 +103,25 @@ const router = useRouter()
 const email = ref('')
 const password = ref('')
 const loading = ref(false)
+const isFailoverMode = ref(false)
 
-onMounted(() => {
-  // Handle OAuth errors from URL
+onMounted(async () => {
+  // 1. Detect if Appwrite is unreachable
+  try {
+    const { $appwrite } = useNuxtApp()
+    // Simple ping to check connection
+    await Promise.race([
+      $appwrite.account.get(),
+      new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 3000))
+    ])
+  } catch (e: any) {
+    // If it's a connection error (not a 401 unauthorized), assume failover
+    if (e.message?.includes('fetch') || e.message?.includes('Network') || e.message === 'Timeout') {
+      isFailoverMode.value = true
+    }
+  }
+
+  // 2. Handle OAuth errors from URL
   const errorQuery = route.query.error
   if (errorQuery) {
     try {
@@ -120,7 +143,7 @@ onMounted(() => {
         // Clear the error from URL to prevent alert showing again on refresh
         router.replace({ query: { ...route.query, error: undefined } })
       }
-    } catch (e) {
+    } catch (e: any) {
       console.error('Failed to parse auth error:', e)
     }
   }
@@ -130,7 +153,7 @@ const handleLogin = async () => {
   loading.value = true
   try {
     await login(email.value, password.value)
-  } catch (e) {
+  } catch (e: any) {
     alert(e.message)
   } finally {
     loading.value = false
